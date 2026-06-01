@@ -37,7 +37,6 @@ function NotFoundComponent() {
 function ErrorComponent({ error, reset }: { error: Error; reset: () => void }) {
   console.error(error);
   const router = useRouter();
-
   return (
     <div className="flex min-h-screen items-center justify-center bg-background px-4">
       <div className="max-w-md text-center">
@@ -49,15 +48,12 @@ function ErrorComponent({ error, reset }: { error: Error; reset: () => void }) {
         </p>
         <div className="mt-6 flex flex-wrap justify-center gap-2">
           <button
-            onClick={() => {
-              router.invalidate();
-              reset();
-            }}
+            onClick={() => { router.invalidate(); reset(); }}
             className="inline-flex items-center justify-center rounded-md bg-primary px-4 py-2 text-sm font-medium text-primary-foreground transition-colors hover:bg-primary/90"
           >
             Try again
           </button>
-          <a
+          
             href="/"
             className="inline-flex items-center justify-center rounded-md border border-input bg-background px-4 py-2 text-sm font-medium text-foreground transition-colors hover:bg-accent"
           >
@@ -74,25 +70,22 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
     meta: [
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
-      { title: "ClickDecisionLab" },
-      { name: "description", content: "ClickDecisionLab is a technical buying lab that provides data-driven verdicts for high-ticket purchases." },
-      { name: "author", content: "Lovable" },
-      { property: "og:title", content: "ClickDecisionLab" },
-      { property: "og:description", content: "ClickDecisionLab is a technical buying lab that provides data-driven verdicts for high-ticket purchases." },
+      { title: "ClickDecisionLab — Complex products. Clear decisions." },
+      { name: "description", content: "A technical decision platform for high-ticket purchases. Engineering-grade analysis, calculators and comparisons for solar generators, batteries, and off-grid systems." },
+      { name: "author", content: "ClickDecisionLab" },
+      { property: "og:title", content: "ClickDecisionLab — Complex products. Clear decisions." },
+      { property: "og:description", content: "A technical decision platform for high-ticket purchases. Engineering-grade analysis, calculators and comparisons for solar generators, batteries, and off-grid systems." },
       { property: "og:type", content: "website" },
-      { name: "twitter:card", content: "summary" },
-      { name: "twitter:site", content: "@Lovable" },
-      { name: "twitter:title", content: "ClickDecisionLab" },
-      { name: "twitter:description", content: "ClickDecisionLab is a technical buying lab that provides data-driven verdicts for high-ticket purchases." },
-      { property: "og:image", content: "https://pub-bb2e103a32db4e198524a2e9ed8f35b4.r2.dev/94764bc2-80fc-4a22-9f50-a1d86e27f08a/id-preview-84119fda--a3caa973-eaae-4847-9748-033320e66914.lovable.app-1779987932619.png" },
-      { name: "twitter:image", content: "https://pub-bb2e103a32db4e198524a2e9ed8f35b4.r2.dev/94764bc2-80fc-4a22-9f50-a1d86e27f08a/id-preview-84119fda--a3caa973-eaae-4847-9748-033320e66914.lovable.app-1779987932619.png" },
+      { property: "og:url", content: "https://www.clickdecisionlab.com/" },
+      { property: "og:site_name", content: "ClickDecisionLab" },
+      { property: "og:image", content: "https://www.clickdecisionlab.com/og-default.png" },
+      { name: "twitter:card", content: "summary_large_image" },
+      { name: "twitter:site", content: "@ClickDecisionLab" },
+      { name: "twitter:title", content: "ClickDecisionLab — Complex products. Clear decisions." },
+      { name: "twitter:description", content: "A technical decision platform for high-ticket purchases. Engineering-grade analysis, calculators and comparisons for solar generators, batteries, and off-grid systems." },
+      { name: "twitter:image", content: "https://www.clickdecisionlab.com/og-default.png" },
     ],
-    links: [
-      {
-        rel: "stylesheet",
-        href: appCss,
-      },
-    ],
+    links: [{ rel: "stylesheet", href: appCss }],
   }),
   shellComponent: RootShell,
   component: RootComponent,
@@ -101,8 +94,8 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
 });
 
 function RootShell({ children }: { children: React.ReactNode }) {
-  const gtmScript = `(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src='https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);})(window,document,'script','dataLayer','GTM-WWS43DKM');`;
-  const gtmNoscript = `<iframe src="https://www.googletagmanager.com/ns.html?id=GTM-WWS43DKM" height="0" width="0" style="display:none;visibility:hidden"></iframe>`;
+  const gtmScript = `(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src='https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);})(window,document,'script','dataLayer','${GTM_ID}');`;
+  const gtmNoscript = `<iframe src="https://www.googletagmanager.com/ns.html?id=${GTM_ID}" height="0" width="0" style="display:none;visibility:hidden"></iframe>`;
   return (
     <html lang="en">
       <head>
@@ -120,7 +113,6 @@ function RootShell({ children }: { children: React.ReactNode }) {
 
 function RootComponent() {
   const { queryClient } = Route.useRouteContext();
-
   return (
     <QueryClientProvider client={queryClient}>
       <Outlet />
