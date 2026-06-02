@@ -7,6 +7,10 @@ type ServerEntry = {
     fetch: (request: Request, env: unknown, ctx: unknown) => Promise<Response> | Response;
 };
 
+type Env = {
+    ASSETS?: { fetch: (request: Request) => Promise<Response> };
+};
+
 let serverEntryPromise: Promise<ServerEntry> | undefined;
 
 async function getServerEntry(): Promise<ServerEntry> {
@@ -32,35 +36,24 @@ function isCatastrophicSsrErrorBody(body: string, responseStatus: number): boole
     } catch {
           return false;
     }
-
-  if (!payload || Array.isArray(payload) || typeof payload !== "object") {
-        return false;
-  }
-
-  const fields = payload as Record<string, unknown>;
+    if (!payload || Array.isArray(payload) || typeof payload !== "object") return false;
+    const fields = payload as Record<string, unknown>;
     const expectedKeys = new Set(["message", "status", "unhandled"]);
-    if (!Object.keys(fields).every((key) => expectedKeys.has(key))) {
-          return false;
-    }
-
-  return (
+    if (!Object.keys(fields).every((key) => expectedKeys.has(key))) return false;
+    return (
         fields.unhandled === true &&
         fields.message === "HTTPError" &&
         (fields.status === undefined || fields.status === responseStatus)
-      );
+    );
 }
 
 async function normalizeCatastrophicSsrResponse(response: Response): Promise<Response> {
     if (response.status < 500) return response;
     const contentType = response.headers.get("content-type") ?? "";
     if (!contentType.includes("application/json")) return response;
-
-  const body = await response.clone().text();
-    if (!isCatastrophicSsrErrorBody(body, response.status)) {
-          return response;
-    }
-
-  console.error(consumeLastCapturedError() ?? new Error(`h3 swallowed SSR error: ${body}`));
+    const body = await response.clone().text();
+    if (!isCatastrophicSsrErrorBody(body, response.status)) return response;
+    console.error(consumeLastCapturedError() ?? new Error(`h3 swallowed SSR error: ${body}`));
     return brandedErrorResponse();
 }
 
@@ -95,39 +88,32 @@ Sitemap: https://clickdecisionlab.com/sitemap.xml
 const SITEMAP_XML = `<?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url><loc>https://clickdecisionlab.com/</loc><lastmod>2026-06-01</lastmod><changefreq>weekly</changefreq><priority>1.0</priority></url>
-    <url><loc>https://clickdecisionlab.com/blog</loc><lastmod>2026-06-01</lastmod><changefreq>weekly</changefreq><priority>0.9</priority></url>
-      <url><loc>https://clickdecisionlab.com/solar-calculator</loc><lastmod>2026-06-01</lastmod><changefreq>monthly</changefreq><priority>0.9</priority></url>
+  <url><loc>https://clickdecisionlab.com/solar-calculator</loc><lastmod>2026-06-01</lastmod><changefreq>monthly</changefreq><priority>0.9</priority></url>
 </urlset>`;
 
 export default {
-    async fetch(request: Request, env: unknown, ctx: unknown) {
+    async fetch(request: Request, env: Env, ctx: unknown) {
           const url = new URL(request.url);
 
-      if (url.pathname === "/robots.txt") {
+          if (url.pathname === "/robots.txt") {
               return new Response(ROBOTS_TXT, {
-                        headers: {
-                                    "content-type": "text/plain; charset=utf-8",
-                                    "cache-control": "public, max-age=86400",
-                        },
+                  headers: { "content-type": "text/plain; charset=utf-8", "cache-control": "public, max-age=86400" },
               });
-      }
+          }
 
-      if (url.pathname === "/sitemap.xml") {
+          if (url.pathname === "/sitemap.xml") {
               return new Response(SITEMAP_XML, {
-                        headers: {
-                                    "content-type": "application/xml; charset=utf-8",
-                                    "cache-control": "public, max-age=86400",
-                        },
+                  headers: { "content-type": "application/xml; charset=utf-8", "cache-control": "public, max-age=86400" },
               });
-      }
+          }
 
-      try {
+          try {
               const handler = await getServerEntry();
               const response = await handler.fetch(request, env, ctx);
               return await normalizeCatastrophicSsrResponse(response);
-      } catch (error) {
+          } catch (error) {
               console.error(error);
               return brandedErrorResponse();
-      }
+          }
     },
 };
