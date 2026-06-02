@@ -508,8 +508,10 @@ function ResultCard({ pick, accentColor, scoreKey }: { pick: PickResult; accentC
               product: `${p.brand} ${p.model}`,
               brand: p.brand,
               price: p.price,
-              label,
+              label,                          // "Best Match" | "Best Value" | "Premium Pick"
               scenario: scoreKey,
+              appliance: scoreKey,
+              recommendation_position: label === "Best Match" ? 1 : label === "Best Value" ? 2 : 3,
             });
           }
         }}
@@ -572,8 +574,20 @@ export function SolarCalculator() {
     // Brief delay to let the analyzing state render — adds perceived intelligence
     setTimeout(() => {
       const b = parseInt(budget || "0", 10) || 0;
-      setResult(computeAnalysis(scenario, appliance, days, b));
+      const analysis = computeAnalysis(scenario, appliance, days, b);
+      setResult(analysis);
       setAnalyzing(false);
+      if (typeof window !== "undefined" && (window as any).cdlTrack) {
+        (window as any).cdlTrack("result_view", {
+          scenario,
+          appliance,
+          budget: b || "unset",
+          days,
+          products_matched: analysis.picks.length,
+          products_eliminated: analysis.eliminations.reduce((s: number, e: {count:number}) => s + e.count, 0),
+          top_recommendation: analysis.picks[0] ? `${analysis.picks[0].product.brand} ${analysis.picks[0].product.model}` : "none",
+        });
+      }
     }, 480);
   };
 
@@ -590,7 +604,12 @@ export function SolarCalculator() {
       {/* Form fields */}
       <div className="grid grid-cols-1 gap-x-5 gap-y-6 sm:grid-cols-2">
         <Field label="SCENARIO" icon="home">
-          <select className={selectCls} value={scenario} onChange={e => setScenario(e.target.value)}>
+          <select className={selectCls} value={scenario} onChange={e => {
+              setScenario(e.target.value);
+              if (typeof window !== "undefined" && (window as any).cdlTrack) {
+                (window as any).cdlTrack("calculator_start", { first_field: "scenario", value: e.target.value });
+              }
+            }}>
             {SCENARIOS.map(s => <option key={s} value={s}>{s}</option>)}
           </select>
         </Field>
