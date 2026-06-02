@@ -104,12 +104,12 @@ function RootShell({ children }: { children: React.ReactNode }) {
       <head>
         <HeadContent />
         {/* Google Analytics 4 */}
-        <script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX" />
+        <script async src="https://www.googletagmanager.com/gtag/js?id=G-RM0BQMSLBV" />
         <script dangerouslySetInnerHTML={{ __html: `
           window.dataLayer = window.dataLayer || [];
           function gtag(){dataLayer.push(arguments);}
           gtag('js', new Date());
-          gtag('config', 'G-XXXXXXXXXX', {
+          gtag('config', 'G-RM0BQMSLBV', {
             page_title: document.title,
             page_location: window.location.href
           });
