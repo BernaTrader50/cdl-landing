@@ -232,7 +232,7 @@ function Hero() {
               alt="Generic portable power station — reference unit"
               width={1024}
               height={1024}
-              className="hidden lg:block h-auto w-[180px] select-none object-contain"
+              className="h-auto w-[180px] select-none object-contain"
               draggable={false}
             />
           </div>
