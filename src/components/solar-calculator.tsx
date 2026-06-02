@@ -489,6 +489,17 @@ function ResultCard({ pick, accentColor, scoreKey }: { pick: PickResult; accentC
     "SuperBase M 1016":     "https://www.amazon.com/s?k=Zendure+SuperBase+M+1016&tag=clickdecision-20",
     "SuperBase Pro 2000":   "https://www.amazon.com/s?k=Zendure+SuperBase+Pro+2000&tag=clickdecision-20",
     "SuperBase V 4600":     "https://www.amazon.com/s?k=Zendure+SuperBase+V+4600&tag=clickdecision-20",
+    // Goal Zero
+    "Yeti 1000X":           "https://www.amazon.com/s?k=Goal+Zero+Yeti+1000X&tag=clickdecision-20",
+    "Yeti 1500X":           "https://www.amazon.com/s?k=Goal+Zero+Yeti+1500X&tag=clickdecision-20",
+    "Yeti 3000X":           "https://www.amazon.com/s?k=Goal+Zero+Yeti+3000X&tag=clickdecision-20",
+    // VTOMAN
+    "FlashSpeed 1500":      "https://www.amazon.com/dp/B0C8T2C8DB?tag=clickdecision-20",
+    "Jump 2200":            "https://www.amazon.com/s?k=VTOMAN+Jump+2200&tag=clickdecision-20",
+    // Pecron
+    "E600LFP":              "https://www.amazon.com/dp/B0FJ247GQL?tag=clickdecision-20",
+    "E1000LFP":             "https://www.amazon.com/s?k=Pecron+E1000LFP&tag=clickdecision-20",
+    "E2000LFP":             "https://www.amazon.com/s?k=Pecron+E2000LFP&tag=clickdecision-20",
   };
 
   const BRAND_FALLBACK: Record<string, string> = {
@@ -496,7 +507,10 @@ function ResultCard({ pick, accentColor, scoreKey }: { pick: PickResult; accentC
     "Bluetti":     "https://www.amazon.com/s?k=Bluetti+portable+power+station&tag=clickdecision-20",
     "Jackery":     "https://www.amazon.com/s?k=Jackery+solar+generator&tag=clickdecision-20",
     "Anker SOLIX": "https://www.amazon.com/s?k=Anker+SOLIX+power+station&tag=clickdecision-20",
-    "Zendure":     "https://www.amazon.com/s?k=Zendure+SuperBase&tag=clickdecision-20",
+    "Zendure":      "https://www.amazon.com/s?k=Zendure+SuperBase&tag=clickdecision-20",
+    "Goal Zero":    "https://www.amazon.com/s?k=Goal+Zero+Yeti+power+station&tag=clickdecision-20",
+    "VTOMAN":       "https://www.amazon.com/s?k=VTOMAN+portable+power+station&tag=clickdecision-20",
+    "Pecron":       "https://www.amazon.com/s?k=Pecron+LFP+power+station&tag=clickdecision-20",
   };
 
   const getAffiliateUrl = (brand: string, model: string): string => {
