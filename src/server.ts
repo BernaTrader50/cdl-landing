@@ -45,17 +45,17 @@ async function normalizeCatastrophicSsrResponse(response: Response): Promise<Res
     return brandedErrorResponse();
 }
 
-// Landing app routes — served by React/TanStack
-const LANDING_ROUTES = ["/", "/solar-calculator", "/methodology", "/comparisons", "/guides", "/blog"];
+// These paths are served by the React landing app (TanStack)
+const LANDING_PREFIXES = ["/solar-calculator", "/methodology", "/comparisons", "/guides", "/blog", "/assets/", "/__manifest", "/_build/"];
 
-function isLandingRoute(pathname: string): boolean {
+function isAssetOrLanding(pathname: string): boolean {
     if (pathname === "/" || pathname === "") return true;
-    return LANDING_ROUTES.some(r => r !== "/" && (pathname === r || pathname === r + "/" || pathname.startsWith(r + "/") || pathname.startsWith(r + "?")));
+    return LANDING_PREFIXES.some(p => pathname === p || pathname === p.replace(/\/$/, "") || pathname.startsWith(p.endsWith("/") ? p : p + "/") || pathname.startsWith(p + "?"));
 }
 
-// WordPress routes — proxy to Hostinger
-function isWordPressRoute(pathname: string): boolean {
-    return pathname.startsWith("/wp-") || pathname.startsWith("/wp-json") || pathname.startsWith("/feed") || pathname.startsWith("/sitemap") || pathname.startsWith("/xmlrpc");
+// WordPress API and admin routes
+function isWordPressAPI(pathname: string): boolean {
+    return pathname.startsWith("/wp-json") || pathname.startsWith("/wp-admin") || pathname.startsWith("/wp-login") || pathname.startsWith("/wp-content") || pathname.startsWith("/xmlrpc");
 }
 
 const ROBOTS_TXT = `# robots.txt - ClickDecisionLab
@@ -64,78 +64,58 @@ Allow: /
 Sitemap: https://clickdecisionlab.com/sitemap.xml
 `;
 
-const SITEMAP_XML = `<?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-  <url><loc>https://clickdecisionlab.com/</loc><lastmod>2026-06-02</lastmod><changefreq>weekly</changefreq><priority>1.0</priority></url>
-  <url><loc>https://clickdecisionlab.com/solar-calculator</loc><lastmod>2026-06-02</lastmod><changefreq>weekly</changefreq><priority>0.9</priority></url>
-  <url><loc>https://clickdecisionlab.com/methodology</loc><lastmod>2026-06-02</lastmod><changefreq>monthly</changefreq><priority>0.8</priority></url>
-</urlset>`;
-
 export default {
     async fetch(request: Request, env: unknown, ctx: unknown) {
         const url = new URL(request.url);
 
         if (url.pathname === "/robots.txt") {
-            return new Response(ROBOTS_TXT, { headers: { "content-type": "text/plain; charset=utf-8", "cache-control": "public, max-age=86400" } });
+            return new Response(ROBOTS_TXT, { headers: { "content-type": "text/plain; charset=utf-8" } });
         }
 
-        if (url.pathname === "/sitemap.xml") {
-            return new Response(SITEMAP_XML, { headers: { "content-type": "application/xml; charset=utf-8", "cache-control": "public, max-age=86400" } });
+        // WordPress API → proxy directly to Hostinger with auth headers intact
+        if (isWordPressAPI(url.pathname)) {
+            const hostingerUrl = new URL(request.url);
+            hostingerUrl.hostname = "185.212.71.247";
+            const proxyReq = new Request(hostingerUrl.toString(), {
+                method: request.method,
+                headers: {
+                    "Host": "clickdecisionlab.com",
+                    "User-Agent": request.headers.get("User-Agent") || "Mozilla/5.0",
+                    "Accept": request.headers.get("Accept") || "*/*",
+                    "Content-Type": request.headers.get("Content-Type") || "application/json",
+                    "Authorization": request.headers.get("Authorization") || "",
+                    "X-Forwarded-Proto": "https",
+                },
+                body: request.method !== "GET" && request.method !== "HEAD" ? request.body : null,
+            });
+            return await fetch(proxyReq);
         }
 
-        // WordPress routes → proxy to Hostinger
-        if (isWordPressRoute(url.pathname)) {
+        // Static assets and landing routes → TanStack React app
+        if (isAssetOrLanding(url.pathname)) {
             try {
-                const hostingerUrl = new URL(request.url);
-                hostingerUrl.hostname = "185.212.71.247";
-                const proxyReq = new Request(hostingerUrl.toString(), {
-                    method: request.method,
-                    headers: {
-                        "Host": "clickdecisionlab.com",
-                        "User-Agent": request.headers.get("User-Agent") || "",
-                        "Accept": request.headers.get("Accept") || "*/*",
-                        "Accept-Language": request.headers.get("Accept-Language") || "",
-                        "Content-Type": request.headers.get("Content-Type") || "",
-                        "Authorization": request.headers.get("Authorization") || "",
-                        "X-Forwarded-Proto": "https",
-                    },
-                    body: request.method !== "GET" && request.method !== "HEAD" ? request.body : null,
-                });
-                return await fetch(proxyReq);
-            } catch (e) {
-                console.error("WP proxy error:", e);
+                const handler = await getServerEntry();
+                const response = await handler.fetch(request, env, ctx);
+                return await normalizeCatastrophicSsrResponse(response);
+            } catch (error) {
+                console.error(error);
                 return brandedErrorResponse();
             }
         }
 
-        // Article routes (slugs with hyphens) → proxy to WordPress
-        if (!isLandingRoute(url.pathname) && url.pathname.includes("-")) {
-            try {
-                const hostingerUrl = new URL(request.url);
-                hostingerUrl.hostname = "185.212.71.247";
-                const proxyReq = new Request(hostingerUrl.toString(), {
-                    method: request.method,
-                    headers: {
-                        "Host": "clickdecisionlab.com",
-                        "User-Agent": request.headers.get("User-Agent") || "",
-                        "Accept": request.headers.get("Accept") || "text/html",
-                        "X-Forwarded-Proto": "https",
-                    },
-                });
-                return await fetch(proxyReq);
-            } catch (e) {
-                console.error("Article proxy error:", e);
-            }
-        }
-
-        // Landing app routes → TanStack React
-        try {
-            const handler = await getServerEntry();
-            const response = await handler.fetch(request, env, ctx);
-            return await normalizeCatastrophicSsrResponse(response);
-        } catch (error) {
-            console.error(error);
-            return brandedErrorResponse();
-        }
+        // Everything else (WordPress articles) → proxy to Hostinger
+        const hostingerUrl = new URL(request.url);
+        hostingerUrl.hostname = "185.212.71.247";
+        const proxyReq = new Request(hostingerUrl.toString(), {
+            method: request.method,
+            headers: {
+                "Host": "clickdecisionlab.com",
+                "User-Agent": request.headers.get("User-Agent") || "Mozilla/5.0",
+                "Accept": request.headers.get("Accept") || "text/html",
+                "Accept-Language": request.headers.get("Accept-Language") || "",
+                "X-Forwarded-Proto": "https",
+            },
+        });
+        return await fetch(proxyReq);
     },
 };
