@@ -455,6 +455,60 @@ function ScoreBreakdown({ components, overallScore, scoreKey }: { components: Sc
 function ResultCard({ pick, accentColor, scoreKey }: { pick: PickResult; accentColor: string; scoreKey: string }) {
   const { product: p, label, expertVerdict, strengths, tradeoffs, limitation, scoreComponents } = pick;
   const overallScore = p.scores[scoreKey as keyof typeof p.scores];
+  // ─── GEO-AWARE AFFILIATE ROUTING ──────────────────────────────────────────
+  // Detects user market via browser locale + timezone → routes to local Amazon
+  // Add your regional Associate IDs below when registered
+  const AFFILIATE_IDS: Record<string, string> = {
+    us: "clickdecision-20",   // ✅ Active
+    uk: "PENDING_UK",         // ⏳ Register at affiliate-program.amazon.co.uk
+    de: "PENDING_DE",         // ⏳ Register at partnernet.amazon.de
+    fr: "PENDING_FR",         // ⏳ Register at partenaires.amazon.fr
+    es: "PENDING_ES",         // ⏳ Register at afiliados.amazon.es
+    it: "PENDING_IT",         // ⏳ Register at programma-affiliazione.amazon.it
+    ca: "PENDING_CA",         // ⏳ Register at associates.amazon.ca
+    au: "PENDING_AU",         // ⏳ Register at afiliados.amazon.com.au
+  };
+
+  // Detect market from browser locale + timezone (client-side, no API needed)
+  const detectMarket = (): string => {
+    if (typeof window === "undefined") return "us";
+    const lang = navigator.language?.toLowerCase() || "";
+    const tz = Intl.DateTimeFormat().resolvedOptions().timeZone || "";
+    if (lang.startsWith("de") || tz.includes("Berlin") || tz.includes("Vienna") || tz.includes("Zurich")) return "de";
+    if (lang.startsWith("fr") || tz.includes("Paris") || tz.includes("Brussels")) return "fr";
+    if (lang.startsWith("es") && !tz.includes("America")) return "es";
+    if (lang.startsWith("it") || tz.includes("Rome")) return "it";
+    if (lang === "en-gb" || lang === "en-ie" || tz.includes("London") || tz.includes("Dublin")) return "uk";
+    if (tz.includes("Sydney") || tz.includes("Melbourne") || tz.includes("Brisbane")) return "au";
+    if (tz.includes("Toronto") || tz.includes("Vancouver") || tz.includes("Montreal")) return "ca";
+    return "us";
+  };
+
+  // Amazon domain per market
+  const AMAZON_DOMAIN: Record<string, string> = {
+    us: "amazon.com",
+    uk: "amazon.co.uk",
+    de: "amazon.de",
+    fr: "amazon.fr",
+    es: "amazon.es",
+    it: "amazon.it",
+    ca: "amazon.ca",
+    au: "amazon.com.au",
+  };
+
+  // Build affiliate URL for current user's market
+  const buildAffiliateUrl = (asin: string | null, brand: string, model: string): string => {
+    const market = detectMarket();
+    const tag = AFFILIATE_IDS[market];
+    const domain = AMAZON_DOMAIN[market] || "amazon.com";
+    // If tag not yet registered, fallback to US
+    const activeTag = tag.startsWith("PENDING") ? AFFILIATE_IDS.us : tag;
+    const activeDomain = tag.startsWith("PENDING") ? "amazon.com" : domain;
+    if (asin) return `https://www.${activeDomain}/dp/${asin}?tag=${activeTag}`;
+    const query = encodeURIComponent(`${brand} ${model}`);
+    return `https://www.${activeDomain}/s?k=${query}&tag=${activeTag}`;
+  };
+
   const AMAZON_PRODUCTS: Record<string, string> = {
     // EcoFlow
     "RIVER 3":              "https://www.amazon.com/s?k=EcoFlow+RIVER+3&tag=clickdecision-20",
