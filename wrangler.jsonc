@@ -3,5 +3,15 @@
   "name": "cdl-landing",
   "compatibility_date": "2025-09-24",
   "compatibility_flags": ["nodejs_compat"],
-  "main": "src/server.ts"
+  "main": "src/server.ts",
+  "routes": [
+    {
+      "pattern": "clickdecisionlab.com",
+      "zone_name": "clickdecisionlab.com"
+    },
+    {
+      "pattern": "www.clickdecisionlab.com",
+      "zone_name": "clickdecisionlab.com"
+    }
+  ]
 }
