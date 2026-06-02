@@ -38,6 +38,18 @@ const PRODUCTS = [
   { brand:"Zendure", model:"SuperBase M 1016", price:999, wh:890, surge:2400, solar:200, ups:false, expandable:false, weight:26, warranty:2, scores:{home_backup:6,rv:6,camping:6,off_grid:5,apartment:6,medical:5,value:5}, notes:"Mid-range Zendure. App integration strong." },
   { brand:"Zendure", model:"SuperBase Pro 2000", price:1699, wh:1850, surge:4000, solar:800, ups:true, expandable:false, weight:46, warranty:5, scores:{home_backup:7,rv:6,camping:4,off_grid:7,apartment:5,medical:8,value:5}, notes:"UPS 13ms. AmpUp to 3000W. App-driven energy." },
   { brand:"Zendure", model:"SuperBase V 4600", price:4999, wh:4100, surge:5000, solar:1200, ups:true, expandable:true, weight:97, warranty:5, scores:{home_backup:9,rv:3,camping:1,off_grid:10,apartment:2,medical:8,value:4}, notes:"Expandable to 64kWh. Off-grid powerhouse." },
+
+  // ─── GOAL ZERO ────────────────────────────────────────────────────────────
+  { brand:"Goal Zero", model:"Yeti 1000X", price:799, wh:983, surge:3500, solar:600, ups:false, expandable:false, weight:37.7, warranty:2, scores:{home_backup:6,rv:7,camping:7,off_grid:5,apartment:6,medical:5,value:7}, notes:"Premium NMC build quality. Strong brand loyalty. No UPS." },
+  { brand:"Goal Zero", model:"Yeti 1500X", price:999, wh:1516, surge:3500, solar:600, ups:false, expandable:false, weight:47.2, warranty:2, scores:{home_backup:7,rv:7,camping:6,off_grid:6,apartment:5,medical:5,value:6}, notes:"Trusted outdoor brand. 2000W continuous, 3500W surge. NMC battery." },
+  { brand:"Goal Zero", model:"Yeti 3000X", price:1999, wh:3032, surge:3500, solar:600, ups:false, expandable:false, weight:69.8, warranty:2, scores:{home_backup:8,rv:5,camping:3,off_grid:7,apartment:3,medical:6,value:5}, notes:"High capacity but heavy. 2000W continuous only. Better competitors exist at price." },
+  // ─── VTOMAN ───────────────────────────────────────────────────────────────
+  { brand:"VTOMAN", model:"FlashSpeed 1500", price:629, wh:1548, surge:3000, solar:400, ups:true, expandable:true, weight:35.3, warranty:3, scores:{home_backup:8,rv:6,camping:6,off_grid:6,apartment:7,medical:7,value:9}, notes:"1-hour recharge. UPS <20ms. Expandable to 3096Wh. Exceptional value at $629." },
+  { brand:"VTOMAN", model:"Jump 2200", price:999, wh:1548, surge:4400, solar:400, ups:true, expandable:true, weight:36.1, warranty:3, scores:{home_backup:8,rv:7,camping:5,off_grid:7,apartment:6,medical:7,value:8}, notes:"2200W continuous, 4400W surge. UPS. Same LFP core as FlashSpeed but more power." },
+  // ─── PECRON ───────────────────────────────────────────────────────────────
+  { brand:"Pecron", model:"E600LFP", price:299, wh:614, surge:2400, solar:200, ups:false, expandable:false, weight:15.9, warranty:3, scores:{home_backup:5,rv:5,camping:8,off_grid:4,apartment:8,medical:4,value:9}, notes:"Budget LFP under $300. No UPS but excellent Wh/$ ratio. Good for camping." },
+  { brand:"Pecron", model:"E1000LFP", price:499, wh:1024, surge:3000, solar:600, ups:true, expandable:true, weight:26.5, warranty:3, scores:{home_backup:7,rv:7,camping:7,off_grid:6,apartment:7,medical:7,value:9}, notes:"UPS, expandable to 4096Wh, 600W solar. Exceptional value vs EcoFlow at same price." },
+  { brand:"Pecron", model:"E2000LFP", price:799, wh:1920, surge:4000, solar:1200, ups:true, expandable:true, weight:44, warranty:3, scores:{home_backup:8,rv:6,camping:5,off_grid:8,apartment:5,medical:8,value:9}, notes:"1920Wh expandable to 8064Wh. UPS. 1200W solar. Underrated vs major brands." },
 ];
 
 // ─── SCENARIO → SCORE KEY ────────────────────────────────────────────────────
@@ -654,7 +666,7 @@ export function SolarCalculator() {
 
       {/* Authority strip */}
       <div className="mb-5 flex items-center gap-4 flex-wrap">
-        {["39 products", "5 brands", "7 use-case scores", "Updated weekly"].map(t => (
+        {["50 products", "8 brands", "7 use-case scores", "Updated weekly"].map(t => (
           <span key={t} className="font-mono text-[10px] text-neutral-400 uppercase tracking-wider">{t}</span>
         ))}
       </div>
