@@ -1,5 +1,4 @@
 import "./lib/error-capture";
-
 import { consumeLastCapturedError } from "./lib/error-capture";
 import { renderErrorPage } from "./lib/error-page";
 
@@ -19,10 +18,7 @@ async function getServerEntry(): Promise<ServerEntry> {
 }
 
 function brandedErrorResponse(): Response {
-    return new Response(renderErrorPage(), {
-        status: 500,
-        headers: { "content-type": "text/html; charset=utf-8" },
-    });
+    return new Response(renderErrorPage(), { status: 500, headers: { "content-type": "text/html; charset=utf-8" } });
 }
 
 function isCatastrophicSsrErrorBody(body: string, responseStatus: number): boolean {
@@ -45,17 +41,11 @@ async function normalizeCatastrophicSsrResponse(response: Response): Promise<Res
     return brandedErrorResponse();
 }
 
-// These paths are served by the React landing app (TanStack)
-const LANDING_PREFIXES = ["/solar-calculator", "/methodology", "/comparisons", "/guides", "/blog", "/assets/", "/__manifest", "/_build/"];
-
-function isAssetOrLanding(pathname: string): boolean {
+// Routes handled by the React landing app
+function isLandingRoute(pathname: string): boolean {
     if (pathname === "/" || pathname === "") return true;
-    return LANDING_PREFIXES.some(p => pathname === p || pathname === p.replace(/\/$/, "") || pathname.startsWith(p.endsWith("/") ? p : p + "/") || pathname.startsWith(p + "?"));
-}
-
-// WordPress API and admin routes
-function isWordPressAPI(pathname: string): boolean {
-    return pathname.startsWith("/wp-json") || pathname.startsWith("/wp-admin") || pathname.startsWith("/wp-login") || pathname.startsWith("/wp-content") || pathname.startsWith("/xmlrpc");
+    const landing = ["/solar-calculator", "/methodology", "/comparisons", "/guides", "/assets/", "/__manifest", "/_build/", "/favicon"];
+    return landing.some(p => pathname === p || pathname.startsWith(p.endsWith("/") ? p : p + "/") || pathname === p + "?");
 }
 
 const ROBOTS_TXT = `# robots.txt - ClickDecisionLab
@@ -72,27 +62,8 @@ export default {
             return new Response(ROBOTS_TXT, { headers: { "content-type": "text/plain; charset=utf-8" } });
         }
 
-        // WordPress API → proxy directly to Hostinger with auth headers intact
-        if (isWordPressAPI(url.pathname)) {
-            const hostingerUrl = new URL(request.url);
-            hostingerUrl.hostname = "185.212.71.247";
-            const proxyReq = new Request(hostingerUrl.toString(), {
-                method: request.method,
-                headers: {
-                    "Host": "clickdecisionlab.com",
-                    "User-Agent": request.headers.get("User-Agent") || "Mozilla/5.0",
-                    "Accept": request.headers.get("Accept") || "*/*",
-                    "Content-Type": request.headers.get("Content-Type") || "application/json",
-                    "Authorization": request.headers.get("Authorization") || "",
-                    "X-Forwarded-Proto": "https",
-                },
-                body: request.method !== "GET" && request.method !== "HEAD" ? request.body : null,
-            });
-            return await fetch(proxyReq);
-        }
-
-        // Static assets and landing routes → TanStack React app
-        if (isAssetOrLanding(url.pathname)) {
+        // Landing routes → React app
+        if (isLandingRoute(url.pathname)) {
             try {
                 const handler = await getServerEntry();
                 const response = await handler.fetch(request, env, ctx);
@@ -103,19 +74,8 @@ export default {
             }
         }
 
-        // Everything else (WordPress articles) → proxy to Hostinger
-        const hostingerUrl = new URL(request.url);
-        hostingerUrl.hostname = "185.212.71.247";
-        const proxyReq = new Request(hostingerUrl.toString(), {
-            method: request.method,
-            headers: {
-                "Host": "clickdecisionlab.com",
-                "User-Agent": request.headers.get("User-Agent") || "Mozilla/5.0",
-                "Accept": request.headers.get("Accept") || "text/html",
-                "Accept-Language": request.headers.get("Accept-Language") || "",
-                "X-Forwarded-Proto": "https",
-            },
-        });
-        return await fetch(proxyReq);
+        // Everything else → pass through to Cloudflare origin (WordPress on Hostinger)
+        // Cloudflare will route to the A record (185.212.71.247) directly
+        return fetch(request);
     },
 };
