@@ -3,112 +3,138 @@ import { consumeLastCapturedError } from "./lib/error-capture";
 import { renderErrorPage } from "./lib/error-page";
 
 type ServerEntry = {
-    fetch: (request: Request, env: unknown, ctx: unknown) => Promise<Response> | Response;
+  fetch: (request: Request, env: unknown, ctx: unknown) => Promise<Response> | Response;
 };
 
 let serverEntryPromise: Promise<ServerEntry> | undefined;
 
 async function getServerEntry(): Promise<ServerEntry> {
-    if (!serverEntryPromise) {
-        serverEntryPromise = import("@tanstack/react-start/server-entry").then(
-            (m) => ((m as { default?: ServerEntry }).default ?? (m as unknown as ServerEntry)),
-        );
-    }
-    return serverEntryPromise;
+  if (!serverEntryPromise) {
+    serverEntryPromise = import("@tanstack/react-start/server-entry").then(
+      (m) => ((m as { default?: ServerEntry }).default ?? (m as unknown as ServerEntry)),
+    );
+  }
+  return serverEntryPromise;
 }
 
 function brandedErrorResponse(): Response {
-    return new Response(renderErrorPage(), {
-        status: 500,
-        headers: { "content-type": "text/html; charset=utf-8" },
-    });
+  return new Response(renderErrorPage(), {
+    status: 500,
+    headers: { "content-type": "text/html; charset=utf-8" },
+  });
 }
 
-// Rutas que pertenecen a la landing React
-const LANDING_ROUTES = ["/", "/solar-calculator", "/methodology", "/comparisons", "/guides", "/blog"];
+// Routes handled by the React landing app
+const LANDING_PREFIXES = [
+  "/solar-calculator",
+  "/methodology",
+  "/comparisons",
+  "/guides",
+  "/blog",
+  "/assets/",
+  "/_build/",
+  "/__manifest",
+];
 
 function isLandingRoute(pathname: string): boolean {
-    if (pathname === "/" ) return true;
-    return LANDING_ROUTES.some(route => route !== "/" && pathname.startsWith(route));
-}
-
-// Rutas de WordPress
-function isWordPressRoute(pathname: string): boolean {
-    return (
-        pathname.startsWith("/wp-") ||
-        pathname.startsWith("/wp-json") ||
-        pathname.startsWith("/feed") ||
-        pathname.startsWith("/sitemap") ||
-        pathname.startsWith("/solar-generator") ||
-        pathname.startsWith("/ecoflow") ||
-        pathname.startsWith("/bluetti") ||
-        pathname.startsWith("/jackery") ||
-        pathname.startsWith("/best-solar") ||
-        pathname.startsWith("/can-solar") ||
-        pathname.startsWith("/can-the-ecoflow") ||
-        pathname.startsWith("/portable") ||
-        pathname.startsWith("/lifepo4") ||
-        pathname.startsWith("/surge") ||
-        pathname.startsWith("/inverter") ||
-        pathname.startsWith("/mistakes") ||
-        pathname.startsWith("/complete-guide") ||
-        pathname.startsWith("/how-long") ||
-        pathname.startsWith("/what-can") ||
-        pathname.startsWith("/generador") ||
-        pathname.startsWith("/mejor") ||
-        pathname.startsWith("/vatios") ||
-        pathname.startsWith("/anker") ||
-        pathname.startsWith("/assets/") === false && pathname.includes("-")
-    );
+  if (pathname === "/" || pathname === "") return true;
+  return LANDING_PREFIXES.some(prefix =>
+    pathname === prefix ||
+    pathname === prefix + "/" ||
+    pathname.startsWith(prefix + "/") ||
+    pathname.startsWith(prefix + "?")
+  );
 }
 
 const ROBOTS_TXT = `# robots.txt - ClickDecisionLab
 User-agent: *
 Allow: /
+
+User-agent: Google-Extended
+Allow: /
+
+User-agent: GPTBot
+Allow: /
+
+User-agent: ClaudeBot
+Allow: /
+
+User-agent: PerplexityBot
+Allow: /
+
+User-agent: AhrefsBot
+Disallow: /
+
+User-agent: SemrushBot
+Disallow: /
+
 Sitemap: https://clickdecisionlab.com/sitemap.xml
 `;
 
 const SITEMAP_XML = `<?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-  <url><loc>https://clickdecisionlab.com/</loc><lastmod>2026-06-01</lastmod><priority>1.0</priority></url>
-  <url><loc>https://clickdecisionlab.com/solar-calculator</loc><lastmod>2026-06-01</lastmod><priority>0.9</priority></url>
+  <url><loc>https://clickdecisionlab.com/</loc><lastmod>2026-06-02</lastmod><changefreq>weekly</changefreq><priority>1.0</priority></url>
+  <url><loc>https://clickdecisionlab.com/solar-calculator</loc><lastmod>2026-06-02</lastmod><changefreq>weekly</changefreq><priority>0.9</priority></url>
+  <url><loc>https://clickdecisionlab.com/methodology</loc><lastmod>2026-06-02</lastmod><changefreq>monthly</changefreq><priority>0.8</priority></url>
 </urlset>`;
 
 export default {
-    async fetch(request: Request, env: unknown, ctx: unknown) {
-        const url = new URL(request.url);
+  async fetch(request: Request, env: unknown, ctx: unknown) {
+    const url = new URL(request.url);
 
-        if (url.pathname === "/robots.txt") {
-            return new Response(ROBOTS_TXT, {
-                headers: { "content-type": "text/plain; charset=utf-8" },
-            });
-        }
+    if (url.pathname === "/robots.txt") {
+      return new Response(ROBOTS_TXT, {
+        headers: {
+          "content-type": "text/plain; charset=utf-8",
+          "cache-control": "public, max-age=86400",
+        },
+      });
+    }
 
-        if (url.pathname === "/sitemap.xml") {
-            return new Response(SITEMAP_XML, {
-                headers: { "content-type": "application/xml; charset=utf-8" },
-            });
-        }
+    if (url.pathname === "/sitemap.xml") {
+      return new Response(SITEMAP_XML, {
+        headers: {
+          "content-type": "application/xml; charset=utf-8",
+          "cache-control": "public, max-age=86400",
+        },
+      });
+    }
 
-        // Proxy WordPress routes to Hostinger
-        if (!isLandingRoute(url.pathname)) {
-            const wpOrigin = "https://clickdecisionlab.com";
-            const proxyUrl = wpOrigin + url.pathname + url.search;
-            const proxyRequest = new Request(proxyUrl, {
-                method: request.method,
-                headers: request.headers,
-                body: request.method !== "GET" && request.method !== "HEAD" ? request.body : null,
-            });
-            return fetch(proxyRequest);
-        }
+    // Serve landing app routes
+    if (isLandingRoute(url.pathname)) {
+      try {
+        const handler = await getServerEntry();
+        const response = await handler.fetch(request, env, ctx);
+        return response;
+      } catch (error) {
+        console.error(error);
+        return brandedErrorResponse();
+      }
+    }
 
-        try {
-            const handler = await getServerEntry();
-            const response = await handler.fetch(request, env, ctx);
-            return response;
-        } catch (error) {
-            console.error(error);
-            return brandedErrorResponse();
-        }
-    },
+    // Everything else → proxy to WordPress on Hostinger
+    try {
+      const hostingerUrl = new URL(request.url);
+      hostingerUrl.hostname = "185.212.71.247";
+
+      const hostingerRequest = new Request(hostingerUrl.toString(), {
+        method: request.method,
+        headers: {
+          "Host": "clickdecisionlab.com",
+          "User-Agent": request.headers.get("User-Agent") || "",
+          "Accept": request.headers.get("Accept") || "*/*",
+          "Accept-Language": request.headers.get("Accept-Language") || "",
+          "Accept-Encoding": "gzip, deflate",
+          "X-Forwarded-Proto": "https",
+          "X-Forwarded-For": request.headers.get("CF-Connecting-IP") || "",
+        },
+        body: request.method !== "GET" && request.method !== "HEAD" ? request.body : null,
+      });
+
+      return await fetch(hostingerRequest);
+    } catch (error) {
+      console.error("WordPress proxy error:", error);
+      return brandedErrorResponse();
+    }
+  },
 };
