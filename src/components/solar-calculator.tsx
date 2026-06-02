@@ -435,22 +435,48 @@ function ScoreBreakdown({ components, overallScore, scoreKey }: { components: Sc
 function ResultCard({ pick, accentColor, scoreKey }: { pick: PickResult; accentColor: string; scoreKey: string }) {
   const { product: p, label, expertVerdict, strengths, tradeoffs, limitation, scoreComponents } = pick;
   const overallScore = p.scores[scoreKey as keyof typeof p.scores];
-  // Affiliate link resolver — specific product first, brand Amazon search as fallback
   const AMAZON_PRODUCTS: Record<string, string> = {
+    // EcoFlow
+    "RIVER 3":              "https://www.amazon.com/s?k=EcoFlow+RIVER+3&tag=clickdecision-20",
+    "RIVER 3 Plus":         "https://www.amazon.com/s?k=EcoFlow+RIVER+3+Plus&tag=clickdecision-20",
+    "DELTA 3 Classic":      "https://www.amazon.com/s?k=EcoFlow+DELTA+3+Classic&tag=clickdecision-20",
+    "DELTA 3 Plus":         "https://www.amazon.com/s?k=EcoFlow+DELTA+3+Plus&tag=clickdecision-20",
+    "DELTA 3 Max":          "https://www.amazon.com/s?k=EcoFlow+DELTA+3+Max&tag=clickdecision-20",
+    "DELTA 3 Max Plus":     "https://www.amazon.com/s?k=EcoFlow+DELTA+3+Max+Plus&tag=clickdecision-20",
     "DELTA 2":              "https://www.amazon.com/dp/B0B97DHQNR?tag=clickdecision-20",
     "DELTA 2 Max":          "https://www.amazon.com/dp/B0B97WFRQ7?tag=clickdecision-20",
     "DELTA Pro":            "https://www.amazon.com/dp/B09BXD2KY9?tag=clickdecision-20",
-    "DELTA 3 Classic":      "https://www.amazon.com/s?k=EcoFlow+DELTA+3+Classic&tag=clickdecision-20",
-    "DELTA 3 Max":          "https://www.amazon.com/s?k=EcoFlow+DELTA+3+Max&tag=clickdecision-20",
-    "DELTA 3 Plus":         "https://www.amazon.com/s?k=EcoFlow+DELTA+3+Plus&tag=clickdecision-20",
-    "Explorer 1000 v2":     "https://www.amazon.com/dp/B0CNW2CXNW?tag=clickdecision-20",
-    "Explorer 2000 Plus":   "https://www.amazon.com/dp/B0C2JDPB4Y?tag=clickdecision-20",
-    "Explorer 1000 Plus":   "https://www.amazon.com/s?k=Jackery+Explorer+1000+Plus&tag=clickdecision-20",
-    "AC200L":               "https://www.amazon.com/dp/B0BV8WNHYV?tag=clickdecision-20",
+    "RIVER 2":              "https://www.amazon.com/s?k=EcoFlow+RIVER+2&tag=clickdecision-20",
+    "RIVER 2 Max":          "https://www.amazon.com/s?k=EcoFlow+RIVER+2+Max&tag=clickdecision-20",
+    // Bluetti
+    "EB3A":                 "https://www.amazon.com/s?k=Bluetti+EB3A&tag=clickdecision-20",
+    "AC60":                 "https://www.amazon.com/s?k=Bluetti+AC60&tag=clickdecision-20",
+    "AC70":                 "https://www.amazon.com/s?k=Bluetti+AC70&tag=clickdecision-20",
     "AC180":                "https://www.amazon.com/dp/B0BQ4VWWF5?tag=clickdecision-20",
+    "AC200L":               "https://www.amazon.com/dp/B0BV8WNHYV?tag=clickdecision-20",
+    "AC300":                "https://www.amazon.com/s?k=Bluetti+AC300&tag=clickdecision-20",
+    "AC500":                "https://www.amazon.com/s?k=Bluetti+AC500&tag=clickdecision-20",
+    "Elite 300":            "https://www.amazon.com/s?k=Bluetti+Elite+300&tag=clickdecision-20",
+    // Jackery
+    "Explorer 300 Plus":    "https://www.amazon.com/s?k=Jackery+Explorer+300+Plus&tag=clickdecision-20",
+    "Explorer 1000 v2":     "https://www.amazon.com/dp/B0CNW2CXNW?tag=clickdecision-20",
+    "Explorer 1000 Plus":   "https://www.amazon.com/s?k=Jackery+Explorer+1000+Plus&tag=clickdecision-20",
+    "Explorer 2000 v2":     "https://www.amazon.com/s?k=Jackery+Explorer+2000+v2&tag=clickdecision-20",
+    "Explorer 2000 Plus":   "https://www.amazon.com/dp/B0C2JDPB4Y?tag=clickdecision-20",
+    "Explorer 600 Plus":    "https://www.amazon.com/s?k=Jackery+Explorer+600+Plus&tag=clickdecision-20",
+    // Anker SOLIX
+    "C800":                 "https://www.amazon.com/s?k=Anker+SOLIX+C800&tag=clickdecision-20",
+    "C800 Plus":            "https://www.amazon.com/s?k=Anker+SOLIX+C800+Plus&tag=clickdecision-20",
+    "C800X":                "https://www.amazon.com/s?k=Anker+SOLIX+C800X&tag=clickdecision-20",
     "C1000":                "https://www.amazon.com/dp/B0C4JNBFCG?tag=clickdecision-20",
-    "F3800":                "https://www.amazon.com/dp/B0CF9LYWMJ?tag=clickdecision-20",
+    "C2000":                "https://www.amazon.com/s?k=Anker+SOLIX+C2000&tag=clickdecision-20",
     "C2000 Gen 2":          "https://www.amazon.com/s?k=Anker+SOLIX+C2000+Gen+2&tag=clickdecision-20",
+    "F3800":                "https://www.amazon.com/dp/B0CF9LYWMJ?tag=clickdecision-20",
+    // Zendure
+    "SuperBase M 607":      "https://www.amazon.com/s?k=Zendure+SuperBase+M+607&tag=clickdecision-20",
+    "SuperBase M 1016":     "https://www.amazon.com/s?k=Zendure+SuperBase+M+1016&tag=clickdecision-20",
+    "SuperBase Pro 2000":   "https://www.amazon.com/s?k=Zendure+SuperBase+Pro+2000&tag=clickdecision-20",
+    "SuperBase V 4600":     "https://www.amazon.com/s?k=Zendure+SuperBase+V+4600&tag=clickdecision-20",
   };
 
   const BRAND_FALLBACK: Record<string, string> = {
@@ -462,15 +488,11 @@ function ResultCard({ pick, accentColor, scoreKey }: { pick: PickResult; accentC
   };
 
   const getAffiliateUrl = (brand: string, model: string): string => {
-    // Check specific product first
-    for (const [key, url] of Object.entries(AMAZON_PRODUCTS)) {
-      if (model.includes(key)) return url;
-    }
-    // Fallback to brand search
+    if (AMAZON_PRODUCTS[model]) return AMAZON_PRODUCTS[model];
     return BRAND_FALLBACK[brand] || `https://www.amazon.com/s?k=${encodeURIComponent(brand+" "+model)}&tag=clickdecision-20`;
   };
 
-  // Keep direct brand URLs for when Impact approves (swap these in)
+  // Direct brand URLs — ready to activate when Impact approves
   const brandUrl: Record<string, string> = {
     "EcoFlow":     "https://us.ecoflow.com",
     "Bluetti":     "https://www.bluettipower.com",
