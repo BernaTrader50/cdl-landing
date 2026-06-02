@@ -223,6 +223,15 @@ export function SolarCalculator() {
   const scoreKey = SCENARIO_SCORE_MAP[scenario] || "home_backup";
 
   const onSubmit = (e: React.FormEvent | React.MouseEvent) => {
+    // Track calculator use
+    if (typeof window !== 'undefined' && (window as any).cdlTrack) {
+      (window as any).cdlTrack('calculator_submit', {
+        scenario: scenario,
+        appliance: appliance,
+        budget: budget || 'unset',
+        days: days
+      });
+    }
     e.preventDefault();
     const b = parseInt(budget || "0", 10) || 0;
     setResult(computePicks(scenario, appliance, days, b));
@@ -337,6 +346,18 @@ export function SolarCalculator() {
                     href={`https://us.ecoflow.com`}
                     target="_blank"
                     rel="noopener noreferrer sponsored"
+                    onClick={() => {
+                      if (typeof window !== 'undefined' && (window as any).cdlTrack) {
+                        (window as any).cdlTrack('affiliate_click', {
+                          product: `${p.product.brand} ${p.product.model}`,
+                          brand: p.product.brand,
+                          price: p.product.price,
+                          label: p.label,
+                          scenario: scenario,
+                          appliance: appliance
+                        });
+                      }
+                    }}
                     className="mt-3 block rounded-[8px] py-2.5 text-center text-[12.5px] font-medium text-white transition-opacity hover:opacity-80"
                     style={{ background: accentColor }}
                   >
