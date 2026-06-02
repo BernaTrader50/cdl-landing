@@ -103,6 +103,48 @@ function RootShell({ children }: { children: React.ReactNode }) {
     <html lang="en">
       <head>
         <HeadContent />
+        {/* SEO Meta Tags */}
+        <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" />
+        <meta name="author" content="ClickDecisionLab" />
+        <link rel="canonical" href="https://clickdecisionlab.com" />
+
+        {/* Open Graph */}
+        <meta property="og:site_name" content="ClickDecisionLab" />
+        <meta property="og:type" content="website" />
+        <meta property="og:image" content="https://clickdecisionlab.com/assets/power-station-B0e88LCQ.png" />
+        <meta property="og:image:width" content="1200" />
+        <meta property="og:image:height" content="630" />
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:site" content="@clickdecisionlab" />
+
+        {/* Schema.org — WebSite with SearchAction (Google Sitelinks Searchbox) */}
+        <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify({
+          "@context": "https://schema.org",
+          "@type": "WebSite",
+          "name": "ClickDecisionLab",
+          "description": "Technical decision platform for solar generators and portable power stations. 49 products analyzed.",
+          "url": "https://clickdecisionlab.com",
+          "potentialAction": {
+            "@type": "SearchAction",
+            "target": {
+              "@type": "EntryPoint",
+              "urlTemplate": "https://clickdecisionlab.com/solar-calculator?q={search_term_string}"
+            },
+            "query-input": "required name=search_term_string"
+          }
+        }) }} />
+
+        {/* Schema.org — Organization */}
+        <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify({
+          "@context": "https://schema.org",
+          "@type": "Organization",
+          "name": "ClickDecisionLab",
+          "url": "https://clickdecisionlab.com",
+          "logo": "https://clickdecisionlab.com/favicon.ico",
+          "description": "Independent technical analysis platform for solar generators. We analyze products using real specs, not marketing claims.",
+          "sameAs": []
+        }) }} />
+
         {/* Google Analytics 4 */}
         <script async src="https://www.googletagmanager.com/gtag/js?id=G-RM0BQMSLBV" />
         <script dangerouslySetInnerHTML={{ __html: `
