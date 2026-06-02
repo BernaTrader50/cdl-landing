@@ -50,6 +50,14 @@ const PRODUCTS = [
   { brand:"Pecron", model:"E600LFP", price:299, wh:614, surge:2400, solar:200, ups:false, expandable:false, weight:15.9, warranty:3, scores:{home_backup:5,rv:5,camping:8,off_grid:4,apartment:8,medical:4,value:9}, notes:"Budget LFP under $300. No UPS but excellent Wh/$ ratio. Good for camping." },
   { brand:"Pecron", model:"E1000LFP", price:499, wh:1024, surge:3000, solar:600, ups:true, expandable:true, weight:26.5, warranty:3, scores:{home_backup:7,rv:7,camping:7,off_grid:6,apartment:7,medical:7,value:9}, notes:"UPS, expandable to 4096Wh, 600W solar. Exceptional value vs EcoFlow at same price." },
   { brand:"Pecron", model:"E2000LFP", price:799, wh:1920, surge:4000, solar:1200, ups:true, expandable:true, weight:44, warranty:3, scores:{home_backup:8,rv:6,camping:5,off_grid:8,apartment:5,medical:8,value:9}, notes:"1920Wh expandable to 8064Wh. UPS. 1200W solar. Underrated vs major brands." },
+  // ─── DJI POWER ───────────────────────────────────────────────────────────
+  { brand:"DJI Power", model:"Power 500", price:349, wh:512, surge:2000, solar:500, ups:true, expandable:false, weight:13.2, warranty:3, scores:{home_backup:5,rv:6,camping:8,off_grid:4,apartment:8,medical:6,value:8}, notes:"6 lbs — ultralight. UPS <20ms. SDC port for DJI drones. Best compact for tech users." },
+  { brand:"DJI Power", model:"Power 1000", price:699, wh:1024, surge:4400, solar:800, ups:true, expandable:false, weight:28.6, warranty:3, scores:{home_backup:7,rv:7,camping:7,off_grid:6,apartment:7,medical:7,value:8}, notes:"4400W surge, UPS, 4000 cycles. SDC drone charging. Competitive vs EcoFlow DELTA 3 Classic." },
+  // ─── RENOGY ───────────────────────────────────────────────────────────────
+  { brand:"Renogy", model:"Lycan 5000", price:2999, wh:4800, surge:7000, solar:4400, ups:true, expandable:true, weight:264.6, warranty:1, scores:{home_backup:9,rv:2,camping:1,off_grid:10,apartment:1,medical:8,value:5}, notes:"Whole-home stationary system. 3500W continuous, 7000W surge. Expandable to 19.2kWh. 264 lbs." },
+  // ─── GENEVERSE ───────────────────────────────────────────────────────────
+  { brand:"Geneverse", model:"HomePower ONE PRO", price:499, wh:1210, surge:2400, solar:400, ups:false, expandable:false, weight:38, warranty:5, scores:{home_backup:7,rv:6,camping:6,off_grid:5,apartment:6,medical:6,value:8}, notes:"Home backup focused. LFP. 1.5h charge. Simple, reliable. Sold at Lowe's and Home Depot." },
+  { brand:"Geneverse", model:"HomePower TWO PRO", price:999, wh:2419, surge:4400, solar:800, ups:false, expandable:false, weight:49, warranty:5, scores:{home_backup:8,rv:6,camping:4,off_grid:6,apartment:4,medical:7,value:7}, notes:"2.4kWh LFP for home backup. 4400W surge. Sold at major retailers. No UPS." },
 ];
 
 // ─── SCENARIO → SCORE KEY ────────────────────────────────────────────────────
@@ -489,6 +497,9 @@ function ResultCard({ pick, accentColor, scoreKey }: { pick: PickResult; accentC
     "SuperBase M 1016":     "https://www.amazon.com/s?k=Zendure+SuperBase+M+1016&tag=clickdecision-20",
     "SuperBase Pro 2000":   "https://www.amazon.com/s?k=Zendure+SuperBase+Pro+2000&tag=clickdecision-20",
     "SuperBase V 4600":     "https://www.amazon.com/s?k=Zendure+SuperBase+V+4600&tag=clickdecision-20",
+    // DJI Power
+    "Power 500":            "https://www.amazon.com/s?k=DJI+Power+500&tag=clickdecision-20",
+    "Power 1000":           "https://www.amazon.com/s?k=DJI+Power+1000&tag=clickdecision-20",
     // Goal Zero
     "Yeti 1000X":           "https://www.amazon.com/s?k=Goal+Zero+Yeti+1000X&tag=clickdecision-20",
     "Yeti 1500X":           "https://www.amazon.com/s?k=Goal+Zero+Yeti+1500X&tag=clickdecision-20",
@@ -511,6 +522,9 @@ function ResultCard({ pick, accentColor, scoreKey }: { pick: PickResult; accentC
     "Goal Zero":    "https://www.amazon.com/s?k=Goal+Zero+Yeti+power+station&tag=clickdecision-20",
     "VTOMAN":       "https://www.amazon.com/s?k=VTOMAN+portable+power+station&tag=clickdecision-20",
     "Pecron":       "https://www.amazon.com/s?k=Pecron+LFP+power+station&tag=clickdecision-20",
+    "DJI Power":    "https://www.amazon.com/s?k=DJI+Power+portable+power+station&tag=clickdecision-20",
+    "Renogy":       "https://www.amazon.com/s?k=Renogy+Lycan+5000+power+station&tag=clickdecision-20",
+    "Geneverse":    "https://www.amazon.com/s?k=Geneverse+HomePower+power+station&tag=clickdecision-20",
   };
 
   const getAffiliateUrl = (brand: string, model: string): string => {
@@ -680,7 +694,7 @@ export function SolarCalculator() {
 
       {/* Authority strip */}
       <div className="mb-5 flex items-center gap-4 flex-wrap">
-        {["50 products", "8 brands", "7 use-case scores", "Updated weekly"].map(t => (
+        {["53 products", "10 brands", "7 use-case scores", "Updated weekly"].map(t => (
           <span key={t} className="font-mono text-[10px] text-neutral-400 uppercase tracking-wider">{t}</span>
         ))}
       </div>
