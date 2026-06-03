@@ -73,6 +73,7 @@ const labs: Array<{ label: string; to?: string; live?: boolean }> = [
 const tools: Array<{ label: string; to: string }> = [
   { label: "Calculators", to: "/solar-calculator" },
   { label: "Comparisons", to: "/comparisons" },
+  { label: "Technical Analysis", to: "/technical-analysis" },
   { label: "Research", to: "/blog" },
   { label: "Methodology", to: "/#methodology" },
   { label: "Articles", to: "/blog" },
