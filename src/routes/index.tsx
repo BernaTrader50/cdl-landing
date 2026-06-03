@@ -788,11 +788,20 @@ function LabCard({ lab }: { lab: Lab }) {
 }
 
 function Labs() {
+  // Real-time metrics — keep in sync with actual site stats
+  const SITE_STATS = {
+    products: 49,
+    brands: 10,
+    technicalAnalyses: 15,
+    articles: 83,
+    comparisons: 25,
+  };
+
   const labs: Lab[] = [
     {
       code: "LAB-01",
       title: "Solar Generators",
-      desc: "49 products analyzed. Portable power stations, runtime modelling, surge analysis, UPS and recharge profiling across 10 brands.",
+      desc: "49 products. 15 Technical Analysis. 25 comparisons. Complete decision engine with real specs and expert verdicts.",
       metrics: ["49 products", "10 brands", "7 use-case scores"],
       status: "live",
       href: "/solar-calculator",
