@@ -2,7 +2,7 @@ import { createFileRoute, Link, notFound } from "@tanstack/react-router";
 import { SiteNav } from "@/components/site-nav";
 import { SiteFooter } from "@/components/site-footer";
 
-const API_BASE = "https://papayawhip-armadillo-217262.hostingersite.com/wp-json/wp/v2";
+const API_BASE = "https://clickdecisionlab.com/wp-json/wp/v2";
 const CDL_BASE = "https://www.clickdecisionlab.com";
 
 type Post = {
