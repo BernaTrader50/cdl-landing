@@ -708,7 +708,6 @@ function ResultCard({ pick, accentColor, scoreKey }: { pick: PickResult; accentC
     "Explorer 2000 v2":     "/jackery-explorer-2000-v2-technical-analysis-2026/",
     "F3800":                "/anker-solix-f3800-technical-analysis-2026/",
   };
-  };
 
   const getAffiliateUrl = (brand: string, model: string): string => {
     if (AMAZON_PRODUCTS[model]) return AMAZON_PRODUCTS[model];
