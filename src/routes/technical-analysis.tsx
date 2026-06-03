@@ -96,7 +96,7 @@ const ANALYSES = [
   },
 ];
 
-const BRANDS = ["All", "EcoFlow", "Jackery", "Bluetti", "Anker SOLIX"];
+const BRANDS = ["All", "EcoFlow", "Jackery", "Bluetti", "Anker SOLIX", "VTOMAN"];
 
 const BADGE_COLORS: Record<string, string> = {
   "Top Rated": "#2563EB",
@@ -158,7 +158,7 @@ function TechnicalAnalysisHub() {
           {/* Authority strip */}
           <div className="mt-5 flex items-center gap-6 flex-wrap">
             {[
-              "10 products analyzed",
+              "15 products analyzed",
               "49 products in dataset",
               "7 use-case scores per product",
               "Updated quarterly",
