@@ -973,6 +973,10 @@ export function SolarCalculator() {
           <p className="mt-5 text-[11px] text-neutral-400 text-center leading-relaxed">
             {PRODUCTS.length} products analyzed · {result.eliminations.reduce((s, e) => s + e.count, 0)} eliminated · {result.picks.length} matched ·{" "}
             <a href="/methodology" className="underline underline-offset-2 hover:text-neutral-600 transition-colors">Methodology</a>
+            {" · "}
+            <a href="/technical-analysis" className="underline underline-offset-2 hover:text-neutral-600 transition-colors">Technical Analysis</a>
+            {" · "}
+            <a href="/comparisons" className="underline underline-offset-2 hover:text-neutral-600 transition-colors">Comparisons</a>
             {" "}· We earn a commission if you purchase — this does not affect our analysis.
           </p>
         </div>
