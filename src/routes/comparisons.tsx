@@ -65,14 +65,56 @@ const LIVE_COMPARISONS = [
     tags: ["Home Backup", "UPS"],
     verdict: "Top 5 by home backup score",
   },
+  {
+    title: "EcoFlow DELTA 3 Max vs Jackery Explorer 2000 Plus",
+    slug: "ecoflow-delta-3-max-vs-jackery-explorer-2000-plus",
+    desc: "The two most popular 2kWh generators head to head. Surge, UPS, expandability, and weight compared.",
+    tags: ["2kWh Class", "Popular"],
+    verdict: "Jackery on surge, EcoFlow on UPS",
+  },
+  {
+    title: "EcoFlow DELTA 3 Max vs Bluetti AC200L",
+    slug: "ecoflow-delta-3-max-vs-bluetti-ac200l",
+    desc: "Same capacity, same price class, different strengths. Surge vs solar input — which 2kWh LFP wins for your scenario?",
+    tags: ["2kWh Class", "LFP"],
+    verdict: "EcoFlow on surge, Bluetti on solar",
+  },
+  {
+    title: "Anker SOLIX F3800 vs EcoFlow DELTA Pro",
+    slug: "anker-solix-f3800-vs-ecoflow-delta-pro",
+    desc: "High-power home backup showdown. 240V, 6,000W continuous, and 12,000W surge vs the established DELTA Pro.",
+    tags: ["High Power", "Home Backup"],
+    verdict: "F3800 for 240V loads",
+  },
+  {
+    title: "Best Solar Generators for Camping 2026",
+    slug: "best-solar-generators-camping-2026",
+    desc: "Ranked by weight, portability, and camping-specific scores across 49 products. Weekend to extended off-grid.",
+    tags: ["Camping", "Outdoor"],
+    verdict: "Jackery 1000 v2 for most",
+  },
+  {
+    title: "Best Solar Generators for RV and Van Life 2026",
+    slug: "best-solar-generators-rv-van-life-2026",
+    desc: "Real RV loads, surge requirements, and expandability for extended dry camping. Sized for actual use.",
+    tags: ["RV", "Van Life"],
+    verdict: "Jackery 2000 Plus for RV",
+  },
+  {
+    title: "Jackery vs Bluetti: Which Brand?",
+    slug: "jackery-vs-bluetti-which-brand-better-2026",
+    desc: "Brand comparison across portable generators. Portability, UPS, solar input, value, and ecosystem.",
+    tags: ["Brand", "Value"],
+    verdict: "Jackery for camping, Bluetti for home",
+  },
 ];
 
 const COMING_COMPARISONS = [
-  { title: "Anker SOLIX F3800 vs EcoFlow DELTA Pro", tags: ["High Power"] },
-  { title: "EcoFlow DELTA 3 Max vs Bluetti AC200L", tags: ["2kWh Class"] },
-  { title: "Best Solar Generators for RV / Van Life", tags: ["RV"] },
-  { title: "DJI Power 1000 vs EcoFlow DELTA 3 Classic", tags: ["Compact"] },
-  { title: "Best Budget Solar Generators Under $500", tags: ["Budget"] },
+  { title: "Best Solar Generators Under $500", tags: ["Budget"] },
+  { title: "EcoFlow vs Anker SOLIX: Which Brand?", tags: ["Brand"] },
+  { title: "Best Solar Generators for Medical Devices", tags: ["Medical"] },
+  { title: "Goal Zero vs EcoFlow: Premium vs Value", tags: ["Premium"] },
+  { title: "Best Solar Generators for Apartments", tags: ["Apartment"] },
 ];
 
 function TagBadge({ tag }: { tag: string }) {
