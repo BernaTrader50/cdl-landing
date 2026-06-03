@@ -49,9 +49,46 @@ function isLandingRoute(pathname: string): boolean {
 }
 
 const ROBOTS_TXT = `# robots.txt - ClickDecisionLab
+# https://clickdecisionlab.com
+
 User-agent: *
 Allow: /
-Sitemap: https://clickdecisionlab.com/sitemap.xml
+Disallow: /wp-admin/
+Disallow: /wp-login.php
+
+# Search engines
+User-agent: Googlebot
+Allow: /
+
+User-agent: Bingbot
+Allow: /
+
+User-agent: DuckDuckBot
+Allow: /
+
+# AI search engines (explicitly allowed for visibility)
+User-agent: Google-Extended
+Allow: /
+
+User-agent: GPTBot
+Allow: /
+
+User-agent: ClaudeBot
+Allow: /
+
+User-agent: PerplexityBot
+Allow: /
+
+User-agent: anthropic-ai
+Allow: /
+
+User-agent: cohere-ai
+Allow: /
+
+# Sitemaps
+Sitemap: https://clickdecisionlab.com/sitemap_index.xml
+Sitemap: https://clickdecisionlab.com/post-sitemap.xml
+Sitemap: https://clickdecisionlab.com/page-sitemap.xml
 `;
 
 export default {
