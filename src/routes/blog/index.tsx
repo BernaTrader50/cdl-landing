@@ -3,7 +3,7 @@ import { useState } from "react";
 import { SiteNav } from "@/components/site-nav";
 import { SiteFooter } from "@/components/site-footer";
 
-const API_BASE = "https://papayawhip-armadillo-217262.hostingersite.com/wp-json/wp/v2";
+const API_BASE = "https://clickdecisionlab.com/wp-json/wp/v2";
 
 type Post = {
   id: number;
