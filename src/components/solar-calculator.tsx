@@ -590,7 +590,8 @@ function ResultCard({ pick, accentColor, scoreKey }: { pick: PickResult; accentC
     const tz = Intl.DateTimeFormat().resolvedOptions().timeZone || "";
     if (lang.startsWith("de") || tz.includes("Berlin") || tz.includes("Vienna") || tz.includes("Zurich")) return "de";
     if (lang.startsWith("fr") || tz.includes("Paris") || tz.includes("Brussels")) return "fr";
-    if (lang.startsWith("es") && !tz.includes("America")) return "es";
+    // ES pending registration — skip for now
+    // if (lang.startsWith("es") && !tz.includes("America")) return "es";
     if (lang.startsWith("it") || tz.includes("Rome")) return "it";
     if (lang === "en-gb" || lang === "en-ie" || tz.includes("London") || tz.includes("Dublin")) return "uk";
     if (tz.includes("Sydney") || tz.includes("Melbourne") || tz.includes("Brisbane")) return "au";
