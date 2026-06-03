@@ -226,7 +226,7 @@ function Hero() {
             against real specs and surge requirements.
           </p>
 
-          <div className="hidden flex-1 items-center justify-start lg:flex">
+          <div className="hidden mt-8 justify-start lg:flex">
             <img
               src={powerStation}
               alt="Generic portable power station — reference unit"
