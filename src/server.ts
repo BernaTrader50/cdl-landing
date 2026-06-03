@@ -44,7 +44,7 @@ async function normalizeCatastrophicSsrResponse(response: Response): Promise<Res
 // Routes handled by the React landing app
 function isLandingRoute(pathname: string): boolean {
     if (pathname === "/" || pathname === "") return true;
-    const landing = ["/solar-calculator", "/methodology", "/comparisons", "/guides", "/assets/", "/__manifest", "/_build/", "/favicon"];
+    const landing = ["/solar-calculator", "/methodology", "/comparisons", "/guides", "/ev-chargers", "/home-batteries", "/backup-power", "/assets/", "/__manifest", "/_build/", "/favicon"];
     return landing.some(p => pathname === p || pathname.startsWith(p.endsWith("/") ? p : p + "/") || pathname === p + "?");
 }
 
