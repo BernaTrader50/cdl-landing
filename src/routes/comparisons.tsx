@@ -1,4 +1,6 @@
-import { createFileRoute, Link } from "@tanstack/react-router";
+import { createFileRoute } from "@tanstack/react-router";
+import { SiteNav } from "@/components/site-nav";
+import { SiteFooter } from "@/components/site-footer";
 
 export const Route = createFileRoute("/comparisons")({
   head: () => ({
@@ -67,7 +69,8 @@ function TagBadge({ tag }: { tag: string }) {
 function ComparisonsPage() {
   return (
     <div className="min-h-screen bg-[#F7F7F5]">
-      <div className="mx-auto max-w-5xl px-5 py-16">
+      <SiteNav />
+      <div className="mx-auto max-w-5xl px-5 pt-32 pb-16">
 
         {/* Header */}
         <div className="mb-10">
@@ -145,6 +148,7 @@ function ComparisonsPage() {
         </div>
 
       </div>
+      <SiteFooter />
     </div>
   );
 }
