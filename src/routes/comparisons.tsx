@@ -68,7 +68,16 @@ function TagBadge({ tag }: { tag: string }) {
 
 function ComparisonsPage() {
   return (
-    <div className="min-h-screen bg-[#F7F7F5]">
+    <div className="min-h-screen relative" style={{
+        backgroundColor: "#F7F7F5",
+        backgroundImage: [
+          "linear-gradient(to right, rgba(15,23,42,0.035) 1px, transparent 1px)",
+          "linear-gradient(to bottom, rgba(15,23,42,0.035) 1px, transparent 1px)",
+          "linear-gradient(to right, rgba(15,23,42,0.02) 1px, transparent 1px)",
+          "linear-gradient(to bottom, rgba(15,23,42,0.02) 1px, transparent 1px)",
+        ].join(","),
+        backgroundSize: "48px 48px, 48px 48px, 240px 240px, 240px 240px",
+      }}>
       <SiteNav />
       <div className="mx-auto max-w-5xl px-5 pt-32 pb-16">
 
