@@ -485,7 +485,7 @@ function ScoreBreakdown({ components, overallScore, scoreKey }: { components: Sc
 }
 
 // ─── ELIMINATED PRODUCTS PANEL ────────────────────────────────────────────────
-function EliminatedPanel({ eliminated }: { eliminated: import("react").ComponentProps<typeof SolarCalculator>["__eliminated"] extends infer T ? T : { brand:string; model:string; price:number; reason:string }[] }) {
+function EliminatedPanel({ eliminated }: { eliminated: EliminatedProduct[] }) {
   if (!eliminated || eliminated.length === 0) return null;
   return (
     <div className="mb-4 rounded-[12px] border bg-white p-4" style={{borderColor:"#E2E2E2"}}>
