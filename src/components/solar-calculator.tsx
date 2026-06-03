@@ -103,12 +103,22 @@ type PickResult = {
   limitation: string;
   scoreComponents: ScoreComponent[];
 };
+type EliminatedProduct = {
+  brand: string;
+  model: string;
+  price: number;
+  reason: string;
+};
 type AnalysisResult = {
   picks: PickResult[];
   eliminations: EliminationReason[];
+  eliminatedProducts: EliminatedProduct[];
   totalEvaluated: number;
   requiredWh: number;
   requiredSurge: number;
+  needsUps: boolean;
+  days: number;
+  applianceLabel: string;
   outOfBudget: boolean;
   scoreKey: keyof typeof PRODUCTS[0]["scores"];
 };
@@ -318,7 +328,30 @@ function computeAnalysis(
       };
     });
 
-  return { picks, eliminations, totalEvaluated: PRODUCTS.length, requiredWh, requiredSurge, outOfBudget, scoreKey };
+  // Track the 3 closest eliminated products with exact reason
+  const eliminatedProducts: EliminatedProduct[] = [];
+  let fullPool = [...PRODUCTS];
+
+  // Re-run elimination tracking individual products
+  const budgetNum = budget > 0 ? budget * 1.15 : Infinity;
+  for (const p of fullPool) {
+    if (picks.some(pk => pk.product === p)) continue;
+    if (p.price > budgetNum) {
+      eliminatedProducts.push({ brand: p.brand, model: p.model, price: p.price, reason: `over budget by $${(p.price - budget).toLocaleString()}` });
+    } else if (p.surge < requiredSurge) {
+      eliminatedProducts.push({ brand: p.brand, model: p.model, price: p.price, reason: `surge ${p.surge.toLocaleString()}W < ${requiredSurge.toLocaleString()}W required` });
+    } else if (needsUps && !p.ups) {
+      eliminatedProducts.push({ brand: p.brand, model: p.model, price: p.price, reason: "no UPS — required for this scenario" });
+    } else if (p.wh < requiredWh * 0.6) {
+      eliminatedProducts.push({ brand: p.brand, model: p.model, price: p.price, reason: `${p.wh}Wh < ${Math.round(requiredWh * 0.6)}Wh minimum runtime` });
+    }
+  }
+  // Sort by "closest to passing" — those with highest score in relevant dimension
+  const closestEliminated = eliminatedProducts
+    .sort((a, b) => b.price - a.price)
+    .slice(0, 3);
+
+  return { picks, eliminations, eliminatedProducts: closestEliminated, totalEvaluated: PRODUCTS.length, requiredWh, requiredSurge, needsUps, days: d, applianceLabel: app.label, outOfBudget, scoreKey };
 }
 
 // ─── ICONS ───────────────────────────────────────────────────────────────────
@@ -451,6 +484,87 @@ function ScoreBreakdown({ components, overallScore, scoreKey }: { components: Sc
   );
 }
 
+// ─── ELIMINATED PRODUCTS PANEL ────────────────────────────────────────────────
+function EliminatedPanel({ eliminated }: { eliminated: import("react").ComponentProps<typeof SolarCalculator>["__eliminated"] extends infer T ? T : { brand:string; model:string; price:number; reason:string }[] }) {
+  if (!eliminated || eliminated.length === 0) return null;
+  return (
+    <div className="mb-4 rounded-[12px] border bg-white p-4" style={{borderColor:"#E2E2E2"}}>
+      <p className="font-mono text-[9.5px] font-medium uppercase tracking-[0.14em] text-neutral-400 mb-3">Closest products eliminated</p>
+      <div className="space-y-2">
+        {eliminated.map((e, i) => (
+          <div key={i} className="flex items-center gap-3">
+            <span className="text-[11px] font-mono text-neutral-300 shrink-0">✕</span>
+            <span className="text-[12px] font-medium text-neutral-600 shrink-0">{e.brand} {e.model}</span>
+            <span className="font-mono text-[11px] text-neutral-400 shrink-0">${e.price.toLocaleString()}</span>
+            <div className="flex-1 h-[1px] bg-neutral-100"/>
+            <span className="text-[11px] text-neutral-400 shrink-0 text-right max-w-[180px]">{e.reason}</span>
+          </div>
+        ))}
+      </div>
+    </div>
+  );
+}
+
+// ─── COMPARISON TABLE ────────────────────────────────────────────────────────
+function ComparisonTable({ picks, requiredWh, requiredSurge, needsUps, scoreKey }: {
+  picks: PickResult[];
+  requiredWh: number;
+  requiredSurge: number;
+  needsUps: boolean;
+  scoreKey: string;
+}) {
+  if (picks.length < 2) return null;
+  const LABEL_COLORS: Record<string, string> = {
+    "Best Match":   "#2563EB",
+    "Best Value":   "#10B981",
+    "Premium Pick": "#8B5CF6",
+  };
+  const rows = [
+    { key: "Price",    fmt: (p: PickResult["product"]) => `$${p.price.toLocaleString()}` },
+    { key: "Capacity", fmt: (p: PickResult["product"]) => `${p.wh.toLocaleString()} Wh` },
+    { key: "Surge",    fmt: (p: PickResult["product"]) => `${p.surge.toLocaleString()} W` },
+    { key: "UPS",      fmt: (p: PickResult["product"]) => p.ups ? "✓ Yes" : "✗ No" },
+    { key: "Runtime*", fmt: (p: PickResult["product"]) => `${Math.round((p.wh / Math.max(requiredWh / (requiredWh > 0 ? 1 : 1), 1)) * 10) / 10}× req.` },
+    { key: "Warranty", fmt: (p: PickResult["product"]) => `${p.warranty}yr` },
+  ];
+  return (
+    <div className="mb-4 overflow-x-auto rounded-[12px] border bg-white" style={{borderColor:"#E2E2E2"}}>
+      <table className="w-full text-left min-w-[400px]">
+        <thead>
+          <tr className="border-b" style={{borderColor:"#F0F0F0"}}>
+            <th className="py-3 pl-4 pr-3 font-mono text-[9px] uppercase tracking-[0.14em] text-neutral-400 w-24">Spec</th>
+            {picks.map(pick => (
+              <th key={pick.label} className="py-3 px-3 font-mono text-[9.5px] font-semibold" style={{color: LABEL_COLORS[pick.label]}}>
+                {pick.label}
+                <div className="font-mono text-[9px] font-normal text-neutral-500 mt-0.5 normal-case tracking-normal">
+                  {pick.product.brand} {pick.product.model}
+                </div>
+              </th>
+            ))}
+          </tr>
+        </thead>
+        <tbody>
+          {rows.map((row, i) => (
+            <tr key={row.key} className={i % 2 === 0 ? "bg-[#FAFAFA]" : ""}>
+              <td className="py-2.5 pl-4 pr-3 font-mono text-[10px] text-neutral-400">{row.key}</td>
+              {picks.map(pick => {
+                const val = row.fmt(pick.product);
+                const highlight = row.key === "UPS" && needsUps && pick.product.ups;
+                return (
+                  <td key={pick.label} className="py-2.5 px-3 font-mono text-[11.5px]" style={{color: highlight ? "#10B981" : "#1a1a1a"}}>
+                    {val}
+                  </td>
+                );
+              })}
+            </tr>
+          ))}
+        </tbody>
+      </table>
+      <p className="px-4 py-2 font-mono text-[9px] text-neutral-300">* Runtime multiple vs your scenario requirement</p>
+    </div>
+  );
+}
+
 // ─── RESULT CARD ─────────────────────────────────────────────────────────────
 function ResultCard({ pick, accentColor, scoreKey }: { pick: PickResult; accentColor: string; scoreKey: string }) {
   const { product: p, label, expertVerdict, strengths, tradeoffs, limitation, scoreComponents } = pick;
@@ -579,6 +693,21 @@ function ResultCard({ pick, accentColor, scoreKey }: { pick: PickResult; accentC
     "DJI Power":    "https://www.amazon.com/s?k=DJI+Power+portable+power+station&tag=clickdecision-20",
     "Renogy":       "https://www.amazon.com/s?k=Renogy+Lycan+5000+power+station&tag=clickdecision-20",
     "Geneverse":    "https://www.amazon.com/s?k=Geneverse+HomePower+power+station&tag=clickdecision-20",
+  };
+
+  // Technical Analysis pages — links to deep-dive pages when available
+  const TECHNICAL_ANALYSIS_PAGES: Record<string, string> = {
+    "DELTA Pro":            "/ecoflow-delta-pro-technical-analysis-2026/",
+    "DELTA 3 Classic":      "/ecoflow-delta-3-classic-technical-analysis-2026/",
+    "DELTA 3 Max":          "/ecoflow-delta-3-max-technical-analysis-2026/",
+    "DELTA 2 Max":          "/ecoflow-delta-2-max-technical-analysis-2026/",
+    "AC200L":               "/bluetti-ac200l-technical-analysis-2026/",
+    "AC300":                "/bluetti-ac300-technical-analysis-2026/",
+    "Explorer 1000 v2":     "/jackery-explorer-1000-v2-technical-analysis-2026/",
+    "Explorer 2000 Plus":   "/jackery-explorer-2000-plus-technical-analysis-2026/",
+    "Explorer 2000 v2":     "/jackery-explorer-2000-v2-technical-analysis-2026/",
+    "F3800":                "/anker-solix-f3800-technical-analysis-2026/",
+  };
   };
 
   const getAffiliateUrl = (brand: string, model: string): string => {
@@ -814,6 +943,18 @@ export function SolarCalculator() {
               No products matched all criteria within budget — showing closest alternatives.
             </p>
           )}
+
+          {/* Eliminated products */}
+          <EliminatedPanel eliminated={result.eliminatedProducts} />
+
+          {/* Comparison table */}
+          <ComparisonTable
+            picks={result.picks}
+            requiredWh={result.requiredWh}
+            requiredSurge={result.requiredSurge}
+            needsUps={result.needsUps}
+            scoreKey={result.scoreKey}
+          />
 
           {/* Product cards */}
           <div className="grid grid-cols-1 gap-4 md:grid-cols-3">
