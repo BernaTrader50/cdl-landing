@@ -12,6 +12,23 @@ export const Route = createFileRoute("/comparisons")({
   component: ComparisonsPage,
 });
 
+const TA_LINKS: Record<string, string[]> = {
+  "ecoflow-delta-pro-vs-delta-3-max": [
+    "/ecoflow-delta-pro-technical-analysis-2026/",
+    "/ecoflow-delta-3-max-technical-analysis-2026/",
+  ],
+  "bluetti-ac200l-vs-ecoflow-delta-2-max": [
+    "/bluetti-ac200l-technical-analysis-2026/",
+    "/ecoflow-delta-2-max-technical-analysis-2026/",
+  ],
+  "jackery-explorer-2000-plus-vs-ecoflow-delta-2-max": [
+    "/jackery-explorer-2000-plus-technical-analysis-2026/",
+    "/ecoflow-delta-2-max-technical-analysis-2026/",
+  ],
+  "best-solar-generators-under-1000": [],
+  "best-solar-generators-home-backup": [],
+};
+
 const LIVE_COMPARISONS = [
   {
     title: "EcoFlow DELTA Pro vs DELTA 3 Max",
@@ -120,7 +137,19 @@ function ComparisonsPage() {
                   <p className="mt-1.5 text-[13px] text-neutral-500 leading-relaxed">{c.desc}</p>
                   <p className="mt-2 font-mono text-[11px] text-[#10B981]">Verdict: {c.verdict}</p>
                 </div>
-                <span className="text-neutral-400 group-hover:text-neutral-600 transition-colors mt-1 shrink-0">→</span>
+                <div className="flex flex-col items-end gap-1 shrink-0">
+                  <span className="text-neutral-400 group-hover:text-neutral-600 transition-colors">→</span>
+                  {(TA_LINKS[c.slug] || []).length > 0 && (
+                    <div className="flex gap-1 flex-wrap justify-end">
+                      {(TA_LINKS[c.slug] || []).map((ta, i) => (
+                        <a key={i} href={ta} onClick={e => e.stopPropagation()}
+                          className="font-mono text-[9px] text-[#2563EB] hover:underline">
+                          TA {i + 1} →
+                        </a>
+                      ))}
+                    </div>
+                  )}
+                </div>
               </a>
             ))}
           </div>
