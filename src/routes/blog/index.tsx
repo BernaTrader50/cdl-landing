@@ -125,7 +125,16 @@ function BlogIndex() {
   }
 
   return (
-    <div className="min-h-screen bg-white text-neutral-950">
+    <div className="min-h-screen relative text-neutral-950" style={{
+        backgroundColor: "#F7F7F5",
+        backgroundImage: [
+          "linear-gradient(to right, rgba(15,23,42,0.035) 1px, transparent 1px)",
+          "linear-gradient(to bottom, rgba(15,23,42,0.035) 1px, transparent 1px)",
+          "linear-gradient(to right, rgba(15,23,42,0.02) 1px, transparent 1px)",
+          "linear-gradient(to bottom, rgba(15,23,42,0.02) 1px, transparent 1px)",
+        ].join(","),
+        backgroundSize: "48px 48px, 48px 48px, 240px 240px, 240px 240px",
+      }}>
       <SiteNav />
       <main className="px-6 pb-24 pt-32">
         <div className="mx-auto max-w-6xl">
