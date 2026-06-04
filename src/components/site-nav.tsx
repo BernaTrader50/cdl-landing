@@ -74,6 +74,7 @@ const tools: Array<{ label: string; to: string }> = [
   { label: "Calculators", to: "/solar-calculator" },
   { label: "Comparisons", to: "/comparisons" },
   { label: "Technical Analysis", to: "/technical-analysis" },
+  { label: "Runtime DB", to: "/runtime-database" },
   { label: "Research", to: "/blog" },
   { label: "Methodology", to: "/#methodology" },
   { label: "Articles", to: "/blog" },
