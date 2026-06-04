@@ -98,7 +98,7 @@ export function SiteNav() {
           {/* CENTER: nav absolutely centered in the full header */}
           <nav className="hidden flex-1 items-center justify-center gap-6 lg:flex">
             <div className="group relative">
-              <span className="cursor-default select-none text-[13px] font-semibold text-neutral-700 transition-colors hover:text-neutral-950">
+              <span className="cursor-default select-none text-[13px] font-bold text-neutral-800 transition-colors hover:text-neutral-950">
                 Labs
               </span>
               <div className="invisible absolute left-1/2 top-full z-50 mt-2 w-[220px] -translate-x-1/2 rounded-[10px] border border-[#e8e8e8] bg-white p-1.5 opacity-0 shadow-[0_8px_24px_-8px_rgba(0,0,0,0.12)] transition-all duration-150 group-hover:visible group-hover:opacity-100">
@@ -119,7 +119,7 @@ export function SiteNav() {
             </div>
             {tools.map(t => (
               <Link key={t.label} to={t.to}
-                className="whitespace-nowrap text-[13px] font-semibold text-neutral-700 transition-colors hover:text-neutral-950">
+                className="whitespace-nowrap text-[13px] font-bold text-neutral-800 transition-colors hover:text-neutral-950">
                 {t.label}
               </Link>
             ))}
