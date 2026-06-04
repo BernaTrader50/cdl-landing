@@ -1,3 +1,4 @@
+// ⚠️ DO NOT MODIFY THIS FILE — nav layout is locked. See commit 3a30e7a.
 import { Link } from "@tanstack/react-router";
 import { useEffect, useState } from "react";
 
