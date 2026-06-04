@@ -58,6 +58,38 @@ const PRODUCTS = [
   // ─── GENEVERSE ───────────────────────────────────────────────────────────
   { brand:"Geneverse", model:"HomePower ONE PRO", price:499, wh:1210, surge:2400, solar:400, ups:false, expandable:false, weight:38, warranty:5, scores:{home_backup:7,rv:6,camping:6,off_grid:5,apartment:6,medical:6,value:8}, notes:"Home backup focused. LFP. 1.5h charge. Simple, reliable. Sold at Lowe's and Home Depot." },
   { brand:"Geneverse", model:"HomePower TWO PRO", price:999, wh:2419, surge:4400, solar:800, ups:false, expandable:false, weight:49, warranty:5, scores:{home_backup:8,rv:6,camping:4,off_grid:6,apartment:4,medical:7,value:7}, notes:"2.4kWh LFP for home backup. 4400W surge. Sold at major retailers. No UPS." },
+
+  // ─── EcoFlow gaps ─────────────────────────────────────────────────────────
+  { brand:"EcoFlow", model:"RIVER 2 Pro", price:349, wh:768, surge:1600, solar:220, ups:true, expandable:true, weight:17.4, warranty:5, scores:{home_backup:5,rv:6,camping:9,off_grid:4,apartment:7,medical:5,value:8}, notes:"768Wh LFP. 800W continuous. UPS. Expandable to 2x. Compact camping flagship." },
+  { brand:"EcoFlow", model:"DELTA Pro 3", price:2999, wh:4096, surge:8000, solar:2600, ups:true, expandable:true, weight:71.7, warranty:5, scores:{home_backup:10,rv:4,camping:2,off_grid:9,apartment:2,medical:9,value:6}, notes:"2025 flagship. 4000W continuous 8000W surge. 240V output. LFP. 5yr warranty." },
+  // ─── Zendure gap ──────────────────────────────────────────────────────────
+  { brand:"Zendure", model:"Hyper 2000", price:1299, wh:2015, surge:4000, solar:1200, ups:true, expandable:true, weight:35, warranty:2, scores:{home_backup:8,rv:6,camping:5,off_grid:7,apartment:6,medical:7,value:7}, notes:"2000W continuous. LFP. UPS. 1200W solar. Hub expandable to 64kWh." },
+  // ─── Jackery gap ──────────────────────────────────────────────────────────
+  { brand:"Jackery", model:"Explorer 3000 Pro", price:2299, wh:2400, surge:6000, solar:1000, ups:false, expandable:false, weight:63.9, warranty:3, scores:{home_backup:8,rv:5,camping:3,off_grid:7,apartment:3,medical:5,value:5}, notes:"3000W continuous 6000W surge NMC. Heavy 63.9 lbs. No UPS. 3yr warranty." },
+  // ─── OUPES ────────────────────────────────────────────────────────────────
+  { brand:"OUPES", model:"Mega 1", price:399, wh:1024, surge:4500, solar:1000, ups:true, expandable:true, weight:26.5, warranty:5, scores:{home_backup:8,rv:7,camping:7,off_grid:6,apartment:7,medical:7,value:9}, notes:"2000W continuous 4500W surge LFP. UPS <20ms. Expandable to 5.12kWh. 36-min charge." },
+  { brand:"OUPES", model:"Mega 2", price:799, wh:2048, surge:5400, solar:1800, ups:true, expandable:true, weight:44, warranty:5, scores:{home_backup:9,rv:7,camping:5,off_grid:7,apartment:5,medical:8,value:8}, notes:"2500W continuous 5400W surge LFP. UPS. Expandable to 10.24kWh. 0.6hr charge." },
+  { brand:"OUPES", model:"Mega 3", price:1082, wh:3072, surge:7000, solar:1900, ups:true, expandable:true, weight:66, warranty:5, scores:{home_backup:9,rv:5,camping:3,off_grid:8,apartment:3,medical:8,value:7}, notes:"3600W continuous 7000W surge LFP. UPS. Expandable to 15.36kWh. 1hr charge." },
+  { brand:"OUPES", model:"Mega 5", price:2499, wh:5040, surge:7000, solar:3900, ups:true, expandable:true, weight:88, warranty:5, scores:{home_backup:10,rv:3,camping:1,off_grid:9,apartment:2,medical:9,value:6}, notes:"4000W continuous 7000W surge LFP. UPS. Expandable to 45.36kWh. 1.3hr charge." },
+  { brand:"OUPES", model:"Exodus 2400", price:799, wh:2232, surge:4500, solar:1100, ups:true, expandable:false, weight:45.2, warranty:5, scores:{home_backup:8,rv:7,camping:5,off_grid:7,apartment:5,medical:7,value:8}, notes:"2400W continuous 4500W surge LFP. UPS. 0-80% in 1.2hr. Lightest 2kWh class." },
+  // ─── Growatt ──────────────────────────────────────────────────────────────
+  { brand:"Growatt", model:"Infinity 1500", price:599, wh:1512, surge:4000, solar:800, ups:true, expandable:true, weight:35.3, warranty:2, scores:{home_backup:7,rv:7,camping:7,off_grid:6,apartment:7,medical:5,value:8}, notes:"2000W continuous 4000W surge NMC. EPS <20ms. Expandable 3 units. 2yr warranty." },
+  { brand:"Growatt", model:"Infinity 1300", price:499, wh:1382, surge:3600, solar:800, ups:true, expandable:false, weight:36.4, warranty:5, scores:{home_backup:7,rv:7,camping:7,off_grid:5,apartment:7,medical:3,value:8}, notes:"1800W LFP. UPS ~20s switchover — slow, NOT suitable for CPAP/PC. 5yr warranty." },
+  // ─── Allpowers ────────────────────────────────────────────────────────────
+  { brand:"Allpowers", model:"R1500 LITE", price:299, wh:1056, surge:3200, solar:650, ups:true, expandable:false, weight:24.3, warranty:2, scores:{home_backup:7,rv:7,camping:8,off_grid:5,apartment:7,medical:7,value:9}, notes:"1600W continuous 3200W surge LFP. UPS <15ms. 650W solar. Best $/Wh with UPS." },
+  { brand:"Allpowers", model:"S2000 Pro", price:499, wh:1452, surge:4000, solar:1000, ups:true, expandable:false, weight:37.5, warranty:5, scores:{home_backup:7,rv:7,camping:6,off_grid:6,apartment:6,medical:7,value:9}, notes:"2400W continuous 4000W surge LFP. UPS <15ms. 1000W solar. 5yr warranty." },
+  { brand:"Allpowers", model:"R2500", price:699, wh:2016, surge:5000, solar:1400, ups:true, expandable:true, weight:46.3, warranty:5, scores:{home_backup:8,rv:7,camping:5,off_grid:7,apartment:5,medical:7,value:9}, notes:"2500W continuous 5000W surge LFP. UPS. 1400W solar. Expandable. Strong value." },
+  // ─── Mango Power ─────────────────────────────────────────────────────────
+  { brand:"Mango Power", model:"Union", price:2799, wh:6900, surge:6600, solar:4000, ups:true, expandable:true, weight:132, warranty:3, scores:{home_backup:10,rv:2,camping:1,off_grid:9,apartment:2,medical:9,value:5}, notes:"2-in-1 detachable. 4350W continuous. UPS <10ms. Expandable to 69kWh. 7000 cycles." },
+  // ─── Aferiy ──────────────────────────────────────────────────────────────
+  { brand:"Aferiy", model:"P210", price:699, wh:2048, surge:4800, solar:1000, ups:true, expandable:false, weight:46, warranty:2, scores:{home_backup:8,rv:6,camping:5,off_grid:7,apartment:5,medical:7,value:9}, notes:"2400W continuous 4800W surge LFP. UPS. 1000W solar. Best value 2kWh." },
+  // ─── VTOMAN new ──────────────────────────────────────────────────────────
+  { brand:"VTOMAN", model:"Jump 600X", price:399, wh:632, surge:1200, solar:200, ups:true, expandable:false, weight:14.3, warranty:3, scores:{home_backup:5,rv:6,camping:8,off_grid:4,apartment:7,medical:6,value:8}, notes:"600W continuous. UPS <20ms. 14.3 lbs. Budget portable with UPS." },
+  // ─── Pecron new ──────────────────────────────────────────────────────────
+  { brand:"Pecron", model:"E3000LFP", price:1299, wh:2880, surge:6000, solar:1200, ups:true, expandable:true, weight:55, warranty:3, scores:{home_backup:9,rv:6,camping:4,off_grid:8,apartment:4,medical:8,value:9}, notes:"3000W continuous 6000W surge LFP. UPS. Expandable to 11.52kWh. Exceptional value." },
+  // ─── Bluetti gaps ─────────────────────────────────────────────────────────
+  { brand:"Bluetti", model:"AC200P", price:999, wh:2000, surge:4800, solar:700, ups:false, expandable:false, weight:60.6, warranty:2, scores:{home_backup:7,rv:5,camping:3,off_grid:6,apartment:3,medical:5,value:6}, notes:"Legacy 2kWh NMC. No UPS. 60.6 lbs heavy. Superseded by AC200L. 2yr warranty." },
+  { brand:"Bluetti", model:"EP500 Pro", price:4099, wh:5100, surge:6000, solar:2400, ups:true, expandable:true, weight:182, warranty:5, scores:{home_backup:10,rv:1,camping:1,off_grid:9,apartment:1,medical:9,value:4}, notes:"Wheeled home system. 3000W continuous. UPS. Expandable to 10.2kWh. 182 lbs." },
 ];
 
 // ─── SCENARIO → SCORE KEY ────────────────────────────────────────────────────
