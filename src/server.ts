@@ -687,6 +687,49 @@ export default {
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
   </url>
+
+  <url>
+    <loc>https://clickdecisionlab.com/runtime-database</loc>
+    <lastmod>2026-06-04</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://clickdecisionlab.com/what-can-a-solar-generator-run/</loc>
+    <lastmod>2026-06-04</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://clickdecisionlab.com/can-a-solar-generator-run-a-refrigerator/</loc>
+    <lastmod>2026-06-04</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://clickdecisionlab.com/can-a-solar-generator-run-a-cpap/</loc>
+    <lastmod>2026-06-04</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://clickdecisionlab.com/can-a-solar-generator-run-starlink/</loc>
+    <lastmod>2026-06-04</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://clickdecisionlab.com/can-a-solar-generator-run-a-microwave/</loc>
+    <lastmod>2026-06-04</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://clickdecisionlab.com/can-a-solar-generator-run-a-portable-ac/</loc>
+    <lastmod>2026-06-04</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
 </urlset>`, {
                 headers: { "content-type": "application/xml; charset=utf-8", "cache-control": "public, max-age=3600" }
             });
