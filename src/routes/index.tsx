@@ -528,7 +528,7 @@ function FeatureBar() {
 /* --------------------------- DATABASE BAR --------------------------- */
 function DatabaseStrip() {
   const items = [
-    { n: "137", l: "Products tracked" },
+    { n: "49", l: "Products tracked" },
     { n: "420+", l: "Specs monitored" },
     { n: "6", l: "Decision verticals" },
     { n: "0", l: "Sponsored rankings" },
@@ -1271,7 +1271,7 @@ function CurrentResearch() {
         <div className="flex items-center gap-2 text-[12px] text-neutral-500">
           <span className={MONO}>6 active threads</span>
           <span className="text-neutral-300">·</span>
-          <span className={MONO}>Monitoring 137 systems</span>
+          <span className={MONO}>Monitoring 49 products</span>
         </div>
       </div>
 
