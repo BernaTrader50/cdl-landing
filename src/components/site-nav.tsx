@@ -15,8 +15,8 @@ function FlaskIcon({ className = "" }: { className?: string }) {
 
 export function Logo({ className = "" }: { className?: string }) {
   return (
-    <Link to="/" className={`flex items-center gap-2 ${className}`}>
-      <FlaskIcon className="h-7 w-7 shrink-0" />
+    <Link to="/" className={`flex shrink-0 items-center gap-2 ${className}`}>
+      <FlaskIcon className="h-8 w-8 shrink-0" />
       <span className="text-[20px] font-bold leading-none tracking-tight text-neutral-950">
         <span>click</span>
         <span style={{ color: "#2563EB" }}>decision</span>
@@ -62,7 +62,7 @@ export function SiteNav() {
 
       {/* Status bar */}
       <div className="hidden h-7 items-center border-b border-[#ececec] bg-[#fafafa] text-[11px] text-neutral-500 md:flex">
-        <div className="mx-auto flex w-full max-w-6xl items-center px-6 gap-4">
+        <div className="mx-auto flex w-full max-w-7xl items-center gap-4 px-8">
           <span className="flex items-center gap-1.5">
             <span className="inline-block h-1.5 w-1.5 rounded-full bg-[#16a34a]" />
             <span className="font-medium text-neutral-600">Research live</span>
@@ -84,22 +84,21 @@ export function SiteNav() {
           WebkitBackdropFilter: "saturate(180%) blur(14px)",
         }}
       >
-        {/* 1fr | auto | 1fr — logo left-anchored, nav truly centered, CTA right-anchored */}
-        <div className="mx-auto grid h-14 max-w-6xl grid-cols-[1fr_auto_1fr] items-center px-6">
+        <div className="mx-auto flex h-16 w-full max-w-7xl items-center px-8">
 
-          {/* Left col — logo + tagline, left-aligned */}
-          <div className="flex items-center gap-2.5 justify-self-start">
+          {/* LEFT: logo + tagline, max 320px, no shrink into nav */}
+          <div className="flex items-center gap-3" style={{ width: "320px", flexShrink: 0 }}>
             <Logo />
-            <span className="hidden select-none text-neutral-300 font-light md:block" aria-hidden>/</span>
-            <span className="hidden font-mono text-[13px] font-normal text-neutral-400 tracking-wide md:block">
-              Real specs. Real decisions.
-            </span>
+            <div className="hidden flex-col gap-[2px] border-l border-neutral-200 pl-3 lg:flex">
+              <span className="whitespace-nowrap font-mono text-[9.5px] font-medium uppercase tracking-widest text-neutral-400 leading-none">Real specs.</span>
+              <span className="whitespace-nowrap font-mono text-[9.5px] font-medium uppercase tracking-widest text-neutral-400 leading-none">Real decisions.</span>
+            </div>
           </div>
 
-          {/* Center col — nav links, naturally centered */}
-          <nav className="hidden items-center gap-5 xl:flex">
+          {/* CENTER: nav absolutely centered in the full header */}
+          <nav className="hidden flex-1 items-center justify-center gap-6 lg:flex">
             <div className="group relative">
-              <span className="cursor-default select-none text-[13px] font-semibold text-neutral-800 transition-colors hover:text-neutral-950">
+              <span className="cursor-default select-none text-[13px] font-semibold text-neutral-700 transition-colors hover:text-neutral-950">
                 Labs
               </span>
               <div className="invisible absolute left-1/2 top-full z-50 mt-2 w-[220px] -translate-x-1/2 rounded-[10px] border border-[#e8e8e8] bg-white p-1.5 opacity-0 shadow-[0_8px_24px_-8px_rgba(0,0,0,0.12)] transition-all duration-150 group-hover:visible group-hover:opacity-100">
@@ -126,8 +125,8 @@ export function SiteNav() {
             ))}
           </nav>
 
-          {/* Right col — CTA, right-aligned */}
-          <div className="flex justify-end">
+          {/* RIGHT: Open Lab, 320px, centered */}
+          <div className="flex items-center justify-center" style={{ width: "320px", flexShrink: 0 }}>
             <Link to="/solar-calculator"
               className="group inline-flex items-center gap-1.5 rounded-[8px] bg-neutral-950 px-4 py-2 text-[13px] font-semibold text-white transition-colors duration-200 hover:bg-[#2563EB]">
               Open Lab
