@@ -44,7 +44,6 @@ const tools = [
   { label: "Comparisons",        to: "/comparisons"        },
   { label: "Technical Analysis", to: "/technical-analysis" },
   { label: "Runtime DB",         to: "/runtime-database"   },
-  { label: "UPS DB",             to: "/ups-database"       },
   { label: "Research",           to: "/blog"               },
 ];
 
