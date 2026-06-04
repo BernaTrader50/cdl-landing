@@ -90,6 +90,51 @@ const PRODUCTS = [
   // ─── Bluetti gaps ─────────────────────────────────────────────────────────
   { brand:"Bluetti", model:"AC200P", price:999, wh:2000, surge:4800, solar:700, ups:false, expandable:false, weight:60.6, warranty:2, scores:{home_backup:7,rv:5,camping:3,off_grid:6,apartment:3,medical:5,value:6}, notes:"Legacy 2kWh NMC. No UPS. 60.6 lbs heavy. Superseded by AC200L. 2yr warranty." },
   { brand:"Bluetti", model:"EP500 Pro", price:4099, wh:5100, surge:6000, solar:2400, ups:true, expandable:true, weight:182, warranty:5, scores:{home_backup:10,rv:1,camping:1,off_grid:9,apartment:1,medical:9,value:4}, notes:"Wheeled home system. 3000W continuous. UPS. Expandable to 10.2kWh. 182 lbs." },
+  // ─── Jackery legacy & new models ─────────────────────────────────────────
+  { brand:"Jackery", model:"Explorer 500 v2",    price:299,  wh:512,  surge:1000, solar:200,  ups:true,  expandable:false, weight:14,   warranty:3, scores:{home_backup:5,rv:7,camping:9,off_grid:4,apartment:6,medical:5,value:9}, notes:"512Wh LFP 6000 cycles. UPS. 14 lbs ultralight. Best Jackery value under $300." },
+  { brand:"Jackery", model:"Explorer 500",        price:249,  wh:518,  surge:1000, solar:100,  ups:false, expandable:false, weight:13.3, warranty:2, scores:{home_backup:4,rv:7,camping:9,off_grid:3,apartment:5,medical:3,value:8}, notes:"Legacy 518Wh NMC. 500W continuous. 1000W surge. Still widely sold." },
+  { brand:"Jackery", model:"Explorer 1000 Pro",   price:699,  wh:1002, surge:2000, solar:400,  ups:false, expandable:false, weight:25.4, warranty:2, scores:{home_backup:6,rv:7,camping:7,off_grid:5,apartment:6,medical:4,value:7}, notes:"1002Wh NMC. 1000W continuous 2000W surge. No UPS. Legacy still popular." },
+  { brand:"Jackery", model:"Explorer 2000 Pro",   price:1299, wh:2042, surge:4400, solar:800,  ups:false, expandable:false, weight:43,   warranty:2, scores:{home_backup:8,rv:6,camping:3,off_grid:7,apartment:3,medical:5,value:5}, notes:"2042Wh NMC. 2200W continuous 4400W surge. No UPS. Legacy flagship." },
+  // ─── Goal Zero ────────────────────────────────────────────────────────────
+  { brand:"Goal Zero", model:"Yeti 500X",         price:399,  wh:505,  surge:600,  solar:150,  ups:false, expandable:false, weight:12.9, warranty:2, scores:{home_backup:4,rv:6,camping:8,off_grid:3,apartment:5,medical:3,value:6}, notes:"505Wh NMC. 300W continuous 600W surge. Compact camping. 2yr warranty." },
+  { brand:"Goal Zero", model:"Yeti 6000X",        price:3999, wh:6071, surge:3500, solar:600,  ups:false, expandable:false, weight:102,  warranty:2, scores:{home_backup:9,rv:4,camping:1,off_grid:8,apartment:1,medical:7,value:4}, notes:"6071Wh NMC. 2000W continuous 3500W surge. Massive capacity. No UPS." },
+  // ─── Bluetti compact ──────────────────────────────────────────────────────
+  { brand:"Bluetti", model:"EB55",                price:349,  wh:537,  surge:1400, solar:200,  ups:false, expandable:false, weight:17.6, warranty:2, scores:{home_backup:5,rv:6,camping:7,off_grid:4,apartment:6,medical:4,value:7}, notes:"537Wh NMC. 700W continuous 1400W surge. Compact entry model. No UPS." },
+  { brand:"Bluetti", model:"EB70",                price:449,  wh:716,  surge:1400, solar:200,  ups:false, expandable:false, weight:21.4, warranty:2, scores:{home_backup:5,rv:7,camping:8,off_grid:5,apartment:6,medical:4,value:7}, notes:"716Wh NMC. 1000W continuous 1400W surge. Popular camping size. No UPS." },
+  // ─── EcoFlow legacy ───────────────────────────────────────────────────────
+  { brand:"EcoFlow", model:"RIVER Pro",           price:399,  wh:720,  surge:1800, solar:200,  ups:true,  expandable:true,  weight:16,   warranty:5, scores:{home_backup:5,rv:6,camping:8,off_grid:5,apartment:6,medical:5,value:7}, notes:"Legacy 720Wh NMC. 600W with X-Boost 1800W. UPS. Still widely searched." },
+  { brand:"EcoFlow", model:"DELTA Max",           price:1099, wh:2016, surge:5000, solar:800,  ups:true,  expandable:true,  weight:48.5, warranty:5, scores:{home_backup:8,rv:6,camping:3,off_grid:7,apartment:4,medical:7,value:6}, notes:"Legacy 2016Wh NMC. 2400W continuous 5000W surge. UPS. Expandable to 6kWh." },
+  { brand:"EcoFlow", model:"DELTA Mini",          price:499,  wh:882,  surge:2600, solar:300,  ups:true,  expandable:false, weight:24.3, warranty:5, scores:{home_backup:6,rv:7,camping:7,off_grid:5,apartment:7,medical:6,value:7}, notes:"Legacy 882Wh NMC. 1400W continuous 2600W surge. UPS. Good mid-range option." },
+  // ─── Lion Energy ─────────────────────────────────────────────────────────
+  { brand:"Lion Energy", model:"Safari LT",       price:399,  wh:450,  surge:600,  solar:150,  ups:false, expandable:false, weight:11,   warranty:3, scores:{home_backup:4,rv:5,camping:8,off_grid:4,apartment:5,medical:4,value:7}, notes:"450Wh LFP. 300W continuous. Lightweight 11 lbs. Budget LFP camping." },
+  { brand:"Lion Energy", model:"UT 1300",         price:1499, wh:1314, surge:4000, solar:500,  ups:true,  expandable:false, weight:30,   warranty:3, scores:{home_backup:7,rv:7,camping:6,off_grid:6,apartment:6,medical:7,value:6}, notes:"1314Wh LFP. 2000W continuous 4000W surge. UPS. US-marketed brand." },
+  // ─── Renogy expanded ─────────────────────────────────────────────────────
+  { brand:"Renogy", model:"Lycan 1000",           price:799,  wh:1002, surge:2000, solar:400,  ups:false, expandable:false, weight:26,   warranty:2, scores:{home_backup:6,rv:6,camping:6,off_grid:5,apartment:6,medical:4,value:6}, notes:"1002Wh NMC. 1000W continuous 2000W surge. No UPS. Budget mid-range." },
+  // ─── Westinghouse ────────────────────────────────────────────────────────
+  { brand:"Westinghouse", model:"iGen1200s",      price:499,  wh:1125, surge:2400, solar:300,  ups:false, expandable:false, weight:29.8, warranty:3, scores:{home_backup:6,rv:6,camping:7,off_grid:5,apartment:6,medical:4,value:7}, notes:"1125Wh NMC. 1200W continuous 2400W surge. Sold at Home Depot/Lowe's." },
+  { brand:"Westinghouse", model:"iGen300s",       price:199,  wh:296,  surge:600,  solar:100,  ups:false, expandable:false, weight:7.7,  warranty:3, scores:{home_backup:3,rv:5,camping:8,off_grid:2,apartment:5,medical:3,value:7}, notes:"296Wh NMC. 300W continuous. Budget entry level. Sold at major retailers." },
+  // ─── Zendure high capacity ───────────────────────────────────────────────
+  { brand:"Zendure", model:"SuperBase V6400",     price:5999, wh:6144, surge:7600, solar:1200, ups:true,  expandable:true,  weight:180,  warranty:2, scores:{home_backup:10,rv:1,camping:1,off_grid:10,apartment:1,medical:9,value:3}, notes:"6144Wh LFP. 3800W continuous 7600W surge. UPS <20ms. Expandable to 64kWh." },
+  // ─── BioLite ────────────────────────────────────────────────────────────
+  { brand:"BioLite", model:"BaseCharge 1500",     price:999,  wh:1521, surge:2400, solar:300,  ups:false, expandable:false, weight:40.8, warranty:2, scores:{home_backup:7,rv:6,camping:5,off_grid:6,apartment:6,medical:5,value:6}, notes:"1521Wh NMC. 1200W continuous. No UPS. Clean US brand design." },
+  // ─── Rockpals ────────────────────────────────────────────────────────────
+  { brand:"Rockpals", model:"RP1000",             price:699,  wh:1002, surge:2000, solar:400,  ups:false, expandable:false, weight:26.8, warranty:2, scores:{home_backup:6,rv:6,camping:6,off_grid:5,apartment:6,medical:4,value:7}, notes:"1002Wh NMC. 1000W continuous 2000W surge. Budget brand with decent specs." },
+  // ─── Anker SOLIX compact ─────────────────────────────────────────────────
+  { brand:"Anker SOLIX", model:"C300",            price:199,  wh:288,  surge:900,  solar:100,  ups:true,  expandable:false, weight:8.6,  warranty:5, scores:{home_backup:3,rv:5,camping:8,off_grid:2,apartment:6,medical:4,value:8}, notes:"288Wh LFP. 300W continuous. UPS. 8.6 lbs. Smallest SOLIX with UPS." },
+  // ─── Pecron budget models ─────────────────────────────────────────────────
+  { brand:"Pecron", model:"E500LFP",              price:299,  wh:461,  surge:1200, solar:200,  ups:true,  expandable:false, weight:13.2, warranty:3, scores:{home_backup:4,rv:6,camping:8,off_grid:3,apartment:6,medical:5,value:9}, notes:"461Wh LFP. 500W continuous. UPS. Best budget 500Wh with UPS." },
+  { brand:"Pecron", model:"E1500LFP",             price:599,  wh:1382, surge:3000, solar:600,  ups:true,  expandable:false, weight:33.1, warranty:3, scores:{home_backup:7,rv:7,camping:6,off_grid:6,apartment:6,medical:7,value:9}, notes:"1382Wh LFP. 1500W continuous. UPS. Strong value. 3yr warranty." },
+  // ─── VTOMAN expanded ─────────────────────────────────────────────────────
+  { brand:"VTOMAN", model:"Jump 1500X",           price:599,  wh:1456, surge:3000, solar:400,  ups:true,  expandable:true,  weight:33.5, warranty:3, scores:{home_backup:7,rv:7,camping:6,off_grid:6,apartment:6,medical:7,value:8}, notes:"1456Wh LFP. 1500W continuous. UPS <20ms. Expandable. 1hr charge." },
+  // ─── Allpowers expanded ──────────────────────────────────────────────────
+  { brand:"Allpowers", model:"R600",              price:199,  wh:299,  surge:600,  solar:100,  ups:false, expandable:false, weight:8.4,  warranty:2, scores:{home_backup:3,rv:5,camping:9,off_grid:2,apartment:5,medical:3,value:9}, notes:"299Wh LFP. 600W continuous. Ultralight 8.4 lbs. Best budget camping." },
+  { brand:"Allpowers", model:"R4000",             price:1299, wh:3456, surge:8000, solar:1200, ups:true,  expandable:false, weight:88,   warranty:2, scores:{home_backup:9,rv:5,camping:2,off_grid:8,apartment:2,medical:8,value:7}, notes:"3456Wh LFP. 4000W continuous 8000W surge. UPS. Heavy home unit." },
+  // ─── OUPES compact ────────────────────────────────────────────────────────
+  { brand:"OUPES", model:"600 Lite",              price:229,  wh:596,  surge:1200, solar:200,  ups:true,  expandable:false, weight:14.7, warranty:5, scores:{home_backup:4,rv:6,camping:8,off_grid:3,apartment:6,medical:5,value:9}, notes:"596Wh LFP. 600W continuous. UPS. Budget compact with UPS. 5yr warranty." },
+  // ─── DJI Power expanded ───────────────────────────────────────────────────
+  { brand:"DJI Power", model:"Power 2000",        price:999,  wh:2048, surge:4400, solar:800,  ups:true,  expandable:false, weight:48,   warranty:3, scores:{home_backup:8,rv:6,camping:4,off_grid:7,apartment:5,medical:7,value:7}, notes:"2048Wh LFP. 2200W continuous. UPS <20ms. SDC drone charging. 3yr." },
+  // ─── Geneverse compact ───────────────────────────────────────────────────
+  { brand:"Geneverse", model:"HomePower One",     price:299,  wh:716,  surge:1400, solar:300,  ups:false, expandable:false, weight:19.8, warranty:2, scores:{home_backup:5,rv:6,camping:7,off_grid:4,apartment:6,medical:4,value:7}, notes:"716Wh LFP. 1000W continuous. Budget entry. 2yr warranty." },
 ];
 
 // ─── SCENARIO → SCORE KEY ────────────────────────────────────────────────────
@@ -517,24 +562,11 @@ function ScoreBreakdown({ components, overallScore, scoreKey }: { components: Sc
 }
 
 // ─── ELIMINATED PRODUCTS PANEL ────────────────────────────────────────────────
-function EliminatedPanel({ eliminated, eliminations }: { eliminated: EliminatedProduct[], eliminations: EliminationReason[] }) {
+function EliminatedPanel({ eliminated }: { eliminated: EliminatedProduct[] }) {
   if (!eliminated || eliminated.length === 0) return null;
-  const total = eliminations.reduce((s, e) => s + e.count, 0);
-  const byBudget   = eliminations.find(e => e.reason.includes("budget"))?.count ?? 0;
-  const bySurge    = eliminations.find(e => e.reason.includes("surge"))?.count ?? 0;
-  const byUps      = eliminations.find(e => e.reason.includes("UPS"))?.count ?? 0;
   return (
     <div className="mb-4 rounded-[12px] border bg-white p-4" style={{borderColor:"#E2E2E2"}}>
-      <div className="flex items-center justify-between mb-3">
-        <p className="font-mono text-[9.5px] font-medium uppercase tracking-[0.14em] text-neutral-400">Elimination breakdown</p>
-        <div className="flex items-center gap-3">
-          {byBudget > 0 && <span className="font-mono text-[10px] text-neutral-500"><span className="font-semibold text-neutral-800">{byBudget}</span> over budget</span>}
-          {bySurge > 0  && <span className="font-mono text-[10px] text-neutral-500"><span className="font-semibold text-neutral-800">{bySurge}</span> insufficient surge</span>}
-          {byUps > 0    && <span className="font-mono text-[10px] text-neutral-500"><span className="font-semibold text-neutral-800">{byUps}</span> no UPS</span>}
-          <span className="font-mono text-[10px] font-semibold text-neutral-400">= {total} eliminated</span>
-        </div>
-      </div>
-      <p className="font-mono text-[9.5px] font-medium uppercase tracking-[0.14em] text-neutral-400 mb-3">Closest products not matched</p>
+      <p className="font-mono text-[9.5px] font-medium uppercase tracking-[0.14em] text-neutral-400 mb-3">Closest products eliminated</p>
       <div className="space-y-2">
         {eliminated.map((e, i) => (
           <div key={i} className="flex items-center gap-3">
@@ -857,54 +889,175 @@ function HowItWorks() {
     { n: "02", text: "Filter by surge capacity, UPS requirement, and budget" },
     { n: "03", text: "Score remaining products across 7 use-case dimensions" },
     { n: "04", text: "Rank by scenario fit, value efficiency, and performance headroom" },
-  
-  // ─── Jackery legacy & new models ─────────────────────────────────────────
-  { brand:"Jackery", model:"Explorer 500 v2",    price:299,  wh:512,  surge:1000, solar:200,  ups:true,  expandable:false, weight:14,   warranty:3, scores:{home_backup:5,rv:7,camping:9,off_grid:4,apartment:6,medical:5,value:9}, notes:"512Wh LFP 6000 cycles. UPS. 14 lbs ultralight. Best Jackery value under $300." },
-  { brand:"Jackery", model:"Explorer 500",        price:249,  wh:518,  surge:1000, solar:100,  ups:false, expandable:false, weight:13.3, warranty:2, scores:{home_backup:4,rv:7,camping:9,off_grid:3,apartment:5,medical:3,value:8}, notes:"Legacy 518Wh NMC. 500W continuous. 1000W surge. Still widely sold and searched." },
-  { brand:"Jackery", model:"Explorer 1000 Pro",   price:699,  wh:1002, surge:2000, solar:400,  ups:false, expandable:false, weight:25.4, warranty:2, scores:{home_backup:6,rv:7,camping:7,off_grid:5,apartment:6,medical:4,value:7}, notes:"1002Wh NMC. 1000W continuous 2000W surge. No UPS. Legacy but popular search." },
-  { brand:"Jackery", model:"Explorer 2000 Pro",   price:1299, wh:2042, surge:4400, solar:800,  ups:false, expandable:false, weight:43,   warranty:2, scores:{home_backup:8,rv:6,camping:3,off_grid:7,apartment:3,medical:5,value:5}, notes:"2042Wh NMC. 2200W continuous 4400W surge. No UPS. Legacy flagship still sold." },
-  // ─── Goal Zero ────────────────────────────────────────────────────────────
-  { brand:"Goal Zero", model:"Yeti 500X",         price:399,  wh:505,  surge:600,  solar:150,  ups:false, expandable:false, weight:12.9, warranty:2, scores:{home_backup:4,rv:6,camping:8,off_grid:3,apartment:5,medical:3,value:6}, notes:"505Wh NMC. 300W continuous 600W surge. Compact camping unit. 2yr warranty." },
-  { brand:"Goal Zero", model:"Yeti 6000X",         price:3999, wh:6071, surge:3500, solar:600,  ups:false, expandable:false, weight:102,  warranty:2, scores:{home_backup:9,rv:4,camping:1,off_grid:8,apartment:1,medical:7,value:4}, notes:"6071Wh NMC. 2000W continuous 3500W surge. Massive capacity. No UPS. 2yr warranty." },
-  // ─── Bluetti compact ──────────────────────────────────────────────────────
-  { brand:"Bluetti", model:"EB55",                 price:349,  wh:537,  surge:1400, solar:200,  ups:false, expandable:false, weight:17.6, warranty:2, scores:{home_backup:5,rv:6,camping:7,off_grid:4,apartment:6,medical:4,value:7}, notes:"537Wh NMC. 700W continuous 1400W surge. Compact entry model. No UPS." },
-  { brand:"Bluetti", model:"EB70",                 price:449,  wh:716,  surge:1400, solar:200,  ups:false, expandable:false, weight:21.4, warranty:2, scores:{home_backup:5,rv:7,camping:8,off_grid:5,apartment:6,medical:4,value:7}, notes:"716Wh NMC. 1000W continuous 1400W surge. Popular camping size. No UPS." },
-  // ─── EcoFlow legacy still sold ────────────────────────────────────────────
-  { brand:"EcoFlow", model:"RIVER Pro",            price:399,  wh:720,  surge:1800, solar:200,  ups:true,  expandable:true,  weight:16,   warranty:5, scores:{home_backup:5,rv:6,camping:8,off_grid:5,apartment:6,medical:5,value:7}, notes:"Legacy 720Wh NMC. 600W with X-Boost 1800W. UPS. Still widely searched." },
-  { brand:"EcoFlow", model:"DELTA Max",            price:1099, wh:2016, surge:5000, solar:800,  ups:true,  expandable:true,  weight:48.5, warranty:5, scores:{home_backup:8,rv:6,camping:3,off_grid:7,apartment:4,medical:7,value:6}, notes:"Legacy 2016Wh NMC. 2400W continuous 5000W surge. UPS. Expandable to 6kWh." },
-  { brand:"EcoFlow", model:"DELTA Mini",           price:499,  wh:882,  surge:2600, solar:300,  ups:true,  expandable:false, weight:24.3, warranty:5, scores:{home_backup:6,rv:7,camping:7,off_grid:5,apartment:7,medical:6,value:7}, notes:"Legacy 882Wh NMC. 1400W continuous 2600W surge. UPS. Still sold at good price." },
-  // ─── Lion Energy ─────────────────────────────────────────────────────────
-  { brand:"Lion Energy", model:"Safari LT",        price:399,  wh:450,  surge:600,  solar:150,  ups:false, expandable:false, weight:11,   warranty:3, scores:{home_backup:4,rv:5,camping:8,off_grid:4,apartment:5,medical:4,value:7}, notes:"450Wh LFP. 300W continuous. Lightweight 11 lbs. Budget LFP option." },
-  { brand:"Lion Energy", model:"UT 1300",          price:1499, wh:1314, surge:4000, solar:500,  ups:true,  expandable:false, weight:30,   warranty:3, scores:{home_backup:7,rv:7,camping:6,off_grid:6,apartment:6,medical:7,value:6}, notes:"1314Wh LFP. 2000W continuous 4000W surge. UPS. Made in USA marketing." },
-  // ─── Renogy ───────────────────────────────────────────────────────────────
-  { brand:"Renogy", model:"Lycan 1000",            price:799,  wh:1002, surge:2000, solar:400,  ups:false, expandable:false, weight:26,   warranty:2, scores:{home_backup:6,rv:6,camping:6,off_grid:5,apartment:6,medical:4,value:6}, notes:"1002Wh NMC. 1000W continuous 2000W surge. No UPS. Budget mid-range option." },
-  // ─── Westinghouse ─────────────────────────────────────────────────────────
-  { brand:"Westinghouse", model:"iGen1200s",       price:499,  wh:1125, surge:2400, solar:300,  ups:false, expandable:false, weight:29.8, warranty:3, scores:{home_backup:6,rv:6,camping:7,off_grid:5,apartment:6,medical:4,value:7}, notes:"1125Wh NMC. 1200W continuous 2400W surge. No UPS. Sold at major retailers." },
-  { brand:"Westinghouse", model:"iGen300s",        price:199,  wh:296,  surge:600,  solar:100,  ups:false, expandable:false, weight:7.7,  warranty:3, scores:{home_backup:3,rv:5,camping:8,off_grid:2,apartment:5,medical:3,value:7}, notes:"296Wh NMC. 300W continuous. Budget entry level. Sold at Home Depot." },
-  // ─── Zendure new model ───────────────────────────────────────────────────
-  { brand:"Zendure", model:"SuperBase V6400",      price:5999, wh:6144, surge:7600, solar:1200, ups:true,  expandable:true,  weight:180,  warranty:2, scores:{home_backup:10,rv:1,camping:1,off_grid:10,apartment:1,medical:9,value:3}, notes:"6144Wh LFP. 3800W continuous 7600W surge. UPS <20ms. Expandable to 64kWh." },
-  // ─── BioLite ─────────────────────────────────────────────────────────────
-  { brand:"BioLite", model:"BaseCharge 1500",      price:999,  wh:1521, surge:2400, solar:300,  ups:false, expandable:false, weight:40.8, warranty:2, scores:{home_backup:7,rv:6,camping:5,off_grid:6,apartment:6,medical:5,value:6}, notes:"1521Wh NMC. 1200W continuous 2400W surge. No UPS. Clean design, US brand." },
-  // ─── Rockpals ─────────────────────────────────────────────────────────────
-  { brand:"Rockpals", model:"RP1000",              price:699,  wh:1002, surge:2000, solar:400,  ups:false, expandable:false, weight:26.8, warranty:2, scores:{home_backup:6,rv:6,camping:6,off_grid:5,apartment:6,medical:4,value:7}, notes:"1002Wh NMC. 1000W continuous 2000W surge. No UPS. Budget brand." },
-  // ─── More EcoFlow compact ────────────────────────────────────────────────
-  { brand:"EcoFlow", model:"RIVER 2 Pro",          price:349,  wh:768,  surge:1600, solar:220,  ups:true,  expandable:true,  weight:17.4, warranty:5, scores:{home_backup:5,rv:6,camping:9,off_grid:4,apartment:7,medical:5,value:8}, notes:"768Wh LFP. 800W continuous UPS. Expandable. Compact camping flagship." },
-  // ─── DJI Power new model ─────────────────────────────────────────────────
-  { brand:"DJI Power", model:"Power 2000",         price:999,  wh:2048, surge:4400, solar:800,  ups:true,  expandable:false, weight:48,   warranty:3, scores:{home_backup:8,rv:6,camping:4,off_grid:7,apartment:5,medical:7,value:7}, notes:"2048Wh LFP. 2200W continuous. UPS <20ms. SDC drone port. 3yr warranty." },
-  // ─── Anker SOLIX compact ─────────────────────────────────────────────────
-  { brand:"Anker SOLIX", model:"C300",             price:199,  wh:288,  surge:900,  solar:100,  ups:true,  expandable:false, weight:8.6,  warranty:5, scores:{home_backup:3,rv:5,camping:8,off_grid:2,apartment:6,medical:4,value:8}, notes:"288Wh LFP. 300W continuous UPS. 8.6 lbs. Smallest SOLIX with UPS." },
-  // ─── Pecron budget models ─────────────────────────────────────────────────
-  { brand:"Pecron", model:"E500LFP",               price:299,  wh:461,  surge:1200, solar:200,  ups:true,  expandable:false, weight:13.2, warranty:3, scores:{home_backup:4,rv:6,camping:8,off_grid:3,apartment:6,medical:5,value:9}, notes:"461Wh LFP. 500W continuous. UPS. Best budget 500Wh with UPS." },
-  { brand:"Pecron", model:"E1500LFP",              price:599,  wh:1382, surge:3000, solar:600,  ups:true,  expandable:false, weight:33.1, warranty:3, scores:{home_backup:7,rv:7,camping:6,off_grid:6,apartment:6,medical:7,value:9}, notes:"1382Wh LFP. 1500W continuous. UPS. Exceptional value. 3yr warranty." },
-  // ─── More VTOMAN ─────────────────────────────────────────────────────────
-  { brand:"VTOMAN", model:"Jump 1500X",            price:599,  wh:1456, surge:3000, solar:400,  ups:true,  expandable:true,  weight:33.5, warranty:3, scores:{home_backup:7,rv:7,camping:6,off_grid:6,apartment:6,medical:7,value:8}, notes:"1456Wh LFP. 1500W continuous. UPS <20ms. Expandable. 1hr charge." },
-  // ─── Geneverse expanded ───────────────────────────────────────────────────
-  { brand:"Geneverse", model:"HomePower One",      price:299,  wh:716,  surge:1400, solar:300,  ups:false, expandable:false, weight:19.8, warranty:2, scores:{home_backup:5,rv:6,camping:7,off_grid:4,apartment:6,medical:4,value:7}, notes:"716Wh LFP. 1000W continuous. Budget Geneverse entry. 2yr warranty." },
-  // ─── EcoFlow DELTA 3 entry ───────────────────────────────────────────────
-  { brand:"EcoFlow", model:"DELTA 3",              price:499,  wh:900,  surge:3600, solar:500,  ups:true,  expandable:false, weight:22,   warranty:5, scores:{home_backup:7,rv:7,camping:7,off_grid:5,apartment:7,medical:6,value:8}, notes:"900Wh LFP. 1800W continuous. UPS <30ms. Mid-range DELTA 3 family." },
-  // ─── Allpowers budget expanded ───────────────────────────────────────────
-  { brand:"Allpowers", model:"R600",               price:199,  wh:299,  surge:600,  solar:100,  ups:false, expandable:false, weight:8.4,  warranty:2, scores:{home_backup:3,rv:5,camping:9,off_grid:2,apartment:5,medical:3,value:9}, notes:"299Wh LFP. 600W continuous. Ultralight 8.4 lbs. Best budget camping option." },
-  { brand:"Allpowers", model:"R4000",              price:1299, wh:3456, surge:8000, solar:1200, ups:true,  expandable:false, weight:88,   warranty:2, scores:{home_backup:9,rv:5,camping:2,off_grid:8,apartment:2,medical:8,value:7}, notes:"3456Wh LFP. 4000W continuous 8000W surge. UPS. Heavy 88 lbs home unit." },
-  // ─── OUPES compact ────────────────────────────────────────────────────────
-  { brand:"OUPES", model:"600 Lite",               price:229,  wh:596,  surge:1200, solar:200,  ups:true,  expandable:false, weight:14.7, warranty:5, scores:{home_backup:4,rv:6,camping:8,off_grid:3,apartment:6,medical:5,value:9}, notes:"596Wh LFP. 600W continuous. UPS. Budget compact with UPS. 5yr warranty." },
-];
+  ];
+  return (
+    <div className="mt-5 rounded-[12px] border p-5" style={{borderColor:"#E2E2E2", background:"#FAFAFA"}}>
+      <p className="font-mono text-[10px] font-medium uppercase tracking-[0.14em] text-neutral-400 mb-4">How recommendations work</p>
+      <div className="grid grid-cols-2 gap-x-4 gap-y-3 sm:grid-cols-4">
+        {steps.map(s => (
+          <div key={s.n} className="flex items-start gap-2">
+            <span className="font-mono text-[11px] font-semibold text-neutral-300 shrink-0 mt-[1px]">{s.n}</span>
+            <span className="text-[11.5px] text-neutral-500 leading-[1.5]">{s.text}</span>
+          </div>
+        ))}
+      </div>
+    </div>
+  );
+}
+
+// ─── MAIN ─────────────────────────────────────────────────────────────────────
+export function SolarCalculator() {
+  const [scenario, setScenario] = useState(SCENARIOS[0]);
+  const [appliance, setAppliance] = useState("Refrigerator");
+  const [budget, setBudget] = useState("1500");
+  const [days, setDays] = useState("2 days");
+  const [result, setResult] = useState<AnalysisResult | null>(null);
+  const [analyzing, setAnalyzing] = useState(false);
+
+  const selectCls = "w-full appearance-none bg-transparent text-[14px] text-neutral-900 outline-none cursor-pointer";
+
+  const LABEL_COLORS: Record<string, string> = {
+    "Best Match":   "#2563EB",
+    "Best Value":   "#10B981",
+    "Premium Pick": "#8B5CF6",
+  };
+
+  const onSubmit = (e: React.FormEvent | React.MouseEvent) => {
+    e.preventDefault();
+    if (typeof window !== "undefined" && (window as any).cdlTrack) {
+      (window as any).cdlTrack("calculator_submit", { scenario, appliance, budget: budget || "unset", days });
+    }
+    setAnalyzing(true);
+    setResult(null);
+    // Brief delay to let the analyzing state render — adds perceived intelligence
+    setTimeout(() => {
+      const b = parseInt(budget || "0", 10) || 0;
+      const analysis = computeAnalysis(scenario, appliance, days, b);
+      setResult(analysis);
+      setAnalyzing(false);
+      if (typeof window !== "undefined" && (window as any).cdlTrack) {
+        (window as any).cdlTrack("result_view", {
+          scenario,
+          appliance,
+          budget: b || "unset",
+          days,
+          products_matched: analysis.picks.length,
+          products_eliminated: analysis.eliminations.reduce((s: number, e: {count:number}) => s + e.count, 0),
+          top_recommendation: analysis.picks[0] ? `${analysis.picks[0].product.brand} ${analysis.picks[0].product.model}` : "none",
+        });
+      }
+    }, 480);
+  };
+
+  return (
+    <form onSubmit={onSubmit} className="rounded-[16px] bg-white p-7 md:p-9" style={{boxShadow:"0 4px 24px rgba(0,0,0,0.08)"}}>
+
+      {/* Authority strip */}
+      <div className="mb-5 flex items-center gap-4 flex-wrap">
+        {["53 products", "10 brands", "7 use-case scores", "Updated weekly"].map(t => (
+          <span key={t} className="font-mono text-[10px] text-neutral-400 uppercase tracking-wider">{t}</span>
+        ))}
+      </div>
+
+      {/* Form fields */}
+      <div className="grid grid-cols-1 gap-x-5 gap-y-6 sm:grid-cols-2">
+        <Field label="SCENARIO" icon="home">
+          <select className={selectCls} value={scenario} onChange={e => {
+              setScenario(e.target.value);
+              if (typeof window !== "undefined" && (window as any).cdlTrack) {
+                (window as any).cdlTrack("calculator_start", { first_field: "scenario", value: e.target.value });
+              }
+            }}>
+            {SCENARIOS.map(s => <option key={s} value={s}>{s}</option>)}
+          </select>
+        </Field>
+        <Field label="KEY APPLIANCE" icon="fridge">
+          <select className={selectCls} value={appliance} onChange={e => setAppliance(e.target.value)}>
+            {APPLIANCE_KEYS.map(s => <option key={s} value={s}>{s}</option>)}
+          </select>
+        </Field>
+        <Field label="BUDGET (USD)" icon="dollar">
+          <input type="number" min={200} max={15000} value={budget} onChange={e => setBudget(e.target.value)} className={selectCls} placeholder="e.g. 1500" />
+        </Field>
+        <Field label="DAYS OF COVERAGE" icon="calendar">
+          <select className={selectCls} value={days} onChange={e => setDays(e.target.value)}>
+            {DAYS_KEYS.map(s => <option key={s} value={s}>{s}</option>)}
+          </select>
+        </Field>
+      </div>
+
+      {/* CTA */}
+      <button
+        type="button"
+        onClick={onSubmit}
+        disabled={analyzing}
+        className="group mt-7 inline-flex w-full items-center justify-center gap-2 rounded-[12px] bg-neutral-950 px-5 py-4 text-[14.5px] font-medium text-white transition-all duration-200 hover:-translate-y-[2px] hover:opacity-[0.85] disabled:opacity-60 disabled:cursor-default disabled:translate-y-0"
+      >
+        {analyzing ? (
+          <>
+            <span className="inline-block h-3.5 w-3.5 animate-spin rounded-full border-2 border-white border-t-transparent"/>
+            Analyzing {PRODUCTS.length} products…
+          </>
+        ) : (
+          <>
+            Find my system
+            <span className="transition-transform duration-200 group-hover:translate-x-0.5">→</span>
+          </>
+        )}
+      </button>
+
+      {/* How it works — always visible below button */}
+      {!result && <HowItWorks />}
+
+      {/* Results */}
+      {result && (
+        <div className="mt-7">
+          {/* Analysis header */}
+          <AnalysisHeader result={result} />
+
+          {result.outOfBudget && (
+            <p className="mb-4 text-[12.5px] text-neutral-500 text-center">
+              No products matched all criteria within budget — showing closest alternatives.
+            </p>
+          )}
+
+          {/* Eliminated products */}
+          <EliminatedPanel eliminated={result.eliminatedProducts} />
+
+          {/* Comparison table */}
+          <ComparisonTable
+            picks={result.picks}
+            requiredWh={result.requiredWh}
+            requiredSurge={result.requiredSurge}
+            needsUps={result.needsUps}
+            scoreKey={result.scoreKey}
+          />
+
+          {/* Product cards */}
+          <div className="grid grid-cols-1 gap-4 md:grid-cols-3">
+            {result.picks.map((pick, i) => (
+              <div key={pick.product.model + i} style={{animationDelay:`${i * 120}ms`}}>
+                <ResultCard
+                  pick={pick}
+                  accentColor={LABEL_COLORS[pick.label] || "#2563EB"}
+                  scoreKey={result.scoreKey}
+                />
+              </div>
+            ))}
+          </div>
+
+          {/* Footer */}
+          <p className="mt-5 text-[11px] text-neutral-400 text-center leading-relaxed">
+            {PRODUCTS.length} products analyzed · {result.eliminations.reduce((s, e) => s + e.count, 0)} eliminated · {result.picks.length} matched ·{" "}
+            <a href="/methodology" className="underline underline-offset-2 hover:text-neutral-600 transition-colors">Methodology</a>
+            {" · "}
+            <a href="/technical-analysis" className="underline underline-offset-2 hover:text-neutral-600 transition-colors">Technical Analysis</a>
+            {" · "}
+            <a href="/comparisons" className="underline underline-offset-2 hover:text-neutral-600 transition-colors">Comparisons</a>
+            {" "}· We earn a commission if you purchase — this does not affect our analysis.
+          </p>
+        </div>
+      )}
+    </form>
+  );
+}
