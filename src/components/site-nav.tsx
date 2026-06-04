@@ -16,7 +16,7 @@ function FlaskIcon({ className = "" }: { className?: string }) {
 export function Logo({ className = "" }: { className?: string }) {
   return (
     <Link to="/" className={`flex items-center gap-2 ${className}`}>
-      <FlaskIcon className="h-8 w-8 shrink-0" />
+      <FlaskIcon className="h-7 w-7 shrink-0" />
       <span className="text-[20px] font-bold leading-none tracking-tight text-neutral-950">
         <span>click</span>
         <span style={{ color: "#2563EB" }}>decision</span>
@@ -62,7 +62,7 @@ export function SiteNav() {
 
       {/* Status bar */}
       <div className="hidden h-7 items-center border-b border-[#ececec] bg-[#fafafa] text-[11px] text-neutral-500 md:flex">
-        <div className="mx-auto flex w-full max-w-6xl items-center px-4 gap-4">
+        <div className="mx-auto flex w-full max-w-6xl items-center px-6 gap-4">
           <span className="flex items-center gap-1.5">
             <span className="inline-block h-1.5 w-1.5 rounded-full bg-[#16a34a]" />
             <span className="font-medium text-neutral-600">Research live</span>
@@ -84,20 +84,20 @@ export function SiteNav() {
           WebkitBackdropFilter: "saturate(180%) blur(14px)",
         }}
       >
-        <div className="mx-auto grid h-14 max-w-6xl grid-cols-[auto_1fr_auto] items-center gap-8 px-4">
+        {/* 1fr | auto | 1fr — logo left-anchored, nav truly centered, CTA right-anchored */}
+        <div className="mx-auto grid h-14 max-w-6xl grid-cols-[1fr_auto_1fr] items-center px-6">
 
-          {/* Col 1 — Brand */}
-          <div className="flex items-center gap-2.5">
+          {/* Left col — logo + tagline, left-aligned */}
+          <div className="flex items-center gap-2.5 justify-self-start">
             <Logo />
-            <span className="hidden select-none text-neutral-300 text-lg font-light md:block" aria-hidden>/</span>
-            <span className="hidden font-mono text-[9px] font-medium uppercase tracking-[0.18em] text-neutral-400 md:block">
+            <span className="hidden select-none text-neutral-300 font-light md:block" aria-hidden>/</span>
+            <span className="hidden font-mono text-[13px] font-normal text-neutral-400 tracking-wide md:block">
               Real specs. Real decisions.
             </span>
           </div>
 
-          {/* Col 2 — Nav links (centered in remaining space) */}
-          <nav className="hidden items-center justify-center gap-5 xl:flex">
-            {/* Labs dropdown */}
+          {/* Center col — nav links, naturally centered */}
+          <nav className="hidden items-center gap-5 xl:flex">
             <div className="group relative">
               <span className="cursor-default select-none text-[13px] font-semibold text-neutral-800 transition-colors hover:text-neutral-950">
                 Labs
@@ -118,7 +118,6 @@ export function SiteNav() {
                 })}
               </div>
             </div>
-            {/* Tool links */}
             {tools.map(t => (
               <Link key={t.label} to={t.to}
                 className="whitespace-nowrap text-[13px] font-semibold text-neutral-700 transition-colors hover:text-neutral-950">
@@ -127,12 +126,14 @@ export function SiteNav() {
             ))}
           </nav>
 
-          {/* Col 3 — CTA */}
-          <Link to="/solar-calculator"
-            className="group inline-flex items-center gap-1.5 rounded-[8px] bg-neutral-950 px-4 py-2 text-[13px] font-semibold text-white transition-colors duration-200 hover:bg-[#2563EB]">
-            Open Lab
-            <span className="transition-transform duration-200 group-hover:translate-x-0.5">→</span>
-          </Link>
+          {/* Right col — CTA, right-aligned */}
+          <div className="flex justify-end">
+            <Link to="/solar-calculator"
+              className="group inline-flex items-center gap-1.5 rounded-[8px] bg-neutral-950 px-4 py-2 text-[13px] font-semibold text-white transition-colors duration-200 hover:bg-[#2563EB]">
+              Open Lab
+              <span className="transition-transform duration-200 group-hover:translate-x-0.5">→</span>
+            </Link>
+          </div>
 
         </div>
       </div>
