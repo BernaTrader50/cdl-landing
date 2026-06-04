@@ -16,8 +16,8 @@ function FlaskIcon({ className = "" }: { className?: string }) {
 export function Logo({ className = "" }: { className?: string }) {
   return (
     <Link to="/" className={`flex items-center gap-1.5 ${className}`}>
-      <FlaskIcon className="h-7 w-7 shrink-0" />
-      <span className="text-[18px] font-semibold leading-none tracking-tight text-neutral-950">
+      <FlaskIcon className="h-6 w-6 shrink-0" />
+      <span className="text-[17px] font-semibold leading-none tracking-tight text-neutral-950">
         <span>click</span>
         <span style={{ color: "#2563EB" }}>decision</span>
         <span>lab</span>
@@ -27,24 +27,24 @@ export function Logo({ className = "" }: { className?: string }) {
 }
 
 const labs = [
-  { label: "Solar Generators", to: "/solar-calculator", status: "live" },
+  { label: "Solar Generators", to: "/solar-calculator", status: "live"     },
   { label: "EV Chargers",      to: "/ev-chargers",      status: "analysis" },
   { label: "Home Batteries",   to: "/home-batteries",   status: "analysis" },
-  { label: "Backup Power",     to: "/backup-power",     status: "planned" },
+  { label: "Backup Power",     to: "/backup-power",     status: "planned"  },
 ];
 
-const STATUS_STYLES: Record<string, { text: string; color: string; bg: string }> = {
+const STATUS: Record<string, { text: string; color: string; bg: string }> = {
   live:     { text: "Live",        color: "#166534", bg: "#DCFCE7" },
   analysis: { text: "In Analysis", color: "#92400E", bg: "#FEF3C7" },
   planned:  { text: "Planned",     color: "#6B7280", bg: "#F3F4F6" },
 };
 
 const tools = [
-  { label: "Calculator",        to: "/solar-calculator" },
-  { label: "Comparisons",       to: "/comparisons" },
-  { label: "Technical Analysis",to: "/technical-analysis" },
-  { label: "Runtime DB",        to: "/runtime-database" },
-  { label: "Research",          to: "/blog" },
+  { label: "Calculator",         to: "/solar-calculator"   },
+  { label: "Comparisons",        to: "/comparisons"        },
+  { label: "Technical Analysis", to: "/technical-analysis" },
+  { label: "Runtime DB",         to: "/runtime-database"   },
+  { label: "Research",           to: "/blog"               },
 ];
 
 export function SiteNav() {
@@ -61,8 +61,8 @@ export function SiteNav() {
     <header className="fixed inset-x-0 top-0 z-50">
 
       {/* Status bar */}
-      <div className="hidden h-8 items-center border-b border-[#ececec] bg-[#fafafa] text-[11px] text-neutral-500 md:flex">
-        <div className="mx-auto flex w-full max-w-7xl items-center px-6 gap-4">
+      <div className="hidden h-7 items-center border-b border-[#ececec] bg-[#fafafa] text-[11px] text-neutral-500 md:flex">
+        <div className="mx-auto flex w-full max-w-6xl items-center px-6 gap-4">
           <span className="flex items-center gap-1.5">
             <span className="inline-block h-1.5 w-1.5 rounded-full bg-[#16a34a]" />
             <span className="font-medium text-neutral-600">Research live</span>
@@ -74,7 +74,7 @@ export function SiteNav() {
         </div>
       </div>
 
-      {/* Main nav */}
+      {/* Main nav — 3 column grid keeps center truly centered */}
       <div
         className="border-b transition-colors duration-200"
         style={{
@@ -84,27 +84,24 @@ export function SiteNav() {
           WebkitBackdropFilter: "saturate(180%) blur(14px)",
         }}
       >
-        <div className="mx-auto flex h-14 max-w-7xl items-center justify-between px-6">
+        <div className="mx-auto grid h-14 max-w-6xl grid-cols-[1fr_auto_1fr] items-center px-6">
 
-          {/* Left: Logo + tagline */}
-          <div className="flex items-center gap-2.5">
+          {/* Col 1 — Brand (left-aligned) */}
+          <div className="flex items-baseline gap-2">
             <Logo />
             <span className="hidden select-none text-neutral-300 md:block" aria-hidden>/</span>
-            <span className="hidden font-mono text-[10px] font-medium uppercase tracking-[0.16em] text-neutral-400 md:block">
+            <span className="hidden font-mono text-[9.5px] font-medium uppercase tracking-[0.16em] text-neutral-400 md:block">
               Real specs. Real decisions.
             </span>
           </div>
 
-          {/* Center: Nav links */}
+          {/* Col 2 — Nav (centered) */}
           <nav className="hidden items-center gap-5 text-[13px] text-neutral-600 xl:flex">
-            {/* Decision Labs dropdown */}
             <div className="group relative">
-              <span className="cursor-default select-none transition-colors hover:text-neutral-950">
-                Labs
-              </span>
+              <span className="cursor-default select-none transition-colors hover:text-neutral-950">Labs</span>
               <div className="invisible absolute left-1/2 top-full z-50 mt-2 w-[220px] -translate-x-1/2 rounded-[10px] border border-[#e8e8e8] bg-white p-1.5 opacity-0 shadow-[0_8px_24px_-8px_rgba(0,0,0,0.12)] transition-all duration-150 group-hover:visible group-hover:opacity-100">
                 {labs.map(l => {
-                  const s = STATUS_STYLES[l.status];
+                  const s = STATUS[l.status];
                   return (
                     <Link key={l.label} to={l.to}
                       className="flex items-center justify-between rounded-[6px] px-2.5 py-1.5 text-[12.5px] text-neutral-700 hover:bg-[#f5f5f5] transition-colors">
@@ -120,18 +117,20 @@ export function SiteNav() {
             </div>
             {tools.map(t => (
               <Link key={t.label} to={t.to}
-                className="transition-colors hover:text-neutral-950 whitespace-nowrap">
+                className="whitespace-nowrap transition-colors hover:text-neutral-950">
                 {t.label}
               </Link>
             ))}
           </nav>
 
-          {/* Right: CTA */}
-          <Link to="/solar-calculator"
-            className="group inline-flex items-center gap-1.5 rounded-[8px] bg-neutral-950 px-3.5 py-2 text-[12.5px] font-medium text-white transition-colors duration-200 hover:bg-[#2563EB]">
-            Open Lab
-            <span className="transition-transform duration-200 group-hover:translate-x-0.5">→</span>
-          </Link>
+          {/* Col 3 — CTA (right-aligned) */}
+          <div className="flex justify-end">
+            <Link to="/solar-calculator"
+              className="group inline-flex items-center gap-1.5 rounded-[8px] bg-neutral-950 px-3.5 py-2 text-[12.5px] font-medium text-white transition-colors duration-200 hover:bg-[#2563EB]">
+              Open Lab
+              <span className="transition-transform duration-200 group-hover:translate-x-0.5">→</span>
+            </Link>
+          </div>
 
         </div>
       </div>
