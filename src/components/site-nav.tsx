@@ -47,15 +47,14 @@ function StatusBar() {
         <div className="flex items-center gap-5">
           <span className="inline-flex items-center gap-1.5">
             <span className="inline-block h-1.5 w-1.5 rounded-full bg-[#16a34a]" />
-            <span className="font-medium text-neutral-700">Database live</span>
+            <span className="font-medium text-neutral-700">Research live</span>
           </span>
           <span className="text-neutral-300">·</span>
-          <span>137 products tracked</span>
+          <span>49 products tracked</span>
           <span className="text-neutral-300">·</span>
           <span>Updated weekly</span>
         </div>
         <div className="flex items-center gap-1.5 text-neutral-500">
-          <span>v2026.05 · US / USD</span>
         </div>
       </div>
     </div>
@@ -71,13 +70,11 @@ const labs: Array<{ label: string; to?: string; live?: boolean }> = [
 ];
 
 const tools: Array<{ label: string; to: string }> = [
-  { label: "Calculators", to: "/solar-calculator" },
+  { label: "Calculator", to: "/solar-calculator" },
   { label: "Comparisons", to: "/comparisons" },
   { label: "Technical Analysis", to: "/technical-analysis" },
   { label: "Runtime DB", to: "/runtime-database" },
   { label: "Research", to: "/blog" },
-  { label: "Methodology", to: "/#methodology" },
-  { label: "Articles", to: "/blog" },
 ];
 
 export function SiteNav() {
