@@ -15,9 +15,9 @@ function FlaskIcon({ className = "" }: { className?: string }) {
 
 export function Logo({ className = "" }: { className?: string }) {
   return (
-    <Link to="/" className={`flex items-center gap-1.5 ${className}`}>
-      <FlaskIcon className="h-[18px] w-[18px] shrink-0" />
-      <span className="text-[16px] font-semibold leading-none tracking-tight text-neutral-950" style={{ lineHeight: 1 }}>
+    <Link to="/" className={`flex items-center gap-2 ${className}`}>
+      <FlaskIcon className="h-8 w-8 shrink-0" />
+      <span className="text-[20px] font-bold leading-none tracking-tight text-neutral-950">
         <span>click</span>
         <span style={{ color: "#2563EB" }}>decision</span>
         <span>lab</span>
@@ -62,7 +62,7 @@ export function SiteNav() {
 
       {/* Status bar */}
       <div className="hidden h-7 items-center border-b border-[#ececec] bg-[#fafafa] text-[11px] text-neutral-500 md:flex">
-        <div className="mx-auto flex w-full max-w-6xl items-center px-6 gap-4">
+        <div className="mx-auto flex w-full max-w-6xl items-center px-4 gap-4">
           <span className="flex items-center gap-1.5">
             <span className="inline-block h-1.5 w-1.5 rounded-full bg-[#16a34a]" />
             <span className="font-medium text-neutral-600">Research live</span>
@@ -74,31 +74,34 @@ export function SiteNav() {
         </div>
       </div>
 
-      {/* Main nav — 3 column grid keeps center truly centered */}
+      {/* Main nav */}
       <div
         className="border-b transition-colors duration-200"
         style={{
           borderColor: scrolled ? "#e8e8e8" : "rgba(232,232,232,0.6)",
-          backgroundColor: "rgba(255,255,255,0.92)",
+          backgroundColor: "rgba(255,255,255,0.94)",
           backdropFilter: "saturate(180%) blur(14px)",
           WebkitBackdropFilter: "saturate(180%) blur(14px)",
         }}
       >
-        <div className="mx-auto grid h-14 max-w-6xl grid-cols-[1fr_auto_1fr] items-center px-6">
+        <div className="mx-auto grid h-14 max-w-6xl grid-cols-[auto_1fr_auto] items-center gap-8 px-4">
 
-          {/* Col 1 — Brand (left-aligned) */}
-          <div className="flex items-center gap-2">
+          {/* Col 1 — Brand */}
+          <div className="flex items-center gap-2.5">
             <Logo />
-            <span className="hidden select-none text-neutral-300 md:block" aria-hidden>/</span>
-            <span className="hidden font-mono text-[9.5px] font-medium uppercase tracking-[0.16em] text-neutral-400 md:flex md:items-center" style={{ lineHeight: 1 }}>
+            <span className="hidden select-none text-neutral-300 text-lg font-light md:block" aria-hidden>/</span>
+            <span className="hidden font-mono text-[9px] font-medium uppercase tracking-[0.18em] text-neutral-400 md:block">
               Real specs. Real decisions.
             </span>
           </div>
 
-          {/* Col 2 — Nav (centered) */}
-          <nav className="hidden items-center gap-5 text-[13px] text-neutral-600 xl:flex">
+          {/* Col 2 — Nav links (centered in remaining space) */}
+          <nav className="hidden items-center justify-center gap-5 xl:flex">
+            {/* Labs dropdown */}
             <div className="group relative">
-              <span className="cursor-default select-none transition-colors hover:text-neutral-950">Labs</span>
+              <span className="cursor-default select-none text-[13px] font-semibold text-neutral-800 transition-colors hover:text-neutral-950">
+                Labs
+              </span>
               <div className="invisible absolute left-1/2 top-full z-50 mt-2 w-[220px] -translate-x-1/2 rounded-[10px] border border-[#e8e8e8] bg-white p-1.5 opacity-0 shadow-[0_8px_24px_-8px_rgba(0,0,0,0.12)] transition-all duration-150 group-hover:visible group-hover:opacity-100">
                 {labs.map(l => {
                   const s = STATUS[l.status];
@@ -115,22 +118,21 @@ export function SiteNav() {
                 })}
               </div>
             </div>
+            {/* Tool links */}
             {tools.map(t => (
               <Link key={t.label} to={t.to}
-                className="whitespace-nowrap transition-colors hover:text-neutral-950">
+                className="whitespace-nowrap text-[13px] font-semibold text-neutral-700 transition-colors hover:text-neutral-950">
                 {t.label}
               </Link>
             ))}
           </nav>
 
-          {/* Col 3 — CTA (right-aligned) */}
-          <div className="flex justify-end">
-            <Link to="/solar-calculator"
-              className="group inline-flex items-center gap-1.5 rounded-[8px] bg-neutral-950 px-3.5 py-2 text-[12.5px] font-medium text-white transition-colors duration-200 hover:bg-[#2563EB]">
-              Open Lab
-              <span className="transition-transform duration-200 group-hover:translate-x-0.5">→</span>
-            </Link>
-          </div>
+          {/* Col 3 — CTA */}
+          <Link to="/solar-calculator"
+            className="group inline-flex items-center gap-1.5 rounded-[8px] bg-neutral-950 px-4 py-2 text-[13px] font-semibold text-white transition-colors duration-200 hover:bg-[#2563EB]">
+            Open Lab
+            <span className="transition-transform duration-200 group-hover:translate-x-0.5">→</span>
+          </Link>
 
         </div>
       </div>
