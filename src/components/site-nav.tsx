@@ -102,7 +102,7 @@ export function SiteNav() {
         <div className="mx-auto flex h-16 max-w-7xl items-center justify-between px-6">
           <div className="flex h-16 items-center gap-3">
             <Logo />
-            <div className="hidden h-[36px] translate-y-px items-center gap-3 leading-none md:flex">
+            <div className="hidden items-center gap-3 leading-none md:flex">
               <span className="flex h-[36px] items-center leading-none text-neutral-300">/</span>
               <span className="flex h-[36px] items-center font-mono text-[10.5px] font-medium uppercase leading-none tracking-[0.18em] text-neutral-500">
                 Real specs. Real decisions.
