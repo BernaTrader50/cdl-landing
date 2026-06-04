@@ -801,7 +801,7 @@ function Labs() {
     {
       code: "LAB-01",
       title: "Solar Generators",
-      desc: "49 products. 15 Technical Analysis. 25 comparisons. Complete decision engine with real specs and expert verdicts.",
+      desc: "69 products · 15 Technical Analysis · 25 comparisons · Runtime Database · UPS Database. Built for decisions, not clicks.",
       metrics: ["49 products", "10 brands", "7 use-case scores"],
       status: "live",
       href: "/solar-calculator",
