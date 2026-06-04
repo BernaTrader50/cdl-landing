@@ -517,11 +517,24 @@ function ScoreBreakdown({ components, overallScore, scoreKey }: { components: Sc
 }
 
 // ─── ELIMINATED PRODUCTS PANEL ────────────────────────────────────────────────
-function EliminatedPanel({ eliminated }: { eliminated: EliminatedProduct[] }) {
+function EliminatedPanel({ eliminated, eliminations }: { eliminated: EliminatedProduct[], eliminations: EliminationReason[] }) {
   if (!eliminated || eliminated.length === 0) return null;
+  const total = eliminations.reduce((s, e) => s + e.count, 0);
+  const byBudget   = eliminations.find(e => e.reason.includes("budget"))?.count ?? 0;
+  const bySurge    = eliminations.find(e => e.reason.includes("surge"))?.count ?? 0;
+  const byUps      = eliminations.find(e => e.reason.includes("UPS"))?.count ?? 0;
   return (
     <div className="mb-4 rounded-[12px] border bg-white p-4" style={{borderColor:"#E2E2E2"}}>
-      <p className="font-mono text-[9.5px] font-medium uppercase tracking-[0.14em] text-neutral-400 mb-3">Closest products eliminated</p>
+      <div className="flex items-center justify-between mb-3">
+        <p className="font-mono text-[9.5px] font-medium uppercase tracking-[0.14em] text-neutral-400">Elimination breakdown</p>
+        <div className="flex items-center gap-3">
+          {byBudget > 0 && <span className="font-mono text-[10px] text-neutral-500"><span className="font-semibold text-neutral-800">{byBudget}</span> over budget</span>}
+          {bySurge > 0  && <span className="font-mono text-[10px] text-neutral-500"><span className="font-semibold text-neutral-800">{bySurge}</span> insufficient surge</span>}
+          {byUps > 0    && <span className="font-mono text-[10px] text-neutral-500"><span className="font-semibold text-neutral-800">{byUps}</span> no UPS</span>}
+          <span className="font-mono text-[10px] font-semibold text-neutral-400">= {total} eliminated</span>
+        </div>
+      </div>
+      <p className="font-mono text-[9.5px] font-medium uppercase tracking-[0.14em] text-neutral-400 mb-3">Closest products not matched</p>
       <div className="space-y-2">
         {eliminated.map((e, i) => (
           <div key={i} className="flex items-center gap-3">
@@ -977,7 +990,7 @@ export function SolarCalculator() {
           )}
 
           {/* Eliminated products */}
-          <EliminatedPanel eliminated={result.eliminatedProducts} />
+          <EliminatedPanel eliminated={result.eliminatedProducts} eliminations={result.eliminations} />
 
           {/* Comparison table */}
           <ComparisonTable
