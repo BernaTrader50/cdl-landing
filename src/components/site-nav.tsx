@@ -16,8 +16,8 @@ function FlaskIcon({ className = "" }: { className?: string }) {
 export function Logo({ className = "" }: { className?: string }) {
   return (
     <Link to="/" className={`flex items-center gap-1.5 ${className}`}>
-      <FlaskIcon className="h-6 w-6 shrink-0" />
-      <span className="text-[17px] font-semibold leading-none tracking-tight text-neutral-950">
+      <FlaskIcon className="h-[18px] w-[18px] shrink-0" />
+      <span className="text-[16px] font-semibold leading-none tracking-tight text-neutral-950" style={{ lineHeight: 1 }}>
         <span>click</span>
         <span style={{ color: "#2563EB" }}>decision</span>
         <span>lab</span>
@@ -87,10 +87,10 @@ export function SiteNav() {
         <div className="mx-auto grid h-14 max-w-6xl grid-cols-[1fr_auto_1fr] items-center px-6">
 
           {/* Col 1 — Brand (left-aligned) */}
-          <div className="flex items-baseline gap-2">
+          <div className="flex items-center gap-2">
             <Logo />
             <span className="hidden select-none text-neutral-300 md:block" aria-hidden>/</span>
-            <span className="hidden font-mono text-[9.5px] font-medium uppercase tracking-[0.16em] text-neutral-400 md:block">
+            <span className="hidden font-mono text-[9.5px] font-medium uppercase tracking-[0.16em] text-neutral-400 md:flex md:items-center" style={{ lineHeight: 1 }}>
               Real specs. Real decisions.
             </span>
           </div>
