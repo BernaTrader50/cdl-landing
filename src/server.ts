@@ -858,6 +858,12 @@ export default {
         }
 
         // Everything else → pass through to Cloudflare origin (WordPress on Hostinger)
+        // Redirect /blog/:slug → /:slug/ (301 — fixes GSC non-indexed pages)
+        if (url.pathname.startsWith('/blog/') && url.pathname.length > 6) {
+          const slug = url.pathname.replace('/blog/', '').replace(/\/+$/, '');
+          return Response.redirect('https://clickdecisionlab.com/' + slug + '/', 301);
+        }
+
         // Cloudflare will route to the A record (185.212.71.247) directly
         return fetch(request);
     },
