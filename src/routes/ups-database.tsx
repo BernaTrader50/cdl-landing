@@ -2,6 +2,7 @@ import { createFileRoute } from "@tanstack/react-router";
 import { SiteNav } from "@/components/site-nav";
 import { SiteFooter } from "@/components/site-footer";
 import { useState } from "react";
+import { Analytics } from "@/components/analytics";
 
 export const Route = createFileRoute("/ups-database")({
   head: () => ({
@@ -188,7 +189,7 @@ function UPSDatabase() {
           <p className="font-mono text-[10px] text-neutral-400 uppercase tracking-wider mb-3">Select device to check compatibility</p>
           <div className="flex items-start gap-2 flex-wrap">
             {DEVICES.map(d => (
-              <button key={d.id} onClick={() => setActiveDevice(d.id)}
+              <button key={d.id} onClick={() => setActiveDevice(d.id); Analytics.upsDbFilter(d.id, rows.length);}
                 className={`flex items-center gap-2 rounded-[10px] px-3.5 py-2 text-[12px] font-medium transition-all ${
                   activeDevice === d.id
                     ? "bg-neutral-950 text-white shadow-sm"
