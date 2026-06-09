@@ -2,6 +2,7 @@ import { createFileRoute } from "@tanstack/react-router";
 import { SiteNav } from "@/components/site-nav";
 import { SiteFooter } from "@/components/site-footer";
 import { useState } from "react";
+import { Analytics } from "@/components/analytics";
 
 export const Route = createFileRoute("/runtime-database")({
   head: () => ({
