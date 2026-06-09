@@ -935,6 +935,11 @@ export function SolarCalculator() {
       const b = parseInt(budget || "0", 10) || 0;
       const analysis = computeAnalysis(scenario, appliance, days, b);
       setResult(analysis);
+    Analytics.calculatorComplete(
+      analysis.matches?.length ?? 0,
+      analysis.eliminatedProducts?.length ?? 0,
+      analysis.matches?.[0]?.model ?? "none"
+    );
       setAnalyzing(false);
       if (typeof window !== "undefined" && (window as any).cdlTrack) {
         (window as any).cdlTrack("result_view", {
