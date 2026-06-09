@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { Analytics } from "@/components/analytics";
 
 // ─── DATASET (39 products — CDL Google Sheets) ───────────────────────────────
 const PRODUCTS = [
