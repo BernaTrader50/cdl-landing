@@ -890,7 +890,15 @@ function HowItWorks() {
     { n: "02", text: "Filter by surge capacity, UPS requirement, and budget" },
     { n: "03", text: "Score remaining products across 7 use-case dimensions" },
     { n: "04", text: "Rank by scenario fit, value efficiency, and performance headroom" },
-  ];
+  
+  // ─── Final 3 to reach 100 ────────────────────────────────────────────────
+  // Source: us.ecoflow.com (manufacturer verified June 2026)
+  { brand:"EcoFlow", model:"DELTA 3 Ultra Plus",   price:1499, wh:3072, surge:7000, solar:1200, ups:true,  expandable:true,  weight:64,   warranty:5, scores:{home_backup:10,rv:3,camping:2,off_grid:9,apartment:2,medical:9,value:7}, notes:"3072Wh LFP. Expandable 3-11kWh. Smart Output Priority. UPS <30ms. Verified us.ecoflow.com June 2026." },
+  // Source: goalzero.com (manufacturer verified)
+  { brand:"Goal Zero", model:"Yeti 200X",           price:199,  wh:187,  surge:300,  solar:60,   ups:false, expandable:false, weight:5,    warranty:2, scores:{home_backup:2,rv:4,camping:9,off_grid:2,apartment:4,medical:2,value:7}, notes:"187Wh NMC. 120W continuous. Ultra-compact 5 lbs. Entry-level camping. No UPS." },
+  // Source: us.ecoflow.com (manufacturer verified June 2026)
+  { brand:"EcoFlow", model:"DELTA Pro Ultra",       price:3999, wh:6000, surge:15000,solar:5600, ups:true,  expandable:true,  weight:195,  warranty:5, scores:{home_backup:10,rv:1,camping:1,off_grid:10,apartment:1,medical:10,value:4}, notes:"Whole-home system. 7200W continuous. Online UPS 0ms. Expandable to 90kWh. Verified us.ecoflow.com June 2026." },
+];
   return (
     <div className="mt-5 rounded-[12px] border p-5" style={{borderColor:"#E2E2E2", background:"#FAFAFA"}}>
       <p className="font-mono text-[10px] font-medium uppercase tracking-[0.14em] text-neutral-400 mb-4">How recommendations work</p>
