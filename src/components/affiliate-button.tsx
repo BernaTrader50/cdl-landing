@@ -48,8 +48,32 @@ function detectRegion(): string {
   return "US";
 }
 
-function resolveLink(links: AffiliateLinks, region: string): string {
-  // Priority: manufacturer > awin > amazon local > amazon US
+// EcoFlow Impact affiliate links (priority over Amazon)
+const ECOFLOW_IMPACT: Record<string, string> = {
+  "DELTA Pro": "https://caecoflowcom.pxf.io/c/7338771/2787516/31964?u=https://us.ecoflow.com/products/delta-pro-portable-power-station",
+  "DELTA Pro 3": "https://caecoflowcom.pxf.io/c/7338771/2787516/31964?u=https://us.ecoflow.com/products/delta-pro-3-portable-power-station",
+  "DELTA Pro Ultra": "https://caecoflowcom.pxf.io/c/7338771/2787516/31964?u=https://us.ecoflow.com/products/delta-pro-ultra",
+  "DELTA 3 Max Plus": "https://caecoflowcom.pxf.io/c/7338771/2787516/31964?u=https://us.ecoflow.com/products/delta-3-max-plus-portable-power-station",
+  "DELTA 3 Max": "https://caecoflowcom.pxf.io/c/7338771/2787516/31964?u=https://us.ecoflow.com/products/delta-3-max-portable-power-station",
+  "DELTA 3 Plus": "https://caecoflowcom.pxf.io/c/7338771/2787516/31964?u=https://us.ecoflow.com/products/delta-3-plus-portable-power-station",
+  "DELTA 3 Classic": "https://caecoflowcom.pxf.io/c/7338771/2787516/31964?u=https://us.ecoflow.com/products/delta-3-classic-portable-power-station",
+  "DELTA 3": "https://caecoflowcom.pxf.io/c/7338771/2787516/31964?u=https://us.ecoflow.com/products/delta-3-portable-power-station",
+  "DELTA 3 Ultra Plus": "https://caecoflowcom.pxf.io/c/7338771/2787516/31964?u=https://us.ecoflow.com/products/delta-3-ultra-plus-portable-power-station",
+  "DELTA 2 Max": "https://caecoflowcom.pxf.io/c/7338771/2787516/31964?u=https://us.ecoflow.com/products/delta-2-max-portable-power-station",
+  "DELTA 2": "https://caecoflowcom.pxf.io/c/7338771/2787516/31964?u=https://us.ecoflow.com/products/delta-2-portable-power-station",
+  "DELTA Max": "https://caecoflowcom.pxf.io/c/7338771/2787516/31964?u=https://us.ecoflow.com/products/delta-max-portable-power-station",
+  "DELTA Mini": "https://caecoflowcom.pxf.io/c/7338771/2787516/31964?u=https://us.ecoflow.com/products/delta-mini-portable-power-station",
+  "RIVER 2 Pro": "https://caecoflowcom.pxf.io/c/7338771/2787516/31964?u=https://us.ecoflow.com/products/river-2-pro-portable-power-station",
+  "RIVER 2 Max": "https://caecoflowcom.pxf.io/c/7338771/2787516/31964?u=https://us.ecoflow.com/products/river-2-max-portable-power-station",
+  "RIVER 2": "https://caecoflowcom.pxf.io/c/7338771/2787516/31964?u=https://us.ecoflow.com/products/river-2-portable-power-station",
+  "RIVER Pro": "https://caecoflowcom.pxf.io/c/7338771/2787516/31964?u=https://us.ecoflow.com/products/river-pro-portable-power-station",
+  "RIVER 3 Plus": "https://caecoflowcom.pxf.io/c/7338771/2787516/31964?u=https://us.ecoflow.com/products/river-3-plus-portable-power-station",
+  "RIVER 3": "https://caecoflowcom.pxf.io/c/7338771/2787516/31964?u=https://us.ecoflow.com/products/river-3-portable-power-station",
+};
+
+function resolveLink(links: AffiliateLinks, region: string, product?: string): string {
+  // Priority: Impact (EcoFlow) > manufacturer > awin > amazon local > amazon US
+  if (product && ECOFLOW_IMPACT[product]) return ECOFLOW_IMPACT[product];
   if (links.manufacturer_url) return links.manufacturer_url;
   if (links.awin_url)          return links.awin_url;
   const regionalKey = `amazon_${region.toLowerCase()}` as keyof AffiliateLinks;
@@ -78,7 +102,7 @@ export function AffiliateButton({ product, links, price, currency = "$", variant
     setRegion(detectRegion());
   }, []);
 
-  const href = resolveLink(links, region);
+  const href = resolveLink(links, region, product);
   const priceStr = price ? ` — ${currency}${price.toLocaleString()}` : "";
   const displayLabel = label ?? `Check Price${priceStr}`;
 
