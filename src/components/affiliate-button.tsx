@@ -48,7 +48,54 @@ function detectRegion(): string {
   return "US";
 }
 
-// EcoFlow Impact affiliate links (priority over Amazon)
+// ─── Awin Publisher ID ──────────────────────────────────────────────────────
+const AWIN_PUB_ID = "2929639";
+
+function awinLink(merchantId: string, productUrl?: string): string {
+  const base = `https://www.awin1.com/cread.php?awinmid=${merchantId}&awinaffid=${AWIN_PUB_ID}`;
+  return productUrl ? base + `&ued=${encodeURIComponent(productUrl)}` : base;
+}
+
+// ─── Awin merchant IDs (verified from ui.awin.com) ──────────────────────────
+const AWIN_MERCHANTS: Record<string, string> = {
+  ecoflow_general: "59181",
+  ecoflow_uk:      "51797",
+  bluetti_us:      "59271",
+  bluetti_uk:      "32273",
+  bluetti_eu:      "95479",
+  allpowers_us:    "40342",
+  allpowers_int:   "38934",
+  jackery_us:      "59183",
+  jackery_uk:      "30413",
+  zendure_eu:      "68786",
+};
+
+// ─── Awin geo-routing by brand + region ─────────────────────────────────────
+function getAwinLink(brand: string, region: string, productUrl?: string): string | null {
+  const b = brand.toLowerCase();
+  const r = region.toUpperCase();
+
+  if (b.includes("bluetti")) {
+    if (r === "US") return awinLink(AWIN_MERCHANTS.bluetti_us, productUrl);
+    if (r === "UK") return awinLink(AWIN_MERCHANTS.bluetti_uk, productUrl);
+    return awinLink(AWIN_MERCHANTS.bluetti_eu, productUrl); // EU/ES/DE/FR/IT
+  }
+  if (b.includes("allpowers")) {
+    if (r === "US" || r === "CA") return awinLink(AWIN_MERCHANTS.allpowers_us, productUrl);
+    return awinLink(AWIN_MERCHANTS.allpowers_int, productUrl);
+  }
+  if (b.includes("jackery")) {
+    if (r === "UK") return awinLink(AWIN_MERCHANTS.jackery_uk, productUrl);
+    if (r === "US") return awinLink(AWIN_MERCHANTS.jackery_us, productUrl);
+    return awinLink(AWIN_MERCHANTS.jackery_us, productUrl); // fallback
+  }
+  if (b.includes("zendure")) {
+    return awinLink(AWIN_MERCHANTS.zendure_eu, productUrl);
+  }
+  return null;
+}
+
+// ─── EcoFlow Impact affiliate links (priority over Amazon) ──────────────────
 const ECOFLOW_IMPACT: Record<string, string> = {
   "DELTA Pro": "https://caecoflowcom.pxf.io/c/7338771/2787516/31964?u=https://us.ecoflow.com/products/delta-pro-portable-power-station",
   "DELTA Pro 3": "https://caecoflowcom.pxf.io/c/7338771/2787516/31964?u=https://us.ecoflow.com/products/delta-pro-3-portable-power-station",
@@ -71,9 +118,19 @@ const ECOFLOW_IMPACT: Record<string, string> = {
   "RIVER 3": "https://caecoflowcom.pxf.io/c/7338771/2787516/31964?u=https://us.ecoflow.com/products/river-3-portable-power-station",
 };
 
-function resolveLink(links: AffiliateLinks, region: string, product?: string): string {
-  // Priority: Impact (EcoFlow) > manufacturer > awin > amazon local > amazon US
+function resolveLink(links: AffiliateLinks, region: string, product?: string, brand?: string): string {
+  // Priority: EcoFlow Impact > Awin (brand-specific) > manufacturer > amazon local > amazon US
+
+  // 1. EcoFlow: always via Impact
   if (product && ECOFLOW_IMPACT[product]) return ECOFLOW_IMPACT[product];
+
+  // 2. Other brands: Awin geo-routing
+  if (brand) {
+    const awinUrl = getAwinLink(brand, region);
+    if (awinUrl) return awinUrl;
+  }
+
+  // 3. Fallbacks
   if (links.manufacturer_url) return links.manufacturer_url;
   if (links.awin_url)          return links.awin_url;
   const regionalKey = `amazon_${region.toLowerCase()}` as keyof AffiliateLinks;
@@ -102,7 +159,9 @@ export function AffiliateButton({ product, links, price, currency = "$", variant
     setRegion(detectRegion());
   }, []);
 
-  const href = resolveLink(links, region, product);
+  // Extract brand from product name (e.g. "Bluetti AC200L" → "Bluetti")
+  const productBrand = product?.split(" ")[0] ?? "";
+  const href = resolveLink(links, region, product, productBrand);
   const priceStr = price ? ` — ${currency}${price.toLocaleString()}` : "";
   const displayLabel = label ?? `Check Price${priceStr}`;
 
