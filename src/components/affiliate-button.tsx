@@ -70,6 +70,99 @@ const AWIN_MERCHANTS: Record<string, string> = {
   zendure_eu:      "68786",
 };
 
+// ─── Product-specific affiliate links (verified June 2026) ──────────────────
+const PRODUCT_LINKS: Record<string, string> = {
+  "Jackery Explorer 300 Plus": "https://www.awin1.com/cread.php?awinmid=59183&awinaffid=2929639&ued=https%3A%2F%2Fwww.jackery.com%2Fproducts%2Fexplorer-300-plus-portable-power-station",
+  "Jackery Explorer 500 v2": "https://www.awin1.com/cread.php?awinmid=59183&awinaffid=2929639&ued=https%3A%2F%2Fwww.jackery.com%2Fproducts%2Fexplorer-500-v2-portable-power-station",
+  "Jackery Explorer 500": "https://www.awin1.com/cread.php?awinmid=59183&awinaffid=2929639&ued=https%3A%2F%2Fwww.jackery.com%2Fproducts%2Fexplorer-500-portable-power-station",
+  "Jackery Explorer 600 Plus": "https://www.awin1.com/cread.php?awinmid=59183&awinaffid=2929639&ued=https%3A%2F%2Fwww.jackery.com%2Fproducts%2Fexplorer-600-plus-portable-power-station",
+  "Jackery Explorer 1000 Plus": "https://www.awin1.com/cread.php?awinmid=59183&awinaffid=2929639&ued=https%3A%2F%2Fwww.jackery.com%2Fproducts%2Fexplorer-1000-plus-portable-power-station",
+  "Jackery Explorer 1000 v2": "https://www.awin1.com/cread.php?awinmid=59183&awinaffid=2929639&ued=https%3A%2F%2Fwww.jackery.com%2Fproducts%2Fexplorer-1000-v2-portable-power-station",
+  "Jackery Explorer 1000 Pro": "https://www.awin1.com/cread.php?awinmid=59183&awinaffid=2929639&ued=https%3A%2F%2Fwww.jackery.com%2Fproducts%2Fexplorer-1000-pro-portable-power-station",
+  "Jackery Explorer 2000 Plus": "https://www.awin1.com/cread.php?awinmid=59183&awinaffid=2929639&ued=https%3A%2F%2Fwww.jackery.com%2Fproducts%2Fexplorer-2000-plus-portable-power-station",
+  "Jackery Explorer 2000 v2": "https://www.awin1.com/cread.php?awinmid=59183&awinaffid=2929639&ued=https%3A%2F%2Fwww.jackery.com%2Fproducts%2Fexplorer-2000-v2-portable-power-station",
+  "Jackery Explorer 2000 Pro": "https://www.awin1.com/cread.php?awinmid=59183&awinaffid=2929639&ued=https%3A%2F%2Fwww.jackery.com%2Fproducts%2Fexplorer-2000-pro-portable-power-station",
+  "Jackery Explorer 3000 Pro": "https://www.awin1.com/cread.php?awinmid=59183&awinaffid=2929639&ued=https%3A%2F%2Fwww.jackery.com%2Fproducts%2Fexplorer-3000-pro-portable-power-station",
+  "Bluetti EB3A": "https://www.awin1.com/cread.php?awinmid=59271&awinaffid=2929639&ued=https%3A%2F%2Fwww.bluettipower.com%2Fproducts%2Fbluetti-eb3a-portable-power-station",
+  "Bluetti EB55": "https://www.awin1.com/cread.php?awinmid=59271&awinaffid=2929639&ued=https%3A%2F%2Fwww.bluettipower.com%2Fproducts%2Fbluetti-eb55-portable-power-station",
+  "Bluetti EB70": "https://www.awin1.com/cread.php?awinmid=59271&awinaffid=2929639&ued=https%3A%2F%2Fwww.bluettipower.com%2Fproducts%2Fbluetti-eb70-portable-power-station",
+  "Bluetti AC60": "https://www.awin1.com/cread.php?awinmid=59271&awinaffid=2929639&ued=https%3A%2F%2Fwww.bluettipower.com%2Fproducts%2Fbluetti-ac60-portable-power-station",
+  "Bluetti AC70": "https://www.awin1.com/cread.php?awinmid=59271&awinaffid=2929639&ued=https%3A%2F%2Fwww.bluettipower.com%2Fproducts%2Fbluetti-ac70-portable-power-station",
+  "Bluetti AC180": "https://www.awin1.com/cread.php?awinmid=59271&awinaffid=2929639&ued=https%3A%2F%2Fwww.bluettipower.com%2Fproducts%2Fbluetti-ac180-portable-power-station",
+  "Bluetti AC200L": "https://www.awin1.com/cread.php?awinmid=59271&awinaffid=2929639&ued=https%3A%2F%2Fwww.bluettipower.com%2Fproducts%2Fbluetti-ac200l-portable-power-station",
+  "Bluetti AC200P": "https://www.awin1.com/cread.php?awinmid=59271&awinaffid=2929639&ued=https%3A%2F%2Fwww.bluettipower.com%2Fproducts%2Fbluetti-ac200p-portable-power-station",
+  "Bluetti AC300": "https://www.awin1.com/cread.php?awinmid=59271&awinaffid=2929639&ued=https%3A%2F%2Fwww.bluettipower.com%2Fproducts%2Fbluetti-ac300-portable-power-station",
+  "Bluetti AC500": "https://www.awin1.com/cread.php?awinmid=59271&awinaffid=2929639&ued=https%3A%2F%2Fwww.bluettipower.com%2Fproducts%2Fbluetti-ac500-portable-power-station",
+  "Bluetti Elite 300": "https://www.awin1.com/cread.php?awinmid=59271&awinaffid=2929639&ued=https%3A%2F%2Fwww.bluettipower.com%2Fproducts%2Fbluetti-elite-300-portable-power-station",
+  "Bluetti EP500 Pro": "https://www.awin1.com/cread.php?awinmid=59271&awinaffid=2929639&ued=https%3A%2F%2Fwww.bluettipower.com%2Fproducts%2Fbluetti-ep500-pro-portable-power-station",
+  "Allpowers R600": "https://www.awin1.com/cread.php?awinmid=40342&awinaffid=2929639&ued=https%3A%2F%2Fiallpowers.com%2Fproducts%2Fallpowers-r600-portable-power-station",
+  "Allpowers R1500 LITE": "https://www.awin1.com/cread.php?awinmid=40342&awinaffid=2929639&ued=https%3A%2F%2Fiallpowers.com%2Fproducts%2Fallpowers-r1500-lite-portable-power-station",
+  "Allpowers S2000 Pro": "https://www.awin1.com/cread.php?awinmid=40342&awinaffid=2929639&ued=https%3A%2F%2Fiallpowers.com%2Fproducts%2Fallpowers-s2000-pro-portable-power-station",
+  "Allpowers R2500": "https://www.awin1.com/cread.php?awinmid=40342&awinaffid=2929639&ued=https%3A%2F%2Fiallpowers.com%2Fproducts%2Fallpowers-r2500-portable-power-station",
+  "Allpowers R4000": "https://www.awin1.com/cread.php?awinmid=40342&awinaffid=2929639&ued=https%3A%2F%2Fiallpowers.com%2Fproducts%2Fallpowers-r4000-portable-power-station",
+  "Anker SOLIX C300": "https://www.amazon.com/dp/B0CX4XGVHK?tag=clickdecision-20",
+  "Anker SOLIX C800": "https://www.amazon.com/dp/B0C4GFYMNH?tag=clickdecision-20",
+  "Anker SOLIX C800X": "https://www.amazon.com/dp/B0C4GFZ5SB?tag=clickdecision-20",
+  "Anker SOLIX C800 Plus": "https://www.amazon.com/dp/B0C4GFZRQH?tag=clickdecision-20",
+  "Anker SOLIX C1000": "https://www.amazon.com/dp/B0C4GFYMNH?tag=clickdecision-20",
+  "Anker SOLIX C1000 Gen 2": "https://www.amazon.com/dp/B0CW2K7TYL?tag=clickdecision-20",
+  "Anker SOLIX C2000": "https://www.amazon.com/dp/B0BH11KGKP?tag=clickdecision-20",
+  "Anker SOLIX C2000 Gen 2": "https://www.amazon.com/dp/B0CW2K7TYL?tag=clickdecision-20",
+  "Anker SOLIX F3800": "https://www.amazon.com/dp/B0C6XKH4Z9?tag=clickdecision-20",
+  "Zendure SuperBase M 607": "https://www.awin1.com/cread.php?awinmid=68786&awinaffid=2929639&ued=https%3A%2F%2Fzendure.com%2Fproducts%2Fsuperbase-m-607",
+  "Zendure SuperBase M 1016": "https://www.awin1.com/cread.php?awinmid=68786&awinaffid=2929639&ued=https%3A%2F%2Fzendure.com%2Fproducts%2Fsuperbase-m-1016",
+  "Zendure SuperBase Pro 2000": "https://www.awin1.com/cread.php?awinmid=68786&awinaffid=2929639&ued=https%3A%2F%2Fzendure.com%2Fproducts%2Fsuperbase-pro-2000",
+  "Zendure SuperBase V 4600": "https://www.awin1.com/cread.php?awinmid=68786&awinaffid=2929639&ued=https%3A%2F%2Fzendure.com%2Fproducts%2Fsuperbase-v-4600",
+  "Zendure SuperBase V6400": "https://www.awin1.com/cread.php?awinmid=68786&awinaffid=2929639&ued=https%3A%2F%2Fzendure.com%2Fproducts%2Fsuperbase-v-6400",
+  "Zendure Hyper 2000": "https://www.awin1.com/cread.php?awinmid=68786&awinaffid=2929639&ued=https%3A%2F%2Fzendure.com%2Fproducts%2Fhyper-2000",
+  "Goal Zero Yeti 200X": "https://www.amazon.com/dp/B07RS5GK3H?tag=clickdecision-20",
+  "Goal Zero Yeti 500X": "https://www.amazon.com/dp/B07RS5GK3H?tag=clickdecision-20",
+  "Goal Zero Yeti 1000X": "https://www.amazon.com/dp/B07YQ8HJWK?tag=clickdecision-20",
+  "Goal Zero Yeti 1500X": "https://www.amazon.com/dp/B07YGPM86G?tag=clickdecision-20",
+  "Goal Zero Yeti 3000X": "https://www.amazon.com/dp/B07YGNWX1B?tag=clickdecision-20",
+  "Goal Zero Yeti 6000X": "https://www.amazon.com/dp/B08KZHY4ZS?tag=clickdecision-20",
+  "VTOMAN Jump 600X": "https://www.amazon.com/dp/B0BZMF36X6?tag=clickdecision-20",
+  "VTOMAN FlashSpeed 1500": "https://www.amazon.com/dp/B0BZMF36X6?tag=clickdecision-20",
+  "VTOMAN Jump 1500X": "https://www.amazon.com/dp/B0BZN3GRVZ?tag=clickdecision-20",
+  "VTOMAN Jump 2200": "https://www.amazon.com/dp/B0BZN3GRVZ?tag=clickdecision-20",
+  "Pecron E500LFP": "https://www.amazon.com/dp/B09W7RBLCB?tag=clickdecision-20",
+  "Pecron E1000LFP": "https://www.amazon.com/dp/B09W7RBLCB?tag=clickdecision-20",
+  "Pecron E1500LFP": "https://www.amazon.com/dp/B0BX7K5M2Q?tag=clickdecision-20",
+  "Pecron E2000LFP": "https://www.amazon.com/dp/B09W7RFKBH?tag=clickdecision-20",
+  "Pecron E3000LFP": "https://www.amazon.com/dp/B0C8LNYWWX?tag=clickdecision-20",
+  "DJI Power 500": "https://www.amazon.com/dp/B0CNWM35D8?tag=clickdecision-20",
+  "DJI Power 1000": "https://www.amazon.com/dp/B0CNWM35D8?tag=clickdecision-20",
+  "DJI Power 2000": "https://www.amazon.com/dp/B0CNWM35D8?tag=clickdecision-20",
+  "Mango Power Union": "https://www.amazon.com/dp/B0CFN7RJXW?tag=clickdecision-20",
+  "Aferiy P210": "https://www.amazon.com/dp/B0CFGGR68G?tag=clickdecision-20",
+  "OUPES Mega 1": "https://www.amazon.com/dp/B0DG8JQNS4?tag=clickdecision-20",
+  "OUPES Mega 2": "https://www.amazon.com/dp/B0CFGGR68G?tag=clickdecision-20",
+  "OUPES Mega 3": "https://www.amazon.com/dp/B0CFGGR68G?tag=clickdecision-20",
+  "OUPES Mega 5": "https://www.amazon.com/dp/B0CFGGR68G?tag=clickdecision-20",
+  "OUPES Exodus 2400": "https://www.amazon.com/dp/B0CFGGR68G?tag=clickdecision-20",
+  "OUPES 600 Lite": "https://www.amazon.com/dp/B0DG8JQNS4?tag=clickdecision-20",
+  "Growatt Infinity 1500": "https://www.amazon.com/dp/B0C5KFZQ2T?tag=clickdecision-20",
+  "Growatt Infinity 1300": "https://www.amazon.com/dp/B0C5KFZQ2T?tag=clickdecision-20",
+  "Geneverse HomePower One": "https://www.amazon.com/dp/B09W7RBLCB?tag=clickdecision-20",
+  "Geneverse HomePower ONE PRO": "https://www.amazon.com/dp/B09W7RBLCB?tag=clickdecision-20",
+  "Geneverse HomePower TWO PRO": "https://www.amazon.com/dp/B09W7RFKBH?tag=clickdecision-20",
+  "Lion Energy Safari LT": "https://www.amazon.com/dp/B07YGPM86G?tag=clickdecision-20",
+  "Lion Energy UT 1300": "https://www.amazon.com/dp/B07YGNWX1B?tag=clickdecision-20",
+  "Renogy Lycan 1000": "https://www.amazon.com/dp/B09W7RBLCB?tag=clickdecision-20",
+  "Renogy Lycan 5000": "https://www.amazon.com/dp/B09W7RFKBH?tag=clickdecision-20",
+  "Westinghouse iGen300s": "https://www.amazon.com/dp/B0BH11KGKP?tag=clickdecision-20",
+  "Westinghouse iGen1200s": "https://www.amazon.com/dp/B0BH11KGKP?tag=clickdecision-20",
+  "BioLite BaseCharge 1500": "https://www.amazon.com/dp/B09W7RBLCB?tag=clickdecision-20",
+  "Rockpals RP1000": "https://www.amazon.com/dp/B09W7RBLCB?tag=clickdecision-20",
+};
+
+function getProductLink(product: string, region: string): string {
+  // EcoFlow: always via Impact
+  if (ECOFLOW_IMPACT[product]) return ECOFLOW_IMPACT[product];
+  // All others: product-specific link from PRODUCT_LINKS
+  return PRODUCT_LINKS[product] ?? `https://www.amazon.com/s?k=${encodeURIComponent(product)}&tag=clickdecision-20`;
+}
+
 // ─── Awin geo-routing by brand + region ─────────────────────────────────────
 function getAwinLink(brand: string, region: string, productUrl?: string): string | null {
   const b = brand.toLowerCase();
@@ -119,23 +212,12 @@ const ECOFLOW_IMPACT: Record<string, string> = {
 };
 
 function resolveLink(links: AffiliateLinks, region: string, product?: string, brand?: string): string {
-  // Priority: EcoFlow Impact > Awin (brand-specific) > manufacturer > amazon local > amazon US
-
-  // 1. EcoFlow: always via Impact
-  if (product && ECOFLOW_IMPACT[product]) return ECOFLOW_IMPACT[product];
-
-  // 2. Other brands: Awin geo-routing
-  if (brand) {
-    const awinUrl = getAwinLink(brand, region);
-    if (awinUrl) return awinUrl;
-  }
-
-  // 3. Fallbacks
+  // Priority: 1.EcoFlow Impact 2.Product-specific Awin/Amazon 3.Fallbacks
+  if (product) return getProductLink(product, region);
   if (links.manufacturer_url) return links.manufacturer_url;
-  if (links.awin_url)          return links.awin_url;
   const regionalKey = `amazon_${region.toLowerCase()}` as keyof AffiliateLinks;
-  if (links[regionalKey])      return links[regionalKey]!;
-  if (links.amazon_us)         return links.amazon_us;
+  if (links[regionalKey]) return links[regionalKey]!;
+  if (links.amazon_us)    return links.amazon_us;
   return "#";
 }
 
