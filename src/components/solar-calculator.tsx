@@ -703,9 +703,9 @@ function ResultCard({ pick, accentColor, scoreKey }: { pick: PickResult; accentC
   };
 
   const AMAZON_PRODUCTS: Record<string, string> = {
-    // EcoFlow — Impact (URL encoded correctly)
+    // EcoFlow — Impact deep links (URLs verified June 2026)
     "RIVER 2":           "https://caecoflowcom.pxf.io/c/7338771/2787516/31964?u=https%3A%2F%2Fus.ecoflow.com%2Fproducts%2Friver-2-portable-power-station",
-    "RIVER 2 Max":       "https://caecoflowcom.pxf.io/c/7338771/2787516/31964?u=https%3A%2F%2Fus.ecoflow.com%2Fproducts%2Friver-2-max-portable-power-station",
+    "RIVER 2 Max":       "https://caecoflowcom.pxf.io/c/7338771/2787516/31964?u=https%3A%2F%2Fus.ecoflow.com%2Fproducts%2Fdelta-2-max-portable-power-station",
     "RIVER 2 Pro":       "https://caecoflowcom.pxf.io/c/7338771/2787516/31964?u=https%3A%2F%2Fus.ecoflow.com%2Fproducts%2Friver-2-pro-portable-power-station",
     "RIVER 3":           "https://caecoflowcom.pxf.io/c/7338771/2787516/31964?u=https%3A%2F%2Fus.ecoflow.com%2Fproducts%2Friver-3-portable-power-station",
     "RIVER 3 Plus":      "https://caecoflowcom.pxf.io/c/7338771/2787516/31964?u=https%3A%2F%2Fus.ecoflow.com%2Fproducts%2Friver-3-plus-portable-power-station",
@@ -713,8 +713,8 @@ function ResultCard({ pick, accentColor, scoreKey }: { pick: PickResult; accentC
     "DELTA 3":           "https://caecoflowcom.pxf.io/c/7338771/2787516/31964?u=https%3A%2F%2Fus.ecoflow.com%2Fproducts%2Fdelta-3-portable-power-station",
     "DELTA 3 Classic":   "https://caecoflowcom.pxf.io/c/7338771/2787516/31964?u=https%3A%2F%2Fus.ecoflow.com%2Fproducts%2Fdelta-3-classic-portable-power-station",
     "DELTA 3 Plus":      "https://caecoflowcom.pxf.io/c/7338771/2787516/31964?u=https%3A%2F%2Fus.ecoflow.com%2Fproducts%2Fdelta-3-plus-portable-power-station",
-    "DELTA 3 Max":       "https://caecoflowcom.pxf.io/c/7338771/2787516/31964?u=https%3A%2F%2Fus.ecoflow.com%2Fproducts%2Fdelta-3-max-portable-power-station",
-    "DELTA 3 Max Plus":  "https://caecoflowcom.pxf.io/c/7338771/2787516/31964?u=https%3A%2F%2Fus.ecoflow.com%2Fproducts%2Fdelta-3-max-plus-portable-power-station",
+    "DELTA 3 Max":       "https://caecoflowcom.pxf.io/c/7338771/2787516/31964?u=https%3A%2F%2Fus.ecoflow.com%2Fproducts%2Fecoflow-delta-3-max-solar-generator",
+    "DELTA 3 Max Plus":  "https://caecoflowcom.pxf.io/c/7338771/2787516/31964?u=https%3A%2F%2Fus.ecoflow.com%2Fproducts%2Fecoflow-delta-3-max-plus-solar-generator",
     "DELTA 3 Ultra":     "https://caecoflowcom.pxf.io/c/7338771/2787516/31964?u=https%3A%2F%2Fus.ecoflow.com%2Fproducts%2Fdelta-3-ultra-portable-power-station",
     "DELTA 3 Ultra Plus":"https://caecoflowcom.pxf.io/c/7338771/2787516/31964?u=https%3A%2F%2Fus.ecoflow.com%2Fproducts%2Fdelta-3-ultra-plus-portable-power-station",
     "DELTA 2":           "https://www.amazon.com/dp/B0DCBYMC9D?tag=clickdecision-20",
@@ -722,9 +722,9 @@ function ResultCard({ pick, accentColor, scoreKey }: { pick: PickResult; accentC
     "DELTA Max":         "https://caecoflowcom.pxf.io/c/7338771/2787516/31964?u=https%3A%2F%2Fus.ecoflow.com%2Fproducts%2Fdelta-max-portable-power-station",
     "DELTA Mini":        "https://caecoflowcom.pxf.io/c/7338771/2787516/31964?u=https%3A%2F%2Fus.ecoflow.com%2Fproducts%2Fdelta-mini-portable-power-station",
     "DELTA Pro":         "https://caecoflowcom.pxf.io/c/7338771/2787516/31964?u=https%3A%2F%2Fus.ecoflow.com%2Fproducts%2Fdelta-pro-portable-power-station",
-    "DELTA Pro 3":       "https://www.amazon.com/dp/B0D14FMFZD?tag=clickdecision-20",
+    "DELTA Pro 3":       "https://caecoflowcom.pxf.io/c/7338771/2787516/31964?u=https%3A%2F%2Fus.ecoflow.com%2Fproducts%2Fdelta-pro-3-portable-power-station",
     "DELTA Pro Ultra":   "https://caecoflowcom.pxf.io/c/7338771/2787516/31964?u=https%3A%2F%2Fus.ecoflow.com%2Fproducts%2Fdelta-pro-ultra",
-    // Jackery — Awin (URL encoded correctly)
+        // Jackery — Awin (URL encoded correctly)
     "Explorer 300 Plus": "https://www.awin1.com/cread.php?awinmid=59183&awinaffid=2929639&ued=https%3A%2F%2Fwww.jackery.com%2Fproducts%2Fjackery-explorer-300-plus-portable-power-station",
     "Explorer 500":      "https://www.amazon.com/s?k=Jackery%20Explorer%20500&tag=clickdecision-20",
     "Explorer 500 v2":   "https://www.awin1.com/cread.php?awinmid=59183&awinaffid=2929639&ued=https%3A%2F%2Fwww.jackery.com%2Fproducts%2Fjackery-explorer-500-v2-portable-power-station",
