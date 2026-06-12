@@ -122,7 +122,7 @@ function RootShell({ children }: { children: React.ReactNode }) {
           "@context": "https://schema.org",
           "@type": "WebSite",
           "name": "ClickDecisionLab",
-          "description": "Technical decision platform for solar generators and portable power stations. 49 products analyzed.",
+          "description": "Technical decision platform for solar generators and portable power stations. 100 products analyzed.",
           "url": "https://clickdecisionlab.com",
           "potentialAction": {
             "@type": "SearchAction",
