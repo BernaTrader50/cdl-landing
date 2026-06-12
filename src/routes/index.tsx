@@ -802,7 +802,7 @@ function Labs() {
       code: "LAB-01",
       title: "Solar Generators",
       desc: "69 products · 15 Technical Analysis · 25 comparisons · Runtime Database · UPS Database. Built for decisions, not clicks.",
-      metrics: ["49 products", "10 brands", "7 use-case scores"],
+      metrics: ["100 products", "10 brands", "7 use-case scores"],
       status: "live",
       href: "/solar-calculator",
     },
@@ -1271,7 +1271,7 @@ function CurrentResearch() {
         <div className="flex items-center gap-2 text-[12px] text-neutral-500">
           <span className={MONO}>6 active threads</span>
           <span className="text-neutral-300">·</span>
-          <span className={MONO}>Monitoring 49 products</span>
+          <span className={MONO}>Monitoring 100 products</span>
         </div>
       </div>
 
