@@ -735,8 +735,8 @@ function ResultCard({ pick, accentColor, scoreKey }: { pick: PickResult; accentC
     "Explorer 1000 Pro":  "https://www.awin1.com/cread.php?awinmid=59183&awinaffid=2929639&ued=https://www.jackery.com/products/jackery-explorer-1000-pro-portable-power-station",
     "Explorer 2000 Plus": "https://www.awin1.com/cread.php?awinmid=59183&awinaffid=2929639&ued=https://www.jackery.com/products/explorer-2000-plus-portable-power-station",
     "Explorer 2000 v2":   "https://www.awin1.com/cread.php?awinmid=59183&awinaffid=2929639&ued=https://www.jackery.com/products/jackery-explorer-2000-v2-portable-power-station",
-    "Explorer 2000 Pro":  "https://www.amazon.com/s?k=Jackery+Explorer+2000+Pro&tag=clickdecision-20",
-    "Explorer 3000 Pro":  "https://www.amazon.com/s?k=Jackery+Explorer+3000+Pro&tag=clickdecision-20",
+    "Explorer 2000 Pro":  "https://www.awin1.com/cread.php?awinmid=59183&awinaffid=2929639&ued=https://www.jackery.com/products/explorer-2000-pro-portable-power-station",
+    "Explorer 3000 Pro":  "https://www.awin1.com/cread.php?awinmid=59183&awinaffid=2929639&ued=https://www.jackery.com/products/explorer-3000-pro-portable-power-station",
     // ─── Bluetti — Awin deep links (VERIFIED WORKING) ────────────────────────
     "EB3A":      "https://www.awin1.com/cread.php?awinmid=59271&awinaffid=2929639&ued=https://www.bluettipower.com/products/eb3a",
     "EB55":      "https://www.awin1.com/cread.php?awinmid=59271&awinaffid=2929639&ued=https://www.bluettipower.com/products/eb55",
