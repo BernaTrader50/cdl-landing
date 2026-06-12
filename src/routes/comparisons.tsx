@@ -61,7 +61,7 @@ const LIVE_COMPARISONS = [
   {
     title: "Best Solar Generators for Home Backup",
     slug: "best-solar-generators-home-backup",
-    desc: "UPS mode, surge capacity, and runtime analyzed specifically for home backup. Ranked by our home backup score across 49 products.",
+    desc: "UPS mode, surge capacity, and runtime analyzed specifically for home backup. Ranked by our home backup score across 100 products.",
     tags: ["Home Backup", "UPS"],
     verdict: "Top 5 by home backup score",
   },
@@ -89,7 +89,7 @@ const LIVE_COMPARISONS = [
   {
     title: "Best Solar Generators for Camping 2026",
     slug: "best-solar-generators-camping-2026",
-    desc: "Ranked by weight, portability, and camping-specific scores across 49 products. Weekend to extended off-grid.",
+    desc: "Ranked by weight, portability, and camping-specific scores across 100 products. Weekend to extended off-grid.",
     tags: ["Camping", "Outdoor"],
     verdict: "Jackery 1000 v2 for most",
   },
