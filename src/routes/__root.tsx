@@ -82,8 +82,8 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       { name: "twitter:site", content: "@Lovable" },
       { name: "twitter:title", content: "ClickDecisionLab" },
       { name: "twitter:description", content: "ClickDecisionLab is a technical buying lab that provides data-driven verdicts for high-ticket purchases." },
-      { property: "og:image", content: "https://pub-bb2e103a32db4e198524a2e9ed8f35b4.r2.dev/94764bc2-80fc-4a22-9f50-a1d86e27f08a/id-preview-84119fda--a3caa973-eaae-4847-9748-033320e66914.lovable.app-1779987932619.png" },
-      { name: "twitter:image", content: "https://pub-bb2e103a32db4e198524a2e9ed8f35b4.r2.dev/94764bc2-80fc-4a22-9f50-a1d86e27f08a/id-preview-84119fda--a3caa973-eaae-4847-9748-033320e66914.lovable.app-1779987932619.png" },
+      { property: "og:image", content: "https://clickdecisionlab.com/og-image.png" },
+      { name: "twitter:image", content: "https://clickdecisionlab.com/og-image.png" },
     ],
     links: [
       {
