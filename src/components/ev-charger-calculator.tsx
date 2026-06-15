@@ -221,6 +221,13 @@ export function EVChargerCalculator() {
 
   const handleSubmit = () => {
     setSubmitted(true);
+    if (typeof window !== "undefined" && (window as any).cdlTrack) {
+      (window as any).cdlTrack("calculator_submit", { scenario, connector, panel });
+      (window as any).cdlTrack("result_view", {
+        scenario,
+        top_recommendation: results[0] ? `${results[0].charger.brand} ${results[0].charger.model}` : "none",
+      });
+    }
     setTimeout(() => {
       document.getElementById("ev-results")?.scrollIntoView({ behavior: "smooth" });
     }, 50);

@@ -228,6 +228,13 @@ function HomeBatteryPage() {
 
   const handleSubmit = () => {
     setSubmitted(true);
+    if (typeof window !== "undefined" && (window as any).cdlTrack) {
+      (window as any).cdlTrack("calculator_submit", { goal, size, install });
+      (window as any).cdlTrack("result_view", {
+        goal, size, install,
+        top_recommendation: PICKS[0] ? `${PICKS[0].brand} ${PICKS[0].model}` : "none",
+      });
+    }
     setTimeout(() => {
       document.getElementById("results")?.scrollIntoView({ behavior: "smooth" });
     }, 50);
