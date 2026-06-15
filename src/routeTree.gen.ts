@@ -9,16 +9,48 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
+import { Route as UpsDatabaseRouteImport } from './routes/ups-database'
+import { Route as TechnicalAnalysisRouteImport } from './routes/technical-analysis'
 import { Route as SolarCalculatorRouteImport } from './routes/solar-calculator'
+import { Route as RuntimeDatabaseRouteImport } from './routes/runtime-database'
+import { Route as MethodologyRouteImport } from './routes/methodology'
+import { Route as HomeBatteriesRouteImport } from './routes/home-batteries'
 import { Route as GuidesRouteImport } from './routes/guides'
+import { Route as EvChargersRouteImport } from './routes/ev-chargers'
 import { Route as ComparisonsRouteImport } from './routes/comparisons'
+import { Route as BackupPowerRouteImport } from './routes/backup-power'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as BlogIndexRouteImport } from './routes/blog/index'
 import { Route as BlogSlugRouteImport } from './routes/blog/$slug'
 
+const UpsDatabaseRoute = UpsDatabaseRouteImport.update({
+  id: '/ups-database',
+  path: '/ups-database',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const TechnicalAnalysisRoute = TechnicalAnalysisRouteImport.update({
+  id: '/technical-analysis',
+  path: '/technical-analysis',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const SolarCalculatorRoute = SolarCalculatorRouteImport.update({
   id: '/solar-calculator',
   path: '/solar-calculator',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const RuntimeDatabaseRoute = RuntimeDatabaseRouteImport.update({
+  id: '/runtime-database',
+  path: '/runtime-database',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const MethodologyRoute = MethodologyRouteImport.update({
+  id: '/methodology',
+  path: '/methodology',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const HomeBatteriesRoute = HomeBatteriesRouteImport.update({
+  id: '/home-batteries',
+  path: '/home-batteries',
   getParentRoute: () => rootRouteImport,
 } as any)
 const GuidesRoute = GuidesRouteImport.update({
@@ -26,9 +58,19 @@ const GuidesRoute = GuidesRouteImport.update({
   path: '/guides',
   getParentRoute: () => rootRouteImport,
 } as any)
+const EvChargersRoute = EvChargersRouteImport.update({
+  id: '/ev-chargers',
+  path: '/ev-chargers',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const ComparisonsRoute = ComparisonsRouteImport.update({
   id: '/comparisons',
   path: '/comparisons',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const BackupPowerRoute = BackupPowerRouteImport.update({
+  id: '/backup-power',
+  path: '/backup-power',
   getParentRoute: () => rootRouteImport,
 } as any)
 const IndexRoute = IndexRouteImport.update({
@@ -49,26 +91,47 @@ const BlogSlugRoute = BlogSlugRouteImport.update({
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/backup-power': typeof BackupPowerRoute
   '/comparisons': typeof ComparisonsRoute
+  '/ev-chargers': typeof EvChargersRoute
   '/guides': typeof GuidesRoute
+  '/home-batteries': typeof HomeBatteriesRoute
+  '/methodology': typeof MethodologyRoute
+  '/runtime-database': typeof RuntimeDatabaseRoute
   '/solar-calculator': typeof SolarCalculatorRoute
+  '/technical-analysis': typeof TechnicalAnalysisRoute
+  '/ups-database': typeof UpsDatabaseRoute
   '/blog/$slug': typeof BlogSlugRoute
   '/blog/': typeof BlogIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/backup-power': typeof BackupPowerRoute
   '/comparisons': typeof ComparisonsRoute
+  '/ev-chargers': typeof EvChargersRoute
   '/guides': typeof GuidesRoute
+  '/home-batteries': typeof HomeBatteriesRoute
+  '/methodology': typeof MethodologyRoute
+  '/runtime-database': typeof RuntimeDatabaseRoute
   '/solar-calculator': typeof SolarCalculatorRoute
+  '/technical-analysis': typeof TechnicalAnalysisRoute
+  '/ups-database': typeof UpsDatabaseRoute
   '/blog/$slug': typeof BlogSlugRoute
   '/blog': typeof BlogIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/backup-power': typeof BackupPowerRoute
   '/comparisons': typeof ComparisonsRoute
+  '/ev-chargers': typeof EvChargersRoute
   '/guides': typeof GuidesRoute
+  '/home-batteries': typeof HomeBatteriesRoute
+  '/methodology': typeof MethodologyRoute
+  '/runtime-database': typeof RuntimeDatabaseRoute
   '/solar-calculator': typeof SolarCalculatorRoute
+  '/technical-analysis': typeof TechnicalAnalysisRoute
+  '/ups-database': typeof UpsDatabaseRoute
   '/blog/$slug': typeof BlogSlugRoute
   '/blog/': typeof BlogIndexRoute
 }
@@ -76,45 +139,108 @@ export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
   fullPaths:
     | '/'
+    | '/backup-power'
     | '/comparisons'
+    | '/ev-chargers'
     | '/guides'
+    | '/home-batteries'
+    | '/methodology'
+    | '/runtime-database'
     | '/solar-calculator'
+    | '/technical-analysis'
+    | '/ups-database'
     | '/blog/$slug'
     | '/blog/'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
+    | '/backup-power'
     | '/comparisons'
+    | '/ev-chargers'
     | '/guides'
+    | '/home-batteries'
+    | '/methodology'
+    | '/runtime-database'
     | '/solar-calculator'
+    | '/technical-analysis'
+    | '/ups-database'
     | '/blog/$slug'
     | '/blog'
   id:
     | '__root__'
     | '/'
+    | '/backup-power'
     | '/comparisons'
+    | '/ev-chargers'
     | '/guides'
+    | '/home-batteries'
+    | '/methodology'
+    | '/runtime-database'
     | '/solar-calculator'
+    | '/technical-analysis'
+    | '/ups-database'
     | '/blog/$slug'
     | '/blog/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  BackupPowerRoute: typeof BackupPowerRoute
   ComparisonsRoute: typeof ComparisonsRoute
+  EvChargersRoute: typeof EvChargersRoute
   GuidesRoute: typeof GuidesRoute
+  HomeBatteriesRoute: typeof HomeBatteriesRoute
+  MethodologyRoute: typeof MethodologyRoute
+  RuntimeDatabaseRoute: typeof RuntimeDatabaseRoute
   SolarCalculatorRoute: typeof SolarCalculatorRoute
+  TechnicalAnalysisRoute: typeof TechnicalAnalysisRoute
+  UpsDatabaseRoute: typeof UpsDatabaseRoute
   BlogSlugRoute: typeof BlogSlugRoute
   BlogIndexRoute: typeof BlogIndexRoute
 }
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
+    '/ups-database': {
+      id: '/ups-database'
+      path: '/ups-database'
+      fullPath: '/ups-database'
+      preLoaderRoute: typeof UpsDatabaseRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/technical-analysis': {
+      id: '/technical-analysis'
+      path: '/technical-analysis'
+      fullPath: '/technical-analysis'
+      preLoaderRoute: typeof TechnicalAnalysisRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/solar-calculator': {
       id: '/solar-calculator'
       path: '/solar-calculator'
       fullPath: '/solar-calculator'
       preLoaderRoute: typeof SolarCalculatorRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/runtime-database': {
+      id: '/runtime-database'
+      path: '/runtime-database'
+      fullPath: '/runtime-database'
+      preLoaderRoute: typeof RuntimeDatabaseRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/methodology': {
+      id: '/methodology'
+      path: '/methodology'
+      fullPath: '/methodology'
+      preLoaderRoute: typeof MethodologyRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/home-batteries': {
+      id: '/home-batteries'
+      path: '/home-batteries'
+      fullPath: '/home-batteries'
+      preLoaderRoute: typeof HomeBatteriesRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/guides': {
@@ -124,11 +250,25 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof GuidesRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/ev-chargers': {
+      id: '/ev-chargers'
+      path: '/ev-chargers'
+      fullPath: '/ev-chargers'
+      preLoaderRoute: typeof EvChargersRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/comparisons': {
       id: '/comparisons'
       path: '/comparisons'
       fullPath: '/comparisons'
       preLoaderRoute: typeof ComparisonsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/backup-power': {
+      id: '/backup-power'
+      path: '/backup-power'
+      fullPath: '/backup-power'
+      preLoaderRoute: typeof BackupPowerRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/': {
@@ -157,12 +297,29 @@ declare module '@tanstack/react-router' {
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  BackupPowerRoute: BackupPowerRoute,
   ComparisonsRoute: ComparisonsRoute,
+  EvChargersRoute: EvChargersRoute,
   GuidesRoute: GuidesRoute,
+  HomeBatteriesRoute: HomeBatteriesRoute,
+  MethodologyRoute: MethodologyRoute,
+  RuntimeDatabaseRoute: RuntimeDatabaseRoute,
   SolarCalculatorRoute: SolarCalculatorRoute,
+  TechnicalAnalysisRoute: TechnicalAnalysisRoute,
+  UpsDatabaseRoute: UpsDatabaseRoute,
   BlogSlugRoute: BlogSlugRoute,
   BlogIndexRoute: BlogIndexRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
   ._addFileTypes<FileRouteTypes>()
+
+import type { getRouter } from './router.tsx'
+import type { startInstance } from './start.ts'
+declare module '@tanstack/react-start' {
+  interface Register {
+    ssr: true
+    router: Awaited<ReturnType<typeof getRouter>>
+    config: Awaited<ReturnType<typeof startInstance.getOptions>>
+  }
+}

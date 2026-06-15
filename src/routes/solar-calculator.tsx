@@ -1,16 +1,16 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { SiteNav } from "@/components/site-nav";
+import SiteHeader from "@/components/SiteHeader";
 import { SiteFooter } from "@/components/site-footer";
 import { SolarCalculator } from "@/components/solar-calculator";
 
 export const Route = createFileRoute("/solar-calculator")({
   head: () => ({
     meta: [
-      { title: "Solar Calculator — ClickDecisionLab" },
+      { title: "Solar Generator Calculator — ClickDecisionLab" },
       {
         name: "description",
         content:
-          "Find the right solar generator for your real scenario. Capacity, surge, ports, and budget — matched to verified models.",
+          "Answer a few questions about your power needs. We match you to the right solar generator using engineering-grade scoring across 100 products.",
       },
     ],
   }),
@@ -19,54 +19,52 @@ export const Route = createFileRoute("/solar-calculator")({
 
 function Page() {
   return (
-    <div className="min-h-screen bg-white text-neutral-950">
-      <SiteNav />
-      <main>
-        <section
-          className="relative w-full overflow-hidden border-b pt-32"
+    <div className="min-h-screen bg-white text-neutral-900">
+      <SiteHeader />
+
+      {/* HERO */}
+      <section className="relative bg-[#2563eb] text-white overflow-hidden">
+        <div
+          className="absolute inset-0 opacity-[0.07] pointer-events-none"
           style={{
-            borderColor: "#e8e8e8",
-            backgroundImage: "linear-gradient(to bottom, #FFFFFF 0%, #F4F6F8 100%)",
+            backgroundImage:
+              "linear-gradient(rgba(255,255,255,.5) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,.5) 1px, transparent 1px)",
+            backgroundSize: "44px 44px",
           }}
-        >
-          <div
-            aria-hidden
-            className="pointer-events-none absolute inset-0"
-            style={{
-              backgroundImage:
-                "linear-gradient(to right, rgba(0,0,0,0.03) 1px, transparent 1px), linear-gradient(to bottom, rgba(0,0,0,0.03) 1px, transparent 1px)",
-              backgroundSize: "48px 48px",
-            }}
-          />
-          <div className="relative mx-auto max-w-3xl px-6 pb-20">
-            <p className="text-[11px] font-medium uppercase tracking-[0.14em] text-[#2563EB]">
-              SOLAR LAB
-            </p>
-            <h1 className="mt-3 text-[40px] font-semibold leading-[1.15] tracking-[-0.025em]">
-              Solar generator calculator.
-            </h1>
-            <p className="mt-4 max-w-xl text-[16px] leading-relaxed text-neutral-600">
-              Pick your scenario, the key appliance you need to run, and your budget. We match against
-              real specs and surge requirements.
-            </p>
-
-            <div className="mt-10">
-              <SolarCalculator />
-            </div>
-
-            <div
-              className="mt-12 rounded-[12px] border bg-white p-7"
-              style={{ borderColor: "#e8e8e8" }}
-            >
-              <h2 className="text-[18px] font-semibold">How we recommend</h2>
-              <p className="mt-2 text-[14.5px] leading-relaxed text-neutral-600">
-                Recommendations are based on appliance load profiles, surge requirements, port
-                compatibility, and verified manufacturer specs. We do not accept brand sponsorships.
-              </p>
-            </div>
+        />
+        <div className="relative max-w-5xl mx-auto px-6 pt-14 pb-32 lg:pb-44 text-center">
+          <div className="text-xs font-mono text-blue-100 tracking-[0.18em] uppercase mb-3">
+            Decision engine · v2.3
           </div>
-        </section>
-      </main>
+          <h1 className="text-4xl lg:text-5xl font-bold tracking-tight">
+            Solar Generator Calculator
+          </h1>
+          <p className="mt-4 text-blue-50/90 max-w-2xl mx-auto">
+            Answer a few questions about your power needs. We match you to the right solar generator
+            using engineering-grade scoring across 100 products.
+          </p>
+          <div className="mt-5 inline-flex items-center gap-2 text-[11px] font-mono uppercase tracking-wider text-blue-50 bg-white/10 border border-white/20 rounded-full px-3 py-1">
+            <span className="h-1.5 w-1.5 rounded-full bg-emerald-300" />
+            100 products · 20 brands · Updated weekly
+          </div>
+        </div>
+      </section>
+
+      {/* CALCULATOR — real engine, 100 products */}
+      <section className="relative bg-[#2563eb] pb-16">
+        <div
+          className="absolute inset-0 opacity-[0.07] pointer-events-none"
+          style={{
+            backgroundImage:
+              "linear-gradient(rgba(255,255,255,.5) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,.5) 1px, transparent 1px)",
+            backgroundSize: "44px 44px",
+          }}
+        />
+        <div className="relative max-w-5xl mx-auto px-6 -mt-24 lg:-mt-36">
+          <SolarCalculator />
+        </div>
+      </section>
+
       <SiteFooter />
     </div>
   );
