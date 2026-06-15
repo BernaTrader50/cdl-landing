@@ -1,4 +1,5 @@
 import { useState, useMemo } from "react";
+import { Home as HomeIcon, Building2, Caravan, Car, Wallet, ArrowUpRight } from "lucide-react";
 
 // ─── DATASET — 49 chargers, 22 brands ───────────────────────────────────────
 type Charger = {
@@ -87,13 +88,27 @@ function getLink(brand: string, model: string) {
 // ─── Scenario inputs ─────────────────────────────────────────────────────────
 type Scenario = "single_family" | "apartment" | "frequent_road_trips" | "multi_ev" | "budget";
 
-const SCENARIO_LABELS: Record<Scenario,string> = {
-  single_family: "Single-family home, dedicated parking",
-  apartment: "Apartment / condo / shared parking",
-  frequent_road_trips: "Frequent road trips, need flexibility",
-  multi_ev: "Multiple EVs at home",
-  budget: "Tight budget, basic charging is fine",
-};
+
+const SITUATIONS: { id: Scenario; label: string; sub: string; icon: typeof HomeIcon }[] = [
+  { id: "single_family", label: "Single-family", sub: "dedicated parking", icon: HomeIcon },
+  { id: "apartment", label: "Apartment", sub: "shared parking", icon: Building2 },
+  { id: "frequent_road_trips", label: "Road trips", sub: "flexibility & portability", icon: Caravan },
+  { id: "multi_ev", label: "Multiple EVs", sub: "smart load management", icon: Car },
+  { id: "budget", label: "Tight budget", sub: "basic charging is fine", icon: Wallet },
+];
+
+const CONNECTORS: { id: Connector; label: string }[] = [
+  { id: "any", label: "Any / Not sure" },
+  { id: "NACS", label: "NACS (Tesla)" },
+  { id: "J1772", label: "J1772" },
+  { id: "Type 2", label: "Type 2 (EU/UK)" },
+];
+
+const PANELS: { id: PanelService; label: string; sub: string }[] = [
+  { id: "60A", label: "60A", sub: "older homes" },
+  { id: "100A", label: "100A", sub: "standard" },
+  { id: "200A+", label: "200A+", sub: "modern" },
+];
 
 type Connector = "any" | "NACS" | "J1772" | "Type 2";
 type PanelService = "60A" | "100A" | "200A+";
@@ -193,6 +208,7 @@ export function EVChargerCalculator() {
   const [scenario, setScenario] = useState<Scenario>("single_family");
   const [connector, setConnector] = useState<Connector>("any");
   const [panel, setPanel] = useState<PanelService>("100A");
+  const [submitted, setSubmitted] = useState(false);
 
   const results = useMemo(() => {
     return CHARGERS
@@ -201,47 +217,128 @@ export function EVChargerCalculator() {
       .slice(0, 3);
   }, [scenario, connector, panel]);
 
+  const brandCount = useMemo(() => new Set(CHARGERS.map(c => c.brand)).size, []);
+
+  const handleSubmit = () => {
+    setSubmitted(true);
+    setTimeout(() => {
+      document.getElementById("ev-results")?.scrollIntoView({ behavior: "smooth" });
+    }, 50);
+  };
+
   return (
-    <div className="mx-auto max-w-5xl px-5 py-12">
-      <div className="mb-8">
-        <h2 className="text-2xl font-semibold text-neutral-950 mb-2">EV Charger Decision Engine</h2>
-        <p className="text-[14px] text-neutral-500">Answer 3 questions to get your top 3 matches from {CHARGERS.length} chargers across {new Set(CHARGERS.map(c=>c.brand)).size} brands.</p>
+    <>
+      <div className="bg-white border border-neutral-200 rounded-2xl shadow-sm p-6 lg:p-8 space-y-8">
+        {/* Situation */}
+        <div>
+          <div className="text-[10px] font-mono uppercase tracking-[0.18em] text-neutral-400 mb-3">
+            1 · Your situation
+          </div>
+          <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-2">
+            {SITUATIONS.map((s) => {
+              const active = scenario === s.id;
+              return (
+                <button
+                  key={s.id}
+                  onClick={() => setScenario(s.id)}
+                  className={`flex items-start gap-2 py-3 px-3 rounded-md border text-left transition-colors ${
+                    active
+                      ? "border-[#2563eb] bg-blue-50"
+                      : "border-neutral-200 hover:border-neutral-300"
+                  }`}
+                >
+                  <s.icon className={`h-4 w-4 mt-0.5 shrink-0 ${active ? "text-[#2563eb]" : "text-neutral-500"}`} />
+                  <div className="min-w-0">
+                    <div className={`text-sm font-medium ${active ? "text-[#2563eb]" : "text-neutral-800"}`}>
+                      {s.label}
+                    </div>
+                    <div className="text-[11px] text-neutral-500">{s.sub}</div>
+                  </div>
+                </button>
+              );
+            })}
+          </div>
+        </div>
+
+        {/* Connector + Panel */}
+        <div className="grid sm:grid-cols-2 gap-6">
+          <div>
+            <div className="text-[10px] font-mono uppercase tracking-[0.18em] text-neutral-400 mb-3">
+              2 · Connector type
+            </div>
+            <div className="grid grid-cols-2 gap-2">
+              {CONNECTORS.map((c) => {
+                const active = connector === c.id;
+                return (
+                  <button
+                    key={c.id}
+                    onClick={() => setConnector(c.id)}
+                    className={`py-2.5 rounded-md text-sm font-medium border transition-colors ${
+                      active
+                        ? "border-[#2563eb] bg-blue-50 text-[#2563eb]"
+                        : "border-neutral-200 text-neutral-700 hover:border-neutral-300"
+                    }`}
+                  >
+                    {c.label}
+                  </button>
+                );
+              })}
+            </div>
+          </div>
+          <div>
+            <div className="text-[10px] font-mono uppercase tracking-[0.18em] text-neutral-400 mb-3">
+              3 · Electrical panel
+            </div>
+            <div className="grid grid-cols-3 gap-2">
+              {PANELS.map((p) => {
+                const active = panel === p.id;
+                return (
+                  <button
+                    key={p.id}
+                    onClick={() => setPanel(p.id)}
+                    className={`flex flex-col items-center py-2.5 rounded-md text-sm font-medium border transition-colors ${
+                      active
+                        ? "border-[#2563eb] bg-blue-50 text-[#2563eb]"
+                        : "border-neutral-200 text-neutral-700 hover:border-neutral-300"
+                    }`}
+                  >
+                    {p.label}
+                    <span className={`text-[10px] font-mono ${active ? "text-blue-400" : "text-neutral-400"}`}>{p.sub}</span>
+                  </button>
+                );
+              })}
+            </div>
+          </div>
+        </div>
+
+        {/* CTA */}
+        <div className="border-t border-neutral-100 pt-6 flex flex-wrap items-center justify-between gap-4">
+          <div className="text-sm text-neutral-600">
+            Matching against <span className="font-bold text-neutral-900">{CHARGERS.length} chargers</span> across {brandCount} brands.
+          </div>
+          <button
+            type="button"
+            onClick={handleSubmit}
+            className="inline-flex items-center gap-2 h-12 px-7 rounded-md bg-[#2563eb] text-white text-sm font-semibold hover:bg-[#1d4ed8] transition-colors"
+          >
+            Find my charger <ArrowUpRight className="h-4 w-4" />
+          </button>
+        </div>
       </div>
 
-      <div className="grid md:grid-cols-3 gap-4 mb-8">
-        <div>
-          <label className="block text-[12px] font-medium text-neutral-600 mb-1.5">Your situation</label>
-          <select value={scenario} onChange={e => setScenario(e.target.value as Scenario)}
-            className="w-full rounded-lg border border-neutral-200 px-3 py-2 text-[13px]">
-            {Object.entries(SCENARIO_LABELS).map(([k,v]) => <option key={k} value={k}>{v}</option>)}
-          </select>
+      {submitted && (
+        <div id="ev-results" className="mt-6 bg-white border border-neutral-200 rounded-2xl shadow-sm p-6 lg:p-8">
+          <div className="text-[10px] font-mono uppercase tracking-[0.18em] text-neutral-400 mb-4">
+            Your top {results.length} matches
+          </div>
+          <div className="grid md:grid-cols-3 gap-4">
+            {results.map((r, i) => (
+              <ChargerCard key={`${r.charger.brand}-${r.charger.model}`} charger={r.charger} score={r.score} rank={i+1} />
+            ))}
+          </div>
         </div>
-        <div>
-          <label className="block text-[12px] font-medium text-neutral-600 mb-1.5">Connector type</label>
-          <select value={connector} onChange={e => setConnector(e.target.value as Connector)}
-            className="w-full rounded-lg border border-neutral-200 px-3 py-2 text-[13px]">
-            <option value="any">Any / Not sure</option>
-            <option value="NACS">NACS (Tesla standard)</option>
-            <option value="J1772">J1772</option>
-            <option value="Type 2">Type 2 (EU/UK)</option>
-          </select>
-        </div>
-        <div>
-          <label className="block text-[12px] font-medium text-neutral-600 mb-1.5">Electrical panel</label>
-          <select value={panel} onChange={e => setPanel(e.target.value as PanelService)}
-            className="w-full rounded-lg border border-neutral-200 px-3 py-2 text-[13px]">
-            <option value="60A">60A service (older homes)</option>
-            <option value="100A">100A service (standard)</option>
-            <option value="200A+">200A+ service (modern)</option>
-          </select>
-        </div>
-      </div>
-
-      <div className="grid md:grid-cols-3 gap-4">
-        {results.map((r, i) => (
-          <ChargerCard key={`${r.charger.brand}-${r.charger.model}`} charger={r.charger} score={r.score} rank={i+1} />
-        ))}
-      </div>
-    </div>
+      )}
+    </>
   );
 }
+
