@@ -86,7 +86,7 @@ const PICKS = [
     app: true,
     install: "Professional",
     verdict: "Best all-around: integrated inverter, strong surge, top-tier app and solar pairing.",
-    affiliate: "https://example.com/affiliate/powerwall-3",
+    affiliate: "https://www.amazon.com/s?k=Tesla%20Powerwall%203&tag=clickdecision-20",
   },
   {
     tier: "#2 Match",
@@ -114,7 +114,7 @@ const PICKS = [
     app: true,
     install: "Professional",
     verdict: "Modular and microinverter-native — easiest to scale 10 → 40 kWh over time.",
-    affiliate: "https://example.com/affiliate/enphase-iq10c",
+    affiliate: "https://www.amazon.com/s?k=Enphase%20IQ%20Battery%2010C&tag=clickdecision-20",
   },
   {
     tier: "#3 Match",
@@ -142,7 +142,7 @@ const PICKS = [
     app: true,
     install: "DIY / Both",
     verdict: "Best DIY route — portable, stackable to 90 kWh, no electrician required to start.",
-    affiliate: "https://example.com/affiliate/delta-pro-ultra",
+    affiliate: "https://www.amazon.com/s?k=EcoFlow%20DELTA%20Pro%20Ultra&tag=clickdecision-20",
   },
 ];
 

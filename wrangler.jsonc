@@ -6,11 +6,11 @@
   "main": "src/server.ts",
   "routes": [
     {
-      "pattern": "clickdecisionlab.com",
+      "pattern": "clickdecisionlab.com/*",
       "zone_name": "clickdecisionlab.com"
     },
     {
-      "pattern": "www.clickdecisionlab.com",
+      "pattern": "www.clickdecisionlab.com/*",
       "zone_name": "clickdecisionlab.com"
     }
   ]
