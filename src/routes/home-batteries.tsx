@@ -59,93 +59,163 @@ const INSTALLS = [
   { id: "either", label: "Either", sub: "flexible" },
 ];
 
-const PICKS = [
+type HBScores = { backup: number; solar: number; value: number; scale: number; offgrid: number; smart: number };
+type HBProduct = {
+  brand: string; model: string; price: number; kwh: number; kwhLabel: string;
+  kwLabel: string; surge: string; chem: string; warranty: string; cycles: string;
+  ev: boolean; app: boolean; install: "Professional" | "DIY / Both";
+  scores: HBScores; verdict: string; affiliate: string;
+};
+
+export const HB_PRODUCTS: HBProduct[] = [
   {
-    tier: "Top Match",
-    accentText: "text-[#2563eb]",
-    border: "border-t-[#2563eb]",
-    btn: "bg-[#2563eb] hover:bg-[#1d4ed8]",
-    img: "linear-gradient(135deg, #dbeafe, #93c5fd)",
-    brand: "Tesla",
-    model: "Powerwall 3",
-    price: 9700,
-    score: 9.5,
-    kwh: "13.5 kWh",
-    kw: "11.5 kW",
-    surge: "30 kW",
-    chem: "LFP",
-    warranty: "10 yr",
-    cycles: "6,000",
-    backup: 9.6,
-    solar: 9.5,
-    value: 8.8,
-    scale: 9.0,
-    offgrid: 8.4,
-    smart: 9.5,
-    ev: true,
-    app: true,
-    install: "Professional",
+    brand: "Tesla", model: "Powerwall 3", price: 9700, kwh: 13.5, kwhLabel: "13.5 kWh",
+    kwLabel: "11.5 kW", surge: "30 kW", chem: "LFP", warranty: "10 yr", cycles: "6,000",
+    ev: true, app: true, install: "Professional",
+    scores: { backup: 9.6, solar: 9.5, value: 8.8, scale: 9.0, offgrid: 8.4, smart: 9.5 },
     verdict: "Best all-around: integrated inverter, strong surge, top-tier app and solar pairing.",
     affiliate: "https://www.amazon.com/s?k=Tesla%20Powerwall%203&tag=clickdecision-20",
   },
   {
-    tier: "#2 Match",
-    accentText: "text-emerald-600",
-    border: "border-t-emerald-500",
-    btn: "bg-emerald-500 hover:bg-emerald-600",
-    img: "linear-gradient(135deg, #d1fae5, #6ee7b7)",
-    brand: "Enphase",
-    model: "IQ Battery 10C",
-    price: 8200,
-    score: 9.1,
-    kwh: "10.08 kWh",
-    kw: "7.68 kW",
-    surge: "10 kW",
-    chem: "LFP",
-    warranty: "15 yr",
-    cycles: "6,000",
-    backup: 8.7,
-    solar: 9.4,
-    value: 9.0,
-    scale: 9.6,
-    offgrid: 8.0,
-    smart: 9.2,
-    ev: true,
-    app: true,
-    install: "Professional",
+    brand: "Enphase", model: "IQ Battery 10C", price: 8200, kwh: 10.08, kwhLabel: "10.08 kWh",
+    kwLabel: "7.68 kW", surge: "10 kW", chem: "LFP", warranty: "15 yr", cycles: "6,000",
+    ev: true, app: true, install: "Professional",
+    scores: { backup: 8.7, solar: 9.4, value: 9.0, scale: 9.6, offgrid: 8.0, smart: 9.2 },
     verdict: "Modular and microinverter-native — easiest to scale 10 → 40 kWh over time.",
     affiliate: "https://www.amazon.com/s?k=Enphase%20IQ%20Battery%2010C&tag=clickdecision-20",
   },
   {
-    tier: "#3 Match",
-    accentText: "text-violet-600",
-    border: "border-t-violet-500",
-    btn: "bg-violet-500 hover:bg-violet-600",
-    img: "linear-gradient(135deg, #ede9fe, #c4b5fd)",
-    brand: "EcoFlow",
-    model: "DELTA Pro Ultra",
-    price: 5800,
-    score: 8.6,
-    kwh: "6 kWh / stackable",
-    kw: "7.2 kW",
-    surge: "14.4 kW",
-    chem: "LFP",
-    warranty: "5 yr",
-    cycles: "3,500",
-    backup: 8.8,
-    solar: 8.4,
-    value: 9.4,
-    scale: 8.6,
-    offgrid: 9.2,
-    smart: 8.7,
-    ev: false,
-    app: true,
-    install: "DIY / Both",
+    brand: "EcoFlow", model: "DELTA Pro Ultra", price: 5800, kwh: 6, kwhLabel: "6 kWh / stackable",
+    kwLabel: "7.2 kW", surge: "14.4 kW", chem: "LFP", warranty: "5 yr", cycles: "3,500",
+    ev: false, app: true, install: "DIY / Both",
+    scores: { backup: 8.8, solar: 8.4, value: 9.4, scale: 8.6, offgrid: 9.2, smart: 8.7 },
     verdict: "Best DIY route — portable, stackable to 90 kWh, no electrician required to start.",
     affiliate: "https://www.amazon.com/s?k=EcoFlow%20DELTA%20Pro%20Ultra&tag=clickdecision-20",
   },
+  {
+    brand: "FranklinWH", model: "aPower 2", price: 14000, kwh: 15, kwhLabel: "15 kWh",
+    kwLabel: "10 kW", surge: "15 kW", chem: "LFP", warranty: "15 yr", cycles: "6,000",
+    ev: false, app: true, install: "Professional",
+    scores: { backup: 9.7, solar: 8.8, value: 8.5, scale: 9.2, offgrid: 9.5, smart: 9.0 },
+    verdict: "Strongest generator integration — aGate hub coordinates solar, battery, grid and standby generator automatically.",
+    affiliate: "https://www.amazon.com/s?k=FranklinWH%20aPower%202&tag=clickdecision-20",
+  },
+  {
+    brand: "Enphase", model: "IQ Battery 5P", price: 8500, kwh: 5, kwhLabel: "5 kWh",
+    kwLabel: "3.84 kW", surge: "7.68 kW", chem: "LFP", warranty: "15 yr", cycles: "7,000",
+    ev: false, app: true, install: "Professional",
+    scores: { backup: 7.0, solar: 9.6, value: 6.5, scale: 9.8, offgrid: 7.0, smart: 9.0 },
+    verdict: "Most granular scaling (5 kWh steps to 80 kWh) and the longest standard warranty in the category — premium per-kWh cost.",
+    affiliate: "https://www.amazon.com/s?k=Enphase%20IQ%20Battery%205P&tag=clickdecision-20",
+  },
+  {
+    brand: "SolarEdge", model: "Home Battery", price: 8000, kwh: 9.7, kwhLabel: "9.7 kWh",
+    kwLabel: "5 kW", surge: "7.5 kW", chem: "LFP", warranty: "10 yr", cycles: "6,000",
+    ev: false, app: true, install: "Professional",
+    scores: { backup: 6.5, solar: 9.2, value: 8.6, scale: 7.5, offgrid: 6.0, smart: 8.0 },
+    verdict: "DC-coupled efficiency is excellent if you already run a SolarEdge inverter — locked to that ecosystem otherwise.",
+    affiliate: "https://www.amazon.com/s?k=SolarEdge%20Home%20Battery&tag=clickdecision-20",
+  },
+  {
+    brand: "Anker SOLIX", model: "X1 (15 kWh)", price: 10000, kwh: 15, kwhLabel: "15 kWh / 5-180 modular",
+    kwLabel: "6 kW", surge: "12 kW", chem: "LFP", warranty: "10 yr", cycles: "6,000",
+    ev: false, app: true, install: "DIY / Both",
+    scores: { backup: 8.0, solar: 8.0, value: 9.2, scale: 9.4, offgrid: 8.0, smart: 8.5 },
+    verdict: "100% usable depth-of-discharge, sub-20ms switchover, and one of the lowest $/kWh in the category.",
+    affiliate: "https://www.amazon.com/s?k=Anker%20SOLIX%20X1&tag=clickdecision-20",
+  },
+  {
+    brand: "Generac", model: "PWRcell 2", price: 18000, kwh: 18, kwhLabel: "18 kWh",
+    kwLabel: "11.5 kW", surge: "15 kW", chem: "NMC", warranty: "10 yr", cycles: "4,000",
+    ev: false, app: true, install: "Professional",
+    scores: { backup: 9.3, solar: 8.3, value: 7.0, scale: 8.8, offgrid: 9.3, smart: 8.8 },
+    verdict: "Highest continuous output here plus native standby-generator handoff — built for hurricane-prone, long-outage regions.",
+    affiliate: "https://www.amazon.com/s?k=Generac%20PWRcell%202&tag=clickdecision-20",
+  },
+  {
+    brand: "LG", model: "RESU16H Prime", price: 13500, kwh: 16, kwhLabel: "16 kWh",
+    kwLabel: "5 kW*", surge: "7.5 kW*", chem: "NMC", warranty: "10 yr", cycles: "6,000",
+    ev: false, app: true, install: "Professional",
+    scores: { backup: 7.0, solar: 8.8, value: 9.0, scale: 7.0, offgrid: 6.0, smart: 7.0 },
+    verdict: "Best raw $/kWh of the DC-coupled options — power output depends on the paired inverter (e.g. SolarEdge StorEdge).",
+    affiliate: "https://www.amazon.com/s?k=LG%20RESU16H%20Prime&tag=clickdecision-20",
+  },
+  {
+    brand: "Bluetti", model: "EP800 + B500", price: 9000, kwh: 9.9, kwhLabel: "9.9 kWh / scalable ~20",
+    kwLabel: "7.6 kW", surge: "15.2 kW", chem: "LFP", warranty: "5 yr", cycles: "3,500",
+    ev: false, app: true, install: "DIY / Both",
+    scores: { backup: 7.8, solar: 7.5, value: 8.8, scale: 8.0, offgrid: 8.5, smart: 7.5 },
+    verdict: "Floor-standing modular unit that works with or without rooftop solar — no electrician required to get started.",
+    affiliate: "https://www.amazon.com/s?k=Bluetti%20EP800&tag=clickdecision-20",
+  },
+  {
+    brand: "Sigenergy", model: "SigenStor (16 kWh)", price: 8000, kwh: 16, kwhLabel: "16 kWh",
+    kwLabel: "8 kW", surge: "16 kW", chem: "LFP", warranty: "10 yr", cycles: "6,000",
+    ev: true, app: true, install: "Professional",
+    scores: { backup: 8.0, solar: 9.0, value: 9.3, scale: 8.8, offgrid: 7.5, smart: 9.4 },
+    verdict: "All-in-one inverter + battery + EV charger with V2G — the strongest smart/EV integration here, newer installer base.",
+    affiliate: "https://www.amazon.com/s?k=Sigenergy%20SigenStor&tag=clickdecision-20",
+  },
+  {
+    brand: "EG4", model: "PowerPro WallMount", price: 3500, kwh: 14.3, kwhLabel: "14.3 kWh",
+    kwLabel: "9.6 kW", surge: "19.2 kW", chem: "LFP", warranty: "10 yr", cycles: "8,000",
+    ev: false, app: false, install: "DIY / Both",
+    scores: { backup: 7.0, solar: 6.5, value: 9.8, scale: 8.5, offgrid: 9.0, smart: 5.5 },
+    verdict: "By far the lowest cost per kWh — the DIY/off-grid community favorite, but needs a separate inverter and lacks a smart-home app.",
+    affiliate: "https://www.amazon.com/s?k=EG4%20PowerPro%2014.3kWh&tag=clickdecision-20",
+  },
 ];
 
+const TIER_STYLES = [
+  { tier: "Top Match", accentText: "text-[#2563eb]", border: "border-t-[#2563eb]", btn: "bg-[#2563eb] hover:bg-[#1d4ed8]", img: "linear-gradient(135deg, #dbeafe, #93c5fd)" },
+  { tier: "#2 Match", accentText: "text-emerald-600", border: "border-t-emerald-500", btn: "bg-emerald-500 hover:bg-emerald-600", img: "linear-gradient(135deg, #d1fae5, #6ee7b7)" },
+  { tier: "#3 Match", accentText: "text-violet-600", border: "border-t-violet-500", btn: "bg-violet-500 hover:bg-violet-600", img: "linear-gradient(135deg, #ede9fe, #c4b5fd)" },
+];
+
+// Target capacity (kWh) per home-size selection, used to bias matches toward realistically-sized systems
+const SIZE_TARGET_KWH: Record<string, number> = { s: 7, m: 13, l: 22 };
+
+// Which scoring dimension each goal primarily optimizes for
+const GOAL_DIMENSION: Record<string, keyof HBScores> = {
+  backup: "backup", solar: "solar", offgrid: "offgrid", ev: "smart", budget: "value",
+};
+
+export type HBPick = HBProduct & { tier: string; accentText: string; border: string; btn: string; img: string; matchScore: number };
+
+export function computeHBAnalysis(goal: string, size: string, install: string) {
+  const dim = GOAL_DIMENSION[goal] ?? "backup";
+  const target = SIZE_TARGET_KWH[size] ?? 13;
+
+  const ranked = HB_PRODUCTS.map((p) => {
+    const dims = Object.keys(p.scores) as (keyof HBScores)[];
+    const others = dims.filter((k) => k !== dim);
+    const otherAvg = others.reduce((s, k) => s + p.scores[k], 0) / others.length;
+
+    let score = p.scores[dim] * 0.55 + otherAvg * 0.45;
+
+    // Size fit: reward capacity close to the target for the selected home size
+    const sizeFit = Math.max(0, 1 - Math.abs(p.kwh - target) / target);
+    score += sizeFit * 0.4;
+
+    // Install preference fit
+    if (install === "diy" && p.install === "DIY / Both") score += 0.3;
+    if (install === "pro" && p.install === "Professional") score += 0.1;
+
+    // EV goal: extra bonus for systems with native EV charger integration
+    if (goal === "ev" && p.ev) score += 0.3;
+
+    return { p, score: Math.round(score * 10) / 10 };
+  });
+
+  ranked.sort((a, b) => b.score - a.score);
+  const top3: HBPick[] = ranked.slice(0, 3).map((r, i) => ({
+    ...r.p,
+    ...TIER_STYLES[i],
+    matchScore: r.score,
+  }));
+
+  return { top3, eliminated: HB_PRODUCTS.length - 3, total: HB_PRODUCTS.length };
+}
 const CRITERIA = [
   { icon: ShieldCheck, title: "Backup Resilience", desc: "Continuous + surge output, transfer time, whole-home vs essentials." },
   { icon: Sun, title: "Solar Pairing", desc: "DC vs AC coupling, inverter compatibility, round-trip efficiency." },
@@ -166,9 +236,9 @@ const RESEARCH = [
 const DEV_STATUS = [
   "Scoring framework designed",
   "Evaluation criteria defined",
-  "Product database — 32 systems in research",
-  "Specs verification in progress (32 systems)",
-  "Decision engine — illustrative preview live",
+  "Product database — 12 systems live (32-system target)",
+  "Specs verified against manufacturer/installer sources (12 systems)",
+  "Decision engine — live, ranks 12 systems by goal/size/install",
 ];
 
 const HB_DB_ROWS: Array<[string, string, string, string, number, string]> = [
@@ -230,9 +300,10 @@ function HomeBatteryPage() {
     setSubmitted(true);
     if (typeof window !== "undefined" && (window as any).cdlTrack) {
       (window as any).cdlTrack("calculator_submit", { goal, size, install });
+      const { top3 } = computeHBAnalysis(goal, size, install);
       (window as any).cdlTrack("result_view", {
         goal, size, install,
-        top_recommendation: PICKS[0] ? `${PICKS[0].brand} ${PICKS[0].model}` : "none",
+        top_recommendation: top3[0] ? `${top3[0].brand} ${top3[0].model}` : "none",
       });
     }
     setTimeout(() => {
@@ -260,7 +331,7 @@ function HomeBatteryPage() {
               In Analysis
             </span>
             <span className="text-[10px] font-mono uppercase tracking-[0.18em] text-blue-100 bg-white/10 border border-white/20 rounded-full px-2.5 py-1">
-              32 systems · dataset in progress
+              12 systems · decision engine live
             </span>
           </div>
           <h1 className="text-4xl lg:text-5xl font-bold tracking-tight">
@@ -373,7 +444,7 @@ function HomeBatteryPage() {
           {/* CTA */}
           <div className="border-t border-neutral-100 pt-6 flex flex-wrap items-center justify-between gap-4">
             <div className="text-sm text-neutral-600">
-              Matching against <span className="font-bold text-neutral-900">32 systems</span> across 10 brands.
+              Matching against <span className="font-bold text-neutral-900">12 systems</span> across 11 brands.
             </div>
             <button
               onClick={handleSubmit}
@@ -387,7 +458,7 @@ function HomeBatteryPage() {
       </section>
 
 
-      {submitted && <ResultsBlock />}
+      {submitted && <ResultsBlock goal={goal} size={size} install={install} />}
 
       {/* CRITERIA */}
       <section className="bg-neutral-50 border-t border-neutral-200">
@@ -708,7 +779,8 @@ function HomeBatteryPage() {
   );
 }
 
-function ResultsBlock() {
+function ResultsBlock({ goal, size, install }: { goal: string; size: string; install: string }) {
+  const { top3: PICKS, eliminated, total } = computeHBAnalysis(goal, size, install);
   return (
     <section id="results" className="bg-neutral-50 border-t border-neutral-200">
       <div className="max-w-7xl mx-auto px-6 py-16">
@@ -717,8 +789,8 @@ function ResultsBlock() {
             Decision engine output
           </div>
           <h2 className="text-3xl lg:text-4xl font-bold tracking-tight">Your top 3 matches</h2>
-          <p className="mt-2 text-sm text-amber-600 font-medium">
-            Illustrative example based on publicly available specs — our 32-system verified scoring engine is in progress
+          <p className="mt-2 text-sm text-neutral-500">
+            Ranked from a {total}-system dataset (verified specs, real affiliate links) based on your goal, home size and install preference.
           </p>
         </div>
 
@@ -747,7 +819,7 @@ function ResultsBlock() {
                   </div>
                   <div className="text-right shrink-0">
                     <div className={`text-2xl font-bold ${p.accentText}`}>${p.price.toLocaleString()}</div>
-                    <div className="text-[10px] font-mono text-neutral-400">match {p.score}</div>
+                    <div className="text-[10px] font-mono text-neutral-400">match {p.matchScore}</div>
                   </div>
                 </div>
 
@@ -836,9 +908,9 @@ function ResultsBlock() {
             <span className="text-xs font-mono text-neutral-400 group-open:rotate-180 transition-transform">▾</span>
           </summary>
           <div className="mt-4 space-y-3 text-sm text-neutral-600 leading-relaxed">
-            <p><strong className="text-neutral-900">Prioritized:</strong> backup resilience, solar pairing, and smart-home integration based on your selected goal.</p>
-            <p><strong className="text-neutral-900">8 eliminated:</strong> capacity below your home's typical daily usage; 4 more excluded for incompatible inverter pairing.</p>
-            <p><strong className="text-neutral-900">Trade-off:</strong> Powerwall 3 scores highest overall but the DELTA Pro Ultra wins on value if DIY is acceptable.</p>
+            <p><strong className="text-neutral-900">Prioritized:</strong> for your selected goal, size and install preference, the engine weights that scoring dimension at 55% and the remaining 5 dimensions at 45%, plus a capacity-fit bonus for your home size.</p>
+            <p><strong className="text-neutral-900">{eliminated} not shown:</strong> the other {eliminated} of {total} systems scored lower for this combination — see the full comparison below or adjust your inputs above.</p>
+            <p><strong className="text-neutral-900">Trade-off:</strong> {PICKS[0]?.brand} {PICKS[0]?.model} ranks highest for this combination; {PICKS[2]?.brand} {PICKS[2]?.model} is the #3 alternative if its install type or price fits better.</p>
           </div>
         </details>
 
