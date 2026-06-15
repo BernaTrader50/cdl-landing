@@ -20,6 +20,7 @@ import {
   Wrench,
 } from "lucide-react";
 import SiteHeader from "@/components/SiteHeader";
+import { SiteFooter } from "@/components/site-footer";
 
 export const Route = createFileRoute("/backup-power")({
   head: () => ({
@@ -74,6 +75,93 @@ const SOLARS = [
   { id: "yes", label: "Yes, have solar+battery", icon: Sun },
   { id: "planning", label: "Planning to add", icon: Wrench },
   { id: "no", label: "No, generator-only", icon: Flame },
+];
+
+const PICKS = [
+  {
+    tier: "Top Match",
+    accentText: "text-[#2563eb]",
+    border: "border-t-[#2563eb]",
+    btn: "bg-[#2563eb] hover:bg-[#1d4ed8]",
+    img: "linear-gradient(135deg, #dbeafe, #93c5fd)",
+    brand: "Generac",
+    model: "Guardian 22kW",
+    price: 4999,
+    score: 9.2,
+    kw: "22 kW",
+    surge: "23.6 kW",
+    fuel: "NG / LP",
+    transfer: "200A Auto",
+    noise: "67 dB",
+    warranty: "5 yr",
+    whole: 9.6,
+    essentials: 9.0,
+    offgrid: 5.5,
+    storm: 9.5,
+    hybrid: 6.5,
+    value: 7.8,
+    ats: true,
+    app: true,
+    install: "Professional",
+    verdict: "Best for true whole-home coverage: automatic transfer switch, unlimited runtime on natural gas, sized for AC + well pump simultaneously.",
+    affiliate: "https://www.amazon.com/s?k=Generac+Guardian+22kW&tag=clickdecision-20",
+  },
+  {
+    tier: "#2 Match",
+    accentText: "text-emerald-600",
+    border: "border-t-emerald-500",
+    btn: "bg-emerald-500 hover:bg-emerald-600",
+    img: "linear-gradient(135deg, #d1fae5, #6ee7b7)",
+    brand: "EcoFlow",
+    model: "DELTA Pro Ultra + Smart Panel",
+    price: 7200,
+    score: 8.8,
+    kw: "7.2 kW",
+    surge: "14.4 kW",
+    fuel: "None (battery)",
+    transfer: "Smart panel",
+    noise: "0 dB",
+    warranty: "5 yr",
+    whole: 7.5,
+    essentials: 9.2,
+    offgrid: 9.4,
+    storm: 8.5,
+    hybrid: 9.6,
+    value: 7.0,
+    ats: true,
+    app: true,
+    install: "DIY / Both",
+    verdict: "Best hybrid pick: pairs with solar for silent, fuel-free backup of essential circuits, with generator as fallback for extended outages.",
+    affiliate: "https://www.amazon.com/s?k=EcoFlow+DELTA+Pro+Ultra&tag=clickdecision-20",
+  },
+  {
+    tier: "#3 Match",
+    accentText: "text-violet-600",
+    border: "border-t-violet-500",
+    btn: "bg-violet-500 hover:bg-violet-600",
+    img: "linear-gradient(135deg, #ede9fe, #c4b5fd)",
+    brand: "Champion",
+    model: "14kW Dual Fuel Standby",
+    price: 3199,
+    score: 8.3,
+    kw: "14 kW",
+    surge: "15.4 kW",
+    fuel: "NG / LP (dual)",
+    transfer: "200A Auto",
+    noise: "65 dB",
+    warranty: "5 yr",
+    whole: 8.2,
+    essentials: 8.6,
+    offgrid: 6.0,
+    storm: 8.4,
+    hybrid: 6.0,
+    value: 9.4,
+    ats: true,
+    app: false,
+    install: "Professional",
+    verdict: "Best $/kW installed: dual-fuel flexibility and automatic transfer switch at the lowest price in this class, with a smaller margin above essential loads.",
+    affiliate: "https://www.amazon.com/s?k=Champion+14kW+Dual+Fuel+Standby&tag=clickdecision-20",
+  },
 ];
 
 const CRITERIA = [
@@ -142,6 +230,9 @@ const BP_RESEARCH = [
 
 function BackupPowerPage() {
   const sp = Route.useSearch();
+  const hasParams =
+    sp.goal !== undefined || sp.loads !== undefined || sp.fuel !== undefined ||
+    sp.solar !== undefined || sp.budget !== undefined;
   const [goal, setGoal] = useState(sp.goal ?? "whole");
   const [loads, setLoads] = useState<string[]>(
     sp.loads !== undefined ? sp.loads.split(",").filter(Boolean) : ["ac", "fridge", "well", "lights"],
@@ -149,6 +240,7 @@ function BackupPowerPage() {
   const [fuel, setFuel] = useState(sp.fuel ?? "ng");
   const [solar, setSolar] = useState(sp.solar ?? "no");
   const [budget, setBudget] = useState<number>(sp.budget ?? 8000);
+  const [submitted, setSubmitted] = useState(hasParams);
 
   const connectedKw = useMemo(
     () => LOADS.filter((l) => loads.includes(l.id)).reduce((s, l) => s + l.kw, 0),
@@ -158,6 +250,20 @@ function BackupPowerPage() {
 
   const toggleLoad = (id: string) =>
     setLoads((cur) => (cur.includes(id) ? cur.filter((x) => x !== id) : [...cur, id]));
+
+  const handleSubmit = () => {
+    setSubmitted(true);
+    if (typeof window !== "undefined" && (window as any).cdlTrack) {
+      (window as any).cdlTrack("calculator_submit", { goal, loads: loads.join(","), fuel, solar, budget, estimatedKw });
+      (window as any).cdlTrack("result_view", {
+        goal, estimatedKw,
+        top_recommendation: PICKS[0] ? `${PICKS[0].brand} ${PICKS[0].model}` : "none",
+      });
+    }
+    setTimeout(() => {
+      document.getElementById("results")?.scrollIntoView({ behavior: "smooth" });
+    }, 50);
+  };
 
   return (
     <div className="min-h-screen bg-white text-neutral-900">
@@ -408,7 +514,7 @@ function BackupPowerPage() {
               </div>
             </div>
 
-            <button className="w-full inline-flex items-center justify-center gap-2 h-12 rounded-md bg-[#2563eb] text-white text-sm font-semibold hover:bg-[#1d4ed8]">
+            <button type="button" onClick={handleSubmit} className="w-full inline-flex items-center justify-center gap-2 h-12 rounded-md bg-[#2563eb] text-white text-sm font-semibold hover:bg-[#1d4ed8] transition-colors">
               Find my system <ArrowUpRight className="h-4 w-4" />
             </button>
             <p className="text-[11px] text-center text-neutral-500">
@@ -417,6 +523,8 @@ function BackupPowerPage() {
           </div>
         </div>
       </section>
+
+      {submitted && <ResultsBlock />}
 
       {/* CRITERIA */}
       <section className="bg-neutral-50 border-t border-neutral-200">
@@ -735,6 +843,8 @@ function BackupPowerPage() {
           </p>
         </div>
       </section>
+
+      <SiteFooter />
     </div>
   );
 }
@@ -750,3 +860,187 @@ function Stat({ label, value, sub }: { label: string; value: string; sub: string
     </div>
   );
 }
+
+function ResultsBlock() {
+  return (
+    <section id="results" className="bg-neutral-50 border-t border-neutral-200">
+      <div className="max-w-7xl mx-auto px-6 py-16">
+        <div className="mb-8">
+          <div className="text-xs font-mono text-[#2563eb] tracking-[0.18em] uppercase mb-3">
+            Decision engine output
+          </div>
+          <h2 className="text-3xl lg:text-4xl font-bold tracking-tight">Your top 3 matches</h2>
+          <p className="mt-2 text-sm text-amber-600 font-medium">
+            Illustrative example based on publicly available specs — our 45-system verified scoring engine is in progress
+          </p>
+        </div>
+
+        <div className="grid md:grid-cols-3 gap-6">
+          {PICKS.map((p) => (
+            <div
+              key={p.tier}
+              className={`bg-white rounded-xl border border-neutral-200 border-t-4 ${p.border} overflow-hidden flex flex-col`}
+            >
+              <div
+                className="h-40 flex items-center justify-center relative"
+                style={{ backgroundImage: p.img }}
+              >
+                <Zap className="h-16 w-16 text-white/80" strokeWidth={1.5} />
+                <span className={`absolute top-3 left-3 inline-flex items-center gap-1 px-2.5 py-1 rounded-full bg-white text-[10px] font-mono uppercase tracking-[0.15em] ${p.accentText}`}>
+                  ★ {p.tier}
+                </span>
+              </div>
+
+              <div className="p-6 flex flex-col flex-1">
+                <div className="flex items-start justify-between gap-3 mb-4">
+                  <div className="min-w-0">
+                    <div className="text-[11px] font-mono text-neutral-400">{p.brand}</div>
+                    <h3 className="text-xl font-bold leading-tight">{p.model}</h3>
+                  </div>
+                  <div className="text-right shrink-0">
+                    <div className={`text-2xl font-bold ${p.accentText}`}>${p.price.toLocaleString()}</div>
+                    <div className="text-[10px] font-mono text-neutral-400">match {p.score}</div>
+                  </div>
+                </div>
+
+                <div className="grid grid-cols-3 gap-2 mb-4">
+                  <ResultSpec icon={Zap} label={p.kw} sub="continuous" />
+                  <ResultSpec icon={Activity} label={p.surge} sub="surge" />
+                  <ResultSpec icon={Fuel} label={p.fuel} sub="fuel" />
+                  <ResultSpec icon={ShieldCheck} label={p.transfer} sub="transfer" />
+                  <ResultSpec icon={Gauge} label={p.noise} sub="noise" />
+                  <ResultSpec icon={Wrench} label={p.warranty} sub="warranty" />
+                </div>
+
+                <div className="flex flex-wrap gap-1.5 mb-4">
+                  <ResultBadge active={p.ats} label="Auto Transfer Switch" />
+                  <ResultBadge active={p.app} label="App Monitor" />
+                  <span className="inline-flex items-center gap-1 text-[10px] font-mono uppercase tracking-wider px-2 py-1 rounded bg-neutral-100 text-neutral-600">
+                    {p.install}
+                  </span>
+                </div>
+
+                <div className="space-y-2 mb-4">
+                  <ResultBar label="Whole-Home" value={p.whole} color={p.accentText} />
+                  <ResultBar label="Essentials Only" value={p.essentials} color={p.accentText} />
+                  <ResultBar label="Off-Grid" value={p.offgrid} color={p.accentText} />
+                  <ResultBar label="Storm Resilience" value={p.storm} color={p.accentText} />
+                  <ResultBar label="Solar Hybrid" value={p.hybrid} color={p.accentText} />
+                  <ResultBar label="Value" value={p.value} color={p.accentText} />
+                </div>
+
+                <p className="text-xs text-neutral-600 leading-relaxed mb-5 italic">"{p.verdict}"</p>
+
+                <a
+                  href={p.affiliate}
+                  target="_blank"
+                  rel="noopener noreferrer sponsored"
+                  className={`mt-auto inline-flex w-full items-center justify-center gap-1.5 h-11 rounded-md text-white text-sm font-semibold transition-colors ${p.btn}`}
+                >
+                  Check price <ArrowUpRight className="h-4 w-4" />
+                </a>
+              </div>
+            </div>
+          ))}
+        </div>
+
+        <div className="mt-12 bg-white border border-neutral-200 rounded-xl overflow-hidden">
+          <div className="px-6 py-4 border-b border-neutral-100">
+            <h3 className="text-lg font-bold">Side-by-side comparison</h3>
+          </div>
+          <div className="overflow-x-auto">
+            <table className="w-full text-sm">
+              <thead>
+                <tr className="bg-neutral-50 border-b border-neutral-200">
+                  <th className="text-left px-4 py-3 font-mono text-[10px] uppercase tracking-wider text-neutral-400">Spec</th>
+                  {PICKS.map((p) => (
+                    <th key={p.tier} className="text-left px-4 py-3">
+                      <div className="text-[10px] font-mono text-neutral-400">{p.brand}</div>
+                      <div className="font-bold text-neutral-900">{p.model}</div>
+                    </th>
+                  ))}
+                </tr>
+              </thead>
+              <tbody className="[&>tr]:border-b [&>tr]:border-neutral-100">
+                <ResultRow label="Price" values={PICKS.map((p) => `$${p.price.toLocaleString()}`)} />
+                <ResultRow label="Continuous output" values={PICKS.map((p) => p.kw)} />
+                <ResultRow label="Surge" values={PICKS.map((p) => p.surge)} />
+                <ResultRow label="Fuel" values={PICKS.map((p) => p.fuel)} />
+                <ResultRow label="Transfer switch" values={PICKS.map((p) => p.transfer)} />
+                <ResultRow label="Noise level" values={PICKS.map((p) => p.noise)} />
+                <ResultRow label="Warranty" values={PICKS.map((p) => p.warranty)} />
+                <ResultRow label="App monitoring" values={PICKS.map((p) => (p.app ? "✓" : "—"))} />
+                <ResultRow label="Install" values={PICKS.map((p) => p.install)} />
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <details className="mt-8 bg-white border border-neutral-200 rounded-xl p-6 group">
+          <summary className="cursor-pointer font-semibold text-neutral-900 flex items-center justify-between">
+            Why this recommendation?
+            <span className="text-xs font-mono text-neutral-400 group-open:rotate-180 transition-transform">▾</span>
+          </summary>
+          <div className="mt-4 space-y-3 text-sm text-neutral-600 leading-relaxed">
+            <p><strong className="text-neutral-900">Prioritized:</strong> sizing margin above your connected load, fuel availability, and transfer-switch automation based on your selected goal.</p>
+            <p><strong className="text-neutral-900">Eliminated:</strong> systems under your estimated capacity requirement, and generator-only units when "Solar + Battery Hybrid" was selected.</p>
+            <p><strong className="text-neutral-900">Trade-off:</strong> the Guardian 22kW covers every circuit but needs professional install; the DELTA Pro Ultra is DIY and silent but covers essentials only on battery alone.</p>
+          </div>
+        </details>
+
+        <p className="mt-8 text-[11px] font-mono text-neutral-400 text-center">
+          We earn a commission if you purchase — this does not affect our analysis.
+        </p>
+      </div>
+    </section>
+  );
+}
+
+function ResultSpec({ icon: Icon, label, sub }: { icon: typeof Zap; label: string; sub: string }) {
+  return (
+    <div className="rounded-md bg-neutral-50 px-2 py-2">
+      <div className="flex items-center gap-1.5">
+        <Icon className="h-3.5 w-3.5 text-[#2563eb] shrink-0" />
+        <div className="text-xs font-semibold text-neutral-900 truncate">{label}</div>
+      </div>
+      <div className="text-[9px] uppercase tracking-wider text-neutral-400 mt-0.5">{sub}</div>
+    </div>
+  );
+}
+
+function ResultBar({ label, value, color }: { label: string; value: number; color: string }) {
+  return (
+    <div>
+      <div className="flex items-center justify-between text-[10px] font-mono uppercase tracking-wider text-neutral-500 mb-1">
+        <span>{label}</span>
+        <span className={`font-bold ${color}`}>{value}/10</span>
+      </div>
+      <div className="h-1.5 bg-neutral-100 rounded-full overflow-hidden">
+        <div className={`h-full rounded-full ${color.replace("text-", "bg-")}`} style={{ width: `${value * 10}%` }} />
+      </div>
+    </div>
+  );
+}
+
+function ResultBadge({ active, label }: { active: boolean; label: string }) {
+  return (
+    <span className={`inline-flex items-center gap-1 text-[10px] font-mono uppercase tracking-wider px-2 py-1 rounded ${
+      active ? "bg-emerald-50 text-emerald-700" : "bg-neutral-100 text-neutral-400"
+    }`}>
+      {active ? <CheckCircle2 className="h-3 w-3" /> : <XCircle className="h-3 w-3" />}
+      {label}
+    </span>
+  );
+}
+
+function ResultRow({ label, values }: { label: string; values: string[] }) {
+  return (
+    <tr>
+      <td className="px-4 py-3 font-mono text-[10px] uppercase tracking-wider text-neutral-400">{label}</td>
+      {values.map((v, i) => (
+        <td key={i} className="px-4 py-3 text-neutral-800">{v}</td>
+      ))}
+    </tr>
+  );
+}
+
