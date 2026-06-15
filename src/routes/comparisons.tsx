@@ -152,7 +152,7 @@ function ComparisonsPage() {
 
           {/* Authority strip */}
           <div className="mt-5 flex items-center gap-5 flex-wrap">
-            {["68 research articles", "50 products tracked", "10 brands analyzed"].map(t => (
+            {["68 research articles", "100 products tracked", "20 brands analyzed"].map(t => (
               <span key={t} className="font-mono text-[10px] text-neutral-400 uppercase tracking-wider">{t}</span>
             ))}
           </div>
