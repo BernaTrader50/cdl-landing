@@ -605,6 +605,7 @@ export function ComparisonTable({ picks, requiredWh, requiredSurge, needsUps, sc
 // Real manufacturer/Amazon CDN images, sourced and verified. Falls back to
 // a gradient placeholder for the ~half of the catalog still pending sourcing.
 const PRODUCT_IMAGES: Record<string, string> = {
+  "Mega 1": "https://oupes.com/cdn/shop/files/Mega_1_Lite.png?v=1774509934&width=1920",
   "AC180": "https://www.bluettipower.com/cdn/shop/files/AC180_cb56a69e-aa02-41ce-b2ed-965b8afa3cef.png?v=1753176697",
   "AC60": "https://checkout.bluettipower.com/cdn/shop/files/AC60-_-_1.png?v=1735357521&width=1024",
   "AC70": "https://checkout.bluettipower.com/cdn/shop/files/AC70_35fdd9e4-714c-4cde-b903-7e344c7e0c4b.png?v=1743142470&width=1024",
