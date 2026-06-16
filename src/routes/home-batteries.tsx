@@ -334,9 +334,9 @@ function HomeBatteryPage() {
             <span className="text-[10px] font-mono uppercase tracking-[0.18em] text-white bg-white/10 border border-white/20 rounded-full px-2.5 py-1">
               LAB-03
             </span>
-            <span className="inline-flex items-center gap-1.5 text-[10px] font-mono uppercase tracking-[0.18em] text-amber-200 bg-amber-500/15 border border-amber-300/30 rounded-full px-2.5 py-1">
-              <span className="h-1.5 w-1.5 rounded-full bg-amber-300 animate-pulse" />
-              In Analysis
+            <span className="inline-flex items-center gap-1.5 text-[10px] font-mono uppercase tracking-[0.18em] text-emerald-200 bg-emerald-500/15 border border-emerald-300/30 rounded-full px-2.5 py-1">
+              <span className="h-1.5 w-1.5 rounded-full bg-emerald-300 animate-pulse" />
+              Live
             </span>
             <span className="text-[10px] font-mono uppercase tracking-[0.18em] text-blue-100 bg-white/10 border border-white/20 rounded-full px-2.5 py-1">
               12 systems · decision engine live

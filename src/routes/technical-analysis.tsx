@@ -1,5 +1,5 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { SiteNav } from "@/components/site-nav";
+import SiteHeader from "@/components/SiteHeader";
 import { SiteFooter } from "@/components/site-footer";
 import { useState } from "react";
 
@@ -127,46 +127,48 @@ function TechnicalAnalysisHub() {
   const filtered = activeBrand === "All" ? ANALYSES : ANALYSES.filter(a => a.brand === activeBrand);
 
   return (
-    <div className="min-h-screen relative text-neutral-950"
-      style={{
-        backgroundColor: "#F7F7F5",
-        backgroundImage: [
-          "linear-gradient(to right, rgba(15,23,42,0.035) 1px, transparent 1px)",
-          "linear-gradient(to bottom, rgba(15,23,42,0.035) 1px, transparent 1px)",
-          "linear-gradient(to right, rgba(15,23,42,0.02) 1px, transparent 1px)",
-          "linear-gradient(to bottom, rgba(15,23,42,0.02) 1px, transparent 1px)",
-        ].join(","),
-        backgroundSize: "48px 48px, 48px 48px, 240px 240px, 240px 240px",
-      }}>
-      <SiteNav />
+    <div className="min-h-screen bg-white text-neutral-900">
+      <SiteHeader />
 
-      <main className="relative z-10 mx-auto max-w-6xl px-5 pt-32 pb-20">
-
-        {/* Header */}
-        <div className="mb-10">
-          <p className="font-mono text-[10px] font-semibold uppercase tracking-widest text-neutral-400 mb-3">
-            Technical Analysis
-          </p>
-          <h1 className="text-4xl font-semibold tracking-tight text-neutral-950 mb-4">
+      {/* HERO */}
+      <section className="relative bg-[#2563eb] text-white overflow-hidden">
+        <div className="absolute inset-0 opacity-[0.07] pointer-events-none"
+             style={{ backgroundImage:
+               "linear-gradient(rgba(255,255,255,.5) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,.5) 1px, transparent 1px)",
+               backgroundSize: "44px 44px" }} />
+        <div className="relative max-w-5xl mx-auto px-6 pt-14 pb-24 lg:pb-32 text-center">
+          <div className="flex flex-wrap items-center justify-center gap-2 mb-3">
+            <span className="text-[10px] font-mono uppercase tracking-[0.18em] text-white bg-white/10 border border-white/20 rounded-full px-2.5 py-1">
+              Technical Analysis
+            </span>
+            <span className="inline-flex items-center gap-1.5 text-[10px] font-mono uppercase tracking-[0.18em] text-emerald-200 bg-emerald-500/15 border border-emerald-300/30 rounded-full px-2.5 py-1">
+              <span className="h-1.5 w-1.5 rounded-full bg-emerald-300 animate-pulse" />
+              Live
+            </span>
+          </div>
+          <h1 className="text-4xl lg:text-5xl font-bold tracking-tight">
             Engineering-grade product analysis.
           </h1>
-          <p className="text-[15px] text-neutral-500 max-w-2xl leading-relaxed">
+          <p className="mt-4 text-blue-50/90 max-w-2xl mx-auto">
             Every analysis is built from verified manufacturer specifications, real surge measurements,
             UPS mode validation, and use-case scoring across 7 dimensions. No marketing copy. No paid placements.
           </p>
 
           {/* Authority strip */}
-          <div className="mt-5 flex items-center gap-6 flex-wrap">
+          <div className="mt-5 flex items-center justify-center gap-6 flex-wrap">
             {[
               "10 products analyzed",
               "104 products in dataset",
               "7 use-case scores per product",
               "Updated quarterly",
             ].map(t => (
-              <span key={t} className="font-mono text-[10px] text-neutral-400 uppercase tracking-wider">{t}</span>
+              <span key={t} className="font-mono text-[10px] text-blue-100 uppercase tracking-wider">{t}</span>
             ))}
           </div>
         </div>
+      </section>
+
+      <main className="relative z-10 mx-auto max-w-6xl px-5 -mt-14 lg:-mt-20 pb-20">
 
         {/* Methodology summary */}
         <div className="mb-8 rounded-[12px] border bg-white p-6" style={{ borderColor: "#E2E2E2" }}>

@@ -1,5 +1,5 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { SiteNav } from "@/components/site-nav";
+import SiteHeader from "@/components/SiteHeader";
 import { SiteFooter } from "@/components/site-footer";
 import { useState } from "react";
 import { Analytics } from "@/components/analytics";
@@ -249,35 +249,40 @@ function RuntimeDatabase() {
   const sortArrow = (key: SortKey) => sortBy === key ? (sortDir === "desc" ? " ↓" : " ↑") : "";
 
   return (
-    <div className="min-h-screen relative text-neutral-950"
-      style={{
-        backgroundColor: "#F7F7F5",
-        backgroundImage: [
-          "linear-gradient(to right, rgba(15,23,42,0.035) 1px, transparent 1px)",
-          "linear-gradient(to bottom, rgba(15,23,42,0.035) 1px, transparent 1px)",
-          "linear-gradient(to right, rgba(15,23,42,0.02) 1px, transparent 1px)",
-          "linear-gradient(to bottom, rgba(15,23,42,0.02) 1px, transparent 1px)",
-        ].join(","),
-        backgroundSize: "48px 48px, 48px 48px, 240px 240px, 240px 240px",
-      }}>
-      <SiteNav />
-      <main className="relative z-10 mx-auto max-w-7xl px-5 pt-32 pb-20">
+    <div className="min-h-screen bg-white text-neutral-900">
+      <SiteHeader />
 
-        {/* Header */}
-        <div className="mb-8">
-          <p className="font-mono text-[10px] font-semibold uppercase tracking-widest text-neutral-400 mb-3">Runtime Database</p>
-          <h1 className="text-4xl font-semibold tracking-tight text-neutral-950 mb-3">
+      {/* HERO */}
+      <section className="relative bg-[#2563eb] text-white overflow-hidden">
+        <div className="absolute inset-0 opacity-[0.07] pointer-events-none"
+             style={{ backgroundImage:
+               "linear-gradient(rgba(255,255,255,.5) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,.5) 1px, transparent 1px)",
+               backgroundSize: "44px 44px" }} />
+        <div className="relative max-w-5xl mx-auto px-6 pt-14 pb-24 lg:pb-32 text-center">
+          <div className="flex flex-wrap items-center justify-center gap-2 mb-3">
+            <span className="text-[10px] font-mono uppercase tracking-[0.18em] text-white bg-white/10 border border-white/20 rounded-full px-2.5 py-1">
+              Runtime Database
+            </span>
+            <span className="inline-flex items-center gap-1.5 text-[10px] font-mono uppercase tracking-[0.18em] text-emerald-200 bg-emerald-500/15 border border-emerald-300/30 rounded-full px-2.5 py-1">
+              <span className="h-1.5 w-1.5 rounded-full bg-emerald-300 animate-pulse" />
+              Live
+            </span>
+          </div>
+          <h1 className="text-4xl lg:text-5xl font-bold tracking-tight">
             How long will it run?
           </h1>
-          <p className="text-[15px] text-neutral-500 max-w-2xl leading-relaxed">
+          <p className="mt-4 text-blue-50/90 max-w-2xl mx-auto">
             Exact runtime estimates for 104 solar generators across 5 use cases. Calculated from verified usable capacity with {Math.round(EFFICIENCY * 100)}% inverter efficiency. Typical and best-case estimates for real-world planning.
           </p>
-          <div className="mt-4 flex items-center gap-5 flex-wrap">
+          <div className="mt-5 flex items-center justify-center gap-5 flex-wrap">
             {["104 products", "5 use cases", "Typical + best case", "Surge compatibility"].map(t => (
-              <span key={t} className="font-mono text-[10px] text-neutral-400 uppercase tracking-wider">{t}</span>
+              <span key={t} className="font-mono text-[10px] text-blue-100 uppercase tracking-wider">{t}</span>
             ))}
           </div>
         </div>
+      </section>
+
+      <main className="relative z-10 mx-auto max-w-7xl px-5 -mt-14 lg:-mt-20 pb-20">
 
         {/* Appliance selector */}
         <div className="mb-2 flex items-center gap-2 flex-wrap">

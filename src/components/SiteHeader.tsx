@@ -1,10 +1,14 @@
+import { useState } from "react";
 import {
   Search,
   ChevronRight,
+  ChevronDown,
   Sun,
   Plug,
   BatteryCharging,
   Flame,
+  Menu,
+  X,
 } from "lucide-react";
 import logo from "@/assets/logo.png";
 
@@ -56,13 +60,129 @@ const CALCULATORS = [
   { href: "/backup-power", title: "Backup Power", code: "LAB-04", icon: Flame },
 ];
 
+const TOP_HREFS: Record<string, string> = {
+  Comparisons: "/comparisons",
+  Database: "/runtime-database",
+  Methodology: "/methodology",
+  Research: "/blog",
+  Blog: "/blog",
+};
+
+function MobileMenu() {
+  const [open, setOpen] = useState(false);
+  const [labsOpen, setLabsOpen] = useState(false);
+  const [calcOpen, setCalcOpen] = useState(false);
+
+  return (
+    <div className="lg:hidden">
+      <button
+        onClick={() => setOpen(true)}
+        aria-label="Open menu"
+        className="inline-flex h-9 w-9 items-center justify-center rounded-full border border-neutral-200 hover:bg-neutral-50"
+      >
+        <Menu className="h-4.5 w-4.5" />
+      </button>
+
+      {open && (
+        <div className="fixed inset-0 z-50 bg-black/30" onClick={() => setOpen(false)}>
+          <div
+            className="absolute right-0 top-0 h-full w-[85%] max-w-sm bg-white shadow-xl overflow-y-auto"
+            onClick={(e) => e.stopPropagation()}
+          >
+            <div className="flex items-center justify-between px-5 h-16 border-b border-neutral-200">
+              <span className="text-sm font-semibold text-neutral-900">Menu</span>
+              <button
+                onClick={() => setOpen(false)}
+                aria-label="Close menu"
+                className="inline-flex h-9 w-9 items-center justify-center rounded-full hover:bg-neutral-50"
+              >
+                <X className="h-4.5 w-4.5" />
+              </button>
+            </div>
+
+            <div className="p-4 space-y-1">
+              {/* Labs accordion */}
+              <button
+                onClick={() => setLabsOpen((v) => !v)}
+                className="w-full flex items-center justify-between px-3 py-3 text-sm font-semibold text-neutral-900 rounded-lg hover:bg-neutral-50"
+              >
+                Labs
+                <ChevronDown className={`h-4 w-4 transition-transform ${labsOpen ? "rotate-180" : ""}`} />
+              </button>
+              {labsOpen && (
+                <div className="pl-2 pb-2 space-y-1">
+                  {LABS.map((l) => (
+                    <a
+                      key={l.code}
+                      href={l.href}
+                      className="flex items-start gap-3 px-3 py-2.5 rounded-lg hover:bg-neutral-50"
+                    >
+                      <div className="h-8 w-8 rounded-md bg-blue-50 flex items-center justify-center shrink-0">
+                        <l.icon className="h-4 w-4 text-[#2563eb]" />
+                      </div>
+                      <div className="flex-1 min-w-0">
+                        <div className="flex items-center justify-between gap-2">
+                          <div className="text-sm font-medium text-neutral-900">{l.title}</div>
+                          <span className="text-[10px] font-mono uppercase tracking-wider px-1.5 py-0.5 rounded bg-emerald-50 text-emerald-700">
+                            {l.status}
+                          </span>
+                        </div>
+                        <div className="text-[11px] text-neutral-500 mt-0.5">{l.code} · {l.count}</div>
+                      </div>
+                    </a>
+                  ))}
+                </div>
+              )}
+
+              {/* Calculator accordion */}
+              <button
+                onClick={() => setCalcOpen((v) => !v)}
+                className="w-full flex items-center justify-between px-3 py-3 text-sm font-semibold text-neutral-900 rounded-lg hover:bg-neutral-50"
+              >
+                Calculator
+                <ChevronDown className={`h-4 w-4 transition-transform ${calcOpen ? "rotate-180" : ""}`} />
+              </button>
+              {calcOpen && (
+                <div className="pl-2 pb-2 space-y-1">
+                  {CALCULATORS.map((c) => (
+                    <a
+                      key={c.href}
+                      href={c.href}
+                      className="flex items-center gap-3 px-3 py-2.5 rounded-lg hover:bg-neutral-50"
+                    >
+                      <div className="h-8 w-8 rounded-md bg-blue-50 flex items-center justify-center shrink-0">
+                        <c.icon className="h-4 w-4 text-[#2563eb]" />
+                      </div>
+                      <div className="text-sm font-medium text-neutral-900">{c.title}</div>
+                    </a>
+                  ))}
+                </div>
+              )}
+
+              {/* Flat nav items */}
+              {NAV.filter((n) => n !== "Solar Lab" && n !== "Calculator").map((n) => (
+                <a
+                  key={n}
+                  href={TOP_HREFS[n] ?? "#"}
+                  className="block px-3 py-3 text-sm font-semibold text-neutral-900 rounded-lg hover:bg-neutral-50"
+                >
+                  {n}
+                </a>
+              ))}
+            </div>
+          </div>
+        </div>
+      )}
+    </div>
+  );
+}
 
 export default function SiteHeader() {
   return (
     <header className="sticky top-0 z-40 bg-white border-b border-neutral-200">
       <div className="max-w-[1400px] mx-auto pl-4 pr-6 h-28 flex items-center gap-6">
         <a href="/" className="flex items-center shrink-0">
-          <img src={logo} alt="ClickDecisionLab — Real specs. Real decisions." className="h-20 w-auto" />
+          <img src={logo} alt="ClickDecisionLab — Real specs. Real decisions." className="h-10 w-auto sm:h-14 lg:h-20" />
         </a>
         <nav className="hidden lg:flex items-center gap-6 text-sm font-medium text-neutral-700">
           <div className="relative group">
@@ -126,25 +246,17 @@ export default function SiteHeader() {
               </div>
             </div>
           </div>
-          {NAV.filter((n) => n !== "Solar Lab" && n !== "Calculator").map((n) => {
-            const HREFS: Record<string, string> = {
-              Comparisons: "/comparisons",
-              Database: "/runtime-database",
-              Methodology: "/methodology",
-              Research: "/blog",
-              Blog: "/blog",
-            };
-            return (
-              <a key={n} href={HREFS[n] ?? "#"} className="hover:text-[#2563eb] transition-colors">
-                {n}
-              </a>
-            );
-          })}
+          {NAV.filter((n) => n !== "Solar Lab" && n !== "Calculator").map((n) => (
+            <a key={n} href={TOP_HREFS[n] ?? "#"} className="hover:text-[#2563eb] transition-colors">
+              {n}
+            </a>
+          ))}
         </nav>
         <div className="flex items-center gap-3 ml-auto">
           <button className="hidden sm:inline-flex h-9 w-9 items-center justify-center rounded-full border border-neutral-200 hover:bg-neutral-50">
             <Search className="h-4 w-4" />
           </button>
+          <MobileMenu />
         </div>
       </div>
     </header>

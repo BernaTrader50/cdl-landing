@@ -1,5 +1,5 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { SiteNav } from "@/components/site-nav";
+import SiteHeader from "@/components/SiteHeader";
 import { SiteFooter } from "@/components/site-footer";
 
 export const Route = createFileRoute("/comparisons")({
@@ -127,36 +127,42 @@ function TagBadge({ tag }: { tag: string }) {
 
 function ComparisonsPage() {
   return (
-    <div className="min-h-screen relative" style={{
-        backgroundColor: "#F7F7F5",
-        backgroundImage: [
-          "linear-gradient(to right, rgba(15,23,42,0.035) 1px, transparent 1px)",
-          "linear-gradient(to bottom, rgba(15,23,42,0.035) 1px, transparent 1px)",
-          "linear-gradient(to right, rgba(15,23,42,0.02) 1px, transparent 1px)",
-          "linear-gradient(to bottom, rgba(15,23,42,0.02) 1px, transparent 1px)",
-        ].join(","),
-        backgroundSize: "48px 48px, 48px 48px, 240px 240px, 240px 240px",
-      }}>
-      <SiteNav />
-      <div className="mx-auto max-w-5xl px-5 pt-32 pb-16">
+    <div className="min-h-screen bg-white text-neutral-900">
+      <SiteHeader />
 
-        {/* Header */}
-        <div className="mb-10">
-          <p className="font-mono text-[10px] font-semibold uppercase tracking-widest text-neutral-400 mb-3">Comparisons Lab</p>
-          <h1 className="text-4xl font-semibold tracking-tight text-neutral-950 mb-4">
+      {/* HERO */}
+      <section className="relative bg-[#2563eb] text-white overflow-hidden">
+        <div className="absolute inset-0 opacity-[0.07] pointer-events-none"
+             style={{ backgroundImage:
+               "linear-gradient(rgba(255,255,255,.5) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,.5) 1px, transparent 1px)",
+               backgroundSize: "44px 44px" }} />
+        <div className="relative max-w-5xl mx-auto px-6 pt-14 pb-32 lg:pb-44 text-center">
+          <div className="flex flex-wrap items-center justify-center gap-2 mb-3">
+            <span className="text-[10px] font-mono uppercase tracking-[0.18em] text-white bg-white/10 border border-white/20 rounded-full px-2.5 py-1">
+              Comparisons Lab
+            </span>
+            <span className="inline-flex items-center gap-1.5 text-[10px] font-mono uppercase tracking-[0.18em] text-emerald-200 bg-emerald-500/15 border border-emerald-300/30 rounded-full px-2.5 py-1">
+              <span className="h-1.5 w-1.5 rounded-full bg-emerald-300 animate-pulse" />
+              Live
+            </span>
+          </div>
+          <h1 className="text-4xl lg:text-5xl font-bold tracking-tight">
             Spec vs spec. No filler.
           </h1>
-          <p className="text-[15px] text-neutral-500 max-w-xl leading-relaxed">
+          <p className="mt-4 text-blue-50/90 max-w-2xl mx-auto">
             Technical side-by-side comparisons built from verified specifications and decision scores. Every verdict is derived from real numbers.
           </p>
 
           {/* Authority strip */}
-          <div className="mt-5 flex items-center gap-5 flex-wrap">
+          <div className="mt-5 flex items-center justify-center gap-5 flex-wrap">
             {["125 research articles", "104 products tracked", "20 brands analyzed"].map(t => (
-              <span key={t} className="font-mono text-[10px] text-neutral-400 uppercase tracking-wider">{t}</span>
+              <span key={t} className="font-mono text-[10px] text-blue-100 uppercase tracking-wider">{t}</span>
             ))}
           </div>
         </div>
+      </section>
+
+      <div className="mx-auto max-w-5xl px-5 -mt-24 lg:-mt-32 pb-16 relative">
 
         {/* Live comparisons */}
         <div className="mb-3">

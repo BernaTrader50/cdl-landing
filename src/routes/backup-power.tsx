@@ -357,9 +357,9 @@ function BackupPowerPage() {
               <span className="text-[10px] font-mono uppercase tracking-[0.18em] text-white bg-white/10 border border-white/20 rounded-full px-2.5 py-1">
                 LAB-04
               </span>
-              <span className="inline-flex items-center gap-1.5 text-[10px] font-mono uppercase tracking-[0.18em] text-neutral-200 bg-white/10 border border-white/20 rounded-full px-2.5 py-1">
-                <span className="h-1.5 w-1.5 rounded-full bg-neutral-300" />
-                Planned · Q4 2026
+              <span className="inline-flex items-center gap-1.5 text-[10px] font-mono uppercase tracking-[0.18em] text-emerald-200 bg-emerald-500/15 border border-emerald-300/30 rounded-full px-2.5 py-1">
+                <span className="h-1.5 w-1.5 rounded-full bg-emerald-300 animate-pulse" />
+                Live
               </span>
               <span className="text-[10px] font-mono uppercase tracking-[0.18em] text-blue-100 bg-white/10 border border-white/20 rounded-full px-2.5 py-1">
                 Backup Power Lab · Methodology v1.0 · Updated weekly
