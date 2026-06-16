@@ -605,6 +605,9 @@ export function ComparisonTable({ picks, requiredWh, requiredSurge, needsUps, sc
 // Real manufacturer/Amazon CDN images, sourced and verified. Falls back to
 // a gradient placeholder for the ~half of the catalog still pending sourcing.
 const PRODUCT_IMAGES: Record<string, string> = {
+  "S2000 Pro": "https://iallpowers.com/cdn/shop/files/ALLPOWERS_S2000Pro_b08588cd-542f-4060-9ec7-a3c577209.jpg?v=1772000600&width=1024",
+  "R2500": "https://iallpowers.com/cdn/shop/files/R2500-US-03.jpg?v=1772000600&width=1024",
+  "R600": "https://iallpowers.com/cdn/shop/files/R600-US-03.jpg?v=1772000600&width=1024",
   "Mega 1": "https://oupes.com/cdn/shop/files/Mega_1_Lite.png?v=1774509934&width=1920",
   "AC180": "https://www.bluettipower.com/cdn/shop/files/AC180_cb56a69e-aa02-41ce-b2ed-965b8afa3cef.png?v=1753176697",
   "AC60": "https://checkout.bluettipower.com/cdn/shop/files/AC60-_-_1.png?v=1735357521&width=1024",
@@ -655,7 +658,6 @@ const PRODUCT_IMAGES: Record<string, string> = {
   "RIVER 2 Pro": "https://us.ecoflow.com/cdn/shop/products/ecoflow-us-ecoflow-river-2-pro-portable-power-station-30042784006217.png?v=1742453520",
   "RIVER 3": "https://us.ecoflow.com/cdn/shop/files/ecoflow-us-ecoflow-river-3-portable-power-station-r3-1174069423.png?v=1750336246",
   "RIVER 3 Plus": "https://us.ecoflow.com/cdn/shop/files/ecoflow-us-ecoflow-river-3-plus-portable-power-station-standalone-36158995398729.png?v=1764216261",
-  "RIVER Pro": "https://cdn.shopify.com/s/files/1/1996/9707/files/ecoflow-turnkey-installation-service-installation-service-installation-service-for-smart-home-panel-2-1182197140.png?v=1753785175",
   "SuperBase Pro 2000": "http://zendure.com/cdn/shop/products/3_fd57e58d-6cc7-4179-8414-9c17de3bbbbd.jpg?v=1677722134",
   "SuperBase V 4600": "http://zendure.com/cdn/shop/products/2_9793f444-f583-4933-ba9b-a217dd31b1a5.png?v=1677642029",
   "SuperBase V6400": "http://zendure.com/cdn/shop/products/2_9793f444-f583-4933-ba9b-a217dd31b1a5.png?v=1677642029",
@@ -727,7 +729,7 @@ export function ResultCard({ pick, accentColor, scoreKey }: { pick: PickResult; 
     "RIVER 2 Pro":        "https://www.awin1.com/cread.php?awinmid=59181&awinaffid=2929639&ued=https://us.ecoflow.com/products/river-2-pro-portable-power-station",
     "RIVER 3":            "https://www.awin1.com/cread.php?awinmid=59181&awinaffid=2929639&ued=https://us.ecoflow.com/products/river-3-portable-power-station",
     "RIVER 3 Plus":       "https://www.awin1.com/cread.php?awinmid=59181&awinaffid=2929639&ued=https://us.ecoflow.com/products/river-3-plus-portable-power-station",
-    "RIVER Pro":          "https://www.awin1.com/cread.php?awinmid=59181&awinaffid=2929639&ued=https://us.ecoflow.com/products/river-pro-portable-power-station",
+    "RIVER Pro":          "https://www.amazon.com/s?k=EcoFlow+RIVER+Pro+720Wh&tag=clickdecision-20",
     "DELTA 3":            "https://www.awin1.com/cread.php?awinmid=59181&awinaffid=2929639&ued=https://us.ecoflow.com/products/delta-3-portable-power-station",
     "DELTA 3 Classic":    "https://www.awin1.com/cread.php?awinmid=59181&awinaffid=2929639&ued=https://us.ecoflow.com/products/delta-3-classic-portable-power-station",
     "DELTA 3 Plus":       "https://www.awin1.com/cread.php?awinmid=59181&awinaffid=2929639&ued=https://us.ecoflow.com/products/delta-3-plus-portable-power-station",
@@ -803,7 +805,7 @@ export function ResultCard({ pick, accentColor, scoreKey }: { pick: PickResult; 
     "Power 500":         "https://www.amazon.com/s?k=DJI+Power+500&tag=clickdecision-20",
     "Power 1000":        "https://www.amazon.com/s?k=DJI+Power+1000&tag=clickdecision-20",
     "Power 2000":        "https://www.amazon.com/s?k=DJI+Power+2000&tag=clickdecision-20",
-    "R600":              "https://www.amazon.com/s?k=Allpowers+R600&tag=clickdecision-20",
+    "R600":              "https://www.awin1.com/cread.php?awinmid=40342&awinaffid=2929639&ued=https://iallpowers.com/products/allpowersportable-power-station-r600-600w-299wh-with-lifep04-battery",
     "R1500 LITE":        "https://www.awin1.com/cread.php?awinmid=40342&awinaffid=2929639&ued=https://iallpowers.com/products/allpowers-r1500-lite-portable-power-station",
     "S2000 Pro":         "https://www.awin1.com/cread.php?awinmid=40342&awinaffid=2929639&ued=https://iallpowers.com/products/allpowers-s2000-pro-solar-generator-portable-power-station-2400w-1500wh-with-solar-panels",
     "R2500":             "https://www.awin1.com/cread.php?awinmid=40342&awinaffid=2929639&ued=https://iallpowers.com/products/allpowers-r2500-portable-home-backup-power-station-2500w-2016wh",
