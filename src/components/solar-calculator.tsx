@@ -93,6 +93,11 @@ export const PRODUCTS = [
   // ─── Jackery legacy & new models ─────────────────────────────────────────
   { brand:"Jackery", model:"Explorer 500 v2",    price:299,  wh:512,  surge:1000, solar:200,  ups:true,  expandable:false, weight:14,   warranty:3, scores:{home_backup:5,rv:7,camping:9,off_grid:4,apartment:6,medical:5,value:9}, notes:"512Wh LFP 6000 cycles. UPS. 14 lbs ultralight. Best Jackery value under $300." },
   { brand:"Jackery", model:"Explorer 500",        price:249,  wh:518,  surge:1000, solar:100,  ups:false, expandable:false, weight:13.3, warranty:2, scores:{home_backup:4,rv:7,camping:9,off_grid:3,apartment:5,medical:3,value:8}, notes:"Legacy 518Wh NMC. 500W continuous. 1000W surge. Still widely sold." },
+  { brand:"Jackery", model:"Explorer 100 Plus",   price:149,  wh:99,   surge:128,  solar:60,   ups:false, expandable:false, weight:2.13, warranty:2, scores:{home_backup:1,rv:4,camping:6,off_grid:2,apartment:5,medical:1,value:7}, notes:"Pocket-sized 99Wh LFP. 128W output. Airline-safe (<100Wh). 2000 cycles." },
+  { brand:"Jackery", model:"Explorer 240 v2",     price:349,  wh:256,  surge:600,  solar:100,  ups:false, expandable:false, weight:7.3,  warranty:2, scores:{home_backup:2,rv:5,camping:7,off_grid:3,apartment:5,medical:2,value:7}, notes:"256Wh LFP, 300W continuous. Compact entry-level v2 generation." },
+  { brand:"Jackery", model:"Explorer 700 Plus",   price:999,  wh:680,  surge:1500, solar:200,  ups:false, expandable:false, weight:22,   warranty:5, scores:{home_backup:5,rv:7,camping:8,off_grid:4,apartment:6,medical:5,value:6}, notes:"680Wh LFP. Sold as Solar Generator 700 Plus bundle. 3yr+2yr extended warranty." },
+  { brand:"Jackery", model:"Explorer 880 Pro",    price:999,  wh:880,  surge:2000, solar:200,  ups:false, expandable:false, weight:24.25,warranty:2, scores:{home_backup:6,rv:7,camping:8,off_grid:5,apartment:6,medical:5,value:6}, notes:"880Wh NMC. 1000W continuous, 2000W peak. App control via Wi-Fi/Bluetooth." },
+  { brand:"Jackery", model:"Explorer 5000 Plus",  price:4299, wh:5040, surge:7200, solar:4000, ups:true,  expandable:true,  weight:99,   warranty:5, scores:{home_backup:10,rv:3,camping:1,off_grid:9,apartment:1,medical:9,value:5}, notes:"5040Wh LFP. 3600W continuous/7200W peak. Expandable to 10kWh double kit. Whole-home backup tier." },
   { brand:"Jackery", model:"Explorer 1000 Pro",   price:699,  wh:1002, surge:2000, solar:400,  ups:false, expandable:false, weight:25.4, warranty:2, scores:{home_backup:6,rv:7,camping:7,off_grid:5,apartment:6,medical:4,value:7}, notes:"1002Wh NMC. 1000W continuous 2000W surge. No UPS. Legacy still popular." },
   { brand:"Jackery", model:"Explorer 2000 Pro",   price:1299, wh:2042, surge:4400, solar:800,  ups:false, expandable:false, weight:43,   warranty:2, scores:{home_backup:8,rv:6,camping:3,off_grid:7,apartment:3,medical:5,value:5}, notes:"2042Wh NMC. 2200W continuous 4400W surge. No UPS. Legacy flagship." },
   // ─── Goal Zero ────────────────────────────────────────────────────────────
@@ -101,6 +106,7 @@ export const PRODUCTS = [
   // ─── Bluetti compact ──────────────────────────────────────────────────────
   { brand:"Bluetti", model:"EB55",                price:349,  wh:537,  surge:1400, solar:200,  ups:false, expandable:false, weight:17.6, warranty:2, scores:{home_backup:5,rv:6,camping:7,off_grid:4,apartment:6,medical:4,value:7}, notes:"537Wh NMC. 700W continuous 1400W surge. Compact entry model. No UPS." },
   { brand:"Bluetti", model:"EB70",                price:449,  wh:716,  surge:1400, solar:200,  ups:false, expandable:false, weight:21.4, warranty:2, scores:{home_backup:5,rv:7,camping:8,off_grid:5,apartment:6,medical:4,value:7}, notes:"716Wh NMC. 1000W continuous 1400W surge. Popular camping size. No UPS." },
+  { brand:"Bluetti", model:"EB70S",               price:429,  wh:716,  surge:1400, solar:200,  ups:false, expandable:false, weight:21.4, warranty:2, scores:{home_backup:5,rv:7,camping:8,off_grid:5,apartment:6,medical:4,value:8}, notes:"Same 716Wh capacity as EB70 with 800W continuous rating, slightly lower price. Newer revision." },
   // ─── EcoFlow legacy ───────────────────────────────────────────────────────
   { brand:"EcoFlow", model:"RIVER Pro",           price:399,  wh:720,  surge:1800, solar:200,  ups:true,  expandable:true,  weight:16,   warranty:5, scores:{home_backup:5,rv:6,camping:8,off_grid:5,apartment:6,medical:5,value:7}, notes:"Legacy 720Wh NMC. 600W with X-Boost 1800W. UPS. Still widely searched." },
   { brand:"EcoFlow", model:"DELTA Max",           price:1099, wh:2016, surge:5000, solar:800,  ups:true,  expandable:true,  weight:48.5, warranty:5, scores:{home_backup:8,rv:6,camping:3,off_grid:7,apartment:4,medical:7,value:6}, notes:"Legacy 2016Wh NMC. 2400W continuous 5000W surge. UPS. Expandable to 6kWh." },
@@ -129,6 +135,7 @@ export const PRODUCTS = [
   // ─── Allpowers expanded ──────────────────────────────────────────────────
   { brand:"Allpowers", model:"R600",              price:199,  wh:299,  surge:600,  solar:100,  ups:false, expandable:false, weight:8.4,  warranty:2, scores:{home_backup:3,rv:5,camping:9,off_grid:2,apartment:5,medical:3,value:9}, notes:"299Wh LFP. 600W continuous. Ultralight 8.4 lbs. Best budget camping." },
   { brand:"Allpowers", model:"R4000",             price:1299, wh:3456, surge:8000, solar:1200, ups:true,  expandable:false, weight:88,   warranty:2, scores:{home_backup:9,rv:5,camping:2,off_grid:8,apartment:2,medical:8,value:7}, notes:"3456Wh LFP. 4000W continuous 8000W surge. UPS. Heavy home unit." },
+  { brand:"Allpowers", model:"R3500",             price:1499, wh:3168, surge:6400, solar:1000, ups:true,  expandable:false, weight:80,   warranty:2, scores:{home_backup:8,rv:5,camping:2,off_grid:7,apartment:2,medical:7,value:6}, notes:"3168Wh LFP. 3200W continuous. UPS. Mid-tier between R2500 and R4000." },
   // ─── OUPES compact ────────────────────────────────────────────────────────
   { brand:"OUPES", model:"600 Lite",              price:229,  wh:596,  surge:1200, solar:200,  ups:true,  expandable:false, weight:14.7, warranty:5, scores:{home_backup:4,rv:6,camping:8,off_grid:3,apartment:6,medical:5,value:9}, notes:"596Wh LFP. 600W continuous. UPS. Budget compact with UPS. 5yr warranty." },
   // ─── DJI Power expanded ───────────────────────────────────────────────────
@@ -605,6 +612,13 @@ export function ComparisonTable({ picks, requiredWh, requiredSurge, needsUps, sc
 // Real manufacturer/Amazon CDN images, sourced and verified. Falls back to
 // a gradient placeholder for the ~half of the catalog still pending sourcing.
 const PRODUCT_IMAGES: Record<string, string> = {
+  "Explorer 100 Plus": "https://www.jackery.com/cdn/shop/files/jackery-explorer-100-plus-portable-power-stationrefurbished-5131934.jpg?v=1754016781&width=800",
+  "Explorer 240 v2": "https://www.jackery.com/cdn/shop/files/jackery-solar-generator-240-v2-refurbished-8233691.jpg?v=1754016790&width=800",
+  "Explorer 700 Plus": "https://www.jackery.com/cdn/shop/files/jackery-solar-generator-700-plus-9476992.jpg?v=1754016918&width=1001",
+  "Explorer 880 Pro": "https://www.jackery.com/cdn/shop/files/jackery-solar-generator-880-pro-refurbished-1666832.png?v=1754016788&width=800",
+  "Explorer 5000 Plus": "https://www.jackery.com/cdn/shop/files/jackery-explorer-5000-plusrefurbished-2945283.png?v=1773394891&width=800",
+  "EB70S": "https://checkout.bluettipower.com/cdn/shop/files/EB70s_55c2969f-df64-4f7d-a00d-5ffeec029c19.png?v=1709802027&width=1024",
+  "R3500": "https://iallpowers.com/cdn/shop/files/R3500-US-03.jpg?v=1772000632&width=1024",
   "S2000 Pro": "https://iallpowers.com/cdn/shop/files/ALLPOWERS_S2000Pro_b08588cd-542f-4060-9ec7-a3c577209.jpg?v=1772000600&width=1024",
   "R2500": "https://iallpowers.com/cdn/shop/files/R2500-US-03.jpg?v=1772000600&width=1024",
   "R600": "https://iallpowers.com/cdn/shop/files/R600-US-03.jpg?v=1772000600&width=1024",
@@ -747,6 +761,11 @@ export function ResultCard({ pick, accentColor, scoreKey }: { pick: PickResult; 
     // ─── Jackery — Awin deep links (VERIFIED WORKING) ────────────────────────
     "Explorer 300 Plus":  "https://www.awin1.com/cread.php?awinmid=59183&awinaffid=2929639&ued=https://www.jackery.com/products/jackery-explorer-300-plus-portable-power-station",
     "Explorer 500":       "https://www.awin1.com/cread.php?awinmid=59183&awinaffid=2929639&ued=https://www.jackery.com/products/explorer-500w-portable-power-station",
+    "Explorer 100 Plus":  "https://www.awin1.com/cread.php?awinmid=59183&awinaffid=2929639&ued=https://www.jackery.com/products/jackery-explorer-100-plus-portable-power-station",
+    "Explorer 240 v2":    "https://www.awin1.com/cread.php?awinmid=59183&awinaffid=2929639&ued=https://www.jackery.com/products/jackery-solar-generator-240-v2",
+    "Explorer 700 Plus":  "https://www.awin1.com/cread.php?awinmid=59183&awinaffid=2929639&ued=https://www.jackery.com/products/jackery-solar-generator-700-plus",
+    "Explorer 880 Pro":   "https://www.awin1.com/cread.php?awinmid=59183&awinaffid=2929639&ued=https://www.jackery.com/products/jackery-solar-generator-880-pro",
+    "Explorer 5000 Plus": "https://www.awin1.com/cread.php?awinmid=59183&awinaffid=2929639&ued=https://www.jackery.com/products/jackery-explorer-5000-plus",
     "Explorer 500 v2":    "https://www.awin1.com/cread.php?awinmid=59183&awinaffid=2929639&ued=https://www.jackery.com/products/explorer-500-v2-series",
     "Explorer 600 Plus":  "https://www.awin1.com/cread.php?awinmid=59183&awinaffid=2929639&ued=https://www.jackery.com/products/jackery-explorer-600-plus-portable-power-station",
     "Explorer 1000 Plus": "https://www.awin1.com/cread.php?awinmid=59183&awinaffid=2929639&ued=https://www.jackery.com/products/jackery-explorer-1000-plus-portable-power-station",
@@ -760,6 +779,7 @@ export function ResultCard({ pick, accentColor, scoreKey }: { pick: PickResult; 
     "EB3A":      "https://www.awin1.com/cread.php?awinmid=59271&awinaffid=2929639&ued=https://www.bluettipower.com/products/bluetti-eb3a-portable-power-station",
     "EB55":      "https://www.awin1.com/cread.php?awinmid=59271&awinaffid=2929639&ued=https://www.bluettipower.com/products/eb55",
     "EB70":      "https://www.awin1.com/cread.php?awinmid=59271&awinaffid=2929639&ued=https://www.bluettipower.com/products/eb70",
+    "EB70S":     "https://www.awin1.com/cread.php?awinmid=59271&awinaffid=2929639&ued=https://www.bluettipower.com/products/eb70s-716wh-800w-portable-power-station-best-solar-generator-for-camping",
     "AC60":      "https://www.awin1.com/cread.php?awinmid=59271&awinaffid=2929639&ued=https://www.bluettipower.com/products/ac60",
     "AC70":      "https://www.awin1.com/cread.php?awinmid=59271&awinaffid=2929639&ued=https://www.bluettipower.com/products/ac70",
     "AC180":     "https://www.awin1.com/cread.php?awinmid=59271&awinaffid=2929639&ued=https://www.bluettipower.com/products/ac180",
@@ -810,6 +830,7 @@ export function ResultCard({ pick, accentColor, scoreKey }: { pick: PickResult; 
     "S2000 Pro":         "https://www.awin1.com/cread.php?awinmid=40342&awinaffid=2929639&ued=https://iallpowers.com/products/allpowers-s2000-pro-solar-generator-portable-power-station-2400w-1500wh-with-solar-panels",
     "R2500":             "https://www.awin1.com/cread.php?awinmid=40342&awinaffid=2929639&ued=https://iallpowers.com/products/allpowers-r2500-portable-home-backup-power-station-2500w-2016wh",
     "R4000":             "https://www.awin1.com/cread.php?awinmid=40342&awinaffid=2929639&ued=https://iallpowers.com/products/allpowers-r4000-power-station",
+    "R3500":             "https://www.awin1.com/cread.php?awinmid=40342&awinaffid=2929639&ued=https://iallpowers.com/products/allpowers-r3500-portable-power-station-3200w-3168wh",
     "Mega 1":            "https://www.amazon.com/s?k=OUPES+Mega+1&tag=clickdecision-20",
     "Mega 2":            "https://www.amazon.com/s?k=OUPES+Mega+2&tag=clickdecision-20",
     "Mega 3":            "https://www.amazon.com/s?k=OUPES+Mega+3&tag=clickdecision-20",
