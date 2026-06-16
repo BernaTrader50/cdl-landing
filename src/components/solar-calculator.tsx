@@ -736,7 +736,7 @@ export function ResultCard({ pick, accentColor, scoreKey }: { pick: PickResult; 
     "DELTA 3 Ultra Plus": "https://www.awin1.com/cread.php?awinmid=59181&awinaffid=2929639&ued=https://us.ecoflow.com/products/delta-3-ultra-plus-portable-power-station",
     "DELTA 2":            "https://www.awin1.com/cread.php?awinmid=59181&awinaffid=2929639&ued=https://us.ecoflow.com/products/delta-2-portable-power-station",
     "DELTA 2 Max":        "https://www.awin1.com/cread.php?awinmid=59181&awinaffid=2929639&ued=https://us.ecoflow.com/products/delta-2-max-portable-power-station",
-    "DELTA Max":          "https://www.amazon.com/s?k=EcoFlow+DELTA+Max+2000&tag=clickdecision-20",
+    "DELTA Max":          "https://www.awin1.com/cread.php?awinmid=59181&awinaffid=2929639&ued=https://us.ecoflow.com/products/delta-max-cover",
     "DELTA Mini":         "https://www.awin1.com/cread.php?awinmid=59181&awinaffid=2929639&ued=https://us.ecoflow.com/products/delta-mini-portable-power-station",
     "DELTA Pro":          "https://www.awin1.com/cread.php?awinmid=59181&awinaffid=2929639&ued=https://us.ecoflow.com/products/delta-pro-portable-power-station",
     "DELTA Pro 3":        "https://www.awin1.com/cread.php?awinmid=59181&awinaffid=2929639&ued=https://us.ecoflow.com/products/delta-pro-3-portable-power-station",
