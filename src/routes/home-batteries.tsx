@@ -526,9 +526,6 @@ function HomeBatteryPage() {
             </h2>
             <p className="mt-3 text-amber-600 text-sm font-medium">Illustrative sample — full 32-system dataset in progress</p>
           </div>
-          <a href="#" className="text-sm font-semibold text-[#2563eb] inline-flex items-center gap-1">
-            View full database <ArrowUpRight className="h-4 w-4" />
-          </a>
         </div>
 
         <div className="border border-neutral-200 rounded-xl overflow-hidden">
@@ -584,7 +581,7 @@ function HomeBatteryPage() {
               Every metric sourced from manufacturer datasheets and verified against independent
               efficiency tests. We show winners — and we show trade-offs.
             </p>
-            <a href="#" className="mt-6 inline-flex items-center gap-2 text-sm font-semibold text-[#2563eb]">
+            <a href="/comparisons" className="mt-6 inline-flex items-center gap-2 text-sm font-semibold text-[#2563eb]">
               View all comparisons <ArrowUpRight className="h-4 w-4" />
             </a>
           </div>
@@ -635,7 +632,7 @@ function HomeBatteryPage() {
             <div className="mt-6 text-xs font-mono text-neutral-400">
               Methodology v1.0 · 14-day rolling window
             </div>
-            <a href="#" className="mt-2 inline-flex items-center gap-2 text-sm font-semibold text-[#2563eb]">
+            <a href="/methodology" className="mt-2 inline-flex items-center gap-2 text-sm font-semibold text-[#2563eb]">
               Read protocol <ArrowUpRight className="h-4 w-4" />
             </a>
           </div>
@@ -789,10 +786,10 @@ function HomeBatteryPage() {
             <ul className="divide-y divide-neutral-100">
               {RESEARCH.map((r) => (
                 <li key={r}>
-                  <a href="#" className="flex items-center justify-between py-3 text-sm text-neutral-700 hover:text-[#2563eb] group">
+                  <div className="flex items-center justify-between py-3 text-sm text-neutral-700">
                     <span>{r}</span>
-                    <ArrowUpRight className="h-4 w-4 text-neutral-300 group-hover:text-[#2563eb]" />
-                  </a>
+                    <span className="text-[10px] font-mono text-neutral-300 uppercase">Coming soon</span>
+                  </div>
                 </li>
               ))}
             </ul>

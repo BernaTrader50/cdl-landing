@@ -362,7 +362,7 @@ function Home() {
             </h2>
             <p className="mt-3 text-neutral-500 text-sm">Last sync: 2 hours ago</p>
           </div>
-          <a href="#" className="text-sm font-semibold text-[#2563eb] inline-flex items-center gap-1">
+          <a href="/runtime-database" className="text-sm font-semibold text-[#2563eb] inline-flex items-center gap-1">
             View full database <ArrowUpRight className="h-4 w-4" />
           </a>
         </div>
@@ -420,7 +420,7 @@ function Home() {
               Every metric sourced from manufacturer datasheets and verified against independent
               runtime tests. We show winners — and we show trade-offs.
             </p>
-            <a href="#" className="mt-6 inline-flex items-center gap-2 text-sm font-semibold text-[#2563eb]">
+            <a href="/comparisons" className="mt-6 inline-flex items-center gap-2 text-sm font-semibold text-[#2563eb]">
               View all comparisons <ArrowUpRight className="h-4 w-4" />
             </a>
           </div>
@@ -475,7 +475,7 @@ function Home() {
             <div className="mt-6 text-xs font-mono text-neutral-400">
               Methodology v2.3 · 14-day rolling window
             </div>
-            <a href="#" className="mt-2 inline-flex items-center gap-2 text-sm font-semibold text-[#2563eb]">
+            <a href="/methodology" className="mt-2 inline-flex items-center gap-2 text-sm font-semibold text-[#2563eb]">
               Read protocol <ArrowUpRight className="h-4 w-4" />
             </a>
           </div>
@@ -687,16 +687,16 @@ function Home() {
             </p>
           </div>
           {[
-            ["Labs", ["Solar Generators", "Home Batteries", "EV Chargers", "Backup Power"]],
-            ["Research", ["Live database", "Comparisons", "Active threads", "Methodology"]],
-            ["Platform", ["About", "Changelog", "Blog", "Contact"]],
+            ["Labs", [["Solar Generators","/solar-calculator"], ["Home Batteries","/home-batteries"], ["EV Chargers","/ev-chargers"], ["Backup Power","/backup-power"]]],
+            ["Research", [["Live database","/runtime-database"], ["Comparisons","/comparisons"], ["Technical Analysis","/technical-analysis"], ["Methodology","/methodology"]]],
+            ["Platform", [["Blog","/blog"], ["Contact","mailto:hello@clickdecisionlab.com"]]],
           ].map(([h, items]) => (
             <div key={h as string}>
               <div className="text-xs font-mono uppercase tracking-wider text-neutral-400 mb-3">{h}</div>
               <ul className="space-y-2">
-                {(items as string[]).map((i) => (
-                  <li key={i}>
-                    <a href="#" className="text-neutral-600 hover:text-[#2563eb]">{i}</a>
+                {(items as [string, string][]).map(([label, href]) => (
+                  <li key={label}>
+                    <a href={href} className="text-neutral-600 hover:text-[#2563eb]">{label}</a>
                   </li>
                 ))}
               </ul>
