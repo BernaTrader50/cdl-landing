@@ -77,92 +77,157 @@ const SOLARS = [
   { id: "no", label: "No, generator-only", icon: Flame },
 ];
 
-const PICKS = [
+type BPScores = { whole: number; essentials: number; offgrid: number; storm: number; hybrid: number; value: number };
+type BPFuelType = "dual" | "battery";
+type BPProduct = {
+  brand: string; model: string; price: number; kwNum: number; kw: string; surge: string;
+  fuel: string; fuelType: BPFuelType; transfer: string; noise: string; warranty: string;
+  ats: boolean; app: boolean; install: "Professional" | "DIY / Both";
+  scores: BPScores; verdict: string; affiliate: string;
+};
+
+export const BP_PRODUCTS: BPProduct[] = [
   {
-    tier: "Top Match",
-    accentText: "text-[#2563eb]",
-    border: "border-t-[#2563eb]",
-    btn: "bg-[#2563eb] hover:bg-[#1d4ed8]",
-    img: "linear-gradient(135deg, #dbeafe, #93c5fd)",
-    brand: "Generac",
-    model: "Guardian 22kW",
-    price: 4999,
-    score: 9.2,
-    kw: "22 kW",
-    surge: "23.6 kW",
-    fuel: "NG / LP",
-    transfer: "200A Auto",
-    noise: "67 dB",
-    warranty: "5 yr",
-    whole: 9.6,
-    essentials: 9.0,
-    offgrid: 5.5,
-    storm: 9.5,
-    hybrid: 6.5,
-    value: 7.8,
-    ats: true,
-    app: true,
-    install: "Professional",
+    brand: "Generac", model: "Guardian 22kW", price: 4999, kwNum: 22, kw: "22 kW", surge: "23.6 kW",
+    fuel: "NG / LP", fuelType: "dual", transfer: "200A Auto", noise: "67 dB", warranty: "5 yr",
+    ats: true, app: true, install: "Professional",
+    scores: { whole: 9.6, essentials: 9.0, offgrid: 5.5, storm: 9.5, hybrid: 6.5, value: 7.8 },
     verdict: "Best for true whole-home coverage: automatic transfer switch, unlimited runtime on natural gas, sized for AC + well pump simultaneously.",
     affiliate: "https://www.amazon.com/s?k=Generac+Guardian+22kW&tag=clickdecision-20",
   },
   {
-    tier: "#2 Match",
-    accentText: "text-emerald-600",
-    border: "border-t-emerald-500",
-    btn: "bg-emerald-500 hover:bg-emerald-600",
-    img: "linear-gradient(135deg, #d1fae5, #6ee7b7)",
-    brand: "EcoFlow",
-    model: "DELTA Pro Ultra + Smart Panel",
-    price: 7200,
-    score: 8.8,
-    kw: "7.2 kW",
-    surge: "14.4 kW",
-    fuel: "None (battery)",
-    transfer: "Smart panel",
-    noise: "0 dB",
-    warranty: "5 yr",
-    whole: 7.5,
-    essentials: 9.2,
-    offgrid: 9.4,
-    storm: 8.5,
-    hybrid: 9.6,
-    value: 7.0,
-    ats: true,
-    app: true,
-    install: "DIY / Both",
+    brand: "EcoFlow", model: "DELTA Pro Ultra + Smart Panel", price: 7200, kwNum: 7.2, kw: "7.2 kW", surge: "14.4 kW",
+    fuel: "None (battery)", fuelType: "battery", transfer: "Smart panel", noise: "0 dB", warranty: "5 yr",
+    ats: true, app: true, install: "DIY / Both",
+    scores: { whole: 7.5, essentials: 9.2, offgrid: 9.4, storm: 8.5, hybrid: 9.6, value: 7.0 },
     verdict: "Best hybrid pick: pairs with solar for silent, fuel-free backup of essential circuits, with generator as fallback for extended outages.",
     affiliate: "https://www.amazon.com/s?k=EcoFlow+DELTA+Pro+Ultra&tag=clickdecision-20",
   },
   {
-    tier: "#3 Match",
-    accentText: "text-violet-600",
-    border: "border-t-violet-500",
-    btn: "bg-violet-500 hover:bg-violet-600",
-    img: "linear-gradient(135deg, #ede9fe, #c4b5fd)",
-    brand: "Champion",
-    model: "14kW Dual Fuel Standby",
-    price: 3199,
-    score: 8.3,
-    kw: "14 kW",
-    surge: "15.4 kW",
-    fuel: "NG / LP (dual)",
-    transfer: "200A Auto",
-    noise: "65 dB",
-    warranty: "5 yr",
-    whole: 8.2,
-    essentials: 8.6,
-    offgrid: 6.0,
-    storm: 8.4,
-    hybrid: 6.0,
-    value: 9.4,
-    ats: true,
-    app: false,
-    install: "Professional",
+    brand: "Champion", model: "14kW Dual Fuel Standby", price: 3199, kwNum: 14, kw: "14 kW", surge: "15.4 kW",
+    fuel: "NG / LP (dual)", fuelType: "dual", transfer: "200A Auto", noise: "65 dB", warranty: "5 yr",
+    ats: true, app: false, install: "Professional",
+    scores: { whole: 8.2, essentials: 8.6, offgrid: 6.0, storm: 8.4, hybrid: 6.0, value: 9.4 },
     verdict: "Best $/kW installed: dual-fuel flexibility and automatic transfer switch at the lowest price in this class, with a smaller margin above essential loads.",
     affiliate: "https://www.amazon.com/s?k=Champion+14kW+Dual+Fuel+Standby&tag=clickdecision-20",
   },
+  {
+    brand: "Generac", model: "Guardian 11kW", price: 2899, kwNum: 11, kw: "11 kW", surge: "12.5 kW",
+    fuel: "NG / LP", fuelType: "dual", transfer: "100A Auto", noise: "63 dB", warranty: "5 yr",
+    ats: true, app: true, install: "Professional",
+    scores: { whole: 6.0, essentials: 9.4, offgrid: 5.5, storm: 8.5, hybrid: 6.0, value: 8.8 },
+    verdict: "Right-sized for essential circuits (fridge, lights, well, sump) — Generac's Quiet-Test mode and Mobile Link app at the lowest entry price in the lineup.",
+    affiliate: "https://www.amazon.com/s?k=Generac+Guardian+11kW&tag=clickdecision-20",
+  },
+  {
+    brand: "Generac", model: "Guardian 26kW", price: 9999, kwNum: 26, kw: "26 kW", surge: "28 kW",
+    fuel: "NG / LP", fuelType: "dual", transfer: "200-800A Auto", noise: "68 dB", warranty: "5 yr",
+    ats: true, app: true, install: "Professional",
+    scores: { whole: 9.9, essentials: 9.0, offgrid: 6.0, storm: 9.7, hybrid: 6.8, value: 6.5 },
+    verdict: "Largest residential Generac — covers multiple AC units plus heavy loads simultaneously; liquid-cooled tier with the highest installed cost here.",
+    affiliate: "https://www.amazon.com/s?k=Generac+Guardian+26kW&tag=clickdecision-20",
+  },
+  {
+    brand: "Briggs & Stratton", model: "22kW PowerProtect", price: 5899, kwNum: 22, kw: "22 kW", surge: "23 kW",
+    fuel: "NG / LP", fuelType: "dual", transfer: "100-400A Auto", noise: "66 dB", warranty: "5 yr",
+    ats: true, app: true, install: "Professional",
+    scores: { whole: 9.4, essentials: 8.8, offgrid: 5.8, storm: 9.3, hybrid: 6.3, value: 8.2 },
+    verdict: "Same power class as the Generac 22kW for less upfront cost — purpose-built cold-weather hardware (battery and oil warmers) for harsh climates.",
+    affiliate: "https://www.amazon.com/s?k=Briggs+Stratton+22kW+PowerProtect&tag=clickdecision-20",
+  },
+  {
+    brand: "Kohler", model: "14RESA", price: 4399, kwNum: 14, kw: "14 kW", surge: "17.5 kW",
+    fuel: "NG / LP", fuelType: "dual", transfer: "RXT Auto", noise: "65 dB", warranty: "5 yr / 2,000 hr",
+    ats: true, app: true, install: "Professional",
+    scores: { whole: 8.0, essentials: 8.8, offgrid: 6.0, storm: 8.6, hybrid: 6.0, value: 7.5 },
+    verdict: "PowerBoost technology gives strong motor-starting headroom (35 kVA peak) for central AC — smaller dealer network than Generac/Champion in most regions.",
+    affiliate: "https://www.amazon.com/s?k=Kohler+14RESA&tag=clickdecision-20",
+  },
+  {
+    brand: "Bluetti", model: "AC500 + 2x B300S", price: 4999, kwNum: 5, kw: "5 kW", surge: "10 kW",
+    fuel: "None (battery)", fuelType: "battery", transfer: "Smart panel", noise: "0 dB", warranty: "4 yr",
+    ats: false, app: true, install: "DIY / Both",
+    scores: { whole: 6.5, essentials: 9.0, offgrid: 9.0, storm: 8.0, hybrid: 9.2, value: 8.0 },
+    verdict: "Modular LFP backup starting at 6.1 kWh and expandable to 18.4 kWh — strong solar input (8,000W with 2+ packs) for sustained off-grid use.",
+    affiliate: "https://www.amazon.com/s?k=Bluetti+AC500+B300S&tag=clickdecision-20",
+  },
+  {
+    brand: "Anker SOLIX", model: "F3800 + Home Power Panel", price: 4694, kwNum: 6, kw: "6 kW", surge: "12 kW",
+    fuel: "None (battery)", fuelType: "battery", transfer: "Smart panel", noise: "0 dB", warranty: "5 yr",
+    ats: false, app: true, install: "DIY / Both",
+    scores: { whole: 7.0, essentials: 9.0, offgrid: 9.0, storm: 8.2, hybrid: 9.4, value: 8.5 },
+    verdict: "Highest continuous output of the battery-based picks (6kW/unit, 12kW with Double Power Hub) — EV-grade cells rated 3,000 cycles, expandable to 53.8 kWh.",
+    affiliate: "https://www.amazon.com/s?k=Anker+SOLIX+F3800+Home+Power+Panel&tag=clickdecision-20",
+  },
+  {
+    brand: "Westinghouse", model: "WGen9500DF", price: 1299, kwNum: 9.5, kw: "9.5 kW", surge: "12.5 kW",
+    fuel: "Dual Fuel (gas/LP)", fuelType: "dual", transfer: "Manual / transfer-switch ready", noise: "72 dB", warranty: "3 yr",
+    ats: false, app: false, install: "DIY / Both",
+    scores: { whole: 4.5, essentials: 7.5, offgrid: 6.5, storm: 6.0, hybrid: 3.5, value: 9.6 },
+    verdict: "Lowest entry cost here — a portable dual-fuel unit that covers essentials with a manual transfer switch; no automatic switchover or app.",
+    affiliate: "https://www.amazon.com/s?k=Westinghouse+WGen9500DF&tag=clickdecision-20",
+  },
+  {
+    brand: "DuroMax", model: "XP12000HX", price: 1799, kwNum: 9.5, kw: "9.5 kW", surge: "12 kW",
+    fuel: "Dual Fuel (gas/LP)", fuelType: "dual", transfer: "Manual / transfer-switch ready", noise: "74 dB", warranty: "3 yr",
+    ats: false, app: false, install: "DIY / Both",
+    scores: { whole: 5.5, essentials: 8.0, offgrid: 6.8, storm: 6.5, hybrid: 3.8, value: 9.2 },
+    verdict: "DIY off-grid favorite — electric start, dual fuel, and a low price per kW, but manual operation and no smart-home integration.",
+    affiliate: "https://www.amazon.com/s?k=DuroMax+XP12000HX&tag=clickdecision-20",
+  },
+  {
+    brand: "Champion", model: "8.5kW Home Standby", price: 1999, kwNum: 8.5, kw: "8.5 kW", surge: "10.5 kW",
+    fuel: "NG / LP", fuelType: "dual", transfer: "100A Auto", noise: "64 dB", warranty: "5 yr",
+    ats: true, app: false, install: "Professional",
+    scores: { whole: 5.0, essentials: 8.8, offgrid: 5.0, storm: 7.5, hybrid: 5.0, value: 9.5 },
+    verdict: "Smallest automatic-transfer standby here — covers essential circuits at the lowest standby price point with Champion's typical value-per-kW edge.",
+    affiliate: "https://www.amazon.com/s?k=Champion+8.5kW+Home+Standby&tag=clickdecision-20",
+  },
 ];
+
+const TIER_STYLES = [
+  { tier: "Top Match", accentText: "text-[#2563eb]", border: "border-t-[#2563eb]", btn: "bg-[#2563eb] hover:bg-[#1d4ed8]", img: "linear-gradient(135deg, #dbeafe, #93c5fd)" },
+  { tier: "#2 Match", accentText: "text-emerald-600", border: "border-t-emerald-500", btn: "bg-emerald-500 hover:bg-emerald-600", img: "linear-gradient(135deg, #d1fae5, #6ee7b7)" },
+  { tier: "#3 Match", accentText: "text-violet-600", border: "border-t-violet-500", btn: "bg-violet-500 hover:bg-violet-600", img: "linear-gradient(135deg, #ede9fe, #c4b5fd)" },
+];
+
+export type BPPick = BPProduct & { tier: string; accentText: string; border: string; btn: string; img: string; matchScore: number };
+
+export function computeBPAnalysis(goal: string, estimatedKw: number, fuel: string, solar: string) {
+  const dim = (["whole", "essentials", "offgrid", "storm", "hybrid", "value"].includes(goal) ? goal : "whole") as keyof BPScores;
+
+  const ranked = BP_PRODUCTS.map((p) => {
+    const dims = Object.keys(p.scores) as (keyof BPScores)[];
+    const others = dims.filter((k) => k !== dim);
+    const otherAvg = others.reduce((s, k) => s + p.scores[k], 0) / others.length;
+
+    let score = p.scores[dim] * 0.5 + otherAvg * 0.3;
+
+    // Size fit vs estimated connected load
+    const sizeFit = Math.max(0, 1 - Math.abs(p.kwNum - estimatedKw) / estimatedKw);
+    score += sizeFit * 0.3;
+    if (p.kwNum < estimatedKw * 0.75) score -= 0.5; // meaningfully undersized
+
+    // Fuel preference (only meaningful for fuel-type generators)
+    if (p.fuelType === "dual" && (fuel === "ng" || fuel === "lp" || fuel === "dual")) score += 0.3;
+    if (fuel === "diesel") score -= 0.1; // none of these run diesel — small honest penalty across the board
+
+    // Solar/battery preference
+    if ((solar === "yes" || solar === "planning") && p.fuelType === "battery") score += 0.4;
+    if (solar === "no" && p.fuelType === "dual") score += 0.2;
+
+    return { p, score: Math.round(score * 10) / 10 };
+  });
+
+  ranked.sort((a, b) => b.score - a.score);
+  const top3: BPPick[] = ranked.slice(0, 3).map((r, i) => ({
+    ...r.p,
+    ...TIER_STYLES[i],
+    matchScore: r.score,
+  }));
+
+  return { top3, eliminated: BP_PRODUCTS.length - 3, total: BP_PRODUCTS.length };
+}
 
 const CRITERIA = [
   { icon: Zap, title: "Power Capacity", desc: "Continuous + surge kW vs your connected load; sizing margin for motor start-up (AC, well pump)." },
@@ -183,9 +248,9 @@ const RESEARCH = [
 const DEV_STATUS = [
   "Scoring framework designed",
   "Evaluation criteria defined",
-  "Product database in progress",
-  "Dataset 0 / ~45 systems",
-  "Decision engine — in analysis",
+  "Product database — 12 systems live (45-system target)",
+  "Dataset 12 / ~45 systems",
+  "Decision engine — live, ranks 12 systems by goal/load/fuel/solar",
 ];
 
 const BP_DB_ROWS: Array<[string, string, string, string]> = [
@@ -255,9 +320,10 @@ function BackupPowerPage() {
     setSubmitted(true);
     if (typeof window !== "undefined" && (window as any).cdlTrack) {
       (window as any).cdlTrack("calculator_submit", { goal, loads: loads.join(","), fuel, solar, budget, estimatedKw });
+      const { top3 } = computeBPAnalysis(goal, estimatedKw, fuel, solar);
       (window as any).cdlTrack("result_view", {
         goal, estimatedKw,
-        top_recommendation: PICKS[0] ? `${PICKS[0].brand} ${PICKS[0].model}` : "none",
+        top_recommendation: top3[0] ? `${top3[0].brand} ${top3[0].model}` : "none",
       });
     }
     setTimeout(() => {
@@ -349,7 +415,7 @@ function BackupPowerPage() {
                 Backup Power Advisor
               </div>
               <div className="text-[10px] font-mono uppercase tracking-[0.18em] text-neutral-400">
-                45 systems · weekly
+                12 systems · weekly
               </div>
             </div>
 
@@ -518,13 +584,13 @@ function BackupPowerPage() {
               Find my system <ArrowUpRight className="h-4 w-4" />
             </button>
             <p className="text-[11px] text-center text-neutral-500">
-              See all 45 systems analyzed and top 3 matches
+              See all 12 systems analyzed and top 3 matches
             </p>
           </div>
         </div>
       </section>
 
-      {submitted && <ResultsBlock />}
+      {submitted && <ResultsBlock goal={goal} estimatedKw={estimatedKw} fuel={fuel} solar={solar} />}
 
       {/* CRITERIA */}
       <section className="bg-neutral-50 border-t border-neutral-200">
@@ -558,7 +624,7 @@ function BackupPowerPage() {
               Database in progress. Methodology defined.
             </h2>
             <div className="mt-3 flex items-center gap-3 flex-wrap">
-              <p className="text-neutral-500 text-sm">Dataset: 0 / ~45 systems</p>
+              <p className="text-neutral-500 text-sm">Dataset: 12 / ~45 systems</p>
               <span className="inline-flex items-center gap-1.5 text-[10px] font-mono uppercase tracking-wider text-amber-700 bg-amber-50 border border-amber-200 rounded-full px-2.5 py-1">
                 <span className="h-1.5 w-1.5 rounded-full bg-amber-500" />
                 Illustrative — not yet verified
@@ -861,7 +927,8 @@ function Stat({ label, value, sub }: { label: string; value: string; sub: string
   );
 }
 
-function ResultsBlock() {
+function ResultsBlock({ goal, estimatedKw, fuel, solar }: { goal: string; estimatedKw: number; fuel: string; solar: string }) {
+  const { top3: PICKS, eliminated, total } = computeBPAnalysis(goal, estimatedKw, fuel, solar);
   return (
     <section id="results" className="bg-neutral-50 border-t border-neutral-200">
       <div className="max-w-7xl mx-auto px-6 py-16">
@@ -870,8 +937,8 @@ function ResultsBlock() {
             Decision engine output
           </div>
           <h2 className="text-3xl lg:text-4xl font-bold tracking-tight">Your top 3 matches</h2>
-          <p className="mt-2 text-sm text-amber-600 font-medium">
-            Illustrative example based on publicly available specs — our 45-system verified scoring engine is in progress
+          <p className="mt-2 text-sm text-neutral-500">
+            Ranked from a {total}-system dataset (verified specs, real affiliate links) based on your goal, load, fuel and solar preference.
           </p>
         </div>
 
@@ -899,7 +966,7 @@ function ResultsBlock() {
                   </div>
                   <div className="text-right shrink-0">
                     <div className={`text-2xl font-bold ${p.accentText}`}>${p.price.toLocaleString()}</div>
-                    <div className="text-[10px] font-mono text-neutral-400">match {p.score}</div>
+                    <div className="text-[10px] font-mono text-neutral-400">match {p.matchScore}</div>
                   </div>
                 </div>
 
@@ -982,9 +1049,9 @@ function ResultsBlock() {
             <span className="text-xs font-mono text-neutral-400 group-open:rotate-180 transition-transform">▾</span>
           </summary>
           <div className="mt-4 space-y-3 text-sm text-neutral-600 leading-relaxed">
-            <p><strong className="text-neutral-900">Prioritized:</strong> sizing margin above your connected load, fuel availability, and transfer-switch automation based on your selected goal.</p>
-            <p><strong className="text-neutral-900">Eliminated:</strong> systems under your estimated capacity requirement, and generator-only units when "Solar + Battery Hybrid" was selected.</p>
-            <p><strong className="text-neutral-900">Trade-off:</strong> the Guardian 22kW covers every circuit but needs professional install; the DELTA Pro Ultra is DIY and silent but covers essentials only on battery alone.</p>
+            <p><strong className="text-neutral-900">Prioritized:</strong> sizing margin above your connected load, fuel/solar preference, and transfer-switch automation based on your selected goal.</p>
+            <p><strong className="text-neutral-900">{eliminated} not shown:</strong> the other {eliminated} of {total} systems scored lower for this combination — see the full comparison below or adjust your inputs above.</p>
+            <p><strong className="text-neutral-900">Trade-off:</strong> {PICKS[0]?.brand} {PICKS[0]?.model} ranks highest for this combination; {PICKS[2]?.brand} {PICKS[2]?.model} is the #3 alternative if its fuel type or install method fits better.</p>
           </div>
         </details>
 
