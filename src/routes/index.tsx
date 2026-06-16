@@ -226,7 +226,7 @@ function Home() {
 
             <div className="mt-10 grid grid-cols-2 sm:grid-cols-4 gap-6 max-w-2xl">
               {[
-                ["181", "Products tracked"],
+                ["177", "Products tracked"],
                 ["4", "Labs"],
                 ["0", "Articles published"],
                 ["0", "Sponsored rankings"],
@@ -562,7 +562,7 @@ function Home() {
               06 / Current research
             </div>
             <h2 className="text-3xl lg:text-4xl font-bold tracking-tight">Continuously evolving.</h2>
-            <p className="mt-3 text-sm text-neutral-500">6 active threads · monitoring 100 products</p>
+            <p className="mt-3 text-sm text-neutral-500">6 active threads · monitoring 104 products</p>
           </div>
         </div>
 
@@ -754,7 +754,7 @@ function HeroCalculator() {
           <span className="h-1.5 w-1.5 rounded-full bg-emerald-500 animate-pulse" />
           Solar Generator Calculator
         </div>
-        <span className="text-[11px] font-mono text-neutral-400">100 products · weekly</span>
+        <span className="text-[11px] font-mono text-neutral-400">104 products · weekly</span>
       </div>
 
       <div className="p-5 space-y-4">
@@ -915,7 +915,7 @@ function HeroCalculator() {
             Find my system <ArrowUpRight className="h-4 w-4" />
           </button>
           <p className="mt-2 text-[10px] text-center text-neutral-500">
-            See all 100 products analyzed and top 3 matches
+            See all 104 products analyzed and top 3 matches
           </p>
         </div>
       </div>

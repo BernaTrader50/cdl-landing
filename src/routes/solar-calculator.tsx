@@ -40,7 +40,7 @@ export const Route = createFileRoute("/solar-calculator")({
       {
         name: "description",
         content:
-          "Answer a few questions about your power needs. We match you to the right solar generator using engineering-grade scoring across 100 products.",
+          "Answer a few questions about your power needs. We match you to the right solar generator using engineering-grade scoring across 104 products.",
       },
     ],
   }),

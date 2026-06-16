@@ -1,6 +1,6 @@
 import { useState } from "react";
 
-// ─── DATASET (100 products — CDL Google Sheets) ──────────────────────────────
+// ─── DATASET (104 products — CDL Google Sheets) ──────────────────────────────
 export const PRODUCTS = [
   { brand:"EcoFlow", model:"RIVER 3", price:199, wh:220, surge:600, solar:110, ups:false, expandable:false, weight:6.6, warranty:5, scores:{home_backup:4,rv:6,camping:8,off_grid:3,apartment:7,medical:4,value:9}, notes:"Entry-level. Ideal for small devices & travel." },
   { brand:"EcoFlow", model:"RIVER 3 Plus", price:299, wh:440, surge:1200, solar:220, ups:false, expandable:false, weight:10.8, warranty:5, scores:{home_backup:5,rv:6,camping:8,off_grid:4,apartment:8,medical:5,value:8}, notes:"Best compact for camping & apartment emergencies." },

@@ -159,7 +159,7 @@ function TechnicalAnalysisHub() {
           <div className="mt-5 flex items-center gap-6 flex-wrap">
             {[
               "15 products analyzed",
-              "100 products in dataset",
+              "104 products in dataset",
               "7 use-case scores per product",
               "Updated quarterly",
             ].map(t => (
@@ -275,7 +275,7 @@ function TechnicalAnalysisHub() {
               Find your specific match →
             </p>
             <p className="mt-1 text-[12.5px] text-neutral-500">
-              Enter your scenario and we rank all 100 products for your requirements.
+              Enter your scenario and we rank all 104 products for your requirements.
             </p>
           </a>
           <a href="/comparisons"

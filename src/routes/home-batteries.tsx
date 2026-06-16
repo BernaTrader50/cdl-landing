@@ -722,7 +722,7 @@ function HomeBatteryPage() {
               06 / Current research
             </div>
             <h2 className="text-3xl lg:text-4xl font-bold tracking-tight">Continuously evolving.</h2>
-            <p className="mt-3 text-sm text-neutral-500">6 active threads · monitoring 32 systems</p>
+            <p className="mt-3 text-sm text-neutral-500">6 active threads · monitoring 12 systems</p>
           </div>
         </div>
 

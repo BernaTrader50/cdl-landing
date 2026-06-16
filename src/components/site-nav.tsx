@@ -29,9 +29,9 @@ export function Logo({ className = "" }: { className?: string }) {
 
 const labs = [
   { label: "Solar Generators", to: "/solar-calculator", status: "live"     },
-  { label: "EV Chargers",      to: "/ev-chargers",      status: "analysis" },
-  { label: "Home Batteries",   to: "/home-batteries",   status: "analysis" },
-  { label: "Backup Power",     to: "/backup-power",     status: "planned"  },
+  { label: "EV Chargers",      to: "/ev-chargers",      status: "live"     },
+  { label: "Home Batteries",   to: "/home-batteries",   status: "live"     },
+  { label: "Backup Power",     to: "/backup-power",     status: "live"     },
 ];
 
 const STATUS: Record<string, { text: string; color: string; bg: string }> = {
@@ -45,6 +45,7 @@ const tools = [
   { label: "Comparisons",        to: "/comparisons"        },
   { label: "Technical Analysis", to: "/technical-analysis" },
   { label: "Runtime DB",         to: "/runtime-database"   },
+  { label: "UPS DB",             to: "/ups-database"       },
   { label: "Research",           to: "/blog"               },
 ];
 
@@ -129,7 +130,7 @@ export function SiteNav() {
           {/* RIGHT: Open Lab, 320px, centered */}
           <div className="flex items-center justify-center" style={{ width: "320px", flexShrink: 0 }}>
             <Link to="/solar-calculator"
-              className="group inline-flex items-center gap-1.5 rounded-[8px] bg-neutral-950 px-4 py-2 text-[13px] font-semibold text-white transition-colors duration-200 hover:bg-[#2563EB]">
+              className="group inline-flex items-center gap-1.5 rounded-[8px] bg-[#2563EB] px-4 py-2 text-[13px] font-semibold text-white transition-colors duration-200 hover:bg-[#1d4ed8]">
               Open Lab
               <span className="transition-transform duration-200 group-hover:translate-x-0.5">→</span>
             </Link>

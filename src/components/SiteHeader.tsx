@@ -17,7 +17,7 @@ const LABS = [
     title: "Solar Generators",
     status: "Live",
     statusColor: "emerald",
-    count: "100 products",
+    count: "104 products",
     href: "/solar-calculator",
   },
   {
@@ -33,27 +33,27 @@ const LABS = [
     icon: BatteryCharging,
     code: "LAB-03",
     title: "Home Batteries",
-    status: "In Analysis",
-    statusColor: "amber",
-    count: "32 systems",
+    status: "Live",
+    statusColor: "emerald",
+    count: "12 systems",
     href: "/home-batteries",
   },
   {
     icon: Flame,
     code: "LAB-04",
     title: "Backup Power",
-    status: "Planned",
-    statusColor: "gray",
-    count: "Q4 2026",
+    status: "Live",
+    statusColor: "emerald",
+    count: "12 systems",
     href: "/backup-power",
   },
 ];
 
 const CALCULATORS = [
-  { href: "/?calc=solar", title: "Solar Generator", code: "LAB-01", icon: Sun },
-  { href: "/?calc=ev", title: "EV Charger", code: "LAB-02", icon: Plug },
-  { href: "/?calc=battery", title: "Home Battery", code: "LAB-03", icon: BatteryCharging },
-  { href: "/?calc=backup", title: "Backup Power", code: "LAB-04", icon: Flame },
+  { href: "/solar-calculator", title: "Solar Generator", code: "LAB-01", icon: Sun },
+  { href: "/ev-chargers", title: "EV Charger", code: "LAB-02", icon: Plug },
+  { href: "/home-batteries", title: "Home Battery", code: "LAB-03", icon: BatteryCharging },
+  { href: "/backup-power", title: "Backup Power", code: "LAB-04", icon: Flame },
 ];
 
 
@@ -129,7 +129,10 @@ export default function SiteHeader() {
           {NAV.filter((n) => n !== "Solar Lab" && n !== "Calculator").map((n) => {
             const HREFS: Record<string, string> = {
               Comparisons: "/comparisons",
+              Database: "/runtime-database",
               Methodology: "/methodology",
+              Research: "/blog",
+              Blog: "/blog",
             };
             return (
               <a key={n} href={HREFS[n] ?? "#"} className="hover:text-[#2563eb] transition-colors">

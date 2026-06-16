@@ -273,7 +273,7 @@ function RuntimeDatabase() {
             Exact runtime estimates for 49 solar generators across 5 use cases. Calculated from verified usable capacity with {Math.round(EFFICIENCY * 100)}% inverter efficiency. Typical and best-case estimates for real-world planning.
           </p>
           <div className="mt-4 flex items-center gap-5 flex-wrap">
-            {["100 products", "5 use cases", "Typical + best case", "Surge compatibility"].map(t => (
+            {["104 products", "5 use cases", "Typical + best case", "Surge compatibility"].map(t => (
               <span key={t} className="font-mono text-[10px] text-neutral-400 uppercase tracking-wider">{t}</span>
             ))}
           </div>
