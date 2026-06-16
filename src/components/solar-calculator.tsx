@@ -684,7 +684,7 @@ export function ResultCard({ pick, accentColor, scoreKey }: { pick: PickResult; 
     "DELTA Pro Ultra":    "https://www.awin1.com/cread.php?awinmid=59181&awinaffid=2929639&ued=https://us.ecoflow.com/products/delta-pro-ultra",
     // ─── Jackery — Awin deep links (VERIFIED WORKING) ────────────────────────
     "Explorer 300 Plus":  "https://www.awin1.com/cread.php?awinmid=59183&awinaffid=2929639&ued=https://www.jackery.com/products/jackery-explorer-300-plus-portable-power-station",
-    "Explorer 500":       "https://www.amazon.com/s?k=Jackery+Explorer+500&tag=clickdecision-20",
+    "Explorer 500":       "https://www.awin1.com/cread.php?awinmid=59183&awinaffid=2929639&ued=https://www.jackery.com/products/explorer-500w-portable-power-station",
     "Explorer 500 v2":    "https://www.awin1.com/cread.php?awinmid=59183&awinaffid=2929639&ued=https://www.jackery.com/products/jackery-explorer-500-v2-portable-power-station",
     "Explorer 600 Plus":  "https://www.awin1.com/cread.php?awinmid=59183&awinaffid=2929639&ued=https://www.jackery.com/products/jackery-explorer-600-plus-portable-power-station",
     "Explorer 1000 Plus": "https://www.awin1.com/cread.php?awinmid=59183&awinaffid=2929639&ued=https://www.jackery.com/products/jackery-explorer-1000-plus-portable-power-station",
