@@ -178,6 +178,16 @@ function MobileMenu() {
 }
 
 export default function SiteHeader() {
+  const [searchOpen, setSearchOpen] = useState(false);
+  const [searchQuery, setSearchQuery] = useState("");
+
+  const submitSearch = (e: React.FormEvent) => {
+    e.preventDefault();
+    if (searchQuery.trim()) {
+      window.location.href = `/?s=${encodeURIComponent(searchQuery.trim())}`;
+    }
+  };
+
   return (
     <header className="sticky top-0 z-40 bg-white border-b border-neutral-200">
       <div className="max-w-[1400px] mx-auto pl-4 pr-6 h-28 flex items-center gap-6">
@@ -253,9 +263,29 @@ export default function SiteHeader() {
           ))}
         </nav>
         <div className="flex items-center gap-3 ml-auto">
-          <button className="hidden sm:inline-flex h-9 w-9 items-center justify-center rounded-full border border-neutral-200 hover:bg-neutral-50">
-            <Search className="h-4 w-4" />
-          </button>
+          {searchOpen ? (
+            <form onSubmit={submitSearch} className="hidden sm:flex items-center gap-1">
+              <input
+                autoFocus
+                type="text"
+                value={searchQuery}
+                onChange={(e) => setSearchQuery(e.target.value)}
+                onBlur={() => { if (!searchQuery) setSearchOpen(false); }}
+                placeholder="Search articles..."
+                className="h-9 w-48 rounded-full border border-neutral-200 px-3 text-sm focus:outline-none focus:border-[#2563eb]"
+              />
+              <button type="button" onClick={() => { setSearchOpen(false); setSearchQuery(""); }}
+                aria-label="Close search"
+                className="inline-flex h-9 w-9 items-center justify-center rounded-full hover:bg-neutral-50">
+                <X className="h-4 w-4" />
+              </button>
+            </form>
+          ) : (
+            <button onClick={() => setSearchOpen(true)} aria-label="Open search"
+              className="hidden sm:inline-flex h-9 w-9 items-center justify-center rounded-full border border-neutral-200 hover:bg-neutral-50">
+              <Search className="h-4 w-4" />
+            </button>
+          )}
           <MobileMenu />
         </div>
       </div>
