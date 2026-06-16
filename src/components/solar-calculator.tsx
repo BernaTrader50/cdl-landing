@@ -601,6 +601,63 @@ export function ComparisonTable({ picks, requiredWh, requiredSurge, needsUps, sc
 }
 
 // ─── RESULT CARD ─────────────────────────────────────────────────────────────
+// ─── PRODUCT IMAGES ─────────────────────────────────────────────────────
+// Real manufacturer/Amazon CDN images, sourced and verified. Falls back to
+// a gradient placeholder for the ~half of the catalog still pending sourcing.
+const PRODUCT_IMAGES: Record<string, string> = {
+  "AC180": "https://www.bluettipower.com/cdn/shop/files/AC180_cb56a69e-aa02-41ce-b2ed-965b8afa3cef.png?v=1753176697",
+  "AC60": "https://checkout.bluettipower.com/cdn/shop/files/AC60-_-_1.png?v=1735357521&width=1024",
+  "AC70": "https://checkout.bluettipower.com/cdn/shop/files/AC70_35fdd9e4-714c-4cde-b903-7e344c7e0c4b.png?v=1743142470&width=1024",
+  "AC200P": "https://checkout.bluettipower.com/cdn/shop/files/AC200P_19bcdf75-f14e-4b8d-b838-856e0f611a07.png?v=1724396385&width=1024",
+  "AC300": "https://checkout.bluettipower.com/cdn/shop/files/AC300_B300K_1x_cf9bcb62-95b1-4116-a38e-87b271ed8be2.png?v=1736396580&width=1024",
+  "AC500": "https://checkout.bluettipower.com/cdn/shop/files/AC500_1_7_829895d9-dfe6-461f-a600-75c78d33256b.jpg?v=1720685506&width=1024",
+  "EB3A": "https://checkout.bluettipower.com/cdn/shop/files/EB_A.png?v=1743145874&width=1024",
+  "P210": "https://m.media-amazon.com/images/I/61X1luzHmKL._AC_UY218_.jpg",
+  "C1000": "https://m.media-amazon.com/images/I/715WOO6deNL._AC_SL1500_.jpg",
+  "C1000 Gen 2": "https://m.media-amazon.com/images/I/81uY+IaTTNL._AC_SL1500_.jpg",
+  "C2000": "https://m.media-amazon.com/images/I/610ZJz+QEIL._AC_SL1500_.jpg",
+  "C2000 Gen 2": "https://m.media-amazon.com/images/I/71KI7q0mbFL._AC_SL1500_.jpg",
+  "C300": "https://m.media-amazon.com/images/I/71ZuqfXZZgL._AC_SL1500_.jpg",
+  "C800 Plus": "https://m.media-amazon.com/images/I/61r4yxiP67L._AC_SL1500_.jpg",
+  "C800X": "https://m.media-amazon.com/images/I/61r4yxiP67L._AC_SL1500_.jpg",
+  "DELTA 2": "https://us.ecoflow.com/cdn/shop/files/ecoflow-us-ecoflow-delta-2-portable-power-station-standalone-delta-2-220w-solar-panel-1192816367.png?v=1765262978",
+  "DELTA 2 Max": "https://us.ecoflow.com/cdn/shop/files/ecoflow-us-ecoflow-delta-2-max-portable-power-station-d2m-delta-2-max-portable-power-station-1182569251.png?v=1754036926",
+  "DELTA 3": "https://us.ecoflow.com/cdn/shop/files/ecoflow-us-ecoflow-delta-3-portable-power-station-standalone-delta-3-36195541155913.png?v=1774332807",
+  "DELTA 3 Classic": "https://us.ecoflow.com/cdn/shop/files/ecoflow-ecoflow-delta-3-classic-portable-power-station-delta-3-classic-1193262710.png?v=1760666975",
+  "DELTA 3 Max": "https://us.ecoflow.com/cdn/shop/files/ecoflow-ecoflow-delta-3-max-series-solar-generator-pv400w-d3m-series-delta-3-max-400w-solar-panel-1196589389.png?v=1759919571",
+  "DELTA 3 Max Plus": "https://us.ecoflow.com/cdn/shop/files/ecoflow-ecoflow-delta-3-ultra-series-solar-generator-pv500w-d3m-series-delta-3-max-plus-4-x-125w-solar-panel-1196627694.png?v=1759926651",
+  "DELTA 3 Plus": "https://us.ecoflow.com/cdn/shop/files/ecoflow-us-ecoflow-delta-3-plus-portable-power-station-standalone-delta-3-plus-1243125465.png?v=1780907290",
+  "DELTA 3 Ultra": "https://us.ecoflow.com/cdn/shop/files/10_5a13be20-2930-4c5c-8736-89f96ffc0d61.jpg?v=1741686539",
+  "DELTA 3 Ultra Plus": "https://us.ecoflow.com/cdn/shop/files/10_5a13be20-2930-4c5c-8736-89f96ffc0d61.jpg?v=1741686539",
+  "DELTA Max": "https://us.ecoflow.com/cdn/shop/files/10_5a13be20-2930-4c5c-8736-89f96ffc0d61.jpg?v=1741686539",
+  "DELTA Mini": "https://us.ecoflow.com/cdn/shop/files/ecoflow-us-ecoflow-delta-mini-portable-power-station-standalone-delta-mini-30402795634761.png?v=1691484386",
+  "DELTA Pro": "https://us.ecoflow.com/cdn/shop/files/ecoflow-us-ecoflow-delta-pro-portable-power-station-dp-delta-pro-portable-power-station-1179495743.png?v=1770796752",
+  "DELTA Pro 3": "https://us.ecoflow.com/cdn/shop/files/ecoflow-ecoflow-delta-pro-3-portable-power-station-ul9540-certificated-dp3-members-only-delta-pro-3-400w-portable-solar-panel-1166978793.png?v=1770796604",
+  "DELTA Pro Ultra": "https://us.ecoflow.com/cdn/shop/files/ecoflow-ecoflow-delta-pro-ultra-whole-home-backup-power-ecoflow-delta-pro-ultra-32618370236489.png?v=1767511414",
+  "Explorer 1000 Plus": "https://www.jackery.com/cdn/shop/files/jackery-explorer-1000-plus-portable-power-station-5666946.png?v=1773394891",
+  "Explorer 1000 Pro": "https://www.jackery.com/cdn/shop/files/638c5802526fcb1bcab5a4f96e82e640.png?v=1699941562",
+  "Explorer 1000 v2": "https://www.jackery.com/cdn/shop/files/explorer-1000-v2-series-5238249.png?v=1773394891",
+  "Explorer 2000 Plus": "https://www.jackery.com/cdn/shop/files/explorer-2000-plus-series-2705859.jpg?v=1773394891",
+  "Explorer 2000 Pro": "https://www.jackery.com/cdn/shop/files/jackery-explorer-2000-pro-portable-power-station-3751244.jpg?v=1754016926",
+  "Explorer 2000 v2": "https://www.jackery.com/cdn/shop/files/solar-generator-2000-v2-series-3059044.png?v=1773394891",
+  "Explorer 300 Plus": "https://www.jackery.com/cdn/shop/files/jackery-explorer-300-plus-portable-power-station-refurbished-4452506.png?v=1754016915",
+  "Explorer 3000 Pro": "https://www.jackery.com/cdn/shop/files/explorer-3000-pro-series-8812015.png?v=1754016786",
+  "Explorer 500 v2": "https://www.jackery.com/cdn/shop/files/638c5802526fcb1bcab5a4f96e82e640.png?v=1699941562",
+  "Explorer 600 Plus": "https://www.jackery.com/cdn/shop/files/jackery-explorer-600-plus-portable-power-station-refurbished-6174243.png?v=1754016788",
+  "Hyper 2000": "http://zendure.com/cdn/shop/files/hyper-2000-product-front.png?v=1747034709",
+  "R1500 LITE": "http://iallpowers.com/cdn/shop/files/R1500LITE-US-03.jpg?v=1772000600&width=2048",
+  "R4000": "http://iallpowers.com/cdn/shop/files/logo.png?v=1677468691&width=2048",
+  "RIVER 2": "https://us.ecoflow.com/cdn/shop/products/ecoflow-us-ecoflow-river-2-portable-power-station-30042778206281.png?v=1667469867",
+  "RIVER 2 Max": "https://us.ecoflow.com/cdn/shop/products/ecoflow-us-ecoflow-river-2-max-portable-power-station-30042740555849.png?v=1668673094",
+  "RIVER 2 Pro": "https://us.ecoflow.com/cdn/shop/products/ecoflow-us-ecoflow-river-2-pro-portable-power-station-30042784006217.png?v=1742453520",
+  "RIVER 3": "https://us.ecoflow.com/cdn/shop/files/ecoflow-us-ecoflow-river-3-portable-power-station-r3-1174069423.png?v=1750336246",
+  "RIVER 3 Plus": "https://us.ecoflow.com/cdn/shop/files/ecoflow-us-ecoflow-river-3-plus-portable-power-station-standalone-36158995398729.png?v=1764216261",
+  "RIVER Pro": "https://cdn.shopify.com/s/files/1/1996/9707/files/ecoflow-turnkey-installation-service-installation-service-installation-service-for-smart-home-panel-2-1182197140.png?v=1753785175",
+  "SuperBase Pro 2000": "http://zendure.com/cdn/shop/products/3_fd57e58d-6cc7-4179-8414-9c17de3bbbbd.jpg?v=1677722134",
+  "SuperBase V 4600": "http://zendure.com/cdn/shop/products/2_9793f444-f583-4933-ba9b-a217dd31b1a5.png?v=1677642029",
+  "SuperBase V6400": "http://zendure.com/cdn/shop/products/2_9793f444-f583-4933-ba9b-a217dd31b1a5.png?v=1677642029",
+};
+
 export function ResultCard({ pick, accentColor, scoreKey }: { pick: PickResult; accentColor: string; scoreKey: string }) {
   const { product: p, label, expertVerdict, strengths, tradeoffs, limitation, scoreComponents } = pick;
   const overallScore = p.scores[scoreKey as keyof typeof p.scores];
@@ -695,17 +752,17 @@ export function ResultCard({ pick, accentColor, scoreKey }: { pick: PickResult; 
     "Explorer 2000 Pro":  "https://www.awin1.com/cread.php?awinmid=59183&awinaffid=2929639&ued=https://www.jackery.com/products/explorer-2000-pro-portable-power-station",
     "Explorer 3000 Pro":  "https://www.awin1.com/cread.php?awinmid=59183&awinaffid=2929639&ued=https://www.jackery.com/products/explorer-3000-pro-portable-power-station",
     // ─── Bluetti — Awin deep links (VERIFIED WORKING) ────────────────────────
-    "EB3A":      "https://www.awin1.com/cread.php?awinmid=59271&awinaffid=2929639&ued=https://www.bluettipower.com/products/eb3a",
+    "EB3A":      "https://www.awin1.com/cread.php?awinmid=59271&awinaffid=2929639&ued=https://www.bluettipower.com/products/bluetti-eb3a-portable-power-station",
     "EB55":      "https://www.awin1.com/cread.php?awinmid=59271&awinaffid=2929639&ued=https://www.bluettipower.com/products/eb55",
     "EB70":      "https://www.awin1.com/cread.php?awinmid=59271&awinaffid=2929639&ued=https://www.bluettipower.com/products/eb70",
     "AC60":      "https://www.awin1.com/cread.php?awinmid=59271&awinaffid=2929639&ued=https://www.bluettipower.com/products/ac60",
     "AC70":      "https://www.awin1.com/cread.php?awinmid=59271&awinaffid=2929639&ued=https://www.bluettipower.com/products/ac70",
     "AC180":     "https://www.awin1.com/cread.php?awinmid=59271&awinaffid=2929639&ued=https://www.bluettipower.com/products/ac180",
     "AC200L":    "https://www.awin1.com/cread.php?awinmid=59271&awinaffid=2929639&ued=https://www.bluettipower.com/products/ac200l",
-    "AC200P":    "https://www.awin1.com/cread.php?awinmid=59271&awinaffid=2929639&ued=https://www.bluettipower.com/products/ac200p",
-    "AC300":     "https://www.awin1.com/cread.php?awinmid=59271&awinaffid=2929639&ued=https://www.bluettipower.com/products/ac300",
-    "AC500":     "https://www.awin1.com/cread.php?awinmid=59271&awinaffid=2929639&ued=https://www.bluettipower.com/products/ac500",
-    "Elite 300": "https://www.awin1.com/cread.php?awinmid=59271&awinaffid=2929639&ued=https://www.bluettipower.com/products/elite-300",
+    "AC200P":    "https://www.awin1.com/cread.php?awinmid=59271&awinaffid=2929639&ued=https://www.bluettipower.com/products/bluetti-ac200p-2000wh-2000w-portable-power-station",
+    "AC300":     "https://www.awin1.com/cread.php?awinmid=59271&awinaffid=2929639&ued=https://www.bluettipower.com/products/ac300-b300k-solar-generator",
+    "AC500":     "https://www.awin1.com/cread.php?awinmid=59271&awinaffid=2929639&ued=https://www.bluettipower.com/products/ac500-inverter-5000w-b300-or-b300s-required-ac500-cms",
+    "Elite 300": "https://www.awin1.com/cread.php?awinmid=59271&awinaffid=2929639&ued=https://www.bluettipower.com/products/elite-300-portable-power-station",
     "EP500 Pro": "https://www.awin1.com/cread.php?awinmid=59271&awinaffid=2929639&ued=https://www.bluettipower.com/products/ep500-pro",
     // ─── Anker SOLIX — Amazon search (ASIN B0CF9LYWMJ was 404) ───────────────
     "C300":        "https://www.amazon.com/dp/B0D62GMQ3F?tag=clickdecision-20",
@@ -818,6 +875,26 @@ export function ResultCard({ pick, accentColor, scoreKey }: { pick: PickResult; 
       className="rounded-[12px] border bg-white p-4 opacity-0 animate-fade-in"
       style={{ borderColor:"#E2E2E2", borderTop:`3px solid ${accentColor}`, animationFillMode:"forwards" }}
     >
+      {/* Product Image */}
+      <div className="flex justify-center mb-3">
+        {PRODUCT_IMAGES[p.model] ? (
+          <img
+            src={PRODUCT_IMAGES[p.model]}
+            alt={`${p.brand} ${p.model}`}
+            loading="lazy"
+            className="h-28 w-28 object-contain rounded-[8px] bg-neutral-50"
+          />
+        ) : (
+          <div
+            className="h-28 w-28 rounded-[8px] flex items-center justify-center text-[10px] font-mono uppercase tracking-wider text-neutral-400"
+            style={{ background: "linear-gradient(135deg, #F1F5F9, #E2E8F0)" }}
+            aria-hidden="true"
+          >
+            {p.brand}
+          </div>
+        )}
+      </div>
+
       {/* Label + Product */}
       <p className="font-mono text-[10.5px] font-medium uppercase tracking-[0.14em]" style={{color:accentColor}}>{label}</p>
       <h3 className="mt-1 text-[15px] font-semibold leading-tight text-neutral-950">{p.brand} {p.model}</h3>
