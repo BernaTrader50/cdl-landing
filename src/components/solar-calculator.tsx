@@ -754,7 +754,7 @@ export function ResultCard({ pick, accentColor, scoreKey }: { pick: PickResult; 
     "RIVER 2 Pro":        "https://www.awin1.com/cread.php?awinmid=59181&awinaffid=2929639&ued=https://us.ecoflow.com/products/river-2-pro-portable-power-station",
     "RIVER 3":            "https://www.awin1.com/cread.php?awinmid=59181&awinaffid=2929639&ued=https://us.ecoflow.com/products/river-3-portable-power-station",
     "RIVER 3 Plus":       "https://www.awin1.com/cread.php?awinmid=59181&awinaffid=2929639&ued=https://us.ecoflow.com/products/river-3-plus-portable-power-station",
-    "RIVER Pro":          "https://www.amazon.com/s?k=EcoFlow+RIVER+Pro+720Wh&tag=clickdecision-20",
+    "RIVER Pro":          "https://www.awin1.com/cread.php?awinmid=59181&awinaffid=2929639&ued=https://us.ecoflow.com/products/river-pro-river-pro-extra-battery-bundle",
     "DELTA 3":            "https://www.awin1.com/cread.php?awinmid=59181&awinaffid=2929639&ued=https://us.ecoflow.com/products/delta-3-portable-power-station",
     "DELTA 3 Classic":    "https://www.awin1.com/cread.php?awinmid=59181&awinaffid=2929639&ued=https://us.ecoflow.com/products/delta-3-classic-portable-power-station",
     "DELTA 3 Plus":       "https://www.awin1.com/cread.php?awinmid=59181&awinaffid=2929639&ued=https://us.ecoflow.com/products/delta-3-plus-portable-power-station",
