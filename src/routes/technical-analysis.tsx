@@ -7,7 +7,7 @@ export const Route = createFileRoute("/technical-analysis")({
   head: () => ({
     meta: [
       { title: "Technical Analysis — Solar Generator Engineering Reviews | ClickDecisionLab" },
-      { name: "description", content: "Independent technical analysis of solar generators. Real specs, surge measurements, UPS validation, and use-case scoring across 10 products from EcoFlow, Bluetti, Jackery, and Anker SOLIX." },
+      { name: "description", content: "Independent technical analysis of solar generators. Real specs, surge measurements, UPS validation, and use-case scoring across 15 products from EcoFlow, Bluetti, Jackery, Anker SOLIX, and VTOMAN." },
     ],
   }),
   component: TechnicalAnalysisHub,
@@ -94,6 +94,46 @@ const ANALYSES = [
     scores: { home_backup: 10, rv: 5, value: 6 },
     badge: "Max Power",
   },
+  {
+    brand: "EcoFlow", model: "DELTA 3 Plus",
+    slug: "/ecoflow-delta-3-plus-technical-analysis-2026/",
+    price: 599, wh: 1800, surge: 2200, ups: true,
+    verdict: "Most overlooked DELTA 3 model. X-Boost enables 2,200W from a 1,800W-rated unit, expandable to 5.1kWh.",
+    scores: { home_backup: 7, rv: 7, value: 8 },
+    badge: null,
+  },
+  {
+    brand: "Bluetti", model: "AC500",
+    slug: "/bluetti-ac500-technical-analysis-2026/",
+    price: 3999, wh: 5500, surge: 10000, ups: true,
+    verdict: "One of the most powerful portable power stations built. 5,000W continuous, expandable to 18.4kWh.",
+    scores: { home_backup: 10, rv: 3, value: 5 },
+    badge: null,
+  },
+  {
+    brand: "VTOMAN", model: "FlashSpeed 1500",
+    slug: "/vtoman-flashspeed-1500-technical-analysis-2026/",
+    price: 629, wh: 1548, surge: 3000, ups: true,
+    verdict: "Best value solar generator with UPS in the dataset. 1-hour recharge, expandable to 3,096Wh.",
+    scores: { home_backup: 7, rv: 7, value: 9 },
+    badge: null,
+  },
+  {
+    brand: "Anker SOLIX", model: "C2000 Gen 2",
+    slug: "/anker-solix-c2000-gen2-technical-analysis-2026/",
+    price: 1199, wh: 1800, surge: 2400, ups: true,
+    verdict: "Anker's answer to the DELTA 2 Max — same capacity, UPS added in Gen 2, but a $200 premium over EcoFlow.",
+    scores: { home_backup: 7, rv: 6, value: 6 },
+    badge: null,
+  },
+  {
+    brand: "EcoFlow", model: "DELTA 3 Max Plus",
+    slug: "/ecoflow-delta-3-max-plus-technical-analysis-2026/",
+    price: 999, wh: 2048, surge: 3000, ups: true,
+    verdict: "Most powerful UPS-equipped generator under $1,000. 3,000W continuous handles loads the standard Max cannot.",
+    scores: { home_backup: 9, rv: 6, value: 7 },
+    badge: null,
+  },
 ];
 
 const BRANDS = ["All", "EcoFlow", "Jackery", "Bluetti", "Anker SOLIX", "VTOMAN"];
@@ -157,7 +197,7 @@ function TechnicalAnalysisHub() {
           {/* Authority strip */}
           <div className="mt-5 flex items-center justify-center gap-6 flex-wrap">
             {[
-              "10 products analyzed",
+              "15 products analyzed",
               "104 products in dataset",
               "7 use-case scores per product",
               "Updated quarterly",
