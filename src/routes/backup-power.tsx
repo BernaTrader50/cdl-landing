@@ -193,10 +193,17 @@ const TIER_STYLES = [
 
 export type BPPick = BPProduct & { tier: string; accentText: string; border: string; btn: string; img: string; matchScore: number };
 
-export function computeBPAnalysis(goal: string, estimatedKw: number, fuel: string, solar: string) {
+export function computeBPAnalysis(goal: string, estimatedKw: number, fuel: string, solar: string, budget: number = 0) {
   const dim = (["whole", "essentials", "offgrid", "storm", "hybrid", "value"].includes(goal) ? goal : "whole") as keyof BPScores;
 
-  const ranked = BP_PRODUCTS.map((p) => {
+  // Budget filter — same pattern as solar-calculator: 15% margin, and if that
+  // empties the pool, fall back to "cheapest available" rather than silently
+  // ignoring budget and showing whatever scores highest regardless of price.
+  const budgetCeiling = budget > 0 ? budget * 1.15 : Infinity;
+  const inBudget = BP_PRODUCTS.filter(p => p.price <= budgetCeiling);
+  const candidatePool = inBudget.length > 0 ? inBudget : BP_PRODUCTS;
+
+  const ranked = candidatePool.map((p) => {
     const dims = Object.keys(p.scores) as (keyof BPScores)[];
     const others = dims.filter((k) => k !== dim);
     const otherAvg = others.reduce((s, k) => s + p.scores[k], 0) / others.length;
@@ -226,7 +233,7 @@ export function computeBPAnalysis(goal: string, estimatedKw: number, fuel: strin
     matchScore: r.score,
   }));
 
-  return { top3, eliminated: BP_PRODUCTS.length - 3, total: BP_PRODUCTS.length };
+  return { top3, eliminated: candidatePool.length - 3, total: BP_PRODUCTS.length };
 }
 
 const CRITERIA = [
@@ -320,7 +327,7 @@ function BackupPowerPage() {
     setSubmitted(true);
     if (typeof window !== "undefined" && (window as any).cdlTrack) {
       (window as any).cdlTrack("calculator_submit", { goal, loads: loads.join(","), fuel, solar, budget, estimatedKw });
-      const { top3 } = computeBPAnalysis(goal, estimatedKw, fuel, solar);
+      const { top3 } = computeBPAnalysis(goal, estimatedKw, fuel, solar, budget);
       (window as any).cdlTrack("result_view", {
         goal, estimatedKw,
         top_recommendation: top3[0] ? `${top3[0].brand} ${top3[0].model}` : "none",
@@ -590,7 +597,7 @@ function BackupPowerPage() {
         </div>
       </section>
 
-      {submitted && <ResultsBlock goal={goal} estimatedKw={estimatedKw} fuel={fuel} solar={solar} />}
+      {submitted && <ResultsBlock goal={goal} estimatedKw={estimatedKw} fuel={fuel} solar={solar} budget={budget} />}
 
       {/* CRITERIA */}
       <section className="bg-neutral-50 border-t border-neutral-200">
@@ -927,8 +934,8 @@ function Stat({ label, value, sub }: { label: string; value: string; sub: string
   );
 }
 
-function ResultsBlock({ goal, estimatedKw, fuel, solar }: { goal: string; estimatedKw: number; fuel: string; solar: string }) {
-  const { top3: PICKS, eliminated, total } = computeBPAnalysis(goal, estimatedKw, fuel, solar);
+function ResultsBlock({ goal, estimatedKw, fuel, solar, budget }: { goal: string; estimatedKw: number; fuel: string; solar: string; budget: number }) {
+  const { top3: PICKS, eliminated, total } = computeBPAnalysis(goal, estimatedKw, fuel, solar, budget);
   return (
     <section id="results" className="bg-neutral-50 border-t border-neutral-200">
       <div className="max-w-7xl mx-auto px-6 py-16">
@@ -936,13 +943,20 @@ function ResultsBlock({ goal, estimatedKw, fuel, solar }: { goal: string; estima
           <div className="text-xs font-mono text-[#2563eb] tracking-[0.18em] uppercase mb-3">
             Decision engine output
           </div>
-          <h2 className="text-3xl lg:text-4xl font-bold tracking-tight">Your top 3 matches</h2>
+          <h2 className="text-3xl lg:text-4xl font-bold tracking-tight">
+            {PICKS.length === 3 ? "Your top 3 matches" : PICKS.length === 1 ? "Your best match" : `Your top ${PICKS.length} matches`}
+          </h2>
           <p className="mt-2 text-sm text-neutral-500">
             Ranked from a {total}-system dataset (verified specs, real affiliate links) based on your goal, load, fuel and solar preference.
           </p>
+          {PICKS.length < 3 && budget > 0 && (
+            <p className="mt-2 text-sm text-amber-600 font-medium">
+              Only {PICKS.length} system{PICKS.length === 1 ? "" : "s"} in our dataset fit{PICKS.length === 1 ? "s" : ""} within ${budget.toLocaleString()} — try raising your budget to see more options.
+            </p>
+          )}
         </div>
 
-        <div className="grid md:grid-cols-3 gap-6">
+        <div className={`grid gap-6 ${PICKS.length === 1 ? "md:grid-cols-1 max-w-md" : PICKS.length === 2 ? "md:grid-cols-2" : "md:grid-cols-3"}`}>
           {PICKS.map((p) => (
             <div
               key={p.tier}
@@ -1011,12 +1025,17 @@ function ResultsBlock({ goal, estimatedKw, fuel, solar }: { goal: string; estima
           ))}
         </div>
 
+        {PICKS.length >= 2 && (
         <div className="mt-12 bg-white border border-neutral-200 rounded-xl overflow-hidden">
           <div className="px-6 py-4 border-b border-neutral-100">
             <h3 className="text-lg font-bold">Side-by-side comparison</h3>
           </div>
           <div className="overflow-x-auto">
-            <table className="w-full text-sm">
+            <table className="w-full text-sm" style={{tableLayout: "fixed"}}>
+              <colgroup>
+                <col style={{width: "140px"}} />
+                {PICKS.map((p) => <col key={p.tier} />)}
+              </colgroup>
               <thead>
                 <tr className="bg-neutral-50 border-b border-neutral-200">
                   <th className="text-left px-4 py-3 font-mono text-[10px] uppercase tracking-wider text-neutral-400">Spec</th>
@@ -1042,6 +1061,7 @@ function ResultsBlock({ goal, estimatedKw, fuel, solar }: { goal: string; estima
             </table>
           </div>
         </div>
+        )}
 
         <details className="mt-8 bg-white border border-neutral-200 rounded-xl p-6 group">
           <summary className="cursor-pointer font-semibold text-neutral-900 flex items-center justify-between">
@@ -1050,8 +1070,16 @@ function ResultsBlock({ goal, estimatedKw, fuel, solar }: { goal: string; estima
           </summary>
           <div className="mt-4 space-y-3 text-sm text-neutral-600 leading-relaxed">
             <p><strong className="text-neutral-900">Prioritized:</strong> sizing margin above your connected load, fuel/solar preference, and transfer-switch automation based on your selected goal.</p>
-            <p><strong className="text-neutral-900">{eliminated} not shown:</strong> the other {eliminated} of {total} systems scored lower for this combination — see the full comparison below or adjust your inputs above.</p>
-            <p><strong className="text-neutral-900">Trade-off:</strong> {PICKS[0]?.brand} {PICKS[0]?.model} ranks highest for this combination; {PICKS[2]?.brand} {PICKS[2]?.model} is the #3 alternative if its fuel type or install method fits better.</p>
+            {eliminated > 0 ? (
+              <p><strong className="text-neutral-900">{eliminated} not shown:</strong> the other {eliminated} of {total} systems scored lower for this combination — see the full comparison below or adjust your inputs above.</p>
+            ) : (
+              <p><strong className="text-neutral-900">All {total} systems considered:</strong> with your current budget, only {PICKS.length} system{PICKS.length === 1 ? "" : "s"} qualified — raise your budget to unlock more comparisons.</p>
+            )}
+            {PICKS.length >= 2 ? (
+              <p><strong className="text-neutral-900">Trade-off:</strong> {PICKS[0]?.brand} {PICKS[0]?.model} ranks highest for this combination; {(PICKS[2] ?? PICKS[1])?.brand} {(PICKS[2] ?? PICKS[1])?.model} is the alternative if its fuel type or install method fits better.</p>
+            ) : (
+              <p><strong className="text-neutral-900">Single match:</strong> {PICKS[0]?.brand} {PICKS[0]?.model} was the only system in our dataset that fit your stated budget for this scenario.</p>
+            )}
           </div>
         </details>
 

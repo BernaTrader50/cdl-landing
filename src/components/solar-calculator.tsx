@@ -341,9 +341,13 @@ export function computeAnalysis(
 
   const outOfBudget = pool.length === 0;
 
-  // Fallback: if nothing passes all filters, relax budget
+  // Fallback: if nothing passes ALL filters, relax surge/UPS/capacity first —
+  // budget stays as the hard constraint as long as at least one product fits it.
+  // Only ignore budget entirely as a last resort, when literally nothing in the
+  // catalog meets it (smallest available unit still costs more).
   if (outOfBudget) {
-    pool = PRODUCTS.filter(p => p.surge >= requiredSurge && (!needsUps || p.ups));
+    const withinBudget = budget > 0 ? PRODUCTS.filter(p => p.price <= budget * 1.15) : PRODUCTS;
+    pool = withinBudget.length > 0 ? withinBudget : PRODUCTS;
   }
 
   // Score and rank
@@ -357,8 +361,11 @@ export function computeAnalysis(
   const bestValueProduct = [...pool]
     .filter(p => p !== bestMatchProduct)
     .sort((a, b) => (b.wh / b.price) - (a.wh / a.price))[0];
-  const premiumProduct = [...PRODUCTS]
-    .filter(p => p !== bestMatchProduct && p !== bestValueProduct && p.surge >= requiredSurge && (!needsUps || p.ups))
+  const budgetCeiling = budget > 0 ? budget * 1.15 : Infinity;
+  const premiumCandidates = [...PRODUCTS]
+    .filter(p => p !== bestMatchProduct && p !== bestValueProduct && p.surge >= requiredSurge && (!needsUps || p.ups));
+  const premiumInBudget = premiumCandidates.filter(p => p.price <= budgetCeiling);
+  const premiumProduct = (premiumInBudget.length > 0 ? premiumInBudget : premiumCandidates)
     .sort((a, b) => b.scores[scoreKey] - a.scores[scoreKey])[0];
 
   const rawPicks: Array<{ product: Product | undefined; label: PickResult["label"] }> = [
@@ -571,7 +578,11 @@ export function ComparisonTable({ picks, requiredWh, requiredSurge, needsUps, sc
   ];
   return (
     <div className="mb-4 overflow-x-auto rounded-[12px] border bg-white" style={{borderColor:"#E2E2E2"}}>
-      <table className="w-full text-left min-w-[400px]">
+      <table className="w-full text-left min-w-[400px]" style={{tableLayout: "fixed"}}>
+        <colgroup>
+          <col style={{width: "96px"}} />
+          {picks.map(pick => <col key={pick.label} />)}
+        </colgroup>
         <thead>
           <tr className="border-b" style={{borderColor:"#F0F0F0"}}>
             <th className="py-3 pl-4 pr-3 font-mono text-[9px] uppercase tracking-[0.14em] text-neutral-400 w-24">Spec</th>

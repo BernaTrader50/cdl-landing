@@ -35,6 +35,7 @@ export const Route = createFileRoute("/home-batteries")({
     goal: typeof s.goal === "string" ? s.goal : undefined,
     size: typeof s.size === "string" ? s.size : undefined,
     install: typeof s.install === "string" ? s.install : undefined,
+    budget: s.budget != null ? Number(s.budget) : undefined,
   }),
   component: HomeBatteryPage,
 });
@@ -182,11 +183,17 @@ const GOAL_DIMENSION: Record<string, keyof HBScores> = {
 
 export type HBPick = HBProduct & { tier: string; accentText: string; border: string; btn: string; img: string; matchScore: number };
 
-export function computeHBAnalysis(goal: string, size: string, install: string) {
+export function computeHBAnalysis(goal: string, size: string, install: string, budget: number = 0) {
   const dim = GOAL_DIMENSION[goal] ?? "backup";
   const target = SIZE_TARGET_KWH[size] ?? 13;
 
-  const ranked = HB_PRODUCTS.map((p) => {
+  // Budget filter — same pattern as solar/backup-power: 15% margin, falling
+  // back to the full catalog only if nothing fits even with that margin.
+  const budgetCeiling = budget > 0 ? budget * 1.15 : Infinity;
+  const inBudget = HB_PRODUCTS.filter(p => p.price <= budgetCeiling);
+  const candidatePool = inBudget.length > 0 ? inBudget : HB_PRODUCTS;
+
+  const ranked = candidatePool.map((p) => {
     const dims = Object.keys(p.scores) as (keyof HBScores)[];
     const others = dims.filter((k) => k !== dim);
     const otherAvg = others.reduce((s, k) => s + p.scores[k], 0) / others.length;
@@ -214,7 +221,7 @@ export function computeHBAnalysis(goal: string, size: string, install: string) {
     matchScore: r.score,
   }));
 
-  return { top3, eliminated: HB_PRODUCTS.length - 3, total: HB_PRODUCTS.length };
+  return { top3, eliminated: candidatePool.length - 3, total: HB_PRODUCTS.length };
 }
 const CRITERIA = [
   { icon: ShieldCheck, title: "Backup Resilience", desc: "Continuous + surge output, transfer time, whole-home vs essentials." },
@@ -287,6 +294,7 @@ function HomeBatteryPage() {
   const [goal, setGoal] = useState(sp.goal ?? "backup");
   const [size, setSize] = useState(sp.size ?? "m");
   const [install, setInstall] = useState(sp.install ?? "pro");
+  const [budget, setBudget] = useState<number>(sp.budget ?? 15000);
   const [submitted, setSubmitted] = useState(hasParams);
 
   useEffect(() => {
@@ -300,7 +308,7 @@ function HomeBatteryPage() {
     setSubmitted(true);
     if (typeof window !== "undefined" && (window as any).cdlTrack) {
       (window as any).cdlTrack("calculator_submit", { goal, size, install });
-      const { top3 } = computeHBAnalysis(goal, size, install);
+      const { top3 } = computeHBAnalysis(goal, size, install, budget);
       (window as any).cdlTrack("result_view", {
         goal, size, install,
         top_recommendation: top3[0] ? `${top3[0].brand} ${top3[0].model}` : "none",
@@ -441,6 +449,31 @@ function HomeBatteryPage() {
             </div>
           </div>
 
+          {/* Budget */}
+          <div>
+            <div className="flex items-center justify-between mb-2">
+              <div className="text-[10px] font-mono uppercase tracking-[0.18em] text-neutral-400">
+                4 · Budget
+              </div>
+              <div className="text-[10px] font-mono uppercase tracking-[0.18em] text-[#2563eb] tabular-nums">
+                ${budget.toLocaleString()}
+              </div>
+            </div>
+            <input
+              type="range"
+              min={0}
+              max={30000}
+              step={500}
+              value={budget}
+              onChange={(e) => setBudget(parseInt(e.target.value))}
+              className="w-full accent-[#2563eb]"
+            />
+            <div className="flex justify-between text-[10px] text-neutral-400 mt-1 font-mono">
+              <span>$0</span>
+              <span>$30k</span>
+            </div>
+          </div>
+
           {/* CTA */}
           <div className="border-t border-neutral-100 pt-6 flex flex-wrap items-center justify-between gap-4">
             <div className="text-sm text-neutral-600">
@@ -458,7 +491,7 @@ function HomeBatteryPage() {
       </section>
 
 
-      {submitted && <ResultsBlock goal={goal} size={size} install={install} />}
+      {submitted && <ResultsBlock goal={goal} size={size} install={install} budget={budget} />}
 
       {/* CRITERIA */}
       <section className="bg-neutral-50 border-t border-neutral-200">
@@ -779,8 +812,8 @@ function HomeBatteryPage() {
   );
 }
 
-function ResultsBlock({ goal, size, install }: { goal: string; size: string; install: string }) {
-  const { top3: PICKS, eliminated, total } = computeHBAnalysis(goal, size, install);
+function ResultsBlock({ goal, size, install, budget }: { goal: string; size: string; install: string; budget: number }) {
+  const { top3: PICKS, eliminated, total } = computeHBAnalysis(goal, size, install, budget);
   return (
     <section id="results" className="bg-neutral-50 border-t border-neutral-200">
       <div className="max-w-7xl mx-auto px-6 py-16">
@@ -788,13 +821,20 @@ function ResultsBlock({ goal, size, install }: { goal: string; size: string; ins
           <div className="text-xs font-mono text-[#2563eb] tracking-[0.18em] uppercase mb-3">
             Decision engine output
           </div>
-          <h2 className="text-3xl lg:text-4xl font-bold tracking-tight">Your top 3 matches</h2>
+          <h2 className="text-3xl lg:text-4xl font-bold tracking-tight">
+            {PICKS.length === 3 ? "Your top 3 matches" : PICKS.length === 1 ? "Your best match" : `Your top ${PICKS.length} matches`}
+          </h2>
           <p className="mt-2 text-sm text-neutral-500">
             Ranked from a {total}-system dataset (verified specs, real affiliate links) based on your goal, home size and install preference.
           </p>
+          {PICKS.length < 3 && budget > 0 && (
+            <p className="mt-2 text-sm text-amber-600 font-medium">
+              Only {PICKS.length} system{PICKS.length === 1 ? "" : "s"} in our dataset fit{PICKS.length === 1 ? "s" : ""} within ${budget.toLocaleString()} — try raising your budget to see more options.
+            </p>
+          )}
         </div>
 
-        <div className="grid md:grid-cols-3 gap-6">
+        <div className={`grid gap-6 ${PICKS.length === 1 ? "md:grid-cols-1 max-w-md" : PICKS.length === 2 ? "md:grid-cols-2" : "md:grid-cols-3"}`}>
           {PICKS.map((p) => (
             <div
               key={p.tier}
@@ -867,13 +907,18 @@ function ResultsBlock({ goal, size, install }: { goal: string; size: string; ins
           ))}
         </div>
 
-        {/* Comparison table */}
+        {/* Comparison table — only meaningful with 2+ products to compare */}
+        {PICKS.length >= 2 && (
         <div className="mt-12 bg-white border border-neutral-200 rounded-xl overflow-hidden">
           <div className="px-6 py-4 border-b border-neutral-100">
             <h3 className="text-lg font-bold">Side-by-side comparison</h3>
           </div>
           <div className="overflow-x-auto">
-            <table className="w-full text-sm">
+            <table className="w-full text-sm" style={{tableLayout: "fixed"}}>
+              <colgroup>
+                <col style={{width: "140px"}} />
+                {PICKS.map((p) => <col key={p.tier} />)}
+              </colgroup>
               <thead>
                 <tr className="bg-neutral-50 border-b border-neutral-200">
                   <th className="text-left px-4 py-3 font-mono text-[10px] uppercase tracking-wider text-neutral-400">Spec</th>
@@ -900,6 +945,7 @@ function ResultsBlock({ goal, size, install }: { goal: string; size: string; ins
             </table>
           </div>
         </div>
+        )}
 
         {/* Why panel */}
         <details className="mt-8 bg-white border border-neutral-200 rounded-xl p-6 group">
@@ -909,8 +955,16 @@ function ResultsBlock({ goal, size, install }: { goal: string; size: string; ins
           </summary>
           <div className="mt-4 space-y-3 text-sm text-neutral-600 leading-relaxed">
             <p><strong className="text-neutral-900">Prioritized:</strong> for your selected goal, size and install preference, the engine weights that scoring dimension at 55% and the remaining 5 dimensions at 45%, plus a capacity-fit bonus for your home size.</p>
-            <p><strong className="text-neutral-900">{eliminated} not shown:</strong> the other {eliminated} of {total} systems scored lower for this combination — see the full comparison below or adjust your inputs above.</p>
-            <p><strong className="text-neutral-900">Trade-off:</strong> {PICKS[0]?.brand} {PICKS[0]?.model} ranks highest for this combination; {PICKS[2]?.brand} {PICKS[2]?.model} is the #3 alternative if its install type or price fits better.</p>
+            {eliminated > 0 ? (
+              <p><strong className="text-neutral-900">{eliminated} not shown:</strong> the other {eliminated} of {total} systems scored lower for this combination — see the full comparison below or adjust your inputs above.</p>
+            ) : (
+              <p><strong className="text-neutral-900">All {total} systems considered:</strong> with your current budget, only {PICKS.length} system{PICKS.length === 1 ? "" : "s"} qualified — raise your budget to unlock more comparisons.</p>
+            )}
+            {PICKS.length >= 2 ? (
+              <p><strong className="text-neutral-900">Trade-off:</strong> {PICKS[0]?.brand} {PICKS[0]?.model} ranks highest for this combination; {(PICKS[2] ?? PICKS[1])?.brand} {(PICKS[2] ?? PICKS[1])?.model} is the alternative if its install type or price fits better.</p>
+            ) : (
+              <p><strong className="text-neutral-900">Single match:</strong> {PICKS[0]?.brand} {PICKS[0]?.model} was the only system in our dataset that fit your stated budget for this scenario.</p>
+            )}
           </div>
         </details>
 
