@@ -1,5 +1,5 @@
 import { createFileRoute, Link, notFound } from "@tanstack/react-router";
-import { SiteNav } from "@/components/site-nav";
+import SiteHeader from "@/components/SiteHeader";
 import { SiteFooter } from "@/components/site-footer";
 
 const API_BASE = "https://clickdecisionlab.com/wp-json/wp/v2";
@@ -88,12 +88,12 @@ export const Route = createFileRoute("/blog/$slug")({
   component: BlogPost,
   errorComponent: ({ error }) => (
     <div className="min-h-screen bg-white">
-      <SiteNav />
-      <main className="px-6 pb-24 pt-32">
+      <SiteHeader />
+      <main className="px-6 pb-24 pt-16">
         <div className="mx-auto max-w-3xl text-center">
           <h1 className="text-2xl font-semibold">Couldn't load this article</h1>
           <p className="mt-2 text-sm text-neutral-600">{error.message}</p>
-          <Link to="/blog" className="mt-6 inline-block rounded-md bg-neutral-900 px-4 py-2 text-[13px] font-medium text-white hover:bg-[#2563EB]">
+          <Link to="/blog" className="mt-6 inline-block rounded-md bg-[#2563eb] px-4 py-2 text-[13px] font-medium text-white hover:bg-[#1d4ed8]">
             ← Back to Research
           </Link>
         </div>
@@ -103,11 +103,11 @@ export const Route = createFileRoute("/blog/$slug")({
   ),
   notFoundComponent: () => (
     <div className="min-h-screen bg-white">
-      <SiteNav />
-      <main className="px-6 pb-24 pt-32">
+      <SiteHeader />
+      <main className="px-6 pb-24 pt-16">
         <div className="mx-auto max-w-3xl text-center">
           <h1 className="text-2xl font-semibold">Article not found</h1>
-          <Link to="/blog" className="mt-6 inline-block rounded-md bg-neutral-900 px-4 py-2 text-[13px] font-medium text-white hover:bg-[#2563EB]">
+          <Link to="/blog" className="mt-6 inline-block rounded-md bg-[#2563eb] px-4 py-2 text-[13px] font-medium text-white hover:bg-[#1d4ed8]">
             ← Back to Research
           </Link>
         </div>
@@ -125,8 +125,8 @@ function BlogPost() {
 
   return (
     <div className="min-h-screen bg-white text-neutral-950">
-      <SiteNav />
-      <main className="px-6 pb-24 pt-32">
+      <SiteHeader />
+      <main className="px-6 pb-24 pt-16">
         <article className="mx-auto max-w-[720px]">
           <Link to="/blog" className="inline-flex items-center gap-1 text-[13px] text-neutral-600 transition-colors hover:text-[#2563EB]">
             ← Back to Research

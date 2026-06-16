@@ -1,5 +1,5 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
-import { SiteNav } from "@/components/site-nav";
+import SiteHeader from "@/components/SiteHeader";
 import { SiteFooter } from "@/components/site-footer";
 import { useState, useEffect } from "react";
 
@@ -92,74 +92,68 @@ function BlogPage() {
   };
 
   return (
-    <div
-      className="min-h-screen relative text-neutral-950"
-      style={{
-        backgroundColor: "#F7F7F5",
-        backgroundImage: [
-          "linear-gradient(to right, rgba(15,23,42,0.035) 1px, transparent 1px)",
-          "linear-gradient(to bottom, rgba(15,23,42,0.035) 1px, transparent 1px)",
-          "linear-gradient(to right, rgba(15,23,42,0.02) 1px, transparent 1px)",
-          "linear-gradient(to bottom, rgba(15,23,42,0.02) 1px, transparent 1px)",
-        ].join(","),
-        backgroundSize: "48px 48px, 48px 48px, 240px 240px, 240px 240px",
-      }}
-    >
-      <SiteNav />
-      <main className="relative z-10 mx-auto max-w-6xl px-5 pt-32 pb-20">
+    <div className="min-h-screen bg-white text-neutral-900">
+      <SiteHeader />
 
-        {/* Header */}
-        <div className="mb-8">
-          <p className="font-mono text-[10px] font-semibold uppercase tracking-widest text-neutral-400 mb-3">Research</p>
-          <h1 className="text-4xl font-semibold tracking-tight text-neutral-950 mb-3">
+      {/* HERO */}
+      <section className="relative bg-[#2563eb] text-white overflow-hidden">
+        <div className="absolute inset-0 opacity-[0.07] pointer-events-none"
+             style={{ backgroundImage:
+               "linear-gradient(rgba(255,255,255,.5) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,.5) 1px, transparent 1px)",
+               backgroundSize: "44px 44px" }} />
+        <div className="relative max-w-6xl mx-auto px-5 pt-14 pb-16">
+          <p className="font-mono text-[10px] font-semibold uppercase tracking-widest text-blue-100 mb-3">Research</p>
+          <h1 className="text-4xl lg:text-5xl font-bold tracking-tight mb-3">
             Technical guides and analysis.
           </h1>
-          <p className="text-[15px] text-neutral-500 max-w-xl leading-relaxed">
+          <p className="text-blue-50/90 max-w-xl leading-relaxed">
             Independent research across solar generators, EV chargers, and home batteries. Built on verified specs, not marketing claims.
           </p>
           <div className="mt-4 flex items-center gap-5 flex-wrap">
-            {["83 research articles", "3 verticals", "Updated daily"].map(t => (
-              <span key={t} className="font-mono text-[10px] text-neutral-400 uppercase tracking-wider">{t}</span>
+            {["125 research articles", "3 verticals", "Updated daily"].map(t => (
+              <span key={t} className="font-mono text-[10px] text-blue-100 uppercase tracking-wider">{t}</span>
+            ))}
+          </div>
+
+          {/* Vertical filters */}
+          <div className="mt-8 flex items-center gap-2 flex-wrap">
+            {Object.entries(CATEGORY_MAP).map(([key, cat]) => (
+              <button
+                key={key}
+                onClick={() => handleTab(key)}
+                className={`flex items-center gap-1.5 rounded-[8px] px-3.5 py-1.5 font-mono text-[11px] font-medium transition-colors ${
+                  activeTab === key
+                    ? "bg-white text-[#2563eb]"
+                    : "bg-white/10 border border-white/20 text-blue-50 hover:bg-white/15"
+                }`}
+              >
+                <span className="text-[13px]">{cat.icon}</span>
+                {cat.label}
+              </button>
+            ))}
+            <span className="font-mono text-[10px] text-blue-100 ml-1">
+              {loading ? "…" : `${totalPosts} articles`}
+            </span>
+          </div>
+
+          {/* Quick links to hubs */}
+          <div className="mt-4 flex items-center gap-3 flex-wrap">
+            <span className="font-mono text-[10px] text-blue-200 uppercase tracking-wider">Also:</span>
+            {[
+              { href: "/technical-analysis", label: "15 Technical Analyses" },
+              { href: "/comparisons", label: "25 Comparisons" },
+              { href: "/solar-calculator", label: "Decision Engine" },
+            ].map(l => (
+              <a key={l.href} href={l.href}
+                className="font-mono text-[10.5px] text-white hover:underline">
+                {l.label} →
+              </a>
             ))}
           </div>
         </div>
+      </section>
 
-        {/* Vertical filters */}
-        <div className="mb-6 flex items-center gap-2 flex-wrap">
-          {Object.entries(CATEGORY_MAP).map(([key, cat]) => (
-            <button
-              key={key}
-              onClick={() => handleTab(key)}
-              className={`flex items-center gap-1.5 rounded-[8px] px-3.5 py-1.5 font-mono text-[11px] font-medium transition-colors ${
-                activeTab === key
-                  ? "bg-neutral-950 text-white"
-                  : "bg-white border text-neutral-600 hover:border-neutral-400"
-              }`}
-              style={activeTab !== key ? { borderColor: "#E2E2E2" } : {}}
-            >
-              <span className="text-[13px]">{cat.icon}</span>
-              {cat.label}
-            </button>
-          ))}
-          <span className="font-mono text-[10px] text-neutral-400 ml-1">
-            {loading ? "…" : `${totalPosts} articles`}
-          </span>
-        </div>
-
-        {/* Quick links to hubs */}
-        <div className="mb-6 flex items-center gap-3 flex-wrap">
-          <span className="font-mono text-[10px] text-neutral-400 uppercase tracking-wider">Also:</span>
-          {[
-            { href: "/technical-analysis", label: "15 Technical Analyses" },
-            { href: "/comparisons", label: "25 Comparisons" },
-            { href: "/solar-calculator", label: "Decision Engine" },
-          ].map(l => (
-            <a key={l.href} href={l.href}
-              className="font-mono text-[10.5px] text-[#2563EB] hover:underline">
-              {l.label} →
-            </a>
-          ))}
-        </div>
+      <main className="relative z-10 mx-auto max-w-6xl px-5 pt-10 pb-20">
 
         {/* Posts grid */}
         {loading ? (
