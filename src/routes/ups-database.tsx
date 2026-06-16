@@ -192,7 +192,7 @@ function UPSDatabase() {
               <button key={d.id} onClick={() => { setActiveDevice(d.id); Analytics.upsDbFilter(d.id, 0); }}
                 className={`flex items-center gap-2 rounded-[10px] px-3.5 py-2 text-[12px] font-medium transition-all ${
                   activeDevice === d.id
-                    ? "bg-neutral-950 text-white shadow-sm"
+                    ? "bg-[#2563eb] text-white shadow-sm"
                     : "bg-white border text-neutral-600 hover:border-neutral-400"
                 }`}
                 style={activeDevice !== d.id ? { borderColor: "#E2E2E2" } : {}}>
@@ -215,7 +215,7 @@ function UPSDatabase() {
           {(["all", "ups_only", "no_ups"] as FilterMode[]).map(f => (
             <button key={f} onClick={() => setFilter(f)}
               className={`rounded-[7px] px-3 py-1.5 font-mono text-[11px] font-medium transition-colors ${
-                filter === f ? "bg-neutral-950 text-white" : "bg-white border text-neutral-600 hover:border-neutral-400"
+                filter === f ? "bg-[#2563eb] text-white" : "bg-white border text-neutral-600 hover:border-neutral-400"
               }`}
               style={filter !== f ? { borderColor: "#E2E2E2" } : {}}>
               {f === "all" ? "All products" : f === "ups_only" ? "UPS only" : "No UPS"}
@@ -226,7 +226,7 @@ function UPSDatabase() {
             {(["ms", "price", "wh"] as const).map(s => (
               <button key={s} onClick={() => setSortBy(s)}
                 className={`rounded-[6px] px-2.5 py-1 font-mono text-[10px] transition-colors ${
-                  sortBy === s ? "bg-neutral-950 text-white" : "bg-white border text-neutral-500"
+                  sortBy === s ? "bg-[#2563eb] text-white" : "bg-white border text-neutral-500"
                 }`}
                 style={sortBy !== s ? { borderColor: "#E2E2E2" } : {}}>
                 {s === "ms" ? "Switchover" : s === "price" ? "Price" : "Capacity"}
@@ -333,9 +333,9 @@ function UPSDatabase() {
             </p>
           </a>
           <a href="/solar-calculator"
-            className="rounded-[12px] border bg-neutral-950 p-5 hover:opacity-80 transition-opacity"
+            className="rounded-[12px] border bg-[#2563eb] p-5 hover:bg-[#1d4ed8] transition-colors"
             style={{ borderColor: "transparent" }}>
-            <p className="font-mono text-[10px] text-neutral-400 mb-1">Decision Engine</p>
+            <p className="font-mono text-[10px] text-blue-200 mb-1">Decision Engine</p>
             <p className="text-[14px] font-semibold text-white">Find your exact match →</p>
           </a>
         </div>

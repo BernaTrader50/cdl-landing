@@ -285,7 +285,7 @@ function RuntimeDatabase() {
             <button key={app.id} onClick={() => setActiveApp(app.id)}
               className={`flex items-center gap-2 rounded-[10px] px-4 py-2 font-mono text-[11px] font-medium transition-all ${
                 activeApp === app.id
-                  ? "bg-neutral-950 text-white shadow-sm"
+                  ? "bg-[#2563eb] text-white shadow-sm"
                   : "bg-white border text-neutral-600 hover:border-neutral-400"
               }`}
               style={activeApp !== app.id ? { borderColor: "#E2E2E2" } : {}}>
@@ -449,11 +449,11 @@ function RuntimeDatabase() {
             </a>
           ))}
           <a href="/solar-calculator"
-            className="rounded-[10px] border bg-neutral-950 p-4 hover:opacity-80 transition-opacity"
+            className="rounded-[10px] border bg-[#2563eb] p-4 hover:bg-[#1d4ed8] transition-colors"
             style={{ borderColor: "transparent" }}>
             <p className="text-[18px] mb-1">⚡</p>
             <p className="text-[13px] font-medium text-white">Decision Engine</p>
-            <p className="font-mono text-[10px] text-neutral-400 mt-0.5">Find your match →</p>
+            <p className="font-mono text-[10px] text-blue-200 mt-0.5">Find your match →</p>
           </a>
         </div>
 

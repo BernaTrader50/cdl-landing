@@ -222,7 +222,7 @@ function ComparisonsPage() {
         {/* CTA to calculator */}
         <div className="mt-10 rounded-[12px] border bg-white p-6 text-center" style={{borderColor:"#E2E2E2"}}>
           <p className="text-[14px] text-neutral-600 mb-3">Need a recommendation now? Use the decision engine.</p>
-          <a href="/solar-calculator" className="inline-flex items-center gap-2 rounded-[10px] bg-neutral-950 px-5 py-3 text-[13px] font-medium text-white hover:opacity-80 transition-opacity">
+          <a href="/solar-calculator" className="inline-flex items-center gap-2 rounded-[10px] bg-[#2563eb] px-5 py-3 text-[13px] font-medium text-white hover:bg-[#1d4ed8] transition-colors">
             Solar Generator Decision Engine →
           </a>
         </div>

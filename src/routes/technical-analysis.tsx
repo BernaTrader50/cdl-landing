@@ -200,7 +200,7 @@ function TechnicalAnalysisHub() {
               onClick={() => setActiveBrand(brand)}
               className={`rounded-[8px] px-3.5 py-1.5 font-mono text-[11px] font-medium transition-colors ${
                 activeBrand === brand
-                  ? "bg-neutral-950 text-white"
+                  ? "bg-[#2563eb] text-white"
                   : "bg-white border text-neutral-600 hover:border-neutral-400"
               }`}
               style={activeBrand !== brand ? { borderColor: "#E2E2E2" } : {}}
