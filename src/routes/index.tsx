@@ -228,7 +228,7 @@ function Home() {
               {[
                 ["177", "Products tracked"],
                 ["4", "Labs"],
-                ["0", "Articles published"],
+                ["125", "Articles published"],
                 ["0", "Sponsored rankings"],
               ].map(([n, l]) => (
                 <div key={l}>

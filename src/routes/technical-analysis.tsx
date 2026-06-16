@@ -158,7 +158,7 @@ function TechnicalAnalysisHub() {
           {/* Authority strip */}
           <div className="mt-5 flex items-center gap-6 flex-wrap">
             {[
-              "15 products analyzed",
+              "10 products analyzed",
               "104 products in dataset",
               "7 use-case scores per product",
               "Updated quarterly",

@@ -8,7 +8,7 @@ export const Route = createFileRoute("/runtime-database")({
   head: () => ({
     meta: [
       { title: "Solar Generator Runtime Database — How Long Will It Run? | ClickDecisionLab" },
-      { name: "description", content: "Exact runtime calculations for 49 solar generators across 5 appliances: refrigerator, CPAP, Starlink, microwave, and portable AC. Typical and best-case estimates with surge compatibility ratings." },
+      { name: "description", content: "Exact runtime calculations for 104 solar generators across 5 appliances: refrigerator, CPAP, Starlink, microwave, and portable AC. Typical and best-case estimates with surge compatibility ratings." },
     ],
   }),
   component: RuntimeDatabase,
@@ -270,7 +270,7 @@ function RuntimeDatabase() {
             How long will it run?
           </h1>
           <p className="text-[15px] text-neutral-500 max-w-2xl leading-relaxed">
-            Exact runtime estimates for 49 solar generators across 5 use cases. Calculated from verified usable capacity with {Math.round(EFFICIENCY * 100)}% inverter efficiency. Typical and best-case estimates for real-world planning.
+            Exact runtime estimates for 104 solar generators across 5 use cases. Calculated from verified usable capacity with {Math.round(EFFICIENCY * 100)}% inverter efficiency. Typical and best-case estimates for real-world planning.
           </p>
           <div className="mt-4 flex items-center gap-5 flex-wrap">
             {["104 products", "5 use cases", "Typical + best case", "Surge compatibility"].map(t => (

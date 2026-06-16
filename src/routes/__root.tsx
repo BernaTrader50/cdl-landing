@@ -111,7 +111,7 @@ function RootShell({ children }: { children: React.ReactNode }) {
         {/* Open Graph */}
         <meta property="og:site_name" content="ClickDecisionLab" />
         <meta property="og:type" content="website" />
-        <meta property="og:image" content="https://clickdecisionlab.com/assets/power-station-B0e88LCQ.png" />
+        <meta property="og:image" content="https://clickdecisionlab.com/og-image.png" />
         <meta property="og:image:width" content="1200" />
         <meta property="og:image:height" content="630" />
         <meta name="twitter:card" content="summary_large_image" />

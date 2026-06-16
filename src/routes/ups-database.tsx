@@ -8,7 +8,7 @@ export const Route = createFileRoute("/ups-database")({
   head: () => ({
     meta: [
       { title: "Solar Generator UPS Database — Switchover Times & Device Compatibility | ClickDecisionLab" },
-      { name: "description", content: "UPS switchover times for 28 solar generators with confirmed UPS mode. Device compatibility for CPAP, NAS, router, PC, Starlink, and medical equipment. The most complete UPS reference for portable power stations." },
+      { name: "description", content: "UPS switchover times for 22 solar generators with confirmed UPS mode. Device compatibility for CPAP, NAS, router, PC, Starlink, and medical equipment. The most complete UPS reference for portable power stations." },
     ],
   }),
   component: UPSDatabase,
