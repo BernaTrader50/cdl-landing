@@ -91,7 +91,7 @@ export const HB_PRODUCTS: HBProduct[] = [
     ev: false, app: true, install: "DIY / Both",
     scores: { backup: 8.8, solar: 8.4, value: 9.4, scale: 8.6, offgrid: 9.2, smart: 8.7 },
     verdict: "Best DIY route — portable, stackable to 90 kWh, no electrician required to start.",
-    affiliate: "https://www.amazon.com/s?k=EcoFlow%20DELTA%20Pro%20Ultra&tag=clickdecision-20",
+    affiliate: "https://www.awin1.com/cread.php?awinmid=59181&awinaffid=2929639&ued=https://us.ecoflow.com/products/delta-pro-ultra",
   },
   {
     brand: "FranklinWH", model: "aPower 2", price: 14000, kwh: 15, kwhLabel: "15 kWh",
@@ -147,7 +147,7 @@ export const HB_PRODUCTS: HBProduct[] = [
     ev: false, app: true, install: "DIY / Both",
     scores: { backup: 7.8, solar: 7.5, value: 8.8, scale: 8.0, offgrid: 8.5, smart: 7.5 },
     verdict: "Floor-standing modular unit that works with or without rooftop solar — no electrician required to get started.",
-    affiliate: "https://www.amazon.com/s?k=Bluetti%20EP800&tag=clickdecision-20",
+    affiliate: "https://www.awin1.com/cread.php?awinmid=59271&awinaffid=2929639&ued=https://www.bluettipower.com/products/bluetti-ep800-b500-home-battery-backup",
   },
   {
     brand: "Sigenergy", model: "SigenStor (16 kWh)", price: 8000, kwh: 16, kwhLabel: "16 kWh",

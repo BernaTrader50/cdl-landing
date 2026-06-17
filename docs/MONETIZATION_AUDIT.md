@@ -12,11 +12,11 @@ Every product card already resolves to exactly ONE final link (no intermediate s
 |---|---|---|---|---|---|
 | Solar | 104 | 55 | 7 | 42 | 0 |
 | EV Chargers | 49 | 0 | 17 | 32 | 0 |
-| Home Batteries | 12 | 0 | 0 | 12 | 0 |
+| Home Batteries | 12 | 2 | 0 | 10 | 0 |
 | Backup Power | 12 | 0 | 0 | 12 | 0 |
-| **TOTAL** | **177** | **55** | **24** | **98** | **0** |
+| **TOTAL** | **177** | **57** | **24** | **96** | **0** |
 
-**Tier 1+2 (AWIN + Amazon verified): 79/177 (45%)**
+**Tier 1+2 (AWIN + Amazon verified): 81/177 (46%)**
 
 ## Full product-by-product detail
 
@@ -84,9 +84,7 @@ Every product card already resolves to exactly ONE final link (no intermediate s
 | Tesla | Universal Wall Connector | EV Chargers | AMAZON_VERIFIED |
 | Wallbox | Pulsar Plus | EV Chargers | AMAZON_VERIFIED |
 | Anker SOLIX | X1 (15 kWh) | Home Batteries | AMAZON_GENERIC |
-| Bluetti | EP800 + B500 | Home Batteries | AMAZON_GENERIC |
 | EG4 | PowerPro WallMount | Home Batteries | AMAZON_GENERIC |
-| EcoFlow | DELTA Pro Ultra | Home Batteries | AMAZON_GENERIC |
 | Enphase | IQ Battery 10C | Home Batteries | AMAZON_GENERIC |
 | Enphase | IQ Battery 5P | Home Batteries | AMAZON_GENERIC |
 | FranklinWH | aPower 2 | Home Batteries | AMAZON_GENERIC |
@@ -95,6 +93,8 @@ Every product card already resolves to exactly ONE final link (no intermediate s
 | Sigenergy | SigenStor (16 kWh) | Home Batteries | AMAZON_GENERIC |
 | SolarEdge | Home Battery | Home Batteries | AMAZON_GENERIC |
 | Tesla | Powerwall 3 | Home Batteries | AMAZON_GENERIC |
+| Bluetti | EP800 + B500 | Home Batteries | AWIN_DIRECT |
+| EcoFlow | DELTA Pro Ultra | Home Batteries | AWIN_DIRECT |
 | Aferiy | P210 | Solar | AMAZON_GENERIC |
 | Anker SOLIX | F3800 | Solar | AMAZON_GENERIC |
 | BioLite | BaseCharge 1500 | Solar | AMAZON_GENERIC |
