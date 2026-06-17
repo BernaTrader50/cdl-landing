@@ -1,4 +1,5 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { trackAffiliateClick, trackImpression, classifyTier } from "./cdl-tracking";
 
 // ─── DATASET (104 products — CDL Google Sheets) ──────────────────────────────
 export const PRODUCTS = [
@@ -691,6 +692,18 @@ const PRODUCT_IMAGES: Record<string, string> = {
 export function ResultCard({ pick, accentColor, scoreKey }: { pick: PickResult; accentColor: string; scoreKey: string }) {
   const { product: p, label, expertVerdict, strengths, tradeoffs, limitation, scoreComponents } = pick;
   const overallScore = p.scores[scoreKey as keyof typeof p.scores];
+
+  useEffect(() => {
+    trackImpression({
+      lab: "solar",
+      brand: p.brand,
+      model: p.model,
+      recommendation_position: label === "Best Match" ? 1 : label === "Best Value" ? 2 : 3,
+      recommendation_label: label,
+      scenario: scoreKey,
+    });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [p.brand, p.model, label]);
   // ─── GEO-AWARE AFFILIATE ROUTING ──────────────────────────────────────────
   // Detects user market via browser locale + timezone → routes to local Amazon
   // Add your regional Associate IDs below when registered
@@ -992,6 +1005,8 @@ export function ResultCard({ pick, accentColor, scoreKey }: { pick: PickResult; 
         target="_blank"
         rel="noopener noreferrer sponsored"
         onClick={() => {
+          const destinationUrl = getAffiliateUrl(p.brand, p.model);
+          const position = label === "Best Match" ? 1 : label === "Best Value" ? 2 : 3;
           if (typeof window !== "undefined" && (window as any).cdlTrack) {
             (window as any).cdlTrack("affiliate_click", {
               product: `${p.brand} ${p.model}`,
@@ -1000,9 +1015,21 @@ export function ResultCard({ pick, accentColor, scoreKey }: { pick: PickResult; 
               label,                          // "Best Match" | "Best Value" | "Premium Pick"
               scenario: scoreKey,
               appliance: scoreKey,
-              recommendation_position: label === "Best Match" ? 1 : label === "Best Value" ? 2 : 3,
+              recommendation_position: position,
             });
           }
+          // Own tracking — independent of GA4, queryable by Berna directly.
+          trackAffiliateClick({
+            lab: "solar",
+            brand: p.brand,
+            model: p.model,
+            price: p.price,
+            recommendation_position: position,
+            recommendation_label: label,
+            affiliate_tier: classifyTier(destinationUrl),
+            destination_url: destinationUrl,
+            scenario: scoreKey,
+          });
         }}
         className="mt-4 block rounded-[8px] py-2.5 text-center text-[12.5px] font-medium text-white transition-opacity hover:opacity-80"
         style={{background: accentColor}}
