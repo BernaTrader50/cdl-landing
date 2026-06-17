@@ -2,21 +2,24 @@
 
 **Last verified:** 2026-06-17
 
-Hierarchy: AWIN_DIRECT (manufacturer affiliate network) > AMAZON_VERIFIED (exact product page, ASIN-checked against real title) > AMAZON_GENERIC (search query, may land on wrong product) > NONE.
+Hierarchy: AWIN_DIRECT (manufacturer affiliate network, monetized) > MANUFACTURER_DIRECT (verified live manufacturer product page, NOT YET monetized — pending affiliate program) > AMAZON_VERIFIED (exact product page, ASIN-checked against real title, monetized) > AMAZON_GENERIC (search query, may land on wrong product, monetized but unreliable) > NONE.
+
+**IMPORTANT LESSON (2026-06-17):** Earlier in this audit, products that didn't have a clean Amazon ASIN match were mislabeled as possibly discontinued. This was WRONG — 'no Amazon match' just means the brand sells direct, not that the product is gone. Verified via manufacturer sitemaps/sites: Goal Zero Yeti X-series (currently sold out at retail but live product pages, not discontinued), DJI Power 500/1000, Pecron E1000LFP, Growatt Infinity 1500 are all live, purchasable products. Per Berna's directive: a verified manufacturer-direct link builds more trust than generic Amazon search, even without active commission — so these were upgraded to MANUFACTURER_DIRECT rather than left on Amazon generic search.
 
 Every product card already resolves to exactly ONE final link (no intermediate search step shown to user) — this audit tracks the QUALITY of that single link, not whether a link exists.
 
 ## Summary by category
 
-| Category | Total | AWIN_DIRECT | AMAZON_VERIFIED | AMAZON_GENERIC | NONE |
-|---|---|---|---|---|---|
-| Solar | 104 | 55 | 16 | 33 | 0 |
-| EV Chargers | 49 | 0 | 23 | 26 | 0 |
-| Home Batteries | 12 | 2 | 0 | 10 | 0 |
-| Backup Power | 12 | 2 | 6 | 4 | 0 |
-| **TOTAL** | **177** | **59** | **45** | **73** | **0** |
+| Category | Total | AWIN_DIRECT | MANUFACTURER_DIRECT | AMAZON_VERIFIED | AMAZON_GENERIC | NONE |
+|---|---|---|---|---|---|---|
+| Solar | 104 | 55 | 9 | 16 | 24 | 0 |
+| EV Chargers | 49 | 0 | 0 | 23 | 26 | 0 |
+| Home Batteries | 12 | 2 | 0 | 0 | 10 | 0 |
+| Backup Power | 12 | 2 | 0 | 6 | 4 | 0 |
+| **TOTAL** | **177** | **59** | **9** | **45** | **64** | **0** |
 
-**Tier 1+2 (AWIN + Amazon verified): 104/177 (59%)**
+**Monetized at Tier 1+2 (AWIN + Amazon verified): 104/177 (59%)**
+**Trust-verified but NOT monetized yet (MANUFACTURER_DIRECT): 9** — pending affiliate program approval for these brands
 
 ## Full product-by-product detail
 
@@ -97,17 +100,9 @@ Every product card already resolves to exactly ONE final link (no intermediate s
 | EcoFlow | DELTA Pro Ultra | Home Batteries | AWIN_DIRECT |
 | Anker SOLIX | F3800 | Solar | AMAZON_GENERIC |
 | BioLite | BaseCharge 1500 | Solar | AMAZON_GENERIC |
-| DJI Power | Power 1000 | Solar | AMAZON_GENERIC |
-| DJI Power | Power 500 | Solar | AMAZON_GENERIC |
 | Geneverse | HomePower One | Solar | AMAZON_GENERIC |
 | Geneverse | HomePower TWO PRO | Solar | AMAZON_GENERIC |
-| Goal Zero | Yeti 1000X | Solar | AMAZON_GENERIC |
-| Goal Zero | Yeti 1500X | Solar | AMAZON_GENERIC |
-| Goal Zero | Yeti 3000X | Solar | AMAZON_GENERIC |
-| Goal Zero | Yeti 500X | Solar | AMAZON_GENERIC |
-| Goal Zero | Yeti 6000X | Solar | AMAZON_GENERIC |
 | Growatt | Infinity 1300 | Solar | AMAZON_GENERIC |
-| Growatt | Infinity 1500 | Solar | AMAZON_GENERIC |
 | Lion Energy | Safari LT | Solar | AMAZON_GENERIC |
 | Lion Energy | UT 1300 | Solar | AMAZON_GENERIC |
 | Mango Power | Union | Solar | AMAZON_GENERIC |
@@ -116,7 +111,6 @@ Every product card already resolves to exactly ONE final link (no intermediate s
 | OUPES | Mega 2 | Solar | AMAZON_GENERIC |
 | OUPES | Mega 3 | Solar | AMAZON_GENERIC |
 | OUPES | Mega 5 | Solar | AMAZON_GENERIC |
-| Pecron | E1000LFP | Solar | AMAZON_GENERIC |
 | Pecron | E2000LFP | Solar | AMAZON_GENERIC |
 | Pecron | E3000LFP | Solar | AMAZON_GENERIC |
 | Pecron | E500LFP | Solar | AMAZON_GENERIC |
@@ -199,3 +193,12 @@ Every product card already resolves to exactly ONE final link (no intermediate s
 | Zendure | SuperBase Pro 2000 | Solar | AWIN_DIRECT |
 | Zendure | SuperBase V 4600 | Solar | AWIN_DIRECT |
 | Zendure | SuperBase V6400 | Solar | AWIN_DIRECT |
+| DJI Power | Power 1000 | Solar | MANUFACTURER_DIRECT |
+| DJI Power | Power 500 | Solar | MANUFACTURER_DIRECT |
+| Goal Zero | Yeti 1000X | Solar | MANUFACTURER_DIRECT |
+| Goal Zero | Yeti 1500X | Solar | MANUFACTURER_DIRECT |
+| Goal Zero | Yeti 3000X | Solar | MANUFACTURER_DIRECT |
+| Goal Zero | Yeti 500X | Solar | MANUFACTURER_DIRECT |
+| Goal Zero | Yeti 6000X | Solar | MANUFACTURER_DIRECT |
+| Growatt | Infinity 1500 | Solar | MANUFACTURER_DIRECT |
+| Pecron | E1000LFP | Solar | MANUFACTURER_DIRECT |
