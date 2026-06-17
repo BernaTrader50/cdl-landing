@@ -93,7 +93,7 @@ export const BP_PRODUCTS: BPProduct[] = [
     ats: true, app: true, install: "Professional",
     scores: { whole: 9.6, essentials: 9.0, offgrid: 5.5, storm: 9.5, hybrid: 6.5, value: 7.8 },
     verdict: "Best for true whole-home coverage: automatic transfer switch, unlimited runtime on natural gas, sized for AC + well pump simultaneously.",
-    affiliate: "https://www.amazon.com/s?k=Generac+Guardian+22kW&tag=clickdecision-20",
+    affiliate: "https://www.amazon.com/dp/B07DV1VGGW?tag=clickdecision-20",
   },
   {
     brand: "EcoFlow", model: "DELTA Pro Ultra + Smart Panel", price: 7200, kwNum: 7.2, kw: "7.2 kW", surge: "14.4 kW",
@@ -101,7 +101,7 @@ export const BP_PRODUCTS: BPProduct[] = [
     ats: true, app: true, install: "DIY / Both",
     scores: { whole: 7.5, essentials: 9.2, offgrid: 9.4, storm: 8.5, hybrid: 9.6, value: 7.0 },
     verdict: "Best hybrid pick: pairs with solar for silent, fuel-free backup of essential circuits, with generator as fallback for extended outages.",
-    affiliate: "https://www.amazon.com/s?k=EcoFlow+DELTA+Pro+Ultra&tag=clickdecision-20",
+    affiliate: "https://www.awin1.com/cread.php?awinmid=59181&awinaffid=2929639&ued=https://us.ecoflow.com/products/delta-pro-ultra-includes-smart-home-panel2",
   },
   {
     brand: "Champion", model: "14kW Dual Fuel Standby", price: 3199, kwNum: 14, kw: "14 kW", surge: "15.4 kW",
@@ -109,7 +109,7 @@ export const BP_PRODUCTS: BPProduct[] = [
     ats: true, app: false, install: "Professional",
     scores: { whole: 8.2, essentials: 8.6, offgrid: 6.0, storm: 8.4, hybrid: 6.0, value: 9.4 },
     verdict: "Best $/kW installed: dual-fuel flexibility and automatic transfer switch at the lowest price in this class, with a smaller margin above essential loads.",
-    affiliate: "https://www.amazon.com/s?k=Champion+14kW+Dual+Fuel+Standby&tag=clickdecision-20",
+    affiliate: "https://www.amazon.com/dp/B09B2TYMVB?tag=clickdecision-20",
   },
   {
     brand: "Generac", model: "Guardian 11kW", price: 2899, kwNum: 11, kw: "11 kW", surge: "12.5 kW",
@@ -125,7 +125,7 @@ export const BP_PRODUCTS: BPProduct[] = [
     ats: true, app: true, install: "Professional",
     scores: { whole: 9.9, essentials: 9.0, offgrid: 6.0, storm: 9.7, hybrid: 6.8, value: 6.5 },
     verdict: "Largest residential Generac — covers multiple AC units plus heavy loads simultaneously; liquid-cooled tier with the highest installed cost here.",
-    affiliate: "https://www.amazon.com/s?k=Generac+Guardian+26kW&tag=clickdecision-20",
+    affiliate: "https://www.amazon.com/dp/B0BL6GL861?tag=clickdecision-20",
   },
   {
     brand: "Briggs & Stratton", model: "22kW PowerProtect", price: 5899, kwNum: 22, kw: "22 kW", surge: "23 kW",
@@ -149,7 +149,7 @@ export const BP_PRODUCTS: BPProduct[] = [
     ats: false, app: true, install: "DIY / Both",
     scores: { whole: 6.5, essentials: 9.0, offgrid: 9.0, storm: 8.0, hybrid: 9.2, value: 8.0 },
     verdict: "Modular LFP backup starting at 6.1 kWh and expandable to 18.4 kWh — strong solar input (8,000W with 2+ packs) for sustained off-grid use.",
-    affiliate: "https://www.amazon.com/s?k=Bluetti+AC500+B300S&tag=clickdecision-20",
+    affiliate: "https://www.awin1.com/cread.php?awinmid=59271&awinaffid=2929639&ued=https://www.bluettipower.com/products/bluetti-ac500-b300s-home-battery-backup-ac500-cms",
   },
   {
     brand: "Anker SOLIX", model: "F3800 + Home Power Panel", price: 4694, kwNum: 6, kw: "6 kW", surge: "12 kW",
@@ -157,7 +157,7 @@ export const BP_PRODUCTS: BPProduct[] = [
     ats: false, app: true, install: "DIY / Both",
     scores: { whole: 7.0, essentials: 9.0, offgrid: 9.0, storm: 8.2, hybrid: 9.4, value: 8.5 },
     verdict: "Highest continuous output of the battery-based picks (6kW/unit, 12kW with Double Power Hub) — EV-grade cells rated 3,000 cycles, expandable to 53.8 kWh.",
-    affiliate: "https://www.amazon.com/s?k=Anker+SOLIX+F3800+Home+Power+Panel&tag=clickdecision-20",
+    affiliate: "https://www.amazon.com/dp/B0DXN4QYLY?tag=clickdecision-20",
   },
   {
     brand: "Westinghouse", model: "WGen9500DF", price: 1299, kwNum: 9.5, kw: "9.5 kW", surge: "12.5 kW",
@@ -173,7 +173,7 @@ export const BP_PRODUCTS: BPProduct[] = [
     ats: false, app: false, install: "DIY / Both",
     scores: { whole: 5.5, essentials: 8.0, offgrid: 6.8, storm: 6.5, hybrid: 3.8, value: 9.2 },
     verdict: "DIY off-grid favorite — electric start, dual fuel, and a low price per kW, but manual operation and no smart-home integration.",
-    affiliate: "https://www.amazon.com/s?k=DuroMax+XP12000HX&tag=clickdecision-20",
+    affiliate: "https://www.amazon.com/dp/B086Z49LJ5?tag=clickdecision-20",
   },
   {
     brand: "Champion", model: "8.5kW Home Standby", price: 1999, kwNum: 8.5, kw: "8.5 kW", surge: "10.5 kW",
@@ -181,7 +181,7 @@ export const BP_PRODUCTS: BPProduct[] = [
     ats: true, app: false, install: "Professional",
     scores: { whole: 5.0, essentials: 8.8, offgrid: 5.0, storm: 7.5, hybrid: 5.0, value: 9.5 },
     verdict: "Smallest automatic-transfer standby here — covers essential circuits at the lowest standby price point with Champion's typical value-per-kW edge.",
-    affiliate: "https://www.amazon.com/s?k=Champion+8.5kW+Home+Standby&tag=clickdecision-20",
+    affiliate: "https://www.amazon.com/dp/B00WNGL3IW?tag=clickdecision-20",
   },
 ];
 

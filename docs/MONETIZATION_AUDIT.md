@@ -13,27 +13,27 @@ Every product card already resolves to exactly ONE final link (no intermediate s
 | Solar | 104 | 55 | 7 | 42 | 0 |
 | EV Chargers | 49 | 0 | 17 | 32 | 0 |
 | Home Batteries | 12 | 2 | 0 | 10 | 0 |
-| Backup Power | 12 | 0 | 0 | 12 | 0 |
-| **TOTAL** | **177** | **57** | **24** | **96** | **0** |
+| Backup Power | 12 | 2 | 6 | 4 | 0 |
+| **TOTAL** | **177** | **59** | **30** | **88** | **0** |
 
-**Tier 1+2 (AWIN + Amazon verified): 81/177 (46%)**
+**Tier 1+2 (AWIN + Amazon verified): 89/177 (50%)**
 
 ## Full product-by-product detail
 
 | Brand | Model | Category | Level |
 |---|---|---|---|
-| Anker SOLIX | F3800 + Home Power Panel | Backup Power | AMAZON_GENERIC |
-| Bluetti | AC500 + 2x B300S | Backup Power | AMAZON_GENERIC |
 | Briggs & Stratton | 22kW PowerProtect | Backup Power | AMAZON_GENERIC |
-| Champion | 14kW Dual Fuel Standby | Backup Power | AMAZON_GENERIC |
-| Champion | 8.5kW Home Standby | Backup Power | AMAZON_GENERIC |
-| DuroMax | XP12000HX | Backup Power | AMAZON_GENERIC |
-| EcoFlow | DELTA Pro Ultra + Smart Panel | Backup Power | AMAZON_GENERIC |
 | Generac | Guardian 11kW | Backup Power | AMAZON_GENERIC |
-| Generac | Guardian 22kW | Backup Power | AMAZON_GENERIC |
-| Generac | Guardian 26kW | Backup Power | AMAZON_GENERIC |
 | Kohler | 14RESA | Backup Power | AMAZON_GENERIC |
 | Westinghouse | WGen9500DF | Backup Power | AMAZON_GENERIC |
+| Anker SOLIX | F3800 + Home Power Panel | Backup Power | AMAZON_VERIFIED |
+| Champion | 14kW Dual Fuel Standby | Backup Power | AMAZON_VERIFIED |
+| Champion | 8.5kW Home Standby | Backup Power | AMAZON_VERIFIED |
+| DuroMax | XP12000HX | Backup Power | AMAZON_VERIFIED |
+| Generac | Guardian 22kW | Backup Power | AMAZON_VERIFIED |
+| Generac | Guardian 26kW | Backup Power | AMAZON_VERIFIED |
+| Bluetti | AC500 + 2x B300S | Backup Power | AWIN_DIRECT |
+| EcoFlow | DELTA Pro Ultra + Smart Panel | Backup Power | AWIN_DIRECT |
 | Autel | MaxiCharger AC Lite | EV Chargers | AMAZON_GENERIC |
 | Autel | MaxiCharger AC Podium | EV Chargers | AMAZON_GENERIC |
 | Autel | MaxiCharger AC Wallbox (NACS) | EV Chargers | AMAZON_GENERIC |
