@@ -1,25 +1,42 @@
 # Monetization Audit — ClickDecisionLab
 
-**Last verified:** 2026-06-17
+**Last verified:** 2026-06-17 (regenerated from live code to include OUPES Mega 2/3/5, Anker SOLIX F3800, Zendure SuperBase M fixes from the prior session)
 
-Hierarchy: AWIN_DIRECT (manufacturer affiliate network, monetized) > MANUFACTURER_DIRECT (verified live manufacturer product page, NOT YET monetized — pending affiliate program) > AMAZON_VERIFIED (exact product page, ASIN-checked against real title, monetized) > AMAZON_GENERIC (search query, may land on wrong product, monetized but unreliable) > NONE.
+## Board-level summary (per Berna's 2026-06-17 review)
 
-**IMPORTANT LESSON (2026-06-17):** Earlier in this audit, products that didn't have a clean Amazon ASIN match were mislabeled as possibly discontinued. This was WRONG — 'no Amazon match' just means the brand sells direct, not that the product is gone. Verified via manufacturer sitemaps/sites: Goal Zero Yeti X-series (currently sold out at retail but live product pages, not discontinued), DJI Power 500/1000, Pecron E1000LFP, Growatt Infinity 1500 are all live, purchasable products. Per Berna's directive: a verified manufacturer-direct link builds more trust than generic Amazon search, even without active commission — so these were upgraded to MANUFACTURER_DIRECT rather than left on Amazon generic search.
+| State | Products | Definition |
+|---|---|---|
+| AWIN / manufacturer affiliate with commission | 59 | Real commission flows today |
+| Amazon exact product URL (verified ASIN) | 45 | Real commission flows today, no friction |
+| Manufacturer direct, no commission yet | 15 | Zero friction, zero monetization — pending affiliate approval |
+| Amazon generic search | 58 | Commission possible but introduces friction: wrong product, competitor product, lost cookie |
+| No monetization at all | 0 | — |
 
-Every product card already resolves to exactly ONE final link (no intermediate search step shown to user) — this audit tracks the QUALITY of that single link, not whether a link exists.
+**Verdict: 104/177 (59%) fully done. 73/177 (41%) still has friction (generic search) or zero commission (manufacturer-direct only). This is the gap to close, not a vanity metric.**
+
+## Target schema (not yet built — this is the standard to reach, per Berna's 2026-06-17 directive)
+
+Every product should carry:
+
+```
+product_id        — stable internal identifier
+amazon_exact_url  — /dp/ASIN, never /s?k= search
+amazon_tag        — affiliate tag appended
+affiliate_type    — AWIN_DIRECT | MANUFACTURER_DIRECT | AMAZON_VERIFIED | AMAZON_GENERIC | NONE
+last_verified     — date of last manual check (drives the 15-day revalidation cadence in PRODUCT_LIFECYCLE_POLICY.md)
+```
+
+**The calculator should never construct a search URL at runtime — every link should already be the exact final destination, stored, not generated.** This is already true for the AWIN_DIRECT and AMAZON_VERIFIED tiers; AMAZON_GENERIC is exactly the violation of this rule and is the active to-do.
 
 ## Summary by category
 
 | Category | Total | AWIN_DIRECT | MANUFACTURER_DIRECT | AMAZON_VERIFIED | AMAZON_GENERIC | NONE |
 |---|---|---|---|---|---|---|
-| Solar | 104 | 55 | 9 | 16 | 24 | 0 |
+| Solar | 104 | 55 | 15 | 16 | 18 | 0 |
 | EV Chargers | 49 | 0 | 0 | 23 | 26 | 0 |
 | Home Batteries | 12 | 2 | 0 | 0 | 10 | 0 |
 | Backup Power | 12 | 2 | 0 | 6 | 4 | 0 |
-| **TOTAL** | **177** | **59** | **9** | **45** | **64** | **0** |
-
-**Monetized at Tier 1+2 (AWIN + Amazon verified): 104/177 (59%)**
-**Trust-verified but NOT monetized yet (MANUFACTURER_DIRECT): 9** — pending affiliate program approval for these brands
+| **TOTAL** | **177** | **59** | **15** | **45** | **58** | **0** |
 
 ## Full product-by-product detail
 
@@ -98,7 +115,6 @@ Every product card already resolves to exactly ONE final link (no intermediate s
 | Tesla | Powerwall 3 | Home Batteries | AMAZON_GENERIC |
 | Bluetti | EP800 + B500 | Home Batteries | AWIN_DIRECT |
 | EcoFlow | DELTA Pro Ultra | Home Batteries | AWIN_DIRECT |
-| Anker SOLIX | F3800 | Solar | AMAZON_GENERIC |
 | BioLite | BaseCharge 1500 | Solar | AMAZON_GENERIC |
 | Geneverse | HomePower One | Solar | AMAZON_GENERIC |
 | Geneverse | HomePower TWO PRO | Solar | AMAZON_GENERIC |
@@ -108,9 +124,6 @@ Every product card already resolves to exactly ONE final link (no intermediate s
 | Mango Power | Union | Solar | AMAZON_GENERIC |
 | OUPES | 600 Lite | Solar | AMAZON_GENERIC |
 | OUPES | Mega 1 | Solar | AMAZON_GENERIC |
-| OUPES | Mega 2 | Solar | AMAZON_GENERIC |
-| OUPES | Mega 3 | Solar | AMAZON_GENERIC |
-| OUPES | Mega 5 | Solar | AMAZON_GENERIC |
 | Pecron | E2000LFP | Solar | AMAZON_GENERIC |
 | Pecron | E3000LFP | Solar | AMAZON_GENERIC |
 | Pecron | E500LFP | Solar | AMAZON_GENERIC |
@@ -120,8 +133,6 @@ Every product card already resolves to exactly ONE final link (no intermediate s
 | VTOMAN | Jump 2200 | Solar | AMAZON_GENERIC |
 | Westinghouse | iGen1200s | Solar | AMAZON_GENERIC |
 | Westinghouse | iGen300s | Solar | AMAZON_GENERIC |
-| Zendure | SuperBase M 1016 | Solar | AMAZON_GENERIC |
-| Zendure | SuperBase M 607 | Solar | AMAZON_GENERIC |
 | Aferiy | P210 | Solar | AMAZON_VERIFIED |
 | Anker SOLIX | C1000 | Solar | AMAZON_VERIFIED |
 | Anker SOLIX | C2000 | Solar | AMAZON_VERIFIED |
@@ -193,6 +204,7 @@ Every product card already resolves to exactly ONE final link (no intermediate s
 | Zendure | SuperBase Pro 2000 | Solar | AWIN_DIRECT |
 | Zendure | SuperBase V 4600 | Solar | AWIN_DIRECT |
 | Zendure | SuperBase V6400 | Solar | AWIN_DIRECT |
+| Anker SOLIX | F3800 | Solar | MANUFACTURER_DIRECT |
 | DJI Power | Power 1000 | Solar | MANUFACTURER_DIRECT |
 | DJI Power | Power 500 | Solar | MANUFACTURER_DIRECT |
 | Goal Zero | Yeti 1000X | Solar | MANUFACTURER_DIRECT |
@@ -201,4 +213,9 @@ Every product card already resolves to exactly ONE final link (no intermediate s
 | Goal Zero | Yeti 500X | Solar | MANUFACTURER_DIRECT |
 | Goal Zero | Yeti 6000X | Solar | MANUFACTURER_DIRECT |
 | Growatt | Infinity 1500 | Solar | MANUFACTURER_DIRECT |
+| OUPES | Mega 2 | Solar | MANUFACTURER_DIRECT |
+| OUPES | Mega 3 | Solar | MANUFACTURER_DIRECT |
+| OUPES | Mega 5 | Solar | MANUFACTURER_DIRECT |
 | Pecron | E1000LFP | Solar | MANUFACTURER_DIRECT |
+| Zendure | SuperBase M 1016 | Solar | MANUFACTURER_DIRECT |
+| Zendure | SuperBase M 607 | Solar | MANUFACTURER_DIRECT |
