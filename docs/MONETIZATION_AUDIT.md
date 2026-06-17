@@ -10,13 +10,13 @@ Every product card already resolves to exactly ONE final link (no intermediate s
 
 | Category | Total | AWIN_DIRECT | AMAZON_VERIFIED | AMAZON_GENERIC | NONE |
 |---|---|---|---|---|---|
-| Solar | 104 | 55 | 7 | 42 | 0 |
+| Solar | 104 | 55 | 16 | 33 | 0 |
 | EV Chargers | 49 | 0 | 23 | 26 | 0 |
 | Home Batteries | 12 | 2 | 0 | 10 | 0 |
 | Backup Power | 12 | 2 | 6 | 4 | 0 |
-| **TOTAL** | **177** | **59** | **36** | **82** | **0** |
+| **TOTAL** | **177** | **59** | **45** | **73** | **0** |
 
-**Tier 1+2 (AWIN + Amazon verified): 95/177 (54%)**
+**Tier 1+2 (AWIN + Amazon verified): 104/177 (59%)**
 
 ## Full product-by-product detail
 
@@ -95,13 +95,10 @@ Every product card already resolves to exactly ONE final link (no intermediate s
 | Tesla | Powerwall 3 | Home Batteries | AMAZON_GENERIC |
 | Bluetti | EP800 + B500 | Home Batteries | AWIN_DIRECT |
 | EcoFlow | DELTA Pro Ultra | Home Batteries | AWIN_DIRECT |
-| Aferiy | P210 | Solar | AMAZON_GENERIC |
 | Anker SOLIX | F3800 | Solar | AMAZON_GENERIC |
 | BioLite | BaseCharge 1500 | Solar | AMAZON_GENERIC |
 | DJI Power | Power 1000 | Solar | AMAZON_GENERIC |
-| DJI Power | Power 2000 | Solar | AMAZON_GENERIC |
 | DJI Power | Power 500 | Solar | AMAZON_GENERIC |
-| Geneverse | HomePower ONE PRO | Solar | AMAZON_GENERIC |
 | Geneverse | HomePower One | Solar | AMAZON_GENERIC |
 | Geneverse | HomePower TWO PRO | Solar | AMAZON_GENERIC |
 | Goal Zero | Yeti 1000X | Solar | AMAZON_GENERIC |
@@ -115,28 +112,23 @@ Every product card already resolves to exactly ONE final link (no intermediate s
 | Lion Energy | UT 1300 | Solar | AMAZON_GENERIC |
 | Mango Power | Union | Solar | AMAZON_GENERIC |
 | OUPES | 600 Lite | Solar | AMAZON_GENERIC |
-| OUPES | Exodus 2400 | Solar | AMAZON_GENERIC |
 | OUPES | Mega 1 | Solar | AMAZON_GENERIC |
 | OUPES | Mega 2 | Solar | AMAZON_GENERIC |
 | OUPES | Mega 3 | Solar | AMAZON_GENERIC |
 | OUPES | Mega 5 | Solar | AMAZON_GENERIC |
 | Pecron | E1000LFP | Solar | AMAZON_GENERIC |
-| Pecron | E1500LFP | Solar | AMAZON_GENERIC |
 | Pecron | E2000LFP | Solar | AMAZON_GENERIC |
 | Pecron | E3000LFP | Solar | AMAZON_GENERIC |
 | Pecron | E500LFP | Solar | AMAZON_GENERIC |
-| Pecron | E600LFP | Solar | AMAZON_GENERIC |
 | Renogy | Lycan 1000 | Solar | AMAZON_GENERIC |
 | Renogy | Lycan 5000 | Solar | AMAZON_GENERIC |
 | Rockpals | RP1000 | Solar | AMAZON_GENERIC |
-| VTOMAN | FlashSpeed 1500 | Solar | AMAZON_GENERIC |
-| VTOMAN | Jump 1500X | Solar | AMAZON_GENERIC |
 | VTOMAN | Jump 2200 | Solar | AMAZON_GENERIC |
-| VTOMAN | Jump 600X | Solar | AMAZON_GENERIC |
 | Westinghouse | iGen1200s | Solar | AMAZON_GENERIC |
 | Westinghouse | iGen300s | Solar | AMAZON_GENERIC |
 | Zendure | SuperBase M 1016 | Solar | AMAZON_GENERIC |
 | Zendure | SuperBase M 607 | Solar | AMAZON_GENERIC |
+| Aferiy | P210 | Solar | AMAZON_VERIFIED |
 | Anker SOLIX | C1000 | Solar | AMAZON_VERIFIED |
 | Anker SOLIX | C2000 | Solar | AMAZON_VERIFIED |
 | Anker SOLIX | C2000 Gen 2 | Solar | AMAZON_VERIFIED |
@@ -144,6 +136,14 @@ Every product card already resolves to exactly ONE final link (no intermediate s
 | Anker SOLIX | C800 | Solar | AMAZON_VERIFIED |
 | Anker SOLIX | C800 Plus | Solar | AMAZON_VERIFIED |
 | Anker SOLIX | C800X | Solar | AMAZON_VERIFIED |
+| DJI Power | Power 2000 | Solar | AMAZON_VERIFIED |
+| Geneverse | HomePower ONE PRO | Solar | AMAZON_VERIFIED |
+| OUPES | Exodus 2400 | Solar | AMAZON_VERIFIED |
+| Pecron | E1500LFP | Solar | AMAZON_VERIFIED |
+| Pecron | E600LFP | Solar | AMAZON_VERIFIED |
+| VTOMAN | FlashSpeed 1500 | Solar | AMAZON_VERIFIED |
+| VTOMAN | Jump 1500X | Solar | AMAZON_VERIFIED |
+| VTOMAN | Jump 600X | Solar | AMAZON_VERIFIED |
 | Allpowers | R1500 LITE | Solar | AWIN_DIRECT |
 | Allpowers | R2500 | Solar | AWIN_DIRECT |
 | Allpowers | R3500 | Solar | AWIN_DIRECT |
