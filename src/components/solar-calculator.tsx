@@ -811,8 +811,8 @@ export function ResultCard({ pick, accentColor, scoreKey }: { pick: PickResult; 
     "C2000 Gen 2": "https://www.amazon.com/dp/B0CX4WGCNP?tag=clickdecision-20",
     "F3800":       "https://us.anker.com/products/f3800",
     // ─── Others — Amazon search (always works) ────────────────────────────────
-    "SuperBase M 607":   "https://www.amazon.com/s?k=Zendure+SuperBase+M+607&tag=clickdecision-20",
-    "SuperBase M 1016":  "https://www.amazon.com/s?k=Zendure+SuperBase+M+1016&tag=clickdecision-20",
+    "SuperBase M 607":   "https://us.zendure.com/products/zendure-superbase-m-portable-power-station",
+    "SuperBase M 1016":  "https://us.zendure.com/products/zendure-superbase-m-portable-power-station",
     "SuperBase Pro 2000":"https://www.awin1.com/cread.php?awinmid=68786&awinaffid=2929639&ued=https://zendure.com/products/superbase-pro-2000",
     "SuperBase V 4600":  "https://www.awin1.com/cread.php?awinmid=68786&awinaffid=2929639&ued=https://zendure.com/products/zendure-superbase-v",
     "SuperBase V6400":   "https://www.awin1.com/cread.php?awinmid=68786&awinaffid=2929639&ued=https://zendure.com/products/zendure-superbase-v",
