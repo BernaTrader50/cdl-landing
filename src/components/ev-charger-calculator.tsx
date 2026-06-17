@@ -74,7 +74,29 @@ function amzSearch(brand: string, model: string) {
 }
 
 const AFFILIATE_LINKS: Record<string, string> = {
-  // Pod Point (Awin 73493), evec (33447), Go Zero (36016) — once applied
+  // AWIN programs identified but NOT YET ACTIVATED — Pod Point (mid 73493), evec (mid 33447), Go Zero (mid 36016).
+  // Until activated, these fall back to verified-product-page Amazon links below (not generic search).
+
+  // --- Verified Amazon ASIN deep-links (title-checked against real product page, not guessed) ---
+  "ChargePoint|Home Flex": "https://www.amazon.com/dp/B0C6YMS4KH?tag=" + TAG,
+  "Wallbox|Pulsar Plus": "https://www.amazon.com/dp/B0DJHDY4JY?tag=" + TAG,
+  "Emporia|Level 2 EV Charger": "https://www.amazon.com/dp/B0CKKPTDPK?tag=" + TAG,
+  "Emporia|EV Charger Pro 48A": "https://www.amazon.com/dp/B0D9MQ415Y?tag=" + TAG,
+  "Grizzl-E|Classic": "https://www.amazon.com/dp/B082LMVSLY?tag=" + TAG,
+  "Grizzl-E|Smart": "https://www.amazon.com/dp/B0CKJ6FWLR?tag=" + TAG,
+  "Grizzl-E|Duo": "https://www.amazon.com/dp/B0GNN1PCPY?tag=" + TAG,
+  "Grizzl-E|Ultimate": "https://www.amazon.com/dp/B0D9HV151X?tag=" + TAG,
+  "Autel|MaxiCharger AC Wallbox": "https://www.amazon.com/dp/B0CRDMXXL7?tag=" + TAG,
+  "Tesla|Universal Wall Connector": "https://www.amazon.com/dp/B0CNJH667W?tag=" + TAG,
+  "Tesla|Mobile Connector": "https://www.amazon.com/dp/B0GPBJTTH5?tag=" + TAG,
+  "ClipperCreek|HCS-40": "https://www.amazon.com/dp/B0DZ6KTJ9S?tag=" + TAG,
+  "JuiceBox|40": "https://www.amazon.com/dp/B0C1WF8VPS?tag=" + TAG,
+  "Lectron|Level 2 J1772": "https://www.amazon.com/dp/B0BXP2JB64?tag=" + TAG,
+  "Megear|MA-EVSE03": "https://www.amazon.com/dp/B077N25YTG?tag=" + TAG,
+  "Morec|Level 2 EVSE": "https://www.amazon.com/dp/B0F66RW78G?tag=" + TAG,
+  "EVoCharge|EVSE-HT": "https://www.amazon.com/dp/B0BNDVR2G4?tag=" + TAG,
+
+  // --- AWIN-pending, currently Amazon search fallback (not yet ASIN-verified) ---
   "Pod Point|Solo 3": amzSearch("Pod Point","Solo 3"),
   "Pod Point|Solo 3 (Smart)": amzSearch("Pod Point","Solo 3 Smart"),
   "evec|E-Hub Pro": amzSearch("evec","E-Hub Pro"),
