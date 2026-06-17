@@ -1,5 +1,6 @@
-import { useState, useMemo } from "react";
+import { useState, useMemo, useEffect } from "react";
 import { Home as HomeIcon, Building2, Caravan, Car, Wallet, ArrowUpRight } from "lucide-react";
+import { trackAffiliateClick, trackImpression, classifyTier } from "./cdl-tracking";
 
 // ─── DATASET — 49 chargers, 22 brands ───────────────────────────────────────
 type Charger = {
@@ -190,6 +191,17 @@ function ScoreBar({ label, value }: { label: string; value: number }) {
 }
 
 function ChargerCard({ charger, score, rank }: { charger: Charger; score: number; rank: number }) {
+  useEffect(() => {
+    trackImpression({
+      lab: "ev_charger",
+      brand: charger.brand,
+      model: charger.model,
+      recommendation_position: rank,
+      recommendation_label: rank === 1 ? "Top Match" : `#${rank} Match`,
+    });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [charger.brand, charger.model, rank]);
+
   return (
     <div className="rounded-xl border border-neutral-200 bg-white p-5">
       <div className="flex items-start justify-between mb-3">
@@ -223,7 +235,20 @@ function ChargerCard({ charger, score, rank }: { charger: Charger; score: number
       <a
         href={getLink(charger.brand, charger.model)}
         target="_blank" rel="noopener noreferrer sponsored"
-        className="block w-full text-center rounded-lg bg-neutral-950 text-white text-[13px] font-medium py-2.5 hover:bg-neutral-800 transition"
+        onClick={() => {
+          const destinationUrl = getLink(charger.brand, charger.model);
+          trackAffiliateClick({
+            lab: "ev_charger",
+            brand: charger.brand,
+            model: charger.model,
+            price: charger.price,
+            recommendation_position: rank,
+            recommendation_label: rank === 1 ? "Top Match" : `#${rank} Match`,
+            affiliate_tier: classifyTier(destinationUrl),
+            destination_url: destinationUrl,
+          });
+        }}
+        className="block w-full text-center rounded-lg bg-[#2563eb] text-white text-[13px] font-medium py-2.5 hover:bg-[#1d4ed8] transition"
       >
         Check Price →
       </a>

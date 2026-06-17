@@ -19,6 +19,7 @@ import {
   Wrench,
 } from "lucide-react";
 import SiteHeader from "@/components/SiteHeader";
+import { trackAffiliateClick, trackImpression, classifyTier } from "@/components/cdl-tracking";
 
 export const Route = createFileRoute("/home-batteries")({
   head: () => ({
@@ -832,75 +833,8 @@ function ResultsBlock({ goal, size, install, budget }: { goal: string; size: str
         </div>
 
         <div className={`grid gap-6 ${PICKS.length === 1 ? "md:grid-cols-1 max-w-md" : PICKS.length === 2 ? "md:grid-cols-2" : "md:grid-cols-3"}`}>
-          {PICKS.map((p) => (
-            <div
-              key={p.tier}
-              className={`bg-white rounded-xl border border-neutral-200 border-t-4 ${p.border} overflow-hidden flex flex-col`}
-            >
-              {/* Product image placeholder */}
-              <div
-                className="h-40 flex items-center justify-center relative"
-                style={{ backgroundImage: p.img }}
-              >
-                <BatteryCharging className="h-16 w-16 text-white/80" strokeWidth={1.5} />
-                <span className={`absolute top-3 left-3 inline-flex items-center gap-1 px-2.5 py-1 rounded-full bg-white text-[10px] font-mono uppercase tracking-[0.15em] ${p.accentText}`}>
-                  ★ {p.tier}
-                </span>
-              </div>
-
-              <div className="p-6 flex flex-col flex-1">
-                <div className="flex items-start justify-between gap-3 mb-4">
-                  <div className="min-w-0">
-                    <div className="text-[11px] font-mono text-neutral-400">{p.brand}</div>
-                    <h3 className="text-xl font-bold leading-tight">{p.model}</h3>
-                  </div>
-                  <div className="text-right shrink-0">
-                    <div className={`text-2xl font-bold ${p.accentText}`}>${p.price.toLocaleString()}</div>
-                    <div className="text-[10px] font-mono text-neutral-400">match {p.matchScore}</div>
-                  </div>
-                </div>
-
-                {/* Spec icons */}
-                <div className="grid grid-cols-3 gap-2 mb-4">
-                  <Spec icon={BatteryCharging} label={p.kwh} sub="capacity" />
-                  <Spec icon={Zap} label={p.kw} sub="continuous" />
-                  <Spec icon={PlugZap} label={p.surge} sub="surge" />
-                  <Spec icon={ShieldCheck} label={p.chem} sub="chemistry" />
-                  <Spec icon={Cog} label={p.warranty} sub="warranty" />
-                  <Spec icon={Gauge} label={p.cycles} sub="cycles" />
-                </div>
-
-                {/* Feature badges */}
-                <div className="flex flex-wrap gap-1.5 mb-4">
-                  <Badge active={p.ev} label="EV Charger" />
-                  <Badge active={p.app} label="App Monitor" />
-                  <span className="inline-flex items-center gap-1 text-[10px] font-mono uppercase tracking-wider px-2 py-1 rounded bg-neutral-100 text-neutral-600">
-                    {p.install}
-                  </span>
-                </div>
-
-                {/* Score bars */}
-                <div className="space-y-2 mb-4">
-                  <Bar label="Backup Resilience" value={p.backup} color={p.accentText} />
-                  <Bar label="Solar Pairing" value={p.solar} color={p.accentText} />
-                  <Bar label="Value" value={p.value} color={p.accentText} />
-                  <Bar label="Scalability" value={p.scale} color={p.accentText} />
-                  <Bar label="Off-Grid" value={p.offgrid} color={p.accentText} />
-                  <Bar label="Smart Home" value={p.smart} color={p.accentText} />
-                </div>
-
-                <p className="text-xs text-neutral-600 leading-relaxed mb-5 italic">"{p.verdict}"</p>
-
-                <a
-                  href={p.affiliate}
-                  target="_blank"
-                  rel="noopener noreferrer sponsored"
-                  className={`mt-auto inline-flex w-full items-center justify-center gap-1.5 h-11 rounded-md text-white text-sm font-semibold transition-colors ${p.btn}`}
-                >
-                  Check price <ArrowUpRight className="h-4 w-4" />
-                </a>
-              </div>
-            </div>
+          {PICKS.map((p, i) => (
+            <HomeBatteryCard key={p.tier} p={p} index={i} />
           ))}
         </div>
 
@@ -970,6 +904,98 @@ function ResultsBlock({ goal, size, install, budget }: { goal: string; size: str
         </p>
       </div>
     </section>
+  );
+}
+
+function HomeBatteryCard({ p, index }: { p: HBPick; index: number }) {
+  useEffect(() => {
+    trackImpression({
+      lab: "home_battery",
+      brand: p.brand,
+      model: p.model,
+      recommendation_position: index + 1,
+      recommendation_label: p.tier,
+    });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [p.brand, p.model, index]);
+
+  return (
+    <div className={`bg-white rounded-xl border border-neutral-200 border-t-4 ${p.border} overflow-hidden flex flex-col`}>
+      <div
+        className="h-40 flex items-center justify-center relative"
+        style={{ backgroundImage: p.img }}
+      >
+        <BatteryCharging className="h-16 w-16 text-white/80" strokeWidth={1.5} />
+        <span className={`absolute top-3 left-3 inline-flex items-center gap-1 px-2.5 py-1 rounded-full bg-white text-[10px] font-mono uppercase tracking-[0.15em] ${p.accentText}`}>
+          ★ {p.tier}
+        </span>
+      </div>
+
+      <div className="p-6 flex flex-col flex-1">
+        <div className="flex items-start justify-between gap-3 mb-4">
+          <div className="min-w-0">
+            <div className="text-[11px] font-mono text-neutral-400">{p.brand}</div>
+            <h3 className="text-xl font-bold leading-tight">{p.model}</h3>
+          </div>
+          <div className="text-right shrink-0">
+            <div className={`text-2xl font-bold ${p.accentText}`}>${p.price.toLocaleString()}</div>
+            <div className="text-[10px] font-mono text-neutral-400">match {p.matchScore}</div>
+          </div>
+        </div>
+
+        {/* Spec icons */}
+        <div className="grid grid-cols-3 gap-2 mb-4">
+          <Spec icon={BatteryCharging} label={p.kwh} sub="capacity" />
+          <Spec icon={Zap} label={p.kw} sub="continuous" />
+          <Spec icon={PlugZap} label={p.surge} sub="surge" />
+          <Spec icon={ShieldCheck} label={p.chem} sub="chemistry" />
+          <Spec icon={Cog} label={p.warranty} sub="warranty" />
+          <Spec icon={Gauge} label={p.cycles} sub="cycles" />
+        </div>
+
+        {/* Feature badges */}
+        <div className="flex flex-wrap gap-1.5 mb-4">
+          <Badge active={p.ev} label="EV Charger" />
+          <Badge active={p.app} label="App Monitor" />
+          <span className="inline-flex items-center gap-1 text-[10px] font-mono uppercase tracking-wider px-2 py-1 rounded bg-neutral-100 text-neutral-600">
+            {p.install}
+          </span>
+        </div>
+
+        {/* Score bars */}
+        <div className="space-y-2 mb-4">
+          <Bar label="Backup Resilience" value={p.backup} color={p.accentText} />
+          <Bar label="Solar Pairing" value={p.solar} color={p.accentText} />
+          <Bar label="Value" value={p.value} color={p.accentText} />
+          <Bar label="Scalability" value={p.scale} color={p.accentText} />
+          <Bar label="Off-Grid" value={p.offgrid} color={p.accentText} />
+          <Bar label="Smart Home" value={p.smart} color={p.accentText} />
+        </div>
+
+        <p className="text-xs text-neutral-600 leading-relaxed mb-5 italic">"{p.verdict}"</p>
+
+        <a
+          href={p.affiliate}
+          target="_blank"
+          rel="noopener noreferrer sponsored"
+          onClick={() => {
+            trackAffiliateClick({
+              lab: "home_battery",
+              brand: p.brand,
+              model: p.model,
+              price: p.price,
+              recommendation_position: index + 1,
+              recommendation_label: p.tier,
+              affiliate_tier: classifyTier(p.affiliate),
+              destination_url: p.affiliate,
+            });
+          }}
+          className={`mt-auto inline-flex w-full items-center justify-center gap-1.5 h-11 rounded-md text-white text-sm font-semibold transition-colors ${p.btn}`}
+        >
+          Check price <ArrowUpRight className="h-4 w-4" />
+        </a>
+      </div>
+    </div>
   );
 }
 
