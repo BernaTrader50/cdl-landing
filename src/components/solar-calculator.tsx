@@ -54,7 +54,7 @@ export const PRODUCTS = [
   { brand:"DJI Power", model:"Power 500", price:349, wh:512, surge:2000, solar:500, ups:true, expandable:false, weight:13.2, warranty:3, scores:{home_backup:5,rv:6,camping:8,off_grid:4,apartment:8,medical:6,value:8}, notes:"6 lbs — ultralight. UPS <20ms. SDC port for DJI drones. Best compact for tech users." },
   { brand:"DJI Power", model:"Power 1000", price:699, wh:1024, surge:4400, solar:800, ups:true, expandable:false, weight:28.6, warranty:3, scores:{home_backup:7,rv:7,camping:7,off_grid:6,apartment:7,medical:7,value:8}, notes:"4400W surge, UPS, 4000 cycles. SDC drone charging. Competitive vs EcoFlow DELTA 3 Classic." },
   // ─── RENOGY ───────────────────────────────────────────────────────────────
-  { brand:"Renogy", model:"Lycan 5000", price:2999, wh:4800, surge:7000, solar:4400, ups:true, expandable:true, weight:264.6, warranty:1, scores:{home_backup:9,rv:2,camping:1,off_grid:10,apartment:1,medical:8,value:5}, notes:"Whole-home stationary system. 3500W continuous, 7000W surge. Expandable to 19.2kWh. 264 lbs." },
+  { brand:"Renogy", model:"Lycan 5000", price:2999, wh:4800, surge:7000, solar:4400, ups:true, expandable:true, weight:264.6, warranty:1, discontinued:true, scores:{home_backup:9,rv:2,camping:1,off_grid:10,apartment:1,medical:8,value:5}, notes:"Whole-home stationary system. 3500W continuous, 7000W surge. Expandable to 19.2kWh. 264 lbs. Discontinued by Renogy — kept for reference, hard to source new." },
   // ─── GENEVERSE ───────────────────────────────────────────────────────────
   { brand:"Geneverse", model:"HomePower ONE PRO", price:499, wh:1210, surge:2400, solar:400, ups:false, expandable:false, weight:38, warranty:5, scores:{home_backup:7,rv:6,camping:6,off_grid:5,apartment:6,medical:6,value:8}, notes:"Home backup focused. LFP. 1.5h charge. Simple, reliable. Sold at Lowe's and Home Depot." },
   { brand:"Geneverse", model:"HomePower TWO PRO", price:999, wh:2419, surge:4400, solar:800, ups:false, expandable:false, weight:49, warranty:5, scores:{home_backup:8,rv:6,camping:4,off_grid:6,apartment:4,medical:7,value:7}, notes:"2.4kWh LFP for home backup. 4400W surge. Sold at major retailers. No UPS." },
@@ -115,7 +115,7 @@ export const PRODUCTS = [
   { brand:"Lion Energy", model:"Safari LT",       price:399,  wh:450,  surge:600,  solar:150,  ups:false, expandable:false, weight:11,   warranty:3, scores:{home_backup:4,rv:5,camping:8,off_grid:4,apartment:5,medical:4,value:7}, notes:"450Wh LFP. 300W continuous. Lightweight 11 lbs. Budget LFP camping." },
   { brand:"Lion Energy", model:"UT 1300",         price:1499, wh:1314, surge:4000, solar:500,  ups:true,  expandable:false, weight:30,   warranty:3, scores:{home_backup:7,rv:7,camping:6,off_grid:6,apartment:6,medical:7,value:6}, notes:"1314Wh LFP. 2000W continuous 4000W surge. UPS. US-marketed brand." },
   // ─── Renogy expanded ─────────────────────────────────────────────────────
-  { brand:"Renogy", model:"Lycan 1000",           price:799,  wh:1002, surge:2000, solar:400,  ups:false, expandable:false, weight:26,   warranty:2, scores:{home_backup:6,rv:6,camping:6,off_grid:5,apartment:6,medical:4,value:6}, notes:"1002Wh NMC. 1000W continuous 2000W surge. No UPS. Budget mid-range." },
+  { brand:"Renogy", model:"Lycan 1000",           price:799,  wh:1002, surge:2000, solar:400,  ups:false, expandable:false, weight:26,   warranty:2, discontinued:true, scores:{home_backup:6,rv:6,camping:6,off_grid:5,apartment:6,medical:4,value:6}, notes:"1002Wh NMC. 1000W continuous 2000W surge. No UPS. Budget mid-range. Discontinued by Renogy — kept for reference, hard to source new." },
   // ─── Westinghouse ────────────────────────────────────────────────────────
   { brand:"Westinghouse", model:"iGen1200s",      price:499,  wh:1125, surge:2400, solar:300,  ups:false, expandable:false, weight:29.8, warranty:3, scores:{home_backup:6,rv:6,camping:7,off_grid:5,apartment:6,medical:4,value:7}, notes:"1125Wh NMC. 1200W continuous 2400W surge. Sold at Home Depot/Lowe's." },
   { brand:"Westinghouse", model:"iGen300s",       price:199,  wh:296,  surge:600,  solar:100,  ups:false, expandable:false, weight:7.7,  warranty:3, scores:{home_backup:3,rv:5,camping:8,off_grid:2,apartment:5,medical:3,value:7}, notes:"296Wh NMC. 300W continuous. Budget entry level. Sold at major retailers." },
@@ -935,6 +935,11 @@ export function ResultCard({ pick, accentColor, scoreKey }: { pick: PickResult; 
       {/* Label + Product */}
       <p className="font-mono text-[10.5px] font-medium uppercase tracking-[0.14em]" style={{color:accentColor}}>{label}</p>
       <h3 className="mt-1 text-[15px] font-semibold leading-tight text-neutral-950">{p.brand} {p.model}</h3>
+      {(p as any).discontinued && (
+        <span className="mt-1.5 inline-flex items-center gap-1 rounded-full bg-amber-50 border border-amber-200 px-2 py-0.5 text-[10px] font-medium text-amber-700">
+          ⚠ Discontinued — hard to find new
+        </span>
+      )}
 
       {/* Specs */}
       <div className="mt-3 grid grid-cols-2 gap-y-1 text-[12px] tabular-nums text-neutral-700">
