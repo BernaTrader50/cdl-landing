@@ -111,7 +111,6 @@ const PRODUCTS: Product[] = [
   { brand:"EcoFlow", model:"DELTA 3 Max",       wh:1800, surge:4800,  price:749  },
   { brand:"EcoFlow", model:"DELTA 3 Plus",      wh:900,  surge:4400,  price:599  },
   { brand:"EcoFlow", model:"DELTA 3 Classic",   wh:900,  surge:3600,  price:449  },
-  { brand:"EcoFlow", model:"DELTA 3",           wh:900,  surge:3600,  price:499  },
   { brand:"EcoFlow", model:"DELTA 2 Max",       wh:1800, surge:4800,  price:999  },
   { brand:"EcoFlow", model:"DELTA 2",           wh:900,  surge:3600,  price:699  },
   { brand:"EcoFlow", model:"RIVER 3 Plus",      wh:440,  surge:1200,  price:299  },
@@ -166,6 +165,62 @@ const PRODUCTS: Product[] = [
   // Geneverse
   { brand:"Geneverse", model:"HomePower TWO PRO",wh:2419,surge:4400,  price:999  },
   { brand:"Geneverse", model:"HomePower ONE PRO",wh:1210,surge:2400,  price:499  },
+  // --- Added from full audit: products in solar-calculator.tsx missing here ---
+  { brand:"Aferiy", model:"P210", wh:2048, surge:4800, price:699 },
+  { brand:"Allpowers", model:"R1500 LITE", wh:1056, surge:3200, price:299 },
+  { brand:"Allpowers", model:"R2500", wh:2016, surge:5000, price:699 },
+  { brand:"Allpowers", model:"R3500", wh:3168, surge:6400, price:1499 },
+  { brand:"Allpowers", model:"R4000", wh:3456, surge:8000, price:1299 },
+  { brand:"Allpowers", model:"R600", wh:299, surge:600, price:199 },
+  { brand:"Allpowers", model:"S2000 Pro", wh:1452, surge:4000, price:499 },
+  { brand:"Anker SOLIX", model:"C300", wh:288, surge:900, price:199 },
+  { brand:"BioLite", model:"BaseCharge 1500", wh:1521, surge:2400, price:999 },
+  { brand:"Bluetti", model:"AC200P", wh:2000, surge:4800, price:999 },
+  { brand:"Bluetti", model:"EB55", wh:537, surge:1400, price:349 },
+  { brand:"Bluetti", model:"EB70", wh:716, surge:1400, price:449 },
+  { brand:"Bluetti", model:"EB70S", wh:716, surge:1400, price:429 },
+  { brand:"Bluetti", model:"EP500 Pro", wh:5100, surge:6000, price:4099 },
+  { brand:"DJI Power", model:"Power 2000", wh:2048, surge:4400, price:999 },
+  { brand:"EcoFlow", model:"DELTA Max", wh:2016, surge:5000, price:1099 },
+  { brand:"EcoFlow", model:"DELTA Mini", wh:882, surge:2600, price:499 },
+  { brand:"EcoFlow", model:"DELTA Pro 3", wh:4096, surge:8000, price:2999 },
+  { brand:"EcoFlow", model:"RIVER 2 Pro", wh:768, surge:1600, price:349 },
+  { brand:"EcoFlow", model:"RIVER Pro", wh:720, surge:1800, price:399 },
+  { brand:"Geneverse", model:"HomePower One", wh:716, surge:1400, price:299 },
+  { brand:"Goal Zero", model:"Yeti 500X", wh:505, surge:600, price:399 },
+  { brand:"Goal Zero", model:"Yeti 6000X", wh:6071, surge:3500, price:3999 },
+  { brand:"Growatt", model:"Infinity 1300", wh:1382, surge:3600, price:499 },
+  { brand:"Growatt", model:"Infinity 1500", wh:1512, surge:4000, price:599 },
+  { brand:"Jackery", model:"Explorer 100 Plus", wh:99, surge:128, price:149 },
+  { brand:"Jackery", model:"Explorer 1000 Pro", wh:1002, surge:2000, price:699 },
+  { brand:"Jackery", model:"Explorer 2000 Pro", wh:2042, surge:4400, price:1299 },
+  { brand:"Jackery", model:"Explorer 240 v2", wh:256, surge:600, price:349 },
+  { brand:"Jackery", model:"Explorer 3000 Pro", wh:2400, surge:6000, price:2299 },
+  { brand:"Jackery", model:"Explorer 500", wh:518, surge:1000, price:249 },
+  { brand:"Jackery", model:"Explorer 500 v2", wh:512, surge:1000, price:299 },
+  { brand:"Jackery", model:"Explorer 5000 Plus", wh:5040, surge:7200, price:4299 },
+  { brand:"Jackery", model:"Explorer 700 Plus", wh:680, surge:1500, price:999 },
+  { brand:"Jackery", model:"Explorer 880 Pro", wh:880, surge:2000, price:999 },
+  { brand:"Lion Energy", model:"Safari LT", wh:450, surge:600, price:399 },
+  { brand:"Lion Energy", model:"UT 1300", wh:1314, surge:4000, price:1499 },
+  { brand:"Mango Power", model:"Union", wh:6900, surge:6600, price:2799 },
+  { brand:"OUPES", model:"600 Lite", wh:596, surge:1200, price:229 },
+  { brand:"OUPES", model:"Exodus 2400", wh:2232, surge:4500, price:799 },
+  { brand:"OUPES", model:"Mega 1", wh:1024, surge:4500, price:399 },
+  { brand:"OUPES", model:"Mega 2", wh:2048, surge:5400, price:799 },
+  { brand:"OUPES", model:"Mega 3", wh:3072, surge:7000, price:1082 },
+  { brand:"OUPES", model:"Mega 5", wh:5040, surge:7000, price:2499 },
+  { brand:"Pecron", model:"E1500LFP", wh:1382, surge:3000, price:599 },
+  { brand:"Pecron", model:"E3000LFP", wh:2880, surge:6000, price:1299 },
+  { brand:"Pecron", model:"E500LFP", wh:461, surge:1200, price:299 },
+  { brand:"Renogy", model:"Lycan 1000", wh:1002, surge:2000, price:799 },
+  { brand:"Rockpals", model:"RP1000", wh:1002, surge:2000, price:699 },
+  { brand:"VTOMAN", model:"Jump 1500X", wh:1456, surge:3000, price:599 },
+  { brand:"VTOMAN", model:"Jump 600X", wh:632, surge:1200, price:399 },
+  { brand:"Westinghouse", model:"iGen1200s", wh:1125, surge:2400, price:499 },
+  { brand:"Westinghouse", model:"iGen300s", wh:296, surge:600, price:199 },
+  { brand:"Zendure", model:"Hyper 2000", wh:2015, surge:4000, price:1299 },
+  { brand:"Zendure", model:"SuperBase V6400", wh:6144, surge:7600, price:5999 },
 ];
 
 // ─── RUNTIME CALCULATIONS ────────────────────────────────────────────────────
@@ -217,7 +272,7 @@ function RuntimeDatabase() {
   const [activeApp, setActiveApp] = useState<string>("refrigerator");
   const [sortBy, setSortBy] = useState<SortKey>("typical");
   const [sortDir, setSortDir] = useState<"desc" | "asc">("desc");
-  const [maxPrice, setMaxPrice] = useState<number>(5000);
+  const [maxPrice, setMaxPrice] = useState<number>(10000);
 
   const appliance = APPLIANCES[activeApp];
 
@@ -337,7 +392,7 @@ function RuntimeDatabase() {
               <option value={1000}>Under $1,000</option>
               <option value={2000}>Under $2,000</option>
               <option value={3000}>Under $3,000</option>
-              <option value={5000}>All prices</option>
+              <option value={10000}>All prices</option>
             </select>
           </div>
           <span className="font-mono text-[10px] text-neutral-400">{rows.length} products shown</span>
