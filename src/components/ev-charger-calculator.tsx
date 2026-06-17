@@ -95,6 +95,12 @@ const AFFILIATE_LINKS: Record<string, string> = {
   "Megear|MA-EVSE03": "https://www.amazon.com/dp/B077N25YTG?tag=" + TAG,
   "Morec|Level 2 EVSE": "https://www.amazon.com/dp/B0F66RW78G?tag=" + TAG,
   "EVoCharge|EVSE-HT": "https://www.amazon.com/dp/B0BNDVR2G4?tag=" + TAG,
+  "ClipperCreek|HCS-50": "https://www.amazon.com/dp/B01L0BXJQO?tag=" + TAG,
+  "Lectron|V-BOX": "https://www.amazon.com/dp/B0FVD5RGTF?tag=" + TAG,
+  "Siemens|VersiCharge": "https://www.amazon.com/dp/B019DKKR7S?tag=" + TAG,
+  "ChargePoint|Home Flex (NACS)": "https://www.amazon.com/dp/B0CSPMC93Y?tag=" + TAG,
+  "Autel|MaxiCharger AC Wallbox (NACS)": "https://www.amazon.com/dp/B0D17P6L87?tag=" + TAG,
+  "Emporia|Level 2 EV Charger (NACS)": "https://www.amazon.com/dp/B0D9MSSXV2?tag=" + TAG,
 
   // --- AWIN-pending, currently Amazon search fallback (not yet ASIN-verified) ---
   "Pod Point|Solo 3": amzSearch("Pod Point","Solo 3"),

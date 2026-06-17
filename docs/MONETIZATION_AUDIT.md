@@ -11,12 +11,12 @@ Every product card already resolves to exactly ONE final link (no intermediate s
 | Category | Total | AWIN_DIRECT | AMAZON_VERIFIED | AMAZON_GENERIC | NONE |
 |---|---|---|---|---|---|
 | Solar | 104 | 55 | 7 | 42 | 0 |
-| EV Chargers | 49 | 0 | 17 | 32 | 0 |
+| EV Chargers | 49 | 0 | 23 | 26 | 0 |
 | Home Batteries | 12 | 2 | 0 | 10 | 0 |
 | Backup Power | 12 | 2 | 6 | 4 | 0 |
-| **TOTAL** | **177** | **59** | **30** | **88** | **0** |
+| **TOTAL** | **177** | **59** | **36** | **82** | **0** |
 
-**Tier 1+2 (AWIN + Amazon verified): 89/177 (50%)**
+**Tier 1+2 (AWIN + Amazon verified): 95/177 (54%)**
 
 ## Full product-by-product detail
 
@@ -36,26 +36,20 @@ Every product card already resolves to exactly ONE final link (no intermediate s
 | EcoFlow | DELTA Pro Ultra + Smart Panel | Backup Power | AWIN_DIRECT |
 | Autel | MaxiCharger AC Lite | EV Chargers | AMAZON_GENERIC |
 | Autel | MaxiCharger AC Podium | EV Chargers | AMAZON_GENERIC |
-| Autel | MaxiCharger AC Wallbox (NACS) | EV Chargers | AMAZON_GENERIC |
 | Autel | MaxiCharger DC Compact | EV Chargers | AMAZON_GENERIC |
 | Blink | HQ 200 | EV Chargers | AMAZON_GENERIC |
 | Bosch | Power Max 2 | EV Chargers | AMAZON_GENERIC |
 | ChargePoint | Flex (48A hardwire) | EV Chargers | AMAZON_GENERIC |
-| ChargePoint | Home Flex (NACS) | EV Chargers | AMAZON_GENERIC |
 | ClipperCreek | HCS-20 | EV Chargers | AMAZON_GENERIC |
-| ClipperCreek | HCS-50 | EV Chargers | AMAZON_GENERIC |
 | ESVEL | Smart EV Charger | EV Chargers | AMAZON_GENERIC |
-| Emporia | Level 2 EV Charger (NACS) | EV Chargers | AMAZON_GENERIC |
 | Enel X | JuiceBox 48 | EV Chargers | AMAZON_GENERIC |
 | Go Zero | Smart Charger 7kW | EV Chargers | AMAZON_GENERIC |
 | Grizzl-E | Avalon | EV Chargers | AMAZON_GENERIC |
 | JuiceBox | 32 | EV Chargers | AMAZON_GENERIC |
-| Lectron | V-BOX | EV Chargers | AMAZON_GENERIC |
 | Lectron | V-BOX Pro 80A | EV Chargers | AMAZON_GENERIC |
 | Leviton | EVR-Green 50 | EV Chargers | AMAZON_GENERIC |
 | Pod Point | Solo 3 | EV Chargers | AMAZON_GENERIC |
 | Pod Point | Solo 3 (Smart) | EV Chargers | AMAZON_GENERIC |
-| Siemens | VersiCharge | EV Chargers | AMAZON_GENERIC |
 | Tesla | Wall Connector (Gen 3 4-pack) | EV Chargers | AMAZON_GENERIC |
 | Tesla | Wall Connector Gen 3 | EV Chargers | AMAZON_GENERIC |
 | Wallbox | Copper SB | EV Chargers | AMAZON_GENERIC |
@@ -67,19 +61,25 @@ Every product card already resolves to exactly ONE final link (no intermediate s
 | evec | E-Hub Lite | EV Chargers | AMAZON_GENERIC |
 | evec | E-Hub Pro | EV Chargers | AMAZON_GENERIC |
 | Autel | MaxiCharger AC Wallbox | EV Chargers | AMAZON_VERIFIED |
+| Autel | MaxiCharger AC Wallbox (NACS) | EV Chargers | AMAZON_VERIFIED |
 | ChargePoint | Home Flex | EV Chargers | AMAZON_VERIFIED |
+| ChargePoint | Home Flex (NACS) | EV Chargers | AMAZON_VERIFIED |
 | ClipperCreek | HCS-40 | EV Chargers | AMAZON_VERIFIED |
+| ClipperCreek | HCS-50 | EV Chargers | AMAZON_VERIFIED |
 | EVoCharge | EVSE-HT | EV Chargers | AMAZON_VERIFIED |
 | Emporia | EV Charger Pro 48A | EV Chargers | AMAZON_VERIFIED |
 | Emporia | Level 2 EV Charger | EV Chargers | AMAZON_VERIFIED |
+| Emporia | Level 2 EV Charger (NACS) | EV Chargers | AMAZON_VERIFIED |
 | Grizzl-E | Classic | EV Chargers | AMAZON_VERIFIED |
 | Grizzl-E | Duo | EV Chargers | AMAZON_VERIFIED |
 | Grizzl-E | Smart | EV Chargers | AMAZON_VERIFIED |
 | Grizzl-E | Ultimate | EV Chargers | AMAZON_VERIFIED |
 | JuiceBox | 40 | EV Chargers | AMAZON_VERIFIED |
 | Lectron | Level 2 J1772 | EV Chargers | AMAZON_VERIFIED |
+| Lectron | V-BOX | EV Chargers | AMAZON_VERIFIED |
 | Megear | MA-EVSE03 | EV Chargers | AMAZON_VERIFIED |
 | Morec | Level 2 EVSE | EV Chargers | AMAZON_VERIFIED |
+| Siemens | VersiCharge | EV Chargers | AMAZON_VERIFIED |
 | Tesla | Mobile Connector | EV Chargers | AMAZON_VERIFIED |
 | Tesla | Universal Wall Connector | EV Chargers | AMAZON_VERIFIED |
 | Wallbox | Pulsar Plus | EV Chargers | AMAZON_VERIFIED |
