@@ -857,6 +857,26 @@ export default {
             }
         }
 
+        // WordPress article URLs (e.g. /some-post-slug/) → render via the React $slug
+        // catch-all route instead of passing through to WordPress's own theme.
+        // This is what gives WordPress-sourced articles the same site design as
+        // every other page. Only matches single-segment paths with no file extension,
+        // so it can't accidentally swallow nested/static asset requests.
+        const singleSegment = /^\/[a-z0-9][a-z0-9-]*\/?$/i.test(url.pathname) && !url.pathname.includes(".");
+        if (singleSegment) {
+            try {
+                const handler = await getServerEntry();
+                const response = await handler.fetch(request, env, ctx);
+                if (response.status !== 404) {
+                    return await normalizeCatastrophicSsrResponse(response);
+                }
+                // React's $slug route returned 404 (no matching WP post) — fall through to origin below
+            } catch (error) {
+                console.error(error);
+                // fall through to origin on error too, rather than showing a branded error for a WP page
+            }
+        }
+
         // Everything else → pass through to Cloudflare origin (WordPress on Hostinger)
         // Redirect /blog/:slug → /:slug/ (301 — fixes GSC non-indexed pages)
         if (url.pathname.startsWith('/blog/') && url.pathname.length > 6) {

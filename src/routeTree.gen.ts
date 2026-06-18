@@ -19,6 +19,7 @@ import { Route as GuidesRouteImport } from './routes/guides'
 import { Route as EvChargersRouteImport } from './routes/ev-chargers'
 import { Route as ComparisonsRouteImport } from './routes/comparisons'
 import { Route as BackupPowerRouteImport } from './routes/backup-power'
+import { Route as SlugRouteImport } from './routes/$slug'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as BlogIndexRouteImport } from './routes/blog/index'
 import { Route as BlogSlugRouteImport } from './routes/blog/$slug'
@@ -73,6 +74,11 @@ const BackupPowerRoute = BackupPowerRouteImport.update({
   path: '/backup-power',
   getParentRoute: () => rootRouteImport,
 } as any)
+const SlugRoute = SlugRouteImport.update({
+  id: '/$slug',
+  path: '/$slug',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
@@ -91,6 +97,7 @@ const BlogSlugRoute = BlogSlugRouteImport.update({
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/$slug': typeof SlugRoute
   '/backup-power': typeof BackupPowerRoute
   '/comparisons': typeof ComparisonsRoute
   '/ev-chargers': typeof EvChargersRoute
@@ -106,6 +113,7 @@ export interface FileRoutesByFullPath {
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/$slug': typeof SlugRoute
   '/backup-power': typeof BackupPowerRoute
   '/comparisons': typeof ComparisonsRoute
   '/ev-chargers': typeof EvChargersRoute
@@ -122,6 +130,7 @@ export interface FileRoutesByTo {
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/$slug': typeof SlugRoute
   '/backup-power': typeof BackupPowerRoute
   '/comparisons': typeof ComparisonsRoute
   '/ev-chargers': typeof EvChargersRoute
@@ -139,6 +148,7 @@ export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
   fullPaths:
     | '/'
+    | '/$slug'
     | '/backup-power'
     | '/comparisons'
     | '/ev-chargers'
@@ -154,6 +164,7 @@ export interface FileRouteTypes {
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
+    | '/$slug'
     | '/backup-power'
     | '/comparisons'
     | '/ev-chargers'
@@ -169,6 +180,7 @@ export interface FileRouteTypes {
   id:
     | '__root__'
     | '/'
+    | '/$slug'
     | '/backup-power'
     | '/comparisons'
     | '/ev-chargers'
@@ -185,6 +197,7 @@ export interface FileRouteTypes {
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  SlugRoute: typeof SlugRoute
   BackupPowerRoute: typeof BackupPowerRoute
   ComparisonsRoute: typeof ComparisonsRoute
   EvChargersRoute: typeof EvChargersRoute
@@ -271,6 +284,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof BackupPowerRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/$slug': {
+      id: '/$slug'
+      path: '/$slug'
+      fullPath: '/$slug'
+      preLoaderRoute: typeof SlugRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/': {
       id: '/'
       path: '/'
@@ -297,6 +317,7 @@ declare module '@tanstack/react-router' {
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  SlugRoute: SlugRoute,
   BackupPowerRoute: BackupPowerRoute,
   ComparisonsRoute: ComparisonsRoute,
   EvChargersRoute: EvChargersRoute,
