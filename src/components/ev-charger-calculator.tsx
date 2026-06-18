@@ -105,9 +105,10 @@ const AFFILIATE_LINKS: Record<string, string> = {
 
   // --- AWIN-pending, currently Amazon search fallback (not yet ASIN-verified) ---
   "Pod Point|Solo 3": amzSearch("Pod Point","Solo 3"),
-  "Pod Point|Solo 3 (Smart)": amzSearch("Pod Point","Solo 3 Smart"),
-  "evec|E-Hub Pro": amzSearch("evec","E-Hub Pro"),
-  "evec|E-Hub Lite": amzSearch("evec","E-Hub Lite"),
+  "Pod Point|Solo 3 (Smart)": amzSearch("Pod Point","Solo 3 EV charger smart"),
+  "evec|E-Hub Pro": amzSearch("evec","EV charger home"),
+  "evec|E-Hub Lite": amzSearch("evec","EV charger 7kW"),
+  "Lectron|V-BOX Pro 80A": amzSearch("Lectron","Level 2 EV charger 80 amp"),
   "Go Zero|Smart Charger 7kW": amzSearch("Go Zero","Smart Charger 7kW"),
 };
 function getLink(brand: string, model: string) {

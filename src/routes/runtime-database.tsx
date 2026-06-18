@@ -104,6 +104,20 @@ const TA: Record<string, string> = {
   "FlashSpeed 1500": "/vtoman-flashspeed-1500-technical-analysis-2026/",
 };
 
+// Manual overrides for products where "{brand} {model}" Amazon search returns zero results
+// (verified empty during the 2026-06-18 audit). Same root cause as the bug Berna found with
+// Mango Power Union — these queries land on a dead end instead of real results.
+const BUY_LINK_OVERRIDE: Record<string, string> = {
+  "Lion Energy|UT 1300": "https://lionenergy.com/products/ut-1300",
+  "Rockpals|RP1000": "https://www.amazon.com/s?k=Rockpals+1000W+1048Wh+power+station&tag=clickdecision-20",
+  "OUPES|600 Lite": "https://www.amazon.com/s?k=OUPES+portable+power+station+600Wh&tag=clickdecision-20",
+  "Mango Power|Union": "https://www.mangopower.com/pages/mango-power-union",
+};
+function getBuyLink(brand: string, model: string): string {
+  return BUY_LINK_OVERRIDE[`${brand}|${model}`]
+    || `https://www.amazon.com/s?k=${encodeURIComponent(brand + " " + model)}&tag=clickdecision-20`;
+}
+
 const PRODUCTS: Product[] = [
   // EcoFlow
   { brand:"EcoFlow", model:"DELTA Pro",         wh:3200, surge:7200,  price:2499 },
@@ -472,7 +486,7 @@ function RuntimeDatabase() {
                   {/* Buy */}
                   <td className="py-3 px-2 pr-4">
                     <a
-                      href={`https://www.amazon.com/s?k=${encodeURIComponent(row.brand + " " + row.model)}&tag=clickdecision-20`}
+                      href={getBuyLink(row.brand, row.model)}
                       rel="sponsored noopener"
                       target="_blank"
                       className="rounded-[6px] bg-[#FF9900] px-2.5 py-1 font-mono text-[10px] font-semibold text-white hover:opacity-80 transition-opacity whitespace-nowrap">

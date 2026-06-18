@@ -140,7 +140,7 @@ export const HB_PRODUCTS: HBProduct[] = [
     ev: false, app: true, install: "Professional",
     scores: { backup: 7.0, solar: 8.8, value: 9.0, scale: 7.0, offgrid: 6.0, smart: 7.0 },
     verdict: "Best raw $/kWh of the DC-coupled options — power output depends on the paired inverter (e.g. SolarEdge StorEdge).",
-    affiliate: "https://www.amazon.com/s?k=LG%20RESU16H%20Prime&tag=clickdecision-20",
+    affiliate: "https://csesolarusa.com/product/lgc-resu-16h-prime/",
   },
   {
     brand: "Bluetti", model: "EP800 + B500", price: 9000, kwh: 9.9, kwhLabel: "9.9 kWh / scalable ~20",
@@ -156,7 +156,7 @@ export const HB_PRODUCTS: HBProduct[] = [
     ev: true, app: true, install: "Professional",
     scores: { backup: 8.0, solar: 9.0, value: 9.3, scale: 8.8, offgrid: 7.5, smart: 9.4 },
     verdict: "All-in-one inverter + battery + EV charger with V2G — the strongest smart/EV integration here, newer installer base.",
-    affiliate: "https://www.amazon.com/s?k=Sigenergy%20SigenStor&tag=clickdecision-20",
+    affiliate: "https://www.amazon.com/s?k=home%20battery%20storage%20system%2016kWh&tag=clickdecision-20",
   },
   {
     brand: "EG4", model: "PowerPro WallMount", price: 3500, kwh: 14.3, kwhLabel: "14.3 kWh",
@@ -164,7 +164,7 @@ export const HB_PRODUCTS: HBProduct[] = [
     ev: false, app: false, install: "DIY / Both",
     scores: { backup: 7.0, solar: 6.5, value: 9.8, scale: 8.5, offgrid: 9.0, smart: 5.5 },
     verdict: "By far the lowest cost per kWh — the DIY/off-grid community favorite, but needs a separate inverter and lacks a smart-home app.",
-    affiliate: "https://www.amazon.com/s?k=EG4%20PowerPro%2014.3kWh&tag=clickdecision-20",
+    affiliate: "https://www.amazon.com/s?k=EG4%20battery%20wall%20mount&tag=clickdecision-20",
   },
 ];
 
