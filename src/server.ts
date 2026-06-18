@@ -93,6 +93,10 @@ export default {
     async fetch(request: Request, env: unknown, ctx: unknown) {
         const url = new URL(request.url);
 
+        if (url.pathname === "/sitemap.xml") {
+            return Response.redirect("https://clickdecisionlab.com/cdl-sitemap.xml", 301);
+        }
+
         if (url.pathname === "/cdl-sitemap.xml") {
             return new Response(`<?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
