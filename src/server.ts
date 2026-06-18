@@ -86,9 +86,7 @@ User-agent: cohere-ai
 Allow: /
 
 # Sitemaps
-Sitemap: https://clickdecisionlab.com/sitemap_index.xml
-Sitemap: https://clickdecisionlab.com/post-sitemap.xml
-Sitemap: https://clickdecisionlab.com/page-sitemap.xml
+Sitemap: https://clickdecisionlab.com/cdl-sitemap.xml
 `;
 
 export default {
