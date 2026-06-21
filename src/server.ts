@@ -99,22 +99,6 @@ export default {
 
         if (url.pathname === "/cdl-sitemap.xml") {
             return new Response(`<?xml version="1.0" encoding="UTF-8"?>
-<sitemapindex xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-  <sitemap>
-    <loc>https://clickdecisionlab.com/cdl-sitemap-app.xml</loc>
-    <lastmod>2026-06-19</lastmod>
-  </sitemap>
-  <sitemap>
-    <loc>https://clickdecisionlab.com/cdl-sitemap-blog.xml</loc>
-    <lastmod>2026-06-19</lastmod>
-  </sitemap>
-</sitemapindex>`, {
-                headers: { "content-type": "application/xml; charset=utf-8", "cache-control": "public, max-age=3600" }
-            });
-        }
-
-        if (url.pathname === "/cdl-sitemap-app.xml") {
-            return new Response(`<?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 <url>
     <loc>https://clickdecisionlab.com/</loc>
@@ -854,14 +838,6 @@ export default {
     <changefreq>monthly</changefreq>
     <priority>0.65</priority>
   </url>
-</urlset>`, {
-                headers: { "content-type": "application/xml; charset=utf-8", "cache-control": "public, max-age=3600" }
-            });
-        }
-
-        if (url.pathname === "/cdl-sitemap-blog.xml") {
-            return new Response(`<?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
     <loc>https://clickdecisionlab.com/ecoflow-delta-3-classic-review-2026-2/</loc>
     <lastmod>2026-06-18</lastmod>
