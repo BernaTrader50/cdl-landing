@@ -106,7 +106,6 @@ function RootShell({ children }: { children: React.ReactNode }) {
         {/* SEO Meta Tags */}
         <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" />
         <meta name="author" content="ClickDecisionLab" />
-        <link rel="canonical" href="https://clickdecisionlab.com" />
 
         {/* Open Graph */}
         <meta property="og:site_name" content="ClickDecisionLab" />
