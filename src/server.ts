@@ -1622,6 +1622,77 @@ export default {
             }
         }
 
+        // ── Geo-routing affiliate links: /go/:brand/:product ──────────────────
+        // Must be BEFORE singleSegment check to intercept /go/brand/product paths
+        if (url.pathname.startsWith('/go/')) {
+            const parts = url.pathname.replace('/go/', '').split('/');
+            const brand = (parts[0] || '').toLowerCase();
+            const country = request.headers.get('CF-IPCountry') || 'US';
+
+            const GEO: Record<string, Record<string, {network: string, url?: string, mid?: string, base?: string}>> = {
+                'ecoflow': {
+                    'US': { network: 'impact', url: 'https://caecoflowcom.pxf.io/c/7338771/2787516/31964' },
+                    'CA': { network: 'impact', url: 'https://caecoflowcom.pxf.io/c/7338771/2787516/31964' },
+                    'GB': { network: 'awin',   mid: '51797', base: 'https://ecoflow.com/uk' },
+                    'DE': { network: 'awin',   mid: '51793', base: 'https://ecoflow.com/de' },
+                    'FR': { network: 'awin',   mid: '51799', base: 'https://ecoflow.com/fr' },
+                    'default': { network: 'impact', url: 'https://caecoflowcom.pxf.io/c/7338771/2787516/31964' },
+                },
+                'jackery': {
+                    'US': { network: 'awin', mid: '59183', base: 'https://www.jackery.com' },
+                    'GB': { network: 'awin', mid: '30413', base: 'https://www.jackery.com/en-gb' },
+                    'DE': { network: 'awin', mid: '30415', base: 'https://www.jackery.com/de' },
+                    'default': { network: 'awin', mid: '59183', base: 'https://www.jackery.com' },
+                },
+                'bluetti': {
+                    'US': { network: 'awin', mid: '59271', base: 'https://www.bluettipower.com' },
+                    'GB': { network: 'awin', mid: '32273', base: 'https://www.bluettipower.com/en-gb' },
+                    'DE': { network: 'awin', mid: '32267', base: 'https://www.bluettipower.com/de' },
+                    'ES': { network: 'awin', mid: '32263', base: 'https://www.bluettipower.com/es' },
+                    'default': { network: 'awin', mid: '59271', base: 'https://www.bluettipower.com' },
+                },
+                'allpowers': {
+                    'US': { network: 'awin', mid: '40342', base: 'https://www.allpowers.com' },
+                    'DE': { network: 'awin', mid: '67914', base: 'https://www.allpowers.com/de' },
+                    'FR': { network: 'awin', mid: '98667', base: 'https://www.allpowers.com/fr' },
+                    'ES': { network: 'awin', mid: '107468', base: 'https://www.allpowers.com/es' },
+                    'IT': { network: 'awin', mid: '107466', base: 'https://www.allpowers.com/it' },
+                    'default': { network: 'awin', mid: '38934', base: 'https://www.allpowers.com' },
+                },
+                'zendure': {
+                    'default': { network: 'awin', mid: '68786', base: 'https://www.zendure.com' },
+                },
+                'anker': {
+                    'DE': { network: 'awin', mid: '32623', base: 'https://www.anker.com/de' },
+                    'default': { network: 'awin', mid: '32623', base: 'https://www.anker.com' },
+                },
+            };
+
+            const brandMap = GEO[brand];
+            if (brandMap) {
+                const config = brandMap[country] || brandMap['default'];
+                let finalUrl = '';
+                if (config.network === 'impact' && config.url) {
+                    finalUrl = config.url;
+                } else if (config.network === 'awin' && config.mid) {
+                    const dest = encodeURIComponent(config.base || 'https://www.google.com');
+                    finalUrl = `https://www.awin1.com/cread.php?awinmid=${config.mid}&awinaffid=2929639&ued=${dest}`;
+                }
+                if (finalUrl) {
+                    return new Response(null, {
+                        status: 302,
+                        headers: {
+                            'Location': finalUrl,
+                            'Cache-Control': 'no-store',
+                            'X-CDL-Country': country,
+                            'X-CDL-Network': config.network,
+                        }
+                    });
+                }
+            }
+            return Response.redirect('https://clickdecisionlab.com/', 302);
+        }
+
         // WordPress article URLs (e.g. /some-post-slug/) → render via the React $slug
         // catch-all route instead of passing through to WordPress's own theme.
         // This is what gives WordPress-sourced articles the same site design as
