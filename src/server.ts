@@ -1647,21 +1647,29 @@ export default {
             const brand = (parts[0] || '').toLowerCase();
             const country = request.headers.get('CF-IPCountry') || 'US';
 
+            // Amazon tag fallback para marcas sin programa propio
+            const amz = (asin: string) => `https://www.amazon.com/dp/${asin}?tag=clickdecision-20`;
+            const amzS = (q: string) => `https://www.amazon.com/s?k=${encodeURIComponent(q)}&tag=clickdecision-20`;
+
             const GEO: Record<string, Record<string, {network: string, url?: string, mid?: string, base?: string}>> = {
+                // ── ECOFLOW — AWIN EU + Impact US/CA ──────────────────────────
                 'ecoflow': {
                     'US': { network: 'impact', url: 'https://caecoflowcom.pxf.io/c/7338771/2787516/31964' },
                     'CA': { network: 'impact', url: 'https://caecoflowcom.pxf.io/c/7338771/2787516/31964' },
-                    'GB': { network: 'awin',   mid: '51797', base: 'https://ecoflow.com/uk' },
-                    'DE': { network: 'awin',   mid: '51793', base: 'https://ecoflow.com/de' },
-                    'FR': { network: 'awin',   mid: '51799', base: 'https://ecoflow.com/fr' },
+                    'GB': { network: 'awin', mid: '51797', base: 'https://ecoflow.com/uk' },
+                    'DE': { network: 'awin', mid: '51793', base: 'https://ecoflow.com/de' },
+                    'FR': { network: 'awin', mid: '51799', base: 'https://ecoflow.com/fr' },
+                    'NL': { network: 'awin', mid: '123332', base: 'https://ecoflow.com/nl' },
                     'default': { network: 'impact', url: 'https://caecoflowcom.pxf.io/c/7338771/2787516/31964' },
                 },
+                // ── JACKERY — AWIN US/UK/DE ────────────────────────────────────
                 'jackery': {
                     'US': { network: 'awin', mid: '59183', base: 'https://www.jackery.com' },
                     'GB': { network: 'awin', mid: '30413', base: 'https://www.jackery.com/en-gb' },
                     'DE': { network: 'awin', mid: '30415', base: 'https://www.jackery.com/de' },
                     'default': { network: 'awin', mid: '59183', base: 'https://www.jackery.com' },
                 },
+                // ── BLUETTI — AWIN US/UK/DE/ES ────────────────────────────────
                 'bluetti': {
                     'US': { network: 'awin', mid: '59271', base: 'https://www.bluettipower.com' },
                     'GB': { network: 'awin', mid: '32273', base: 'https://www.bluettipower.com/en-gb' },
@@ -1669,20 +1677,71 @@ export default {
                     'ES': { network: 'awin', mid: '32263', base: 'https://www.bluettipower.com/es' },
                     'default': { network: 'awin', mid: '59271', base: 'https://www.bluettipower.com' },
                 },
+                // ── ALLPOWERS — AWIN US/DE/FR/ES/IT/INTL ──────────────────────
                 'allpowers': {
                     'US': { network: 'awin', mid: '40342', base: 'https://www.allpowers.com' },
+                    'CA': { network: 'awin', mid: '40342', base: 'https://www.allpowers.com' },
                     'DE': { network: 'awin', mid: '67914', base: 'https://www.allpowers.com/de' },
                     'FR': { network: 'awin', mid: '98667', base: 'https://www.allpowers.com/fr' },
                     'ES': { network: 'awin', mid: '107468', base: 'https://www.allpowers.com/es' },
                     'IT': { network: 'awin', mid: '107466', base: 'https://www.allpowers.com/it' },
                     'default': { network: 'awin', mid: '38934', base: 'https://www.allpowers.com' },
                 },
+                // ── ZENDURE — AWIN EU ─────────────────────────────────────────
                 'zendure': {
                     'default': { network: 'awin', mid: '68786', base: 'https://www.zendure.com' },
                 },
+                // ── ANKER SOLIX — AWIN DE (pendiente aprobación) ─────────────
                 'anker': {
                     'DE': { network: 'awin', mid: '32623', base: 'https://www.anker.com/de' },
                     'default': { network: 'awin', mid: '32623', base: 'https://www.anker.com' },
+                },
+                'ankersolix': {
+                    'DE': { network: 'awin', mid: '32623', base: 'https://www.anker.com/de' },
+                    'default': { network: 'awin', mid: '32623', base: 'https://www.anker.com' },
+                },
+                // ── SIN PROGRAMA PROPIO — Amazon fallback ─────────────────────
+                'goalzero': {
+                    'default': { network: 'amazon', url: amzS('Goal Zero Yeti power station') },
+                },
+                'oupes': {
+                    'default': { network: 'amazon', url: amzS('OUPES portable power station') },
+                },
+                'growatt': {
+                    'default': { network: 'amazon', url: amzS('Growatt VITA portable power station') },
+                },
+                'mangopower': {
+                    'default': { network: 'amazon', url: amzS('Mango Power portable power station') },
+                },
+                'pecron': {
+                    'default': { network: 'amazon', url: amzS('Pecron portable power station') },
+                },
+                'vtoman': {
+                    'default': { network: 'amazon', url: amzS('VTOMAN FlashSpeed power station') },
+                },
+                'geneverse': {
+                    'default': { network: 'amazon', url: amzS('Geneverse solar generator') },
+                },
+                'renogy': {
+                    'default': { network: 'amazon', url: amzS('Renogy portable power station') },
+                },
+                'djipower': {
+                    'default': { network: 'amazon', url: amzS('DJI Power portable station') },
+                },
+                'lionenergy': {
+                    'default': { network: 'amazon', url: amzS('Lion Energy portable power station') },
+                },
+                'westinghouse': {
+                    'default': { network: 'amazon', url: amzS('Westinghouse portable power station') },
+                },
+                'aferiy': {
+                    'default': { network: 'amazon', url: amzS('Aferiy portable power station') },
+                },
+                'biolite': {
+                    'default': { network: 'amazon', url: amzS('BioLite BaseCharge power station') },
+                },
+                'rockpals': {
+                    'default': { network: 'amazon', url: amzS('Rockpals portable power station') },
                 },
             };
 
@@ -1691,6 +1750,8 @@ export default {
                 const config = brandMap[country] || brandMap['default'];
                 let finalUrl = '';
                 if (config.network === 'impact' && config.url) {
+                    finalUrl = config.url;
+                } else if (config.network === 'amazon' && config.url) {
                     finalUrl = config.url;
                 } else if (config.network === 'awin' && config.mid) {
                     const dest = encodeURIComponent(config.base || 'https://www.google.com');
