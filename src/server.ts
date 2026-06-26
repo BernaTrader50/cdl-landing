@@ -1746,7 +1746,8 @@ export default {
                 },
                 // ── ZENDURE — AWIN EU ─────────────────────────────────────────
                 'zendure': {
-                    'default': { network: 'awin', mid: '68786', base: 'https://www.zendure.com' },
+                    'PL': { network: 'awin', mid: '68786', base: 'https://pl.zendure.com/' },
+                    'default': { network: 'awin', mid: '68786', base: 'https://www.zendure.com/pages/prime-day' },
                 },
                 // ── ANKER SOLIX — AWIN DE (pendiente aprobación) ─────────────
                 'anker': {
