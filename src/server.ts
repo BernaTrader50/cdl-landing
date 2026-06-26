@@ -1661,6 +1661,51 @@ export default {
             const amz = (asin: string) => `https://www.amazon.com/dp/${asin}?tag=clickdecision-20`;
             const amzS = (q: string) => `https://www.amazon.com/s?k=${encodeURIComponent(q)}&tag=clickdecision-20`;
 
+            // ASIN map: /go/brand/product-slug → Amazon ASIN directo
+            const ASIN: Record<string, string> = {
+                // EcoFlow
+                'ecoflow/river-2':          'B0BL3GS65R',
+                'ecoflow/river-3':          'B0CVQR6RHR',
+                'ecoflow/delta-3':          'B0D6PGPFJ3',
+                'ecoflow/delta-3-max':      'B0D6PGQ847',
+                'ecoflow/delta-3-max-plus': 'B0D6PGQ847',
+                'ecoflow/delta-pro':        'B099JGHTY3',
+                'ecoflow/delta-2':          'B0B95FBNQN',
+                'ecoflow/delta-2-max':      'B0BW7B2GX3',
+                'ecoflow/delta-pro-ultra':  'B0CHK4GGWK',
+                // Jackery
+                'jackery/explorer-1000-v2': 'B0CNW2CXNW',
+                'jackery/explorer-2000-pro':'B09JZQW7CR',
+                'jackery/explorer-2000-v2': 'B0D6X3NF3T',
+                'jackery/explorer-500-v2':  'B0CKVBM4T4',
+                // Bluetti
+                'bluetti/ac200l':           'B0C3XWT42H',
+                'bluetti/ac300':            'B09DKNB5KB',
+                'bluetti/eb70':             'B093BVBZD5',
+                'bluetti/ac200p':           'B08LZX7S4T',
+                // Anker SOLIX
+                'ankersolix/c1000':         'B0C6JRPVTB',
+                'ankersolix/f3800':         'B0CRZS72V5',
+                // Goal Zero
+                'goalzero/yeti-500x':       'B07PDBNNT8',
+                'goalzero/yeti-1000x':      'B07T2BB3F2',
+                'goalzero/yeti-1500x':      'B07T1LMWMJ',
+                'goalzero/yeti-3000x':      'B08BSXT4WT',
+                // OUPES
+                'oupes/mega-2':             'B0CCTK9F16',
+                'oupes/mega-1':             'B0BDWHPBTT',
+                // Growatt
+                'growatt/vita-550':         'B0CQTCPZQN',
+                'growatt/infinity-1500':    'B0CJRTL7VX',
+                'growatt/infinity-2000':    'B0CJRTL7VX',
+                // VTOMAN
+                'vtoman/flashspeed-1500':   'B0CDRYT31L',
+                // Allpowers
+                'allpowers/r1500-lite':     'B0CVPVQJY7',
+                'allpowers/r2500':          'B0CVPWMFKP',
+                'allpowers/prime-day':      'B0CVPVQJY7',
+            };
+
             const GEO: Record<string, Record<string, {network: string, url?: string, mid?: string, base?: string}>> = {
                 // ── ECOFLOW — AWIN EU + Impact US/CA ──────────────────────────
                 'ecoflow': {
@@ -1761,7 +1806,13 @@ export default {
             if (brandMap) {
                 const config = brandMap[country] || brandMap['default'];
                 let finalUrl = '';
-                if (config.network === 'impact' && config.url) {
+
+                // Check ASIN map first — direct product link beats generic search
+                const asinKey = `${brand}/${parts[1] || ''}`;
+                const asin = ASIN[asinKey];
+                if (asin) {
+                    finalUrl = amz(asin);
+                } else if (config.network === 'impact' && config.url) {
                     finalUrl = config.url;
                 } else if (config.network === 'amazon' && config.url) {
                     finalUrl = config.url;
@@ -1776,7 +1827,7 @@ export default {
                             'Location': finalUrl,
                             'Cache-Control': 'no-store',
                             'X-CDL-Country': country,
-                            'X-CDL-Network': config.network,
+                            'X-CDL-Network': asin ? 'amazon-direct' : config.network,
                         }
                     });
                 }
