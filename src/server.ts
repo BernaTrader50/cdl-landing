@@ -45,6 +45,7 @@ async function normalizeCatastrophicSsrResponse(response: Response): Promise<Res
 function isLandingRoute(pathname: string): boolean {
     if (pathname === "/" || pathname === "") return true;
     const landing = ["/solar-calculator", "/methodology", "/comparisons", "/technical-analysis", "/runtime-database", "/ups-database", "/guides", "/blog", "/ev-chargers", "/home-batteries", "/backup-power", "/solar-generators", "/assets/", "/__manifest", "/_build/", "/favicon"];
+    // Match exact, sub-paths (/solar-generators/product-name/), and query strings
     return landing.some(p => pathname === p || pathname.startsWith(p.endsWith("/") ? p : p + "/") || pathname === p + "?");
 }
 
@@ -1628,6 +1629,15 @@ export default {
             return new Response(ROBOTS_TXT, { headers: { "content-type": "text/plain; charset=utf-8" } });
         }
 
+        // Lab sub-paths → redirigir al lab (ANTES de isLandingRoute)
+        // /solar-generators/product-name/ → /solar-generators/
+        const labPrefixes = ['/solar-generators/', '/ev-chargers/', '/home-batteries/', '/backup-power/'];
+        for (const prefix of labPrefixes) {
+            if (url.pathname.startsWith(prefix) && url.pathname !== prefix) {
+                return Response.redirect('https://clickdecisionlab.com' + prefix, 301);
+            }
+        }
+
         // Landing routes → React app
         if (isLandingRoute(url.pathname)) {
             try {
@@ -1791,6 +1801,20 @@ export default {
             } catch (error) {
                 console.error(error);
                 // fall through to origin on error too, rather than showing a branded error for a WP page
+            }
+        }
+
+        // Lab sub-paths que no existen como rutas React → redirigir al lab
+        // e.g. /solar-generators/ecoflow-delta-3-max/ → /solar-generators/
+        const labRedirects: Record<string, string> = {
+            '/solar-generators/': '/solar-generators/',
+            '/ev-chargers/': '/ev-chargers/',
+            '/home-batteries/': '/home-batteries/',
+            '/backup-power/': '/backup-power/',
+        };
+        for (const [prefix, target] of Object.entries(labRedirects)) {
+            if (url.pathname.startsWith(prefix) && url.pathname !== prefix) {
+                return Response.redirect('https://clickdecisionlab.com' + target, 301);
             }
         }
 
