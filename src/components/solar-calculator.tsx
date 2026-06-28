@@ -625,11 +625,11 @@ export function ComparisonTable({ picks, requiredWh, requiredSurge, needsUps, sc
 const PRODUCT_IMAGES: Record<string, string> = {
   "Explorer 100 Plus": "https://www.jackery.com/cdn/shop/files/jackery-explorer-100-plus-portable-power-stationrefurbished-5131934.jpg?v=1754016781&width=800",
   "Explorer 240 v2": "https://www.jackery.com/cdn/shop/files/jackery-solar-generator-240-v2-refurbished-8233691.jpg?v=1754016790&width=800",
-  "Explorer 700 Plus": "https://www.jackery.com/cdn/shop/files/jackery-solar-generator-700-plus-9476992.jpg?v=1754016918&width=1001",
+  "Explorer 700 Plus": "https://www.awin1.com/cread.php?awinmid=59183&awinaffid=2929639&ued=https://www.jackery.com/products/jackery-explorer-700-plus-portable-power-station",
   "Explorer 880 Pro": "https://www.jackery.com/cdn/shop/files/jackery-solar-generator-880-pro-refurbished-1666832.png?v=1754016788&width=800",
   "Explorer 5000 Plus": "https://www.jackery.com/cdn/shop/files/jackery-explorer-5000-plusrefurbished-2945283.png?v=1773394891&width=800",
   "EB70S": "https://checkout.bluettipower.com/cdn/shop/files/EB70s_55c2969f-df64-4f7d-a00d-5ffeec029c19.png?v=1709802027&width=1024",
-  "R3500": "https://iallpowers.com/cdn/shop/files/R3500-US-03.jpg?v=1772000632&width=1024",
+  "R3500": "https://www.awin1.com/cread.php?awinmid=40342&awinaffid=2929639&ued=https://iallpowers.com/products/allpowers-r3500-portable-power-station-3200w-3168wh",
   "S2000 Pro": "https://iallpowers.com/cdn/shop/files/ALLPOWERS_S2000Pro_b08588cd-542f-4060-9ec7-a3c577209.jpg?v=1772000600&width=1024",
   "R2500": "https://iallpowers.com/cdn/shop/files/R2500-US-03.jpg?v=1772000600&width=1024",
   "R600": "https://iallpowers.com/cdn/shop/files/R600-US-03.jpg?v=1772000600&width=1024",
