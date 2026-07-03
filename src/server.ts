@@ -1736,12 +1736,12 @@ export default {
                 'allpowers': {
                     'US': { network: 'awin', mid: '40342', base: 'https://www.allpowers.com' },
                     'CA': { network: 'awin', mid: '40342', base: 'https://www.allpowers.com' },
-                    'DE': { network: 'awin', mid: '67914', base: 'https://iallpowers.eu/pages/prime-day-sale' },
-                    'FR': { network: 'awin', mid: '98667', base: 'https://iallpowers.eu/pages/prime-day-sale' },
-                    'ES': { network: 'awin', mid: '107468', base: 'https://iallpowers.eu/pages/prime-day-sale' },
-                    'IT': { network: 'awin', mid: '107466', base: 'https://iallpowers.eu/pages/prime-day-sale' },
-                    'NL': { network: 'awin', mid: '38934', base: 'https://iallpowers.eu/pages/prime-day-sale' },
-                    'BE': { network: 'awin', mid: '38934', base: 'https://iallpowers.eu/pages/prime-day-sale' },
+                    'DE': { network: 'awin', mid: '67914', base: 'https://www.allpowers.com/de' },
+                    'FR': { network: 'awin', mid: '98667', base: 'https://www.allpowers.com/fr' },
+                    'ES': { network: 'awin', mid: '107468', base: 'https://www.allpowers.com/es' },
+                    'IT': { network: 'awin', mid: '107466', base: 'https://www.allpowers.com/it' },
+                    'NL': { network: 'awin', mid: '38934', base: 'https://www.allpowers.com' },
+                    'BE': { network: 'awin', mid: '38934', base: 'https://www.allpowers.com' },
                     'default': { network: 'awin', mid: '38934', base: 'https://www.allpowers.com' },
                 },
                 // ── ZENDURE — AWIN EU ─────────────────────────────────────────
