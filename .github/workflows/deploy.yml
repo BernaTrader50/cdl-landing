@@ -1,0 +1,37 @@
+name: Deploy to Cloudflare
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v5
+
+    - uses: actions/setup-node@v4
+      with:
+        node-version: '20'
+        cache: 'npm'
+
+    - name: Install dependencies
+      run: npm install
+
+    - name: Build (vite)
+      run: npx vite build
+
+    - name: Deploy (wrangler with dist)
+      env:
+        CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+      run: |
+        # Usar dist como main para evitar errores de resolución de TanStack
+        node -e "
+          const fs = require('fs');
+          const cfg = fs.readFileSync('wrangler.jsonc', 'utf8');
+          fs.writeFileSync('wrangler.jsonc', cfg.replace('\"main\": \"src/server.ts\"', '\"main\": \"dist/server/server.js\"'));
+        "
+        npx wrangler deploy
+        # Restaurar
+        git checkout wrangler.jsonc
