@@ -3,7 +3,7 @@ import SiteHeader from "@/components/SiteHeader";
 import { SiteFooter } from "@/components/site-footer";
 
 const API_BASE = "https://clickdecisionlab.com/wp-json/wp/v2";
-const CDL_BASE = "https://www.clickdecisionlab.com";
+const CDL_BASE = "https://clickdecisionlab.com";
 
 type Post = {
   id: number;
