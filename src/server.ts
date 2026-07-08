@@ -94,29 +94,9 @@ export default {
     async fetch(request: Request, env: unknown, ctx: unknown) {
         const url = new URL(request.url);
 
-        // ── URL normalization (canonical enforcement) ─────────────────────────
-        // 1. Force HTTPS
-        // 2. Remove www (canonical is clickdecisionlab.com without www)
-        // 3. Add trailing slash to content paths (avoids duplicate /slug vs /slug/)
-        const needsHttps = url.protocol !== 'https:';
-        const needsNoWww = url.hostname === 'www.clickdecisionlab.com';
-        // Add trailing slash to single-segment WP article paths (not to /go/, /sitemap, /robots, assets)
-        const isContentPath = url.pathname.length > 1
-            && !url.pathname.endsWith('/')
-            && !url.pathname.includes('.')
-            && !url.pathname.startsWith('/go/')
-            && !url.pathname.startsWith('/assets/')
-            && !url.pathname.startsWith('/_build/')
-            && url.pathname !== '/cdl-sitemap.xml'
-            && url.pathname !== '/robots.txt';
-        const needsTrailingSlash = isContentPath;
-
-        if (needsHttps || needsNoWww || needsTrailingSlash) {
-            const canonical = new URL(request.url);
-            canonical.protocol = 'https:';
-            canonical.hostname = 'clickdecisionlab.com';
-            if (needsTrailingSlash) canonical.pathname = url.pathname + '/';
-            return Response.redirect(canonical.toString(), 301);
+        // Interceptar redirect loop de homepage (Cloudflare Rule redirige / → /?calc=solar)
+        if (url.pathname === '/' && url.searchParams.has('calc')) {
+            return Response.redirect('https://clickdecisionlab.com/', 301);
         }
 
         if (url.pathname === "/sitemap.xml") {
