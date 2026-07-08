@@ -1,20 +1,11 @@
 #!/bin/bash
+# CDL Deploy Script — método definitivo con nitro
+# Uso: CLOUDFLARE_API_TOKEN=xxx bash deploy.sh
 set -e
-echo "Building with vite..."
-npx vite build
-
-echo "Deploying with wrangler (using dist)..."
-# Cambiar main a dist temporalmente
-node -e "
-const fs = require('fs');
-const cfg = fs.readFileSync('wrangler.jsonc', 'utf8');
-fs.writeFileSync('wrangler.jsonc.bak', cfg);
-fs.writeFileSync('wrangler.jsonc', cfg.replace('\"main\": \"src/server.ts\"', '\"main\": \"dist/server/server.js\"'));
-"
-
-CLOUDFLARE_API_TOKEN=${CLOUDFLARE_API_TOKEN} npx wrangler deploy
-
-# Restaurar
-cp wrangler.jsonc.bak wrangler.jsonc
-rm wrangler.jsonc.bak
-echo "✅ Deploy completado"
+echo "[CDL] Building with nitro..."
+LOVABLE_SANDBOX=1 npx cf-vite build
+echo "[CDL] Deploying to Cloudflare..."
+cd dist/server
+npx wrangler deploy --config wrangler.json
+cd ../..
+echo "[CDL] ✅ Deploy completado"

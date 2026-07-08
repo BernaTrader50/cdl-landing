@@ -10,26 +10,14 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v5
-
-    - name: Setup Node 20
-      uses: actions/setup-node@v4
+    - uses: actions/setup-node@v4
       with:
         node-version: '22'
-
     - name: Install
       run: npm install
-
-    - name: Build
-      run: npx vite build
-
+    - name: Build (nitro)
+      run: LOVABLE_SANDBOX=1 npx cf-vite build
     - name: Deploy
       env:
         CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
-      run: |
-        node -e "
-          const fs = require('fs');
-          const c = fs.readFileSync('wrangler.jsonc','utf8');
-          fs.writeFileSync('wrangler.jsonc', c.replace('\"main\": \"src/server.ts\"','\"main\": \"dist/server/server.js\"'));
-        "
-        npx wrangler deploy
-        git checkout wrangler.jsonc
+      run: cd dist/server && npx wrangler deploy --config wrangler.json
