@@ -10,14 +10,73 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v5
+
     - uses: actions/setup-node@v4
       with:
         node-version: '22'
+
     - name: Install
       run: npm install
-    - name: Build (nitro)
+
+    - name: Build
       run: LOVABLE_SANDBOX=1 npx cf-vite build
+
     - name: Deploy
       env:
         CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
       run: cd dist/server && npx wrangler deploy --config wrangler.json
+
+    - name: Smoke test post-deploy
+      run: |
+        sleep 10
+        python3 << 'PYEOF'
+        import subprocess, sys, re
+
+        CHECKS = [
+            ("Homepage",    "https://clickdecisionlab.com/",                              200),
+            ("Solar lab",   "https://clickdecisionlab.com/solar-generators/",             200),
+            ("EV lab",      "https://clickdecisionlab.com/ev-chargers/",                  200),
+            ("Batteries",   "https://clickdecisionlab.com/home-batteries/",               200),
+            ("Backup",      "https://clickdecisionlab.com/backup-power/",                 200),
+            ("WP Article",  "https://clickdecisionlab.com/solar-generator-cpap-camping/", 200),
+            ("Sin slash",   "https://clickdecisionlab.com/solar-generator-cpap-camping",  301),
+            ("Geo EcoFlow", "https://clickdecisionlab.com/go/ecoflow/delta-pro",          302),
+            ("Sitemap",     "https://clickdecisionlab.com/cdl-sitemap.xml",               200),
+        ]
+
+        fails = []
+        for name, url, exp in CHECKS:
+            r = subprocess.run(['curl','-s','-o','/dev/null','-w','%{http_code}',
+                '--no-location','--max-time','10', url], capture_output=True, text=True)
+            code = int(r.stdout.strip() or 0)
+            ok = code == exp
+            print(f"{'✅' if ok else '❌'} {name}: [{code}]")
+            if not ok:
+                fails.append(f"{name}: got {code}, expected {exp}")
+
+        # Canonical checks
+        for name, url in [("Homepage", "https://clickdecisionlab.com/"),
+                           ("WP Article", "https://clickdecisionlab.com/solar-generator-cpap-camping/")]:
+            r = subprocess.run(['curl','-sL','--max-time','10', url], capture_output=True, text=True)
+            canons = re.findall(r'rel="canonical"[^>]*href="([^"]+)"', r.stdout)
+            ok = len(canons) == 1 and 'www.' not in canons[0]
+            print(f"{'✅' if ok else '❌'} canonical {name}")
+            if not ok:
+                fails.append(f"canonical {name}: {canons or 'MISSING'}")
+
+        # Calculator check
+        r = subprocess.run(['curl','-sL','--max-time','10', 'https://clickdecisionlab.com/'],
+            capture_output=True, text=True)
+        has_calc = 'calculator' in r.stdout.lower() or 'watt' in r.stdout.lower()
+        print(f"{'✅' if has_calc else '❌'} Calculator presente en homepage")
+        if not has_calc:
+            fails.append("Calculator missing from homepage")
+
+        if fails:
+            print(f"\n❌ SMOKE TEST FAILED — {len(fails)} checks fallaron:")
+            for f in fails:
+                print(f"  - {f}")
+            sys.exit(1)
+        else:
+            print(f"\n✅ SMOKE TEST PASSED — todo OK")
+        PYEOF
