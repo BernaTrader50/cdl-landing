@@ -94,9 +94,24 @@ export default {
     async fetch(request: Request, env: unknown, ctx: unknown) {
         const url = new URL(request.url);
 
-        // Interceptar redirect loop de homepage (Cloudflare Rule redirige / → /?calc=solar)
-        if (url.pathname === '/' && url.searchParams.has('calc')) {
-            return Response.redirect('https://clickdecisionlab.com/', 301);
+        // URL normalization: force https, no-www, trailing slash on content paths
+        const needsHttps = url.protocol !== 'https:';
+        const needsNoWww = url.hostname === 'www.clickdecisionlab.com';
+        const isContentPath = url.pathname.length > 1
+            && !url.pathname.endsWith('/')
+            && !url.pathname.includes('.')
+            && !url.pathname.startsWith('/go/')
+            && !url.pathname.startsWith('/assets/')
+            && !url.pathname.startsWith('/_build/')
+            && url.pathname !== '/cdl-sitemap.xml'
+            && url.pathname !== '/robots.txt';
+
+        if (needsHttps || needsNoWww || isContentPath) {
+            const canonical = new URL(request.url);
+            canonical.protocol = 'https:';
+            canonical.hostname = 'clickdecisionlab.com';
+            if (isContentPath) canonical.pathname = url.pathname + '/';
+            return Response.redirect(canonical.toString(), 301);
         }
 
         if (url.pathname === "/sitemap.xml") {

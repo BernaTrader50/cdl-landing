@@ -50,7 +50,7 @@ export const Route = createFileRoute("/")({
   validateSearch: (s: Record<string, unknown>) => ({
     calc: (["solar", "ev", "battery", "backup"].includes(s.calc as string)
       ? (s.calc as "solar" | "ev" | "battery" | "backup")
-      : "solar") as "solar" | "ev" | "battery" | "backup",
+      : undefined),
   }),
   component: Home,
 });
