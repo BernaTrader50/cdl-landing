@@ -51,7 +51,7 @@ export const Route = createFileRoute("/")({
   validateSearch: (s: Record<string, unknown>) => ({
     calc: (["solar", "ev", "battery", "backup"].includes(s.calc as string)
       ? (s.calc as "solar" | "ev" | "battery" | "backup")
-      : undefined),
+      : undefined) as "solar" | "ev" | "battery" | "backup" | undefined,
   }),
   component: Home,
 });
@@ -177,7 +177,8 @@ const SCORES = [
 ] as const;
 
 function Home() {
-  const { calc } = Route.useSearch();
+  const { calc: calcParam } = Route.useSearch();
+  const calc = calcParam ?? "solar";
   const navigate = Route.useNavigate();
   const CALC_TABS = [
     { id: "solar" as const, label: "Solar", icon: Sun },
