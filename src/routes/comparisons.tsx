@@ -4,6 +4,7 @@ import { SiteFooter } from "@/components/site-footer";
 
 export const Route = createFileRoute("/comparisons")({
   head: () => ({
+    links: [{ rel: "canonical", href: "https://clickdecisionlab.com/comparisons/" }],
     meta: [
       { title: "Solar Generator Comparisons — ClickDecisionLab" },
       { name: "description", content: "Technical side-by-side comparisons for solar generators. Verified specs, decision scores, and clear verdicts — EcoFlow vs Bluetti, Jackery vs EcoFlow, and more." },

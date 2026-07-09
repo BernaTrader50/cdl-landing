@@ -38,6 +38,7 @@ import { EvCalcCard, BatteryCalcCard, BackupCalcCard } from "@/components/calcul
 
 export const Route = createFileRoute("/")({
   head: () => ({
+    links: [{ rel: "canonical", href: "https://clickdecisionlab.com/" }],
     meta: [
       { title: "ClickDecisionLab — Real Specs. Real Decisions." },
       {

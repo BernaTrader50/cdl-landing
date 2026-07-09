@@ -25,6 +25,7 @@ import { SiteFooter } from "@/components/site-footer";
 
 export const Route = createFileRoute("/backup-power")({
   head: () => ({
+    links: [{ rel: "canonical", href: "https://clickdecisionlab.com/backup-power/" }],
     meta: [
       { title: "Backup Power Decision Lab — ClickDecisionLab" },
       {

@@ -6,6 +6,7 @@ import { Zap, Gauge, Plug, Wifi, Cog, ShieldCheck } from "lucide-react";
 
 export const Route = createFileRoute("/solar-generators")({
   head: () => ({
+    links: [{ rel: "canonical", href: "https://clickdecisionlab.com/solar-generators/" }],
     meta: [
       { title: "Solar Generator Lab — Compare 104 Solar Generators | ClickDecisionLab" },
       { name: "description", content: "Compare 104 solar generators across 20 brands. Find the right capacity, inverter power and solar input for your exact use case — camping, RV, home backup or off-grid." },

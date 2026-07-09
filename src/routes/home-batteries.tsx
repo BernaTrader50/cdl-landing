@@ -23,6 +23,7 @@ import { trackAffiliateClick, trackImpression, classifyTier } from "@/components
 
 export const Route = createFileRoute("/home-batteries")({
   head: () => ({
+    links: [{ rel: "canonical", href: "https://clickdecisionlab.com/home-batteries/" }],
     meta: [
       { title: "Home Battery Decision Lab — ClickDecisionLab" },
       {

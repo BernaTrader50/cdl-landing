@@ -6,6 +6,7 @@ import { Zap, Gauge, Plug, Wifi, Cog, ShieldCheck } from "lucide-react";
 
 export const Route = createFileRoute("/ev-chargers")({
   head: () => ({
+    links: [{ rel: "canonical", href: "https://clickdecisionlab.com/ev-chargers/" }],
     meta: [
       { title: "EV Charger Decision Lab — Compare 49 Home EV Chargers | ClickDecisionLab" },
       { name: "description", content: "Compare 49 Level 2 home EV chargers across 22 brands. Get matched by amperage, panel requirements, connector type (NACS/J1772) and smart features for your exact situation." },
