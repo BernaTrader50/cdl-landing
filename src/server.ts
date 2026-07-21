@@ -116,6 +116,28 @@ export default {
             return Response.redirect('https://clickdecisionlab.com' + CATEGORY_REDIRECTS[url.pathname], 301);
         }
 
+        // Duplicate/near-duplicate product reviews: content_draft agent published
+        // 2-3 separate WP articles for the same product (same score, same
+        // "Executive Verdict" template, ~40% text overlap - same review in
+        // substance, different URL). Consolidate onto the newer/longer
+        // "-review-2026" version; redirect the older/shorter/duplicate ones.
+        // Found 2026-07-21 via title-pattern scan across all 127 WP posts.
+        const DUPLICATE_CONTENT_REDIRECTS = {
+            '/ecoflow-delta-3-classic-review-2026-2/': '/ecoflow-delta-3-classic-review-2026/',
+            '/ecoflow-delta-3-classic-technical-analysis-2026/': '/ecoflow-delta-3-classic-review-2026/',
+            '/jackery-explorer-1000-v2-review-2026-2/': '/jackery-explorer-1000-v2-review-2026/',
+            '/jackery-explorer-1000-v2-technical-analysis-2026/': '/jackery-explorer-1000-v2-review-2026/',
+            '/jackery-explorer-2000-v2-technical-analysis-2026/': '/jackery-explorer-2000-v2-review-2026/',
+            '/bluetti-ac300-technical-analysis-2026/': '/bluetti-ac300-review-2026/',
+            '/anker-solix-f3800-technical-analysis-2026/': '/anker-solix-f3800-review-2026/',
+            '/bluetti-ac200l-technical-analysis-2026/': '/bluetti-ac200l-review-2026/',
+            '/jackery-explorer-2000-plus-technical-analysis-2026/': '/jackery-explorer-2000-plus-review-2026/',
+            '/ecoflow-delta-3-max-technical-analysis-2026/': '/ecoflow-delta-3-max-review-2026/',
+        };
+        if (DUPLICATE_CONTENT_REDIRECTS[url.pathname]) {
+            return Response.redirect('https://clickdecisionlab.com' + DUPLICATE_CONTENT_REDIRECTS[url.pathname], 301);
+        }
+
         // URL normalization: force https, no-www, trailing slash on content paths
         const needsHttps = url.protocol !== 'https:';
         const needsNoWww = url.hostname === 'www.clickdecisionlab.com';
@@ -594,55 +616,7 @@ export default {
     <priority>0.80</priority>
   </url>
 <url>
-    <loc>https://clickdecisionlab.com/jackery-explorer-2000-v2-technical-analysis-2026/</loc>
-    <lastmod>2026-07-19</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.85</priority>
-  </url>
-<url>
     <loc>https://clickdecisionlab.com/ecoflow-delta-2-max-technical-analysis-2026/</loc>
-    <lastmod>2026-07-19</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.85</priority>
-  </url>
-<url>
-    <loc>https://clickdecisionlab.com/bluetti-ac300-technical-analysis-2026/</loc>
-    <lastmod>2026-07-19</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.85</priority>
-  </url>
-<url>
-    <loc>https://clickdecisionlab.com/ecoflow-delta-3-classic-technical-analysis-2026/</loc>
-    <lastmod>2026-07-19</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.85</priority>
-  </url>
-<url>
-    <loc>https://clickdecisionlab.com/anker-solix-f3800-technical-analysis-2026/</loc>
-    <lastmod>2026-07-19</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.85</priority>
-  </url>
-<url>
-    <loc>https://clickdecisionlab.com/bluetti-ac200l-technical-analysis-2026/</loc>
-    <lastmod>2026-07-19</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.85</priority>
-  </url>
-<url>
-    <loc>https://clickdecisionlab.com/jackery-explorer-1000-v2-technical-analysis-2026/</loc>
-    <lastmod>2026-07-19</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.85</priority>
-  </url>
-<url>
-    <loc>https://clickdecisionlab.com/jackery-explorer-2000-plus-technical-analysis-2026/</loc>
-    <lastmod>2026-07-19</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.85</priority>
-  </url>
-<url>
-    <loc>https://clickdecisionlab.com/ecoflow-delta-3-max-technical-analysis-2026/</loc>
     <lastmod>2026-07-19</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.85</priority>
@@ -880,18 +854,6 @@ export default {
     <lastmod>2026-07-19</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.65</priority>
-  </url>
-<url>
-    <loc>https://clickdecisionlab.com/ecoflow-delta-3-classic-review-2026-2/</loc>
-    <lastmod>2026-07-19</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-<url>
-    <loc>https://clickdecisionlab.com/jackery-explorer-1000-v2-review-2026-2/</loc>
-    <lastmod>2026-07-19</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
   </url>
 <url>
     <loc>https://clickdecisionlab.com/jackery-explorer-2000-v2-review-2026/</loc>
