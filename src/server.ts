@@ -104,6 +104,18 @@ export default {
             return Response.redirect('https://clickdecisionlab.com/' + slug + '/', 301);
         }
 
+        // WP category archives that duplicate an existing hub page → 301 to the hub.
+        // Same rationale as /blog/:slug above: these are thin/duplicate WP archive
+        // pages, indexable by default, competing with the real hub for rankings.
+        const CATEGORY_REDIRECTS = {
+            '/category/comparisons/': '/comparisons/',
+            '/category/home-backup/': '/backup-power/',
+            '/category/technical-guides/': '/guides/',
+        };
+        if (CATEGORY_REDIRECTS[url.pathname]) {
+            return Response.redirect('https://clickdecisionlab.com' + CATEGORY_REDIRECTS[url.pathname], 301);
+        }
+
         // URL normalization: force https, no-www, trailing slash on content paths
         const needsHttps = url.protocol !== 'https:';
         const needsNoWww = url.hostname === 'www.clickdecisionlab.com';
@@ -1216,6 +1228,26 @@ export default {
         }
 
         // Everything else → pass through to Cloudflare origin (WordPress on Hostinger)
+        // WP category archives with no equivalent hub page: no redirect target
+        // makes sense (they hold genuinely mixed/misc content), so noindex them
+        // instead - keeps them browsable for users/internal nav, tells Google not
+        // to index the thin auto-generated archive.
+        const NOINDEX_CATEGORY_PATHS = new Set([
+            '/category/camping-off-grid/',
+            '/category/uncategorized/',
+            '/category/use-cases/',
+        ]);
+        if (NOINDEX_CATEGORY_PATHS.has(url.pathname)) {
+            const originResponse = await fetch(request);
+            const newHeaders = new Headers(originResponse.headers);
+            newHeaders.set('X-Robots-Tag', 'noindex, follow');
+            return new Response(originResponse.body, {
+                status: originResponse.status,
+                statusText: originResponse.statusText,
+                headers: newHeaders,
+            });
+        }
+
         // Cloudflare will route to the A record (185.212.71.247) directly
         return fetch(request);
     },
