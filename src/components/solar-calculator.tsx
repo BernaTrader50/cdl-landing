@@ -632,7 +632,7 @@ const PRODUCT_IMAGES: Record<string, string> = {
   "R3500": "https://www.awin1.com/cread.php?awinmid=40342&awinaffid=2929639&ued=https://iallpowers.com/products/allpowers-r3500-portable-power-station-3200w-3168wh",
   "S2000 Pro": "https://www.awin1.com/cread.php?awinmid=40342&awinaffid=2929639&ued=https://iallpowers.com/products/s2000-pro-100w-solar-panel",
   "R2500": "https://www.awin1.com/cread.php?awinmid=40342&awinaffid=2929639&ued=https://iallpowers.com/products/allpowers-r2500-portable-home-backup-power-station-2500w-2016wh",
-  "R600": "https://www.awin1.com/cread.php?awinmid=40342&awinaffid=2929639",
+  "R600": "https://www.awin1.com/cread.php?awinmid=40342&awinaffid=2929639&ued=https://iallpowers.com/products/r600-140w-solar-panel",
   "Mega 1": "https://oupes.com/cdn/shop/files/Mega_1_Lite.png?v=1774509934&width=1920",
   "AC180": "https://www.awin1.com/cread.php?awinmid=59271&awinaffid=2929639&ued=https://www.bluettipower.com/products/ac180",
   "AC60": "https://www.awin1.com/cread.php?awinmid=59271&awinaffid=2929639&ued=https://www.bluettipower.com/products/ac60",
